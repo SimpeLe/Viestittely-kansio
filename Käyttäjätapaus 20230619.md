@@ -4,12 +4,16 @@ Kuka?
 Mitä?
 	Käyttäjä haluaa lähettää PC:llä viestejä salatusti ja helposti.
 Miksi?
-	Haluaa turvallista viestittelyä. 
+	Haluaa turvallista viestittelyä.
+Esiehto:
+	Tiedonvälitysohjelma esim Signal, Telegram, Wickr asennettu
+	Vastaanottajan IP
+	Tyhjä tikku tai muistikortti
 Käyttötapauksen kulku:
 	1. käyttäjä kirjoittaa viestin
 	2. käyttäjä valitsee numeron <5001, joka on SIJOITUSAVAIMEN ensimmäinen merkitsevä numero
 	3. ohjelma salaa viestin
-	4. ohjelma kirjoittaa salausavaimen tiedostoon tikulle???
+	4. ohjelma kirjoittaa salausavaimen tiedostoon tikulle
 	5. käyttäjä välittää viestin ja avaimet sovitulla tavalla vastaanottajalla esim tikulla, 
 	
 
@@ -19,7 +23,10 @@ Kuka?
 Mitä?
 	Käyttäjä haluaa vastaanottaa PC:llä viestejä salatusti ja helposti.
 Miksi?
-	Haluaa turvallista viestittelyä. 
+	Haluaa turvallista viestittelyä.
+Esiehto:
+	Tiedonvälitysohjelma esim Signal, Telegram, Wickr asennettu
+   	Lähettäjän IP
 Käyttötapauksen kulku:
 	1. Käyttäjä vastaanottaa viestin ja avaimet sovitulla tavalla esim avain tikulta, avaa viestin python ui:lla
  	2. Käyttäjä kirjoittaa avain-tiedoston ja sen polun avain-kenttään
