@@ -20,7 +20,7 @@ Käyttötapauksen kulku:
  	8. Käyttäjä välittää avaimen ja satunnainen numero sovitulla tavalla vastaanottajalle esim tikulla
 	
 
-3.  Kehittynyt käyttäjä vastaanottaa viestin
+2.  Kehittynyt käyttäjä vastaanottaa viestin
 Kuka?
 	Kehittynyt käyttäjä vastaanottaa viestin
 Mitä?
