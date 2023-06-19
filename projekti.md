@@ -10,3 +10,10 @@ ei liian isoa targettia kerralla
    lähetys), viesti luetaan ja näytetään viestikentässä
 5. Mieti rajapintoja eri ohjelmiston osien välillä esi. UI -tiedostun luku
 6. Määrittele salaukseen liittyvät termit vrt. kohta 1
+
++ kerää vaatimukset
++ tee käyttäjätapauksia
+käyttöliittymä
+vuokaavio/toimintalogiikka
+testaus suunnitelma
+
