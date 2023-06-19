@@ -1,5 +1,7 @@
 VAATIMUKSET:
-- ei laitteisto vaatimuksia softan kannalta
-- PC Windows ympäristö
-- netti-yhteys tarvitaan
-- käyttäjän ymmärrys kansio/hakemisto-rakenteesta
+	- ei laitteisto vaatimuksia softan kannalta
+	- ei laitteisto tai ohjelmisto luotettavuusvaatimuksia
+	- PC Windows ympäristö
+	- hiirellä käytettävä 
+	- netti-yhteys tarvitaan
+	- käyttäjän ymmärrys kansio/hakemisto-rakenteesta
