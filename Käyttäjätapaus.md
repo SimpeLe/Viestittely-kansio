@@ -9,6 +9,7 @@ Esiehto:
 	Tiedonvälitysohjelma esim Signal, Telegram, Wickr asennettu
 	Vastaanottajan IP
 	Tyhjä tikku tai muistikortti USP-portissa
+	Käyttäjä on kirjautunut ohjelmaan
 Käyttötapauksen kulku:
 	1. Käyttäjä kirjoittaa nastaanottajan IP:n
 	2. Käyttäjä kirjoittaa viestin
@@ -20,7 +21,7 @@ Käyttötapauksen kulku:
  	8. Käyttäjä välittää avaimen ja satunnainen numero sovitulla tavalla vastaanottajalle esim tikulla
 	
 
-2.  Kehittynyt käyttäjä vastaanottaa viestin
+3.  Kehittynyt käyttäjä vastaanottaa viestin
 Kuka?
 	Kehittynyt käyttäjä vastaanottaa viestin
 Mitä?
@@ -30,6 +31,8 @@ Miksi?
 Esiehto:
 	Tiedonvälitysohjelma esim Signal, Telegram, Wickr asennettu
    	Lähettäjän IP
+    	Lähettäjän kirjoittama muistitikku
+    	Käyttäjä on kirjautunut ohjelmaan
 Käyttötapauksen kulku:
 	1. Käyttäjä vastaanottaa avaimen sovitulla tavalla esim tikulta
  	2. Käyttäjä kirjoittaa Lähettäjän IP:n
