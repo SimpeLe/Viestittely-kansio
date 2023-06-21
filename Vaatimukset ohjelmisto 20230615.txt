@@ -1,0 +1,19 @@
+Termit salauksessa:
+1. Kirjoitusavaintiedosto on noin 1 Megatavun kokoinen eli sisältää miljoona merkkiä. Tiedosto muodostetaan siten että
+   otetaan kaikki aakkoset ja numerot sekä erikoismerkit esim. 128 kpl. Nämä sekoitettaan mielivaltaiseen järjestykseen ja kirjoitetaan
+   tiedostoon, tämä toistetaan niin kauan että tiedostossa on miljoona merkkiä täysin sekaisin. Kun viestiä kirjoitetaan esim. sana koira
+   etsitään ensin ensimmäinen k-kirjain ja sen sijain tiedostossa esim. 72. Tämän jälkeen etsitään o-kirjain ja sen sijainti laskettuna k-kirjaimen
+   sijainnista eteenpäin, esim. 10. Näin voidaan kirjoittaa pelkkien sijaintien mukaan ja vastaavasti lukea toisinpäin.
+
+2. Sijoitusavaintiedosto tai sijoitusavain on joukko peräkkäisiä numeroita joka kertoo mihin paikkoihin lopullisessa viestissä (joka kirjoitetaan tiedostoon)
+   kohdan 1 tiedot eli numrot sijoitetaa. Esim. sijoitusavain on 4,9,8,6,12,7,37,10 eli näihin paikkoihin sijoitetaan oikeat kirjainten sijainnit.
+   Esim 1 kohdan kakse ensimmäistä kirjainta on lopullisessa viestissä 2,33,15,72,22,45,7,3,8,22,7,8,10
+   Eli tuossa positiossa 4 mikä on sijoitusavaimen ensimmäinen positio lukee 72 mikä vastaa kirjainta k irjoitusavaintiedossa, sitten otettan sijoitusavaimen toinen luku 9
+   ja kirjoitetaan yhdeksänteen paikkaan edellisestä eli numero 4 eteenpäin seuraavan kirjaimen (o-kirjain) paikka eli 10 jne. Eli ensimmäinen paikka oikealle sijoitukselle
+   on 4 ja edeltävät 3 lukua ovat täytettä eli luvut 2, 33 ja 15 esimerkissä. Seuraava paikka oikealle sijoitukselle on 9 eteenpäin eli luvut 22,45,7,3,8,22,7,8 ovat täytettä
+   eli vääriä sijainteja mitä ei käytetä mihinkään.
+
+3. Varsinainen viesti on siis pelkkiä numeoita tiedostossa
+
+turha muutos
+   

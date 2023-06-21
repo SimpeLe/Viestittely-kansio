@@ -1,0 +1,40 @@
+1. SALAUS
+1.0. Yleistä
+	Pyritään salaamaan KIRJOITUSAVAIN ja SIJOITUSAVAIN. Ei saisi syntyä historialogia, eikä tulevaisuuden avaimia esim tunnuslukukortti tms. Jos viesti välitetään Pythonin UI:lla, lähettäjän pitää   saada vastaanottajan IP-osoite.
+
+1.1. KIRJOITUSAVAIN-tiedosto on noin 1 Megatavun kokoinen eli sisältää miljoona merkkiä. Tiedosto muodostetaan siten että
+   otetaan kaikki aakkoset ja numerot sekä erikoismerkit esim. 128 kpl. Nämä sekoitettaan mielivaltaiseen järjestykseen ja kirjoitetaan
+   tiedostoon, tämä toistetaan niin kauan että tiedostossa on miljoona merkkiä täysin sekaisin. Kun viestiä kirjoitetaan esim. sana koira
+   etsitään ensin ensimmäinen k-kirjain ja sen sijain tiedostossa esim. 72. Tämän jälkeen etsitään o-kirjain ja sen sijainti laskettuna k-kirjaimen
+   sijainnista eteenpäin, esim. 10. Näin voidaan kirjoittaa pelkkien sijaintien mukaan ja vastaavasti lukea toisinpäin. 
+
+1.2. Sijoitusavaintiedosto tai SIJOITUSAVAIN on joukko peräkkäisiä numeroita joka kertoo mihin paikkoihin lopullisessa viestissä (joka kirjoitetaan tiedostoon). 
+   kohdan 1 tiedot eli numrot sijoitetaa. Esim. SIJOITUSAVAIN on 4,9,8,6,12,7,37,10 eli näihin paikkoihin sijoitetaan oikeat kirjainten sijainnit. Merkitseviä numeroita nyt 8000 (niitä jotka kertovat oikeat paikat viestissä), plus ALOITUSNUMERO määrä sekalaisia
+
+1.3. Sijoitusavaimen ensimmäinen merkitsevä luku eli ALOITUSNUMERO vaihtelee, esim. ensimmäinen merkitsevä numero voi olla 5. numero, tässä esimerkissä se on 1. ALOITUSNUMERO maksimi on 5000.
+
+1.4. Varsinainen VIESTI on siis pelkkiä numeoita tiedostossa
+   Esim 1 kohdan kakse ensimmäistä kirjainta on lopullinen VIESTI 2,33,15,72,22,45,7,3,8,22,7,8,10  isoin merkitsevä luku 255, kirjaimeen liittymätön (merkitsemätön esim nro 2) numero maksimi on 255. 
+
+   Eli tuossa positiossa 4 mikä on SIJOITUSAVAIMEN ensimmäinen positio lukee 72 mikä vastaa kirjainta KIRJOITUSAVAIN, sitten otettan sijoitusavaimen toinen luku 9
+   ja kirjoitetaan yhdeksänteen paikkaan edellisestä eli numero 4 eteenpäin seuraavan kirjaimen (o-kirjain) paikka eli 10 jne. Eli ensimmäinen paikka oikealle sijoitukselle
+   on 4 ja edeltävät 3 lukua ovat täytettä eli luvut 2, 33 ja 15 esimerkissä. Seuraava paikka oikealle sijoitukselle on 9 eteenpäin eli luvut 22,45,7,3,8,22,7,8 ovat täytettä
+   eli vääriä sijainteja mitä ei käytetä mihinkään.
+
+
+2. TIEDONSIIRTO
+2.1. KIRJOITUSAVAIN välitetään tietoturvallisesti tiedostossa esim Signal, Telegram, Wickr
+2.2. SIJOITUSAVAIN välitetään tietoturvallisesti tiedostossa
+2.3. ALOITUSNUMERO välitetään toisella medialla kuin tiedostossa esim SMS, puhelu.
+2.4. VIESTI välitetään tiedostossa mielellään tietoturvallisesti, jonka on luotu Pythonin UI:lla
+
+
+3. KÄYTTÖLIITTYMÄ
+
+
+
+
+
+
+
+   
