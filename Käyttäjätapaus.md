@@ -1,3 +1,4 @@
+versio 20230621 14:30
 1. Kehittynyt käyttäjä lähetettää viestin
 Kuka?
 	Kehittynyt käyttäjä lähetettää viestin
@@ -42,6 +43,7 @@ Käyttötapauksen kulku:
    	6. Ohjelma vastaanottaa viestin python ui:lla
 	7. Ohjelma ilmoittaa, kun viesti vastaanotettu
  	8. Ohjelma näyttää viestin
+
 
  
   	   
