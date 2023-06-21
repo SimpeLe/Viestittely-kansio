@@ -1,4 +1,4 @@
-2023061 14:38
+20230621 14:38
 Projektisuunnitelma alustavaa suunnitelmaa. Aluksi kevyesti toimiva perussovellus jota voidaan laajentaa,
 ei liian isoa targettia kerralla
 
