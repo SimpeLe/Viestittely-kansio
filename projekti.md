@@ -13,7 +13,7 @@ ei liian isoa targettia kerralla
 
 + kerää vaatimukset
 + tee käyttäjätapauksia
-käyttöliittymä
++ käyttöliittymä
 vuokaavio/toimintalogiikka
 testaus suunnitelma
 
