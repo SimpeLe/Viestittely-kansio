@@ -1,3 +1,4 @@
+2023061 14:35
 VAATIMUKSET:
 	- ei prose vaatimuksia softan kannalta
 	- ei laitteisto tai ohjelmisto luotettavuusvaatimuksia
