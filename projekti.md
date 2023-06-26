@@ -15,7 +15,9 @@ ei liian isoa targettia kerralla
 + kerää vaatimukset
 + tee käyttäjätapauksia
 + käyttöliittymä
++ toteutusmäärittely
 vuokaavio/toimintalogiikka
 testaus-suunnitelma
 projekti-suunnitelma
-mikä muu dokumentti? Käyttöohje tms Ketterä ohjelma keh....pdf https://eduamiedu.sharepoint.com/:b:/r/sites/z-PythonTYPO4/Jaetut%20asiakirjat/Opetus,%20online-kokoukset%20ja%20materiaalit/Ketter%C3%A4%20ohjelmistokehitys_python.pdf?csf=1&web=1&e=a0yBfh
+- mikä muu dokumentti? Käyttöohje tms Ketterä ohjelma keh....pdf https://eduamiedu.sharepoint.com/:b:/r/sites/z-PythonTYPO4/Jaetut%20asiakirjat/Opetus,%20online-kokoukset%20ja%20materiaalit/Ketter%C3%A4%20ohjelmistokehitys_python.pdf?csf=1&web=1&e=a0yBfh
+- miten oman koneen kansio liitetään github-repositoryyn
