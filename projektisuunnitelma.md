@@ -11,6 +11,16 @@ ei liian isoa targettia kerralla
    lähetys), viesti luetaan ja näytetään viestikentässä
 5. Mieti rajapintoja eri ohjelmiston osien välillä esi. UI -tiedostun luku
 6. Määrittele salaukseen liittyvät termit vrt. kohta 1
+7. Toteutus
+   7.1. Viestittely-kotisivu
+   7.2. Viestittely-lähetä
+   7.3. Viestittely-vastaanota
+   7.4. Tiedoston siirto
+   
+   
+
+
+
 
 + kerää vaatimukset
 + tee käyttäjätapauksia
