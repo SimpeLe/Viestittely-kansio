@@ -1,36 +1,47 @@
-20230621 14:38
-Projektisuunnitelma alustavaa suunnitelmaa. Aluksi kevyesti toimiva perussovellus jota voidaan laajentaa,
+1. Yleistä
+   Projektisuunnitelma alustavaa suunnitelmaa. Aluksi kevyesti toimiva perussovellus jota voidaan laajentaa,
 ei liian isoa targettia kerralla
 
-1. Määritä oikeat termit yksiseliiteisesti niin että kummatkin osapuolet tietävät
+
+2. Määrittely
+   2.1. Määritä oikeat termit yksiseliiteisesti niin että kummatkin osapuolet tietävät
    mistä asiasta puhutaan, näin koomunikointi pysyy selvänä.
-2. Kerää vaatimukset
-3. Tee käyttäjätapauksia
-4. Suunnittele UI kevytversio, esim. vertaa Kallen chat-sovellukseen, aluksi vähän protoillaan ei tarkkaa UI leiskaa heti
+   2.2. Kerää käyttäjä- ja järjestelmä vaatimukset
+   2.3. Kerää ohjelmisto vaatimukset
+   2.4. Tee käyttäjätapauksia
+   2.5. Suunnittele UI kevytversio, esim. vertaa Kallen chat-sovellukseen, aluksi vähän protoillaan ei tarkkaa UI leiskaa heti
    UI:ssa pitää vaikka aluksi olla painonappi jola avaa tiedoston mistä viesti voidaan lukea tiedostosta (myöhemmin viestin 
    lähetys), viesti luetaan ja näytetään viestikentässä
-5. Mieti rajapintoja eri ohjelmiston osien välillä esi. UI -tiedostun luku
-6. Määrittele salaukseen liittyvät termit vrt. kohta 1
-7. Toteutus
-   7.1. Viestittely-kotisivu
-   7.2. Viestittely-lähetä
-   7.3. Viestittely-vastaanota
-   7.4. Tiedoston siirto
+   2.6. Mieti rajapintoja eri ohjelmiston osien välillä esi. UI -tiedostun luku
+   2.7. Määrittele salaukseen liittyvät termit vrt. kohta 1
+
+
+3. Suunnitelu
+   3.1. Toteutusmäärittely
+-   3.2. Vuokaavio/toimintalogiikka
+-   3.3. Testaussuunnitelma
+
+   
+4. Toteutus - käyttöliittymä
+   4.1. Viestittely-kotisivu (Simis)
+   4.2. Viestittely-lähetä (Simis)
+   4.3. Viestittely-vastaanota (Simis)
+   4.5. Viestittely-kopio (Simis)
    
    
+5. Toteutus - ohjelmointi   
+   5.1. Viestittely-kotisivu 
+   5.2. Viestittely-lähetä (Ville)
+   5.3. Viestittely-vastaanota (Simis)
+   5.4. Tiedoston siirto (Ville, Simis)
+   5.5. Viestittely-kopio (Ville)
 
+   
+- 6. Testaus
 
+   
+- 7. Käyttöönotto
 
-
-+ kerää vaatimukset
-+ tee käyttäjätapauksia
-+ käyttöliittymä
-+ toteutusmäärittely
-vuokaavio/toimintalogiikka
-testaus-suunnitelma
-projekti-suunnitelma
-
-
-Python moduli secrities
+ython moduli secrities
 
 
