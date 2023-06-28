@@ -30,4 +30,4 @@ Toteutus:
    - ALOITUSNUMERO välitetään toisella medialla kuin tiedostossa esim suusanallisesti, SMS, puhelu.
    - SALATTU VIESTI välitetään tiedostossa mielellään tietoturvallisesti FTP:llä, jonka on luotu Pythonin UI:lla. Jos aikaa jää, viestin voisi välittää Torpy:llä.
 
-5. 
+5. Viestittely-kopio (johonkin versioon)
