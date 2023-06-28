@@ -20,7 +20,7 @@ vuokaavio/toimintalogiikka
 testaus-suunnitelma
 projekti-suunnitelma
 
-Natalia kommentit:
+
 Python moduli secrities
 
 
