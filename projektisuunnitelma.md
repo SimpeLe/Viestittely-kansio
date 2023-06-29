@@ -23,7 +23,7 @@ ei liian isoa targettia kerralla
 
    
 4. Toteutus - käyttöliittymä
-   4.1. Viestittely-kotisivu (Simis)
+   4.1. Viestittely-kotisivu (PyQt Simis)
    4.2. Viestittely-lähetä (Simis)
    4.3. Viestittely-vastaanota (Simis)
    4.5. Viestittely-kopio (Simis)
