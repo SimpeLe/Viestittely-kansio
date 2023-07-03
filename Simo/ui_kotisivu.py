@@ -68,6 +68,8 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.kopio_pushButton.setFont(font)
+        self.kopio_pushButton.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.kopio_pushButton.setAutoFillBackground(False)
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap("kopio.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.kopio_pushButton.setIcon(icon3)
@@ -101,12 +103,18 @@ class Ui_MainWindow(object):
         self.ylaotsikko_label.setText(_translate("MainWindow", "Viestittely-kotisivu"))
         self.kayttaja_label.setText(_translate("MainWindow", "Käyttäjätunnus:"))
         self.salis_label.setText(_translate("MainWindow", "Salasana:"))
+        self.kirjaudu_pushButton.setToolTip(_translate("MainWindow", "Kirjaudu Viestittely-ohjelmaan"))
         self.kirjaudu_pushButton.setText(_translate("MainWindow", "Kirjaudu"))
+        self.laheta_pushButton.setToolTip(_translate("MainWindow", "Siirry lähetä-sivulle"))
         self.laheta_pushButton.setText(_translate("MainWindow", "Lähetä"))
+        self.vastaanota_pushButton.setToolTip(_translate("MainWindow", "Siirry vastaanota-sivulle"))
         self.vastaanota_pushButton.setText(_translate("MainWindow", "Vastaanota"))
         self.vastaanota_pushButton.setShortcut(_translate("MainWindow", "Alt+V"))
+        self.kopio_pushButton.setToolTip(_translate("MainWindow", "Siirry kopio-sivulle"))
         self.kopio_pushButton.setText(_translate("MainWindow", "Kopio"))
         self.kopio_pushButton.setShortcut(_translate("MainWindow", "Alt+K"))
+        self.kayttaja_lineEdit.setToolTip(_translate("MainWindow", "Käyttäjätunnus"))
+        self.lineEdit_2.setToolTip(_translate("MainWindow", "Käyttäjätunnuksen salasana"))
 
 
 if __name__ == "__main__":

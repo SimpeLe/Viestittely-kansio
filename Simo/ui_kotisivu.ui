@@ -82,6 +82,9 @@
       <pointsize>12</pointsize>
      </font>
     </property>
+    <property name="toolTip">
+     <string>Kirjaudu Viestittely-ohjelmaan</string>
+    </property>
     <property name="text">
      <string>Kirjaudu</string>
     </property>
@@ -104,6 +107,9 @@
       <pointsize>12</pointsize>
      </font>
     </property>
+    <property name="toolTip">
+     <string>Siirry lähetä-sivulle</string>
+    </property>
     <property name="text">
      <string>Lähetä</string>
     </property>
@@ -125,6 +131,9 @@
      <font>
       <pointsize>12</pointsize>
      </font>
+    </property>
+    <property name="toolTip">
+     <string>Siirry vastaanota-sivulle</string>
     </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
@@ -154,6 +163,15 @@
       <pointsize>12</pointsize>
      </font>
     </property>
+    <property name="toolTip">
+     <string>Siirry kopio-sivulle</string>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
     <property name="text">
      <string>Kopio</string>
     </property>
@@ -174,6 +192,9 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Käyttäjätunnus</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_2">
     <property name="geometry">
@@ -183,6 +204,9 @@
       <width>271</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>Käyttäjätunnuksen salasana</string>
     </property>
    </widget>
   </widget>

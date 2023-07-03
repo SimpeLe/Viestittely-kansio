@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="lylaotsikko_label">
+   <widget class="QLabel" name="vylaotsikko_label">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -29,28 +29,10 @@
      </font>
     </property>
     <property name="text">
-     <string>Viestittely-lähetä</string>
+     <string>Viestittely-vastaanota</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lvastaanottaja_label">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>130</y>
-      <width>161</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Vastaanottajan IP:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lviesti_label">
+   <widget class="QLabel" name="vviesti_label">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -68,38 +50,7 @@
      <string>Viesti:</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="llaheta_pushButton">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>480</y>
-      <width>121</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="toolTip">
-     <string>lähetä viesti, ALT+L</string>
-    </property>
-    <property name="statusTip">
-     <string/>
-    </property>
-    <property name="text">
-     <string>Lähetä</string>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>laheta.png</normaloff>laheta.png</iconset>
-    </property>
-    <property name="shortcut">
-     <string>Alt+L</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="lperu_pushButton">
+   <widget class="QPushButton" name="vperu_pushButton">
     <property name="geometry">
      <rect>
       <x>510</x>
@@ -114,7 +65,7 @@
      </font>
     </property>
     <property name="toolTip">
-     <string>peru ja siirry takaisin kotisivulle, ALT+P</string>
+     <string>peru ja palaa takaisin kotisivulle</string>
     </property>
     <property name="statusTip">
      <string/>
@@ -132,27 +83,8 @@
     <property name="shortcut">
      <string>Alt+P</string>
     </property>
-    <property name="checkable">
-     <bool>true</bool>
-    </property>
    </widget>
-   <widget class="QLineEdit" name="lvastaanottaja_lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>130</y>
-      <width>271</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="toolTip">
-     <string>vastaanottajan IP</string>
-    </property>
-    <property name="statusTip">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lsalattu_tdsto_lineEdit">
+   <widget class="QLineEdit" name="vsalattu_tdsto_lineEdit">
     <property name="geometry">
      <rect>
       <x>490</x>
@@ -162,16 +94,13 @@
      </rect>
     </property>
     <property name="toolTip">
-     <string>salattu viesti-tiedosto</string>
-    </property>
-    <property name="statusTip">
-     <string/>
+     <string>viesti-tiedosto</string>
     </property>
     <property name="text">
-     <string>lopuksi salattu viesti-tiedosto</string>
+     <string>salattu viesti-tiedosto</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lveistintalletuspolku_lineEdit">
+   <widget class="QLineEdit" name="vveistintalletuspolku_lineEdit">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -183,14 +112,11 @@
     <property name="toolTip">
      <string>viestin talletuspolku</string>
     </property>
-    <property name="statusTip">
-     <string/>
-    </property>
     <property name="text">
      <string>viestin talletuspolku</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lsijoitusavainpolku_lineEdit">
+   <widget class="QLineEdit" name="vsijoitusavainpolku_lineEdit">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -202,14 +128,11 @@
     <property name="toolTip">
      <string>sijoitusavaimen talletuspolku</string>
     </property>
-    <property name="statusTip">
-     <string/>
-    </property>
     <property name="text">
      <string>sijoitusavaimen polku</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lkirjoitusavainpolku_lineEdit">
+   <widget class="QLineEdit" name="vkirjoitusavainpolku_lineEdit">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -221,14 +144,11 @@
     <property name="toolTip">
      <string>kirjoitusavaimen talletuspolku</string>
     </property>
-    <property name="statusTip">
-     <string/>
-    </property>
     <property name="text">
      <string>kirjoitusavaimen polku</string>
     </property>
    </widget>
-   <widget class="QLabel" name="laloitusnro_label">
+   <widget class="QLabel" name="valoitusnro_label">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -246,7 +166,7 @@
      <string>Aloitusnumero:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lvastaanottaja_label_3">
+   <widget class="QLabel" name="vvastaanottaja_label_3">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -264,7 +184,7 @@
      <string>Kirjoitusavain:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lvastaanottaja_label_4">
+   <widget class="QLabel" name="vvastaanottaja_label_4">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -282,7 +202,7 @@
      <string>Sijoitusavain:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="laloitusnro_lineEdit">
+   <widget class="QLineEdit" name="valoitusnro_lineEdit">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -292,16 +212,13 @@
      </rect>
     </property>
     <property name="toolTip">
-     <string>kirjoita joku luku &lt;5000. Ei saa olla sama kuin viime kerralla.</string>
-    </property>
-    <property name="statusTip">
-     <string/>
+     <string>lähettäjän antama satunnainen numero</string>
     </property>
     <property name="text">
      <string/>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lkirjoitusavain_tdsto_lineEdit">
+   <widget class="QLineEdit" name="vkirjoitusavain_tdsto_lineEdit">
     <property name="geometry">
      <rect>
       <x>490</x>
@@ -313,14 +230,11 @@
     <property name="toolTip">
      <string>kirjoitusavain-tiedostonimi</string>
     </property>
-    <property name="statusTip">
-     <string/>
-    </property>
     <property name="text">
      <string>kirjoitusavain-tiedostonimi</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lsalattu_tdsto_lineEdit_3">
+   <widget class="QLineEdit" name="vsijoitusavain_tdsto_lineEdit">
     <property name="geometry">
      <rect>
       <x>490</x>
@@ -332,14 +246,11 @@
     <property name="toolTip">
      <string>sijoitusavain-tiedostonimi</string>
     </property>
-    <property name="statusTip">
-     <string/>
-    </property>
     <property name="text">
      <string>sijoitusavain-tiedostonimi</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="lviesti_textBrowser">
+   <widget class="QTextBrowser" name="vviesti_textBrowser">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -349,10 +260,35 @@
      </rect>
     </property>
     <property name="toolTip">
-     <string>kirjoita viestisi tähän</string>
+     <string>tästä voit lukea viestin, kun olet sen vastaanottanut</string>
     </property>
-    <property name="statusTip">
-     <string/>
+   </widget>
+   <widget class="QPushButton" name="vvastaanota_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>480</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Muokkaa viesti luettavaan muotoon</string>
+    </property>
+    <property name="text">
+     <string>Vastaanota</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>vastaanota.png</normaloff>vastaanota.png</iconset>
+    </property>
+    <property name="shortcut">
+     <string>Alt+V</string>
     </property>
    </widget>
   </widget>
@@ -369,17 +305,16 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <tabstops>
-  <tabstop>lvastaanottaja_lineEdit</tabstop>
-  <tabstop>lveistintalletuspolku_lineEdit</tabstop>
-  <tabstop>lsalattu_tdsto_lineEdit</tabstop>
-  <tabstop>lviesti_textBrowser</tabstop>
-  <tabstop>laloitusnro_lineEdit</tabstop>
-  <tabstop>lkirjoitusavainpolku_lineEdit</tabstop>
-  <tabstop>lkirjoitusavain_tdsto_lineEdit</tabstop>
-  <tabstop>lsijoitusavainpolku_lineEdit</tabstop>
-  <tabstop>lsalattu_tdsto_lineEdit_3</tabstop>
-  <tabstop>llaheta_pushButton</tabstop>
-  <tabstop>lperu_pushButton</tabstop>
+  <tabstop>vveistintalletuspolku_lineEdit</tabstop>
+  <tabstop>vsalattu_tdsto_lineEdit</tabstop>
+  <tabstop>vviesti_textBrowser</tabstop>
+  <tabstop>valoitusnro_lineEdit</tabstop>
+  <tabstop>vkirjoitusavainpolku_lineEdit</tabstop>
+  <tabstop>vkirjoitusavain_tdsto_lineEdit</tabstop>
+  <tabstop>vsijoitusavainpolku_lineEdit</tabstop>
+  <tabstop>vsijoitusavain_tdsto_lineEdit</tabstop>
+  <tabstop>vvastaanota_pushButton</tabstop>
+  <tabstop>vperu_pushButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>
