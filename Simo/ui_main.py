@@ -5,6 +5,7 @@
 # - pip list
 # - pip install pyqt5 pyqt5-tools
 # - python.exe -m pip install --upgrade pip
+#   TAI C:\Users\Simis\AppData\Local\Programs\Python\Python311\python.exe -m pip install --upgrade pip
 # (desingner kansio on syvällä kansiorakenteessa, seuraavassa oikotie)
 # - qt5-tools designer
 # - kopio pyqt\env\scripts\pyuic5.exe työkansioon
