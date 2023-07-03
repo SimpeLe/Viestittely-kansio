@@ -49,6 +49,9 @@
     <property name="text">
      <string>Vastaanottajan IP:</string>
     </property>
+    <property name="buddy">
+     <cstring>lvastaanottaja_lineEdit</cstring>
+    </property>
    </widget>
    <widget class="QLabel" name="lviesti_label">
     <property name="geometry">
@@ -66,6 +69,9 @@
     </property>
     <property name="text">
      <string>Viesti:</string>
+    </property>
+    <property name="buddy">
+     <cstring>lveistintalletuspolku_lineEdit</cstring>
     </property>
    </widget>
    <widget class="QPushButton" name="llaheta_pushButton">
@@ -245,6 +251,9 @@
     <property name="text">
      <string>Aloitusnumero:</string>
     </property>
+    <property name="buddy">
+     <cstring>laloitusnro_lineEdit</cstring>
+    </property>
    </widget>
    <widget class="QLabel" name="lvastaanottaja_label_3">
     <property name="geometry">
@@ -263,6 +272,9 @@
     <property name="text">
      <string>Kirjoitusavain:</string>
     </property>
+    <property name="buddy">
+     <cstring>lkirjoitusavain_tdsto_lineEdit</cstring>
+    </property>
    </widget>
    <widget class="QLabel" name="lvastaanottaja_label_4">
     <property name="geometry">
@@ -280,6 +292,9 @@
     </property>
     <property name="text">
      <string>Sijoitusavain:</string>
+    </property>
+    <property name="buddy">
+     <cstring>lsalattu_tdsto_lineEdit_3</cstring>
     </property>
    </widget>
    <widget class="QLineEdit" name="laloitusnro_lineEdit">
@@ -382,5 +397,22 @@
   <tabstop>lperu_pushButton</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>lperu_pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>570</x>
+     <y>516</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -120,8 +120,14 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.lvastaanottaja_label.setBuddy(self.lvastaanottaja_lineEdit)
+        self.lviesti_label.setBuddy(self.lveistintalletuspolku_lineEdit)
+        self.laloitusnro_label.setBuddy(self.laloitusnro_lineEdit)
+        self.lvastaanottaja_label_3.setBuddy(self.lkirjoitusavain_tdsto_lineEdit)
+        self.lvastaanottaja_label_4.setBuddy(self.lsalattu_tdsto_lineEdit_3)
 
         self.retranslateUi(MainWindow)
+        self.lperu_pushButton.clicked.connect(MainWindow.hide) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.lvastaanottaja_lineEdit, self.lveistintalletuspolku_lineEdit)
         MainWindow.setTabOrder(self.lveistintalletuspolku_lineEdit, self.lsalattu_tdsto_lineEdit)
