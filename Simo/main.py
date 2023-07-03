@@ -8,15 +8,17 @@
 #   TAI C:\Users\Simis\AppData\Local\Programs\Python\Python311\python.exe -m pip install --upgrade pip
 # (desingner kansio on syvällä kansiorakenteessa, seuraavassa oikotie)
 # - qt5-tools designer
-# - kopio pyqt\env\scripts\pyuic5.exe työkansioon
-# - pyuic5 -x -o ui_login_application.py ui_login_application.ui (kansiossa jossa pyuic5.e3xe on)
+# - resurssienhallinnassa kopio pyqt\env\scripts\pyuic5.exe työkansioon
+# - pyuic5 -x -o ui_kotisivu.py ui_kotisivu.ui (kansiossa jossa pyuic5.e3xe on)
 # (seuraava käynnistää ohjelman. Katso että komentokehotteen edessä lukee "(env)")
 # (jos ei lue "(env)", käynnistä virtuaaliympäristö env\scripts\activate)
-# - python ui_login_application.py 
+# - python ui_kotisivu.py 
 
 # - tee törkeesti muutoksia main.py fileen Code Studiossa
-#     from ui_login_application import Ui_MainWindow
+from ui_kotisivu import Ui_MainWindow
+from ui_laheta import Ui_MainWindow
 
-#     from PyQt5 import QtWidgets as qtw
-#     from PyQt5 import QtCore as qtc
+from PyQt5 import QtWidgets as qtw
+from PyQt5 import QtCore as qtc
+from PyQt5 import QtGui as qtg
 #
