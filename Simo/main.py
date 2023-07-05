@@ -15,6 +15,7 @@
 # (seuraava käynnistää ohjelman. Katso että komentokehotteen edessä lukee "(env)")
 # (jos ei lue "(env)", käynnistä virtuaaliympäristö env\scripts\activate)
 # - python ui_kotisivu.py 
+# - python main.py 
 
 # - tee törkeesti muutoksia main.py fileen Code Studiossa
 from ui_kotisivu import Ui_MainWindow
@@ -25,7 +26,7 @@ from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtGui as qtg
 
-class fkotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on valittu designerissa
+class ckotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on valittu designerissa
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
@@ -38,27 +39,23 @@ class fkotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on v
     def login_click(self):
  #        if users.username == self.ui.txt_username.text() and users.password==self.ui.txt_password.text():
         if self.ui.pkayttaja_lineEdit.text() == "kalle" and self.ui.psalis_lineEdit.text() == "k":
-            print("Kalle sisällä")
-            qtw.QMessageBox.information(self, 'ONNISTUI', 'Olet kirjautunut Viestittely-ohjelmaan')
+            print(self.ui.pkayttaja_lineEdit.text()," sisällä")
+            # qtw.QMessageBox.information(self, 'ONNISTUI', 'Olet kirjautunut Viestittely-ohjelmaan')
+            self.ui.plaheta_pushButton.setEnabled(True)
+            self.ui.pvastaanota_pushButton.setEnabled(True)
+            self.ui.pkopio_pushButton.setEnabled(True)
+            self.ui.pkayttaja_lineEdit.setEnabled(False)
+            self.ui.psalis_lineEdit.setEnabled(False)
+            self.ui.pkirjaudu_pushButton.setEnabled(False)
             # self.hide()
             # self.ui = flaheta_klikkaus() # tuo suoraan lähetä-ikkunan
             # napin painalluksen yhdistäminen luokan metodiin
-            self.ui.plaheta_pushButton.clicked.connect(self.flaheta_klikkaus) 
+            # self.ui.plaheta_pushButton.clicked.connect(self.claheta_klikkaus) #'ckotisivu' object has no attribute 'claheta_klikkaus'
+            # self.ui.plaheta_pushButton.clicked.connect(claheta_klikkaus) #tuo koti-ikkunan uudelleen näkyville
         else:
             qtw.QMessageBox.critical(self, 'KIRJAUTUMISVIRHE', "Kirjoita oikea käyttäjätunnus ja salasana")
         
-        
-# class TokaWindow(qtw.QWidget):
-#     def __init__(self):
-#         super().__init__()
-#         self.ui = Ui_Form()
-#         self.ui.setupUi(self)
-#         self.show()
-#         self.conn = db.connect('BOOKS')
-#         book = db.fetch_latest_book(self.conn)
-#         self.ui.btn_push.setText(book)
-
-class flaheta_klikkaus(qtw.QWidget):
+class claheta_klikkaus(qtw.QWidget):
     def __init__(self):
         super().__init__()
         self.ui = Ui_Form()
@@ -67,5 +64,5 @@ class flaheta_klikkaus(qtw.QWidget):
 
 if __name__=='__main__':
     app = qtw.QApplication([])
-    kotisivu = fkotisivu()
+    kotisivu = ckotisivu()
     app.exec_()

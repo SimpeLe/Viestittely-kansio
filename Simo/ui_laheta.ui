@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Viestittely-lähetä</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>BradPittHat.jpg</normaloff>BradPittHat.jpg</iconset>
   </property>
   <widget class="QWidget" name="centralwidget" native="true">
    <property name="geometry">
