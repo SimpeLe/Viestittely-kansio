@@ -136,6 +136,12 @@
      <iconset>
       <normaloff>laheta.png</normaloff>laheta.png</iconset>
     </property>
+    <property name="iconSize">
+     <size>
+      <width>32</width>
+      <height>32</height>
+     </size>
+    </property>
    </widget>
    <widget class="QPushButton" name="pvastaanota_pushButton">
     <property name="enabled">

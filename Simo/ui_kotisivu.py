@@ -58,6 +58,7 @@ class Ui_MainWindow(object):
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap("laheta.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.plaheta_pushButton.setIcon(icon2)
+        self.plaheta_pushButton.setIconSize(QtCore.QSize(32, 32))
         self.plaheta_pushButton.setObjectName("plaheta_pushButton")
         self.pvastaanota_pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pvastaanota_pushButton.setEnabled(False)

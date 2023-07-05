@@ -19,18 +19,36 @@
 
 # - tee törkeesti muutoksia main.py fileen Code Studiossa
 from ui_kotisivu import Ui_MainWindow
-from ui_laheta import Ui_Form
-# from ui_vastaanota import Ui_MainWindow
+from ui_laheta import Ui_Form as laheta
+from ui_vastaanota import Ui_Form as vastota
 
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtGui as qtg
 
-class ckotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on valittu designerissa
+class Claheta_klikkaus(qtw.QWidget):
+    def __init__(self):
+        super().__init__()
+        self.ui = laheta()
+        self.ui.setupUi(self)
+        self.show()
+
+
+class Cvastaanota_klikkaus(qtw.QWidget):
+    def __init__(self):
+        super().__init__()
+        self.ui = vastota()
+        self.ui.setupUi(self)
+        self.show()
+
+
+class Ckotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on valittu designerissa
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.lahetasivu = None
+        self.vastotasivu = None
         #napin painalluksen yhdistäminen luokan metodiin
         self.ui.pkirjaudu_pushButton.clicked.connect(self.login_click) 
 # #        self.ui.cb_checkbox.setChecked(True)
@@ -38,7 +56,7 @@ class ckotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on v
 
     def login_click(self):
  #        if users.username == self.ui.txt_username.text() and users.password==self.ui.txt_password.text():
-        if self.ui.pkayttaja_lineEdit.text() == "kalle" and self.ui.psalis_lineEdit.text() == "k":
+        if self.ui.pkayttaja_lineEdit.text() == "k" and self.ui.psalis_lineEdit.text() == "k":
             print(self.ui.pkayttaja_lineEdit.text()," sisällä")
             # qtw.QMessageBox.information(self, 'ONNISTUI', 'Olet kirjautunut Viestittely-ohjelmaan')
             self.ui.plaheta_pushButton.setEnabled(True)
@@ -48,21 +66,36 @@ class ckotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on v
             self.ui.psalis_lineEdit.setEnabled(False)
             self.ui.pkirjaudu_pushButton.setEnabled(False)
             # self.hide()
+            ## napin painalluksen yhdistäminen luokan metodiin ##
             # self.ui = flaheta_klikkaus() # tuo suoraan lähetä-ikkunan
-            # napin painalluksen yhdistäminen luokan metodiin
-            # self.ui.plaheta_pushButton.clicked.connect(self.claheta_klikkaus) #'ckotisivu' object has no attribute 'claheta_klikkaus'
-            # self.ui.plaheta_pushButton.clicked.connect(claheta_klikkaus) #tuo koti-ikkunan uudelleen näkyville
+            # self.ui.plaheta_pushButton.clicked.connect(self.Claheta_klikkaus) #'Ckotisivu' object has no attribute 'claheta_klikkaus'
+            # self.ui.plaheta_pushButton.clicked.connect(Claheta_klikkaus) #tuo koti-ikkunan uudelleen näkyville
+
+            # self.laheta_form = claheta_klikkaus() # tuo suoraan läheteä-ikkunan
+            # self.laheta_form.show() # tuo suoraan läheteä-ikkunan
+
+            self.ui.plaheta_pushButton.clicked.connect(self.show_claheta_klikkaus) 
+            self.ui.pvastaanota_pushButton.clicked.connect(self.show_cvastaanota_klikkaus) 
         else:
             qtw.QMessageBox.critical(self, 'KIRJAUTUMISVIRHE', "Kirjoita oikea käyttäjätunnus ja salasana")
         
-class claheta_klikkaus(qtw.QWidget):
-    def __init__(self):
-        super().__init__()
-        self.ui = Ui_Form()
-        self.ui.setupUi(self)
-        self.show()
+    def show_claheta_klikkaus(self, checked):
+        if self.lahetasivu is None:
+            self.lahetasivu = Claheta_klikkaus()
+            self.lahetasivu.show()
+        else:
+            self.lahetasivu.close()
+            self.lahetasivu = None
+
+    def show_cvastaanota_klikkaus(self, checked):
+        if self.vastotasivu is None:
+            self.vastotasivu = Cvastaanota_klikkaus()
+            self.vastotasivu.show()
+        else:
+            self.vastota.close()
+            self.vastotasivu = None
 
 if __name__=='__main__':
     app = qtw.QApplication([])
-    kotisivu = ckotisivu()
+    kotisivu = Ckotisivu()
     app.exec_()
