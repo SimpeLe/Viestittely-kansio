@@ -98,6 +98,7 @@ class Ui_Form(object):
         self.vvastaanota_pushButton.setObjectName("vvastaanota_pushButton")
 
         self.retranslateUi(Form)
+        self.vperu_pushButton.clicked.connect(Form.close) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(Form)
         Form.setTabOrder(self.vveistintalletuspolku_lineEdit, self.vsalattu_tdsto_lineEdit)
         Form.setTabOrder(self.vsalattu_tdsto_lineEdit, self.vviesti_textBrowser)

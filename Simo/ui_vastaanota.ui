@@ -318,5 +318,22 @@
   <tabstop>vperu_pushButton</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>vperu_pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>570</x>
+     <y>495</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

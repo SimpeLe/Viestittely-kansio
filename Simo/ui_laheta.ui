@@ -113,6 +113,12 @@
      <iconset>
       <normaloff>laheta.png</normaloff>laheta.png</iconset>
     </property>
+    <property name="iconSize">
+     <size>
+      <width>32</width>
+      <height>32</height>
+     </size>
+    </property>
     <property name="shortcut">
      <string>Alt+L</string>
     </property>
@@ -398,5 +404,22 @@
   <tabstop>lperu_pushButton</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>lperu_pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>580</x>
+     <y>495</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

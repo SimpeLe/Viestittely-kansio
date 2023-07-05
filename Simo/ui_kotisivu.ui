@@ -54,10 +54,13 @@
      </font>
     </property>
     <property name="text">
-     <string>Käyttäjätunnus:</string>
+     <string>Käyttäjä&amp;tunnus:</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="buddy">
+     <cstring>pkayttaja_lineEdit</cstring>
     </property>
    </widget>
    <widget class="QLabel" name="psalis_label">
@@ -75,7 +78,10 @@
      </font>
     </property>
     <property name="text">
-     <string>Salasana:</string>
+     <string>&amp;Salasana:</string>
+    </property>
+    <property name="buddy">
+     <cstring>psalis_lineEdit</cstring>
     </property>
    </widget>
    <widget class="QPushButton" name="pkirjaudu_pushButton">
@@ -96,7 +102,7 @@
      <string>Kirjaudu Viestittely-ohjelmaan</string>
     </property>
     <property name="text">
-     <string>Kirjaudu</string>
+     <string>Kirjaud&amp;u</string>
     </property>
     <property name="icon">
      <iconset>
@@ -124,7 +130,7 @@
      <string>Siirry lähetä-sivulle</string>
     </property>
     <property name="text">
-     <string>Lähetä</string>
+     <string>&amp;Lähetä</string>
     </property>
     <property name="icon">
      <iconset>
@@ -155,7 +161,7 @@
      <enum>Qt::LeftToRight</enum>
     </property>
     <property name="text">
-     <string>Vastaanota</string>
+     <string>&amp;Vastaanota</string>
     </property>
     <property name="icon">
      <iconset>
@@ -192,7 +198,7 @@
      <bool>false</bool>
     </property>
     <property name="text">
-     <string>Kopio</string>
+     <string>&amp;Kopio</string>
     </property>
     <property name="icon">
      <iconset>
@@ -228,6 +234,11 @@
       <width>271</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="toolTip">
      <string>Käyttäjätunnuksen salasana</string>

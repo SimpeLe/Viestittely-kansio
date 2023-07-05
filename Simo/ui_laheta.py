@@ -48,6 +48,7 @@ class Ui_Form(object):
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("laheta.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.llaheta_pushButton.setIcon(icon1)
+        self.llaheta_pushButton.setIconSize(QtCore.QSize(32, 32))
         self.llaheta_pushButton.setObjectName("llaheta_pushButton")
         self.lperu_pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.lperu_pushButton.setGeometry(QtCore.QRect(520, 480, 121, 31))
@@ -123,6 +124,7 @@ class Ui_Form(object):
         self.lvastaanottaja_label_4.setBuddy(self.lsalattu_tdsto_lineEdit_3)
 
         self.retranslateUi(Form)
+        self.lperu_pushButton.clicked.connect(Form.close) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(Form)
         Form.setTabOrder(self.lvastaanottaja_lineEdit, self.lveistintalletuspolku_lineEdit)
         Form.setTabOrder(self.lveistintalletuspolku_lineEdit, self.lsalattu_tdsto_lineEdit)
