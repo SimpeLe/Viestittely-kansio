@@ -18,8 +18,8 @@
 
 # - tee törkeesti muutoksia main.py fileen Code Studiossa
 from ui_kotisivu import Ui_MainWindow
-from ui_laheta import Ui_MainWindow
-from ui_vastaanota import Ui_MainWindow
+from ui_laheta import Ui_Form
+# from ui_vastaanota import Ui_MainWindow
 
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
@@ -28,24 +28,27 @@ from PyQt5 import QtGui as qtg
 class fkotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on valittu designerissa
     def __init__(self):
         super().__init__()
-#         self.ui = Ui_MainWindow()
-#         self.ui.setupUi(self)
-#         self.ui.btn_login.clicked.connect(self.login_click) #napin painalluksen yhdistäminen luokan metodiin
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+        #napin painalluksen yhdistäminen luokan metodiin
+        self.ui.pkirjaudu_pushButton.clicked.connect(self.login_click) 
 # #        self.ui.cb_checkbox.setChecked(True)
-#         self.show()
+        self.show()
 
-#     def login_click(self):
-# #        if users.username == self.ui.txt_username.text() and users.password==self.ui.txt_password.text():
-#         if self.ui.pkayttaja_lineEdit.text() == "kalle" and self.ui.psalis_lineEdit.text() == "k":
-# #            self.hide()
-# #            self.ui = TokaWindow() 
-#             qtw.QMessageBox.information(self, 'Onnistui', 'Olet kirjautunut Viestittely-ohjelmaan')
-#             print("Kalle sisällä")
-#         else:
-#             qtw.QMessageBox.critical(self, 'KIRJAUTUMISVIRHE', "Kirjoita oikea käyttäjätunnus ja salasana")
+    def login_click(self):
+ #        if users.username == self.ui.txt_username.text() and users.password==self.ui.txt_password.text():
+        if self.ui.pkayttaja_lineEdit.text() == "kalle" and self.ui.psalis_lineEdit.text() == "k":
+            print("Kalle sisällä")
+            qtw.QMessageBox.information(self, 'ONNISTUI', 'Olet kirjautunut Viestittely-ohjelmaan')
+            # self.hide()
+            # self.ui = flaheta_klikkaus() # tuo suoraan lähetä-ikkunan
+            # napin painalluksen yhdistäminen luokan metodiin
+            self.ui.plaheta_pushButton.clicked.connect(self.flaheta_klikkaus) 
+        else:
+            qtw.QMessageBox.critical(self, 'KIRJAUTUMISVIRHE', "Kirjoita oikea käyttäjätunnus ja salasana")
         
         
-# class TokaWindow(qtw.QMainWindow):
+# class TokaWindow(qtw.QWidget):
 #     def __init__(self):
 #         super().__init__()
 #         self.ui = Ui_Form()
@@ -55,9 +58,14 @@ class fkotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on v
 #         book = db.fetch_latest_book(self.conn)
 #         self.ui.btn_push.setText(book)
 
+class flaheta_klikkaus(qtw.QWidget):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_Form()
+        self.ui.setupUi(self)
+        self.show()
+
 if __name__=='__main__':
     app = qtw.QApplication([])
     kotisivu = fkotisivu()
-    kotisivu.show()
     app.exec_()
-#

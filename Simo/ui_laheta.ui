@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,9 +11,17 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Form</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="centralwidget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>801</width>
+     <height>541</height>
+    </rect>
+   </property>
    <widget class="QLabel" name="lylaotsikko_label">
     <property name="geometry">
      <rect>
@@ -108,7 +116,7 @@
    <widget class="QPushButton" name="lperu_pushButton">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>520</x>
       <y>480</y>
       <width>121</width>
       <height>31</height>
@@ -371,17 +379,6 @@
     </property>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <tabstops>
   <tabstop>lvastaanottaja_lineEdit</tabstop>
@@ -397,22 +394,5 @@
   <tabstop>lperu_pushButton</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>lperu_pushButton</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>hide()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>570</x>
-     <y>516</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
