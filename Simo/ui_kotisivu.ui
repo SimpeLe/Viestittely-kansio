@@ -14,13 +14,13 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="ylaotsikko_label">
+   <widget class="QLabel" name="pylaotsikko_label">
     <property name="geometry">
      <rect>
       <x>260</x>
       <y>30</y>
-      <width>251</width>
-      <height>61</height>
+      <width>190</width>
+      <height>29</height>
      </rect>
     </property>
     <property name="font">
@@ -31,8 +31,11 @@
     <property name="text">
      <string>Viestittely-kotisivu</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
-   <widget class="QLabel" name="kayttaja_label">
+   <widget class="QLabel" name="pkayttaja_label">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -49,8 +52,11 @@
     <property name="text">
      <string>Käyttäjätunnus:</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
    </widget>
-   <widget class="QLabel" name="salis_label">
+   <widget class="QLabel" name="psalis_label">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -68,7 +74,7 @@
      <string>Salasana:</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="kirjaudu_pushButton">
+   <widget class="QPushButton" name="pkirjaudu_pushButton">
     <property name="geometry">
      <rect>
       <x>250</x>
@@ -93,7 +99,7 @@
       <normaloff>kirjaudu.png</normaloff>kirjaudu.png</iconset>
     </property>
    </widget>
-   <widget class="QPushButton" name="laheta_pushButton">
+   <widget class="QPushButton" name="plaheta_pushButton">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -118,7 +124,7 @@
       <normaloff>laheta.png</normaloff>laheta.png</iconset>
     </property>
    </widget>
-   <widget class="QPushButton" name="vastaanota_pushButton">
+   <widget class="QPushButton" name="pvastaanota_pushButton">
     <property name="geometry">
      <rect>
       <x>250</x>
@@ -149,7 +155,7 @@
      <string>Alt+V</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="kopio_pushButton">
+   <widget class="QPushButton" name="pkopio_pushButton">
     <property name="geometry">
      <rect>
       <x>390</x>
@@ -183,7 +189,7 @@
      <string>Alt+K</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="kayttaja_lineEdit">
+   <widget class="QLineEdit" name="pkayttaja_lineEdit">
     <property name="geometry">
      <rect>
       <x>250</x>
@@ -196,7 +202,7 @@
      <string>Käyttäjätunnus</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="psalis_lineEdit">
     <property name="geometry">
      <rect>
       <x>250</x>
@@ -207,6 +213,9 @@
     </property>
     <property name="toolTip">
      <string>Käyttäjätunnuksen salasana</string>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
     </property>
    </widget>
   </widget>
@@ -223,12 +232,12 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <tabstops>
-  <tabstop>kayttaja_lineEdit</tabstop>
-  <tabstop>lineEdit_2</tabstop>
-  <tabstop>kirjaudu_pushButton</tabstop>
-  <tabstop>laheta_pushButton</tabstop>
-  <tabstop>vastaanota_pushButton</tabstop>
-  <tabstop>kopio_pushButton</tabstop>
+  <tabstop>pkayttaja_lineEdit</tabstop>
+  <tabstop>psalis_lineEdit</tabstop>
+  <tabstop>pkirjaudu_pushButton</tabstop>
+  <tabstop>plaheta_pushButton</tabstop>
+  <tabstop>pvastaanota_pushButton</tabstop>
+  <tabstop>pkopio_pushButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

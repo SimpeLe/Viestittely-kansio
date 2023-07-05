@@ -21,8 +21,43 @@ from ui_kotisivu import Ui_MainWindow
 from ui_laheta import Ui_MainWindow
 from ui_vastaanota import Ui_MainWindow
 
-
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtGui as qtg
+
+class fkotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on valittu designerissa
+    def __init__(self):
+        super().__init__()
+#         self.ui = Ui_MainWindow()
+#         self.ui.setupUi(self)
+#         self.ui.btn_login.clicked.connect(self.login_click) #napin painalluksen yhdistäminen luokan metodiin
+# #        self.ui.cb_checkbox.setChecked(True)
+#         self.show()
+
+#     def login_click(self):
+# #        if users.username == self.ui.txt_username.text() and users.password==self.ui.txt_password.text():
+#         if self.ui.pkayttaja_lineEdit.text() == "kalle" and self.ui.psalis_lineEdit.text() == "k":
+# #            self.hide()
+# #            self.ui = TokaWindow() 
+#             qtw.QMessageBox.information(self, 'Onnistui', 'Olet kirjautunut Viestittely-ohjelmaan')
+#             print("Kalle sisällä")
+#         else:
+#             qtw.QMessageBox.critical(self, 'KIRJAUTUMISVIRHE', "Kirjoita oikea käyttäjätunnus ja salasana")
+        
+        
+# class TokaWindow(qtw.QMainWindow):
+#     def __init__(self):
+#         super().__init__()
+#         self.ui = Ui_Form()
+#         self.ui.setupUi(self)
+#         self.show()
+#         self.conn = db.connect('BOOKS')
+#         book = db.fetch_latest_book(self.conn)
+#         self.ui.btn_push.setText(book)
+
+if __name__=='__main__':
+    app = qtw.QApplication([])
+    kotisivu = fkotisivu()
+    kotisivu.show()
+    app.exec_()
 #
