@@ -88,6 +88,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.pkayttaja_lineEdit.setFont(font)
+        self.pkayttaja_lineEdit.setPlaceholderText("")
         self.pkayttaja_lineEdit.setObjectName("pkayttaja_lineEdit")
         self.psalis_lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.psalis_lineEdit.setGeometry(QtCore.QRect(250, 170, 271, 31))
@@ -111,6 +112,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Viestittely-kotisivu"))
+        MainWindow.setToolTip(_translate("MainWindow", "Vie kursori haluamaasi kenttään tai painikkeelle, niin näet vihjeen."))
         self.pylaotsikko_label.setText(_translate("MainWindow", "Viestittely-kotisivu"))
         self.pkayttaja_label.setText(_translate("MainWindow", "Käyttäjä&tunnus:"))
         self.psalis_label.setText(_translate("MainWindow", "&Salasana:"))
@@ -124,7 +126,7 @@ class Ui_MainWindow(object):
         self.pkopio_pushButton.setToolTip(_translate("MainWindow", "Siirry kopio-sivulle"))
         self.pkopio_pushButton.setText(_translate("MainWindow", "&Kopio"))
         self.pkopio_pushButton.setShortcut(_translate("MainWindow", "Alt+K"))
-        self.pkayttaja_lineEdit.setToolTip(_translate("MainWindow", "Käyttäjätunnus"))
+        self.pkayttaja_lineEdit.setToolTip(_translate("MainWindow", "käyttäjätunnus"))
         self.psalis_lineEdit.setToolTip(_translate("MainWindow", "Käyttäjätunnuksen salasana"))
 
 

@@ -15,7 +15,10 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>BradPittHat.jpg</normaloff>BradPittHat.jpg</iconset>
+    <normaloff>cards.png</normaloff>cards.png</iconset>
+  </property>
+  <property name="toolTip">
+   <string>Vie kursori haluamaasi kenttään tai painikkeelle, niin näet vihjeen.</string>
   </property>
   <widget class="QWidget" name="centralwidget" native="true">
    <property name="geometry">
@@ -25,6 +28,9 @@
      <width>801</width>
      <height>541</height>
     </rect>
+   </property>
+   <property name="toolTipDuration">
+    <number>2</number>
    </property>
    <widget class="QLabel" name="lylaotsikko_label">
     <property name="geometry">
@@ -169,11 +175,22 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="toolTip">
      <string>vastaanottajan IP</string>
     </property>
     <property name="statusTip">
      <string/>
+    </property>
+    <property name="maxLength">
+     <number>12</number>
+    </property>
+    <property name="placeholderText">
+     <string>vastaanottajan ip esim 127.0.0.25</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lsalattu_tdsto_lineEdit">
@@ -185,14 +202,22 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="toolTip">
-     <string>salattu viesti-tiedosto</string>
+     <string>tähän ilmestyy lopuksi salatun viesti-tiedoston nimi</string>
     </property>
     <property name="statusTip">
      <string/>
     </property>
     <property name="text">
-     <string>lopuksi salattu viesti-tiedosto</string>
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>lopuksi ilmestyy tiedostonimi </string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lveistintalletuspolku_lineEdit">
@@ -204,13 +229,27 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="toolTip">
      <string>viestin talletuspolku</string>
     </property>
+    <property name="toolTipDuration">
+     <number>-1</number>
+    </property>
     <property name="statusTip">
-     <string/>
+     <string comment="StatusTip-disambiquation viestin talletuspolku " extracomment="StatusTip-comment viestin talletuspolku ">StatusTip viestin talletuspolku</string>
+    </property>
+    <property name="whatsThis">
+     <string comment="whatsThis-disambiquation viestin talletuspolku " extracomment="whatsThis-comment viestin talletuspolku ">whatsThis viestin talletuspolku</string>
     </property>
     <property name="text">
+     <string/>
+    </property>
+    <property name="placeholderText">
      <string>viestin talletuspolku</string>
     </property>
    </widget>
@@ -223,6 +262,11 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="toolTip">
      <string>sijoitusavaimen talletuspolku</string>
     </property>
@@ -230,7 +274,10 @@
      <string/>
     </property>
     <property name="text">
-     <string>sijoitusavaimen polku</string>
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>sijoitusavaimen tallennuspolku</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lkirjoitusavainpolku_lineEdit">
@@ -242,6 +289,11 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="toolTip">
      <string>kirjoitusavaimen talletuspolku</string>
     </property>
@@ -249,7 +301,10 @@
      <string/>
     </property>
     <property name="text">
-     <string>kirjoitusavaimen polku</string>
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>kirjoitusavaimen tallennuspolku</string>
     </property>
    </widget>
    <widget class="QLabel" name="laloitusnro_label">
@@ -273,7 +328,7 @@
      <cstring>laloitusnro_lineEdit</cstring>
     </property>
    </widget>
-   <widget class="QLabel" name="lvastaanottaja_label_3">
+   <widget class="QLabel" name="lkirjoitusavain_label">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -294,7 +349,7 @@
      <cstring>lkirjoitusavain_tdsto_lineEdit</cstring>
     </property>
    </widget>
-   <widget class="QLabel" name="lvastaanottaja_label_4">
+   <widget class="QLabel" name="lsijoitusavain_label">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -312,7 +367,7 @@
      <string>Sijoitusavain:</string>
     </property>
     <property name="buddy">
-     <cstring>lsalattu_tdsto_lineEdit_3</cstring>
+     <cstring>lsijoitusavain_tdsto_lineEdit</cstring>
     </property>
    </widget>
    <widget class="QLineEdit" name="laloitusnro_lineEdit">
@@ -324,14 +379,31 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="toolTip">
-     <string>kirjoita joku luku &lt;5000. Ei saa olla sama kuin viime kerralla.</string>
+     <string>muista kirjoittamasi numero. Kirjoita joku numero &lt;5000, joka eri kuin viimekerralla</string>
     </property>
     <property name="statusTip">
      <string/>
     </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhDigitsOnly</set>
+    </property>
+    <property name="inputMask">
+     <string extracomment="nro"/>
+    </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="maxLength">
+     <number>4</number>
+    </property>
+    <property name="placeholderText">
+     <string>muista kirjoittamasi numero</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lkirjoitusavain_tdsto_lineEdit">
@@ -343,6 +415,11 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="toolTip">
      <string>kirjoitusavain-tiedostonimi</string>
     </property>
@@ -350,10 +427,13 @@
      <string/>
     </property>
     <property name="text">
-     <string>kirjoitusavain-tiedostonimi</string>
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>kirjoitusavaimen tiedostonimi</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lsalattu_tdsto_lineEdit_3">
+   <widget class="QLineEdit" name="lsijoitusavain_tdsto_lineEdit">
     <property name="geometry">
      <rect>
       <x>490</x>
@@ -362,6 +442,11 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="toolTip">
      <string>sijoitusavain-tiedostonimi</string>
     </property>
@@ -369,10 +454,13 @@
      <string/>
     </property>
     <property name="text">
-     <string>sijoitusavain-tiedostonimi</string>
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>sijoitusavaimen tiedostonimi</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="lviesti_textBrowser">
+   <widget class="QPlainTextEdit" name="lviesti_plainTextEdit">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -381,11 +469,25 @@
       <height>101</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="toolTip">
      <string>kirjoita viestisi tähän</string>
     </property>
     <property name="statusTip">
+     <string>kirjoita viestisi tähänkirjoita</string>
+    </property>
+    <property name="whatsThis">
+     <string>kirjoita viestisi tähänkirjoita</string>
+    </property>
+    <property name="plainText">
      <string/>
+    </property>
+    <property name="placeholderText">
+     <string>kirjoita viestisi tähän</string>
     </property>
    </widget>
   </widget>
@@ -394,12 +496,12 @@
   <tabstop>lvastaanottaja_lineEdit</tabstop>
   <tabstop>lveistintalletuspolku_lineEdit</tabstop>
   <tabstop>lsalattu_tdsto_lineEdit</tabstop>
-  <tabstop>lviesti_textBrowser</tabstop>
+  <tabstop>lviesti_plainTextEdit</tabstop>
   <tabstop>laloitusnro_lineEdit</tabstop>
   <tabstop>lkirjoitusavainpolku_lineEdit</tabstop>
   <tabstop>lkirjoitusavain_tdsto_lineEdit</tabstop>
   <tabstop>lsijoitusavainpolku_lineEdit</tabstop>
-  <tabstop>lsalattu_tdsto_lineEdit_3</tabstop>
+  <tabstop>lsijoitusavain_tdsto_lineEdit</tabstop>
   <tabstop>llaheta_pushButton</tabstop>
   <tabstop>lperu_pushButton</tabstop>
  </tabstops>
