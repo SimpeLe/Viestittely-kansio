@@ -1,7 +1,8 @@
 20230621 14:35
 VAATIMUKSET:
-	- ei prose vaatimuksia softan kannalta
+	- ei prosessori vaatimuksia softan kannalta
 	- ei laitteisto tai ohjelmisto luotettavuusvaatimuksia
+ 	- välitettävät tiedostot pieniä (tekstiä, ei kuvaa)
 	- PC Windows ympäristö
 	- hiirellä käytettävä 
 	- netti-yhteys tarvitaan
