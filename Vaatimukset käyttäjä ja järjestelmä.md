@@ -7,6 +7,7 @@ VAATIMUKSET:
 	- netti-yhteys tarvitaan
 
  KÄYTTÄJÄN ENNAKKO-OLETUS:
+ 	- käyttää amerikkalaista (ASCII) tai suomalaista (åäö) merkistöä 
 	- käyttäjän ymmärrys kansio/hakemisto-rakenteesta
 	- käyttäjä osaa tai oppii tiedonvälitysohjelman käytön esim. Signal, Telegram, Wickr
 	
