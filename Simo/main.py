@@ -9,7 +9,8 @@
 # (desingner kansio on syvällä kansiorakenteessa, seuraavassa oikotie)
 # - qt5-tools designer
 # - resurssienhallinnassa kopio pyqt\env\scripts\pyuic5.exe työkansioon
-# - pyuic5 -x -o ui_kotisivu.py ui_kotisivu.ui (kansiossa jossa pyuic5.e3xe on)
+# (kansiossa jossa pyuic5.e3xe on)
+# - pyuic5 -x -o ui_kotisivu.py ui_kotisivu.ui 
 # - pyuic5 -x -o ui_laheta.py ui_laheta.ui
 # - pyuic5 -x -o ui_vastaanota.py ui_vastaanota.ui
 # (seuraava käynnistää ohjelman. Katso että komentokehotteen edessä lukee "(env)")
@@ -32,7 +33,12 @@ class Claheta_klikkaus(qtw.QWidget):
         self.ui = laheta()
         self.ui.setupUi(self)
         self.show()
-
+        self.ui.lvastaanottaja_lineEdit.setFocus()
+        self.ui.llaheta_pushButton.clicked.connect(self.laheta_klik) 
+    
+    def laheta_klik(self):
+        print("tässä kutsu laheta-metodia")
+        
 
 class Cvastaanota_klikkaus(qtw.QWidget):
     def __init__(self):
@@ -40,6 +46,11 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         self.ui = vastota()
         self.ui.setupUi(self)
         self.show()
+        self.ui.vveistintalletuspolku_lineEdit.setFocus()
+        self.ui.vvastaanota_pushButton.clicked.connect(self.vastaanota_klik) 
+    
+    def vastaanota_klik(self):
+        print("tässä kutsu vastaanota-metodia")
 
 
 class Ckotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on valittu designerissa
@@ -53,6 +64,8 @@ class Ckotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on v
         self.ui.pkirjaudu_pushButton.clicked.connect(self.login_click) 
 # #        self.ui.cb_checkbox.setChecked(True)
         self.show()
+        self.ui.pkayttaja_lineEdit.setFocus()
+
 
     def login_click(self):
  #        if users.username == self.ui.txt_username.text() and users.password==self.ui.txt_password.text():
@@ -80,22 +93,24 @@ class Ckotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on v
             qtw.QMessageBox.critical(self, 'KIRJAUTUMISVIRHE', "Kirjoita oikea käyttäjätunnus ja salasana")
         
     def show_claheta_klikkaus(self, checked):
-        if self.lahetasivu is None:
-            self.lahetasivu = Claheta_klikkaus()
-            self.lahetasivu.show()
-        else:
-            self.lahetasivu.close()
-            self.lahetasivu = None
+        # if self.lahetasivu is None:
+        self.lahetasivu = Claheta_klikkaus()
+#        self.lahetasivu.show() # tuleeko uus sivu näkyviin ilman tätä
+        # else:
+        #     self.lahetasivu.close()
+        #     self.lahetasivu = None
 
     def show_cvastaanota_klikkaus(self, checked):
-        if self.vastotasivu is None:
-            self.vastotasivu = Cvastaanota_klikkaus()
-            self.vastotasivu.show()
-        else:
-            self.vastota.close()
-            self.vastotasivu = None
+        # if self.vastotasivu is None:
+        self.vastotasivu = Cvastaanota_klikkaus()
+#        self.vastotasivu.show()
+        # else:
+        #     self.vastotasivu.close()
+        #     self.vastotasivu = None
 
 if __name__=='__main__':
     app = qtw.QApplication([])
     kotisivu = Ckotisivu()
     app.exec_()
+
+    #https://www.pythonguis.com/tutorials/creating-multiple-windows/
