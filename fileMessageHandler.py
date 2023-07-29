@@ -84,7 +84,7 @@ def createLocationKey(lengthOfKey):
                  #   print(locationLine)
             print("one line is ready")
             oneLinenumbers = 0
-            locationLine = locationLine[:-1] # remove lat ","
+            locationLine = locationLine[:-1] # remove last ","
             locationLine += "\n"
             locationKeyFile.write(locationLine)
             locationLine = ""
@@ -93,7 +93,7 @@ def createLocationKey(lengthOfKey):
 
     with open(r"locationKeyFile.txt", 'r') as fp:        
         x = len(fp.readlines())
-        print('Total lines  in location file:', x) # 8
+        print('Total lines  in location file:', x) 
 
     # for x in enumerate(fp.readlines()):
     #     print(x)
@@ -217,9 +217,95 @@ def findPositionFromSourceCharacterFile(mark):
     return index
 
 
-def setFinalPositionInCryptedMessage():
-    pass
+def readOneRowFromfileToList():
+    listOfOneRowLocation=[] # read one row of location from file to this list
+    oneMessagerow=[] # create one row of messages and write to file
+    listOfOneRowIndex=[] # read one row of index from file to this list
+    lengthOfOneMessageRow = 100
+    lengthOfOneLocationRow = 0
+    lengthOfOneIndexRow = 0
+    numberOfIndexRowInFile = 0
+    numberOfLocationRowInFile = 0
+    messageRowReady = False
+    distanceOfRowIndex = 0
+    indexNumber = 0 # counter for reading values fron location list
+    currenLocationNumber = 0
+    currenIndexNumber = 0
+    locationCounter = 0 # count location together and set to final message by location 
+    hanledLocationForMessageRow = 0
+    #f = open(filename,"r")
+    #lines = f.readlines()
+    #f.seek(0)
+    #filerowlen = len(f.readlines())
+    #print(filerowlen)
+    #f.close()
+    with open("finalMessage.txt", 'w') as messageFile:
+        with open("indexFile.txt", 'r') as indexFile:
+             with open("locationTest.txt", 'r') as locationFile:
+                indexRowLines = indexFile.readlines()
+                print("index file readed")
+                numberOfIndexRowInFile = len(indexRowLines)
+                print("numberOfIndexRowInFile " + str(numberOfIndexRowInFile) +"\n")
+                locationRowLines = locationFile.readlines()
+                numberOfLocationRowInFile = len(locationRowLines)
+                print("numberOfLocationRowInFile " + str(numberOfLocationRowInFile) +"\n")
+                #for line in indexFile:
+                for line in range(0,numberOfIndexRowInFile): # go through entire index file row by row
+                    locationCounter = 0
+                    indexNumber = 0
+                    locationFile.seek(0) #  set file iterator to zero before read line, otherwise it will raise "index out of range" error
+                    #listOfOneRowLocation = locationFile.readlines()[line]
+                    listOfOneRowLocation = [int(x) for x in locationRowLines[line].split(",")] # read one location row to list
+                    print(listOfOneRowLocation)
+                    print("index file loop " + str(line)+ "\n")
+                    listOfOneRowIndex = [int(x) for x in indexRowLines[line].split(",")] # read one index row to list
+                    print(listOfOneRowIndex)
+                    lengthOfOneIndexRow = len(listOfOneRowIndex)
+                    if messageRowReady == False: # start creating one message row
+                        print("row creating")
+                        for messageRowIndex in range(0, lengthOfOneMessageRow): # fill one row with random numbers
+                            oneMessagerow.append(random.randrange(102))
+                            print(str(messageRowIndex)+"\n")
+                    elif messageRowReady == True:
+                        print("row ready")
+                        hanledLocationForMessageRow = 0
 
+                    for oneRowIndex in listOfOneRowIndex: # go through one index row and set numbers to message row by location
+                        print("listOfOneRowIndex " + str(listOfOneRowIndex) +"\n")
+                        print("oneRowIndex " + str(oneRowIndex) +"\n")
+                        print("indexNumber " + str(indexNumber) +"\n")
+                        #oneMessagerow[oneRowIndex] = 36
+                        #messageFile.write(str(indexNumber)+",")
+                        currenLocationNumber = listOfOneRowLocation[indexNumber] # read one location from list
+                        locationCounter += currenLocationNumber # count together location for message row
+                        oneMessagerow[locationCounter] = oneRowIndex # set index by location to message row
+                        hanledLocationForMessageRow +=1 # add counter of handled location
+                        if hanledLocationForMessageRow == 4:
+                            hanledLocationForMessageRow = 0
+                            messageFile.write(','.join(str(i) for i in oneMessagerow))
+                            messageFile.write("\n")
+                        currenIndexNumber = oneRowIndex
+                        print(listOfOneRowLocation)
+                        print(oneMessagerow)
+                        print("currenLocationNumber " + str(currenLocationNumber) +"\n")
+                        print("currenIndexNumber " + str(currenIndexNumber) +"\n")
+                        print("locationCounter " + str(locationCounter) +"\n")
+                        indexNumber += 1
+                    print(oneMessagerow)
+                locationFile.close()
+             indexFile.close()
+        messageFile.close()
+
+
+def setFinalPositionInCryptedMessage(listOfOneRow):
+     pass
+         
+def writelisttofile():
+    myList = [1,2,3,4]
+
+    with open('listfile.txt', 'w') as outfile:
+        outfile.write(','.join(str(i) for i in myList))
+        outfile.close()
 
 def testsearchPositionFromCharFile():
     indexInLine = 0
@@ -243,7 +329,7 @@ def testsearchPositionFromCharFile():
         with open("testMessage.txt", 'r') as messageFile:
             with open("sourceCharacterFile.txt", 'r') as charFile:
                 
-                for readline in messageFile: # go through hole file line by line
+                for readline in messageFile: # go through hole original message(write by user) file line by line
                 # messagelineHandler = linecache.getline(r"origMessageFile.txt", 1)
                 # print(messagelineHandler)
                     print("print readline\n")
@@ -429,17 +515,177 @@ def saveListOfNumb():
     fp.close()
 
 
+def readNumList():
+    list1=[]
+    list2=[]
+    f = open("nums_method_1b.txt","r")
+    lines = f.readlines()
+    x = len(f.readlines())
+    print(x)
+    f.close()
+    list1 = [int(x) for x in lines[0].split(",")]
+    list2 = [int(x) for x in lines[1].split(",")]
+
+    print(list1)
+    print(list2)
+    print(list1[2])
+    list1 += list2
+    print(list1)
+
+def readNumListLoop():
+    list1=[]
+    list2=[]
+    f = open("nums_method_1b.txt","r")
+    lines = f.readlines()
+    f.seek(0)
+    x = len(f.readlines())
+    print(x)
+    f.close()
+    for line in range(0,x):
+        list1 = [int(x) for x in lines[line].split(",")]
+        print(list1) 
+        #list2 = [int(x) for x in lines[1].split(",")]
+        list2 = list2 + list1
+        print(list2)
+
+
+def readOneNumList():
+    list1=[]
+    list2=[]
+    file = open("nums_method_1b.txt","r")
+    #line = file.readline()[0]
+    
+    #list1 = [int(x) for x in line.split(",")]
+    list1 = [int(number) for number in file.readline().split(',')]
+    #list2 = [int(x) for x in lines[1].split(",")]
+
+    print(list1)
+   # print(list2)
+    print(list1[4])
+    file.close()
+
+def readMultipleNumList():
+    list1=[]
+    list2=[]
+    with open("nums_method_1b.txt") as nums:   
+        for line in nums:
+    #line = file.readline()[0]
+    
+    #list1 = [int(x) for x in line.split(",")]
+            #list1.append([int(number) for number in nums.readline().split(',')])
+            list1 = [int(number) for number in nums.readline().split(',')]
+    #list2 = [int(x) for x in lines[1].split(",")]
+
+    print(list1)
+   # print(list2)
+    #print(list1[4])
+    nums.close()
+
+def readAllNimb():
+    numbers = []
+    with open("nums_method_1b.txt") as nums:   
+        for line in nums:
+            line = line.strip() # remove newline at end and other whitespace
+            if line: # avoid empty lines
+                n = list(map(int, line.split(", ")))
+                numbers.append(n)
+       
+    row1, row2 = numbers 
+    print(row1)
+    print(row2)
+
+def readAgain():
+    numlist = []
+    f=open('nums_method_1b.txt',"r")
+    for line in f:
+        numlist.append(line.strip('\n'))
+        print(numlist)
+               
+def readAgain2():
+    with open('nums_method_1b.txt', 'r') as f:
+        lines = f.readlines()
+        numbers =[int(e.strip()) for e in lines]
+        print(numbers)
+
+def readAgain3():
+        with open('nums_method_1b.txt', 'r') as input_data:
+            input_list= [map(int,num.split()) for num in input_data.readlines()]
+        print(input_list)
+
+def readAgain4():
+    L = []
+    with open('nums_method_1b.txt') as txtfile:
+        for line in txtfile:
+            L.append(int(line.rstrip()))
+            #''.join(e for e in line if e.isalnum())
+            print(line)
+            #print(e)
+            #int(float(input))
+    print(L)
+
+def readAgain5():
+    with open('nums_method_1b.txt') as num:
+        numbers = num.read()
+        n= numbers.split()
+        lst = []
+        for x in range(len(n)):
+            nu = n[x]
+            print(nu)
+            new_string = nu.replace(',', ' ')
+            print(new_string)
+            #lst.append(int(new_string))
+            #lst.append(int(mytable))
+        print(lst)
+
+def removePunc():
+    #s = "string. With. Punctuation?" # Sample string 
+    #out = s.translate(string.maketrans("",""), string.punctuation)
+    #print(out)
+
+    txt = "Hello Sam!"
+    mytable = str.maketrans("S", "P")
+    print(txt.translate(mytable))
+
+    
+    txt = "32423,30902,28153,31651,36795 , 28939 , 26144 , 2194"
+    mytable = str.maketrans(",", " ")
+    print(txt.translate(mytable))
+
+def removePunc2():
+    #a_string = '!hi, wh?at is the weat[h]er lik?e.'
+    a_string = "32423,30902,28153,31651,36795 , 28939 , 26144 , 2194"
+    new_string = a_string.translate(str.maketrans('', '', string.punctuation))
+
+    print(new_string)
+
+def removePunc3():
+    #a_string = '!hi. wh?at is the weat[h]er lik?e.'
+    a_string = "32423,30902,28153,31651,36795 , 28939 , 26144 , 2194"
+    new_string = a_string.replace(',', ' ')
+
+    print(new_string)
+
+
 #createOneSourceCharacterList()
 #createSourceCharacterFile(1)
 #createLocationKey(8000)
 #searchPositionFromCharFile("hgsah")
 #findPositionFromSourceCharacterFile("s")
-testsearchPositionFromCharFile()
+#testsearchPositionFromCharFile()
 #testPickle()
 #testList()
 #writeListLines()
 #readListLines()
 #saveListOfNumb()
+#readNumList()
+#readNumListLoop()
+#readOneNumList()
+#readMultipleNumList()
+#readAllNimb()
+#readAgain5()
+#removePunc3()
+#writelisttofile()
+readOneRowFromfileToList()
 
 
 
