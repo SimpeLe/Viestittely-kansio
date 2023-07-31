@@ -12,7 +12,7 @@ def readNumberFromfileToList(filename):
     f.seek(0)
     filerowlen = len(f.readlines())
     #print(filerowlen)
-    f.close()
+    #f.close()
     for line in range(0,filerowlen):
         listOfOneRow = [int(x) for x in lines[line].split(",")]
         #list2 = [int(x) for x in lines[1].split(",")]
@@ -99,7 +99,7 @@ def findIndexFromSourceCharFile():
                         numberOfHandledIndex +=1
 
 
-def testfindIndexFromSourceCharFile():
+def testfindCharByIndexFromSourceCharFile():
      sourceCharacterlineHandler  = ""
      charFoundByIndex = ""
      indexOfRowInCharFile = 0
@@ -108,11 +108,11 @@ def testfindIndexFromSourceCharFile():
      indexrowflineHandled = False
      list = []
      list = readNumberFromfileToList("indexFile.txt")
-     with open("testOrigMessage.txt", 'w') as messageFile:
+     with open("testMessage.txt", 'w') as messageFile:
         with open("sourceCharacterFile.txt", 'r') as charFile:
             charFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
             sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile]
-            for indexInLine in list:
+            for indexInLine in list: # go through entire index list
                 #print(indexInLine)
                 #print("index of numberOfHandledIndex 1 " + str(numberOfHandledIndex)+ "\n")
                 if numberOfHandledIndex == numberOfIndexHandle: # 3
@@ -149,9 +149,60 @@ def testfindIndexFromSourceCharFile():
                     messageFile.write(charFoundByIndex)
                     numberOfHandledIndex +=1
                     print("index of numberOfHandledIndex 2 " + str(numberOfHandledIndex)+ "\n")
+        charFile.close()
+     messageFile.close()
 
+def findLocationFromMessage():
+    oneMessageRowlist = [] # read one row of message to this list
+    oneLocationRowlist = [] # read one location row to this list
+    oneIndexRowlist = []
+    indexOfRowInMessageFile = 0
+    indexOfrowInLocationInFile = 0
+    numberOfMessageRowInFile = 0
+    numberOfFoundLocation = 0
+    indexFoundByLocation = 0
+    locationCounter = 0 # count location together for finding rigth location from message row
+    with open("finalMessage.txt", 'r') as messageFile:
+        with open("locationTest.txt", 'r') as locationFile:
+            with open("indexTest.txt", 'w') as indexFile:
+                messageRowLines = messageFile.readlines()
+                print("messageFile file readed")
+                numberOfMessageRowInFile = len(messageRowLines)
+                print("numberOfIndexRowInFile " + str(numberOfMessageRowInFile) +"\n")
+                locationRowLines = locationFile.readlines()
+                numberOfLocationRowInFile = len(locationRowLines)
+                print("numberOfLocationRowInFile " + str(numberOfLocationRowInFile) +"\n")
+                messageFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
+                sourceMessagelineHandler = messageFile.readlines()[indexOfRowInMessageFile]
 
+                oneMessageRowlist = [int(x) for x in messageRowLines[indexOfRowInMessageFile].split(",")] # read one message row to list
+                print(oneMessageRowlist)
+                
+                for line in range(0, numberOfLocationRowInFile): # go throug all list of location 
+                    listOfOneRowLocation = [int(x) for x in locationRowLines[line].split(",")] # read one location row to list
+                    print(listOfOneRowLocation)
+
+                    for oneRowIndex in listOfOneRowLocation: # go through one location row and find location from messages
+                        if numberOfFoundLocation == 10: # 10 location are witten in one message row
+                            indexOfRowInMessageFile += 1
+                            oneMessageRowlist = [int(x) for x in messageRowLines[indexOfRowInMessageFile].split(",")] # read one message row to list
+                            numberOfFoundLocation = 0
+
+                        print("oneRowIndex " + str(oneRowIndex)+ "\n")
+                        locationCounter += oneRowIndex
+                        print("locationCounter " + str(locationCounter)+ "\n")
+                        indexFoundByLocation = oneMessageRowlist[locationCounter] # index by location from message row
+                        print(indexFoundByLocation)
+                        oneIndexRowlist.append(indexFoundByLocation)
+                        if len(oneIndexRowlist) == 100: # when found enough index write to list
+                            indexFile.write(','.join(str(i) for i in oneIndexRowlist))
+                            indexFile.write("\n")
+                            oneIndexRowlist.clear()
+                        numberOfFoundLocation += 1
+                indexFile.close()
+            locationFile.close()
+        messageFile.close()
 
 filename = "indexFile.txt"
 #readNumberFromfileToList(filename)
-testfindIndexFromSourceCharFile()
+testfindCharByIndexFromSourceCharFile()
