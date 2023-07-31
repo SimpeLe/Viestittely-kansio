@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>cards.png</normaloff>cards.png</iconset>
+    <normaloff>cards.ico</normaloff>cards.ico</iconset>
   </property>
   <property name="toolTip">
    <string>Vie kursori haluamaasi kenttään tai painikkeelle, niin näet vihjeen.</string>
@@ -117,7 +117,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>laheta.png</normaloff>laheta.png</iconset>
+      <normaloff>../../../../Users/Simis/.designer/backup/laheta.png</normaloff>../../../../Users/Simis/.designer/backup/laheta.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -157,7 +157,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>peru.jpg</normaloff>peru.jpg</iconset>
+      <normaloff>../../../../Users/Simis/.designer/backup/peru.jpg</normaloff>../../../../Users/Simis/.designer/backup/peru.jpg</iconset>
     </property>
     <property name="shortcut">
      <string>Alt+P</string>
@@ -194,11 +194,14 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="lsalattu_tdsto_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>590</x>
       <y>170</y>
-      <width>271</width>
+      <width>171</width>
       <height>31</height>
      </rect>
     </property>
@@ -207,8 +210,11 @@
       <pointsize>12</pointsize>
      </font>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="toolTip">
-     <string>tähän ilmestyy lopuksi salatun viesti-tiedoston nimi</string>
+     <string>salatun viesti-tiedoston nimi</string>
     </property>
     <property name="statusTip">
      <string/>
@@ -216,8 +222,14 @@
     <property name="text">
      <string/>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="placeholderText">
-     <string>lopuksi ilmestyy tiedostonimi </string>
+     <string>testMessage.txt</string>
+    </property>
+    <property name="clearButtonEnabled">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QLineEdit" name="lveistintalletuspolku_lineEdit">
@@ -225,7 +237,7 @@
      <rect>
       <x>210</x>
       <y>170</y>
-      <width>271</width>
+      <width>291</width>
       <height>31</height>
      </rect>
     </property>
@@ -235,7 +247,7 @@
      </font>
     </property>
     <property name="toolTip">
-     <string>viestin talletuspolku</string>
+     <string>salatun viestin talletuspolku</string>
     </property>
     <property name="toolTipDuration">
      <number>-1</number>
@@ -254,11 +266,14 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="lsijoitusavainpolku_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>210</x>
       <y>400</y>
-      <width>271</width>
+      <width>281</width>
       <height>31</height>
      </rect>
     </property>
@@ -266,6 +281,9 @@
      <font>
       <pointsize>12</pointsize>
      </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="toolTip">
      <string>sijoitusavaimen talletuspolku</string>
@@ -276,16 +294,22 @@
     <property name="text">
      <string/>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="placeholderText">
      <string>sijoitusavaimen tallennuspolku</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lkirjoitusavainpolku_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>210</x>
       <y>360</y>
-      <width>271</width>
+      <width>281</width>
       <height>31</height>
      </rect>
     </property>
@@ -293,6 +317,9 @@
      <font>
       <pointsize>12</pointsize>
      </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="toolTip">
      <string>kirjoitusavaimen talletuspolku</string>
@@ -302,6 +329,9 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
     <property name="placeholderText">
      <string>kirjoitusavaimen tallennuspolku</string>
@@ -375,7 +405,7 @@
      <rect>
       <x>210</x>
       <y>320</y>
-      <width>271</width>
+      <width>281</width>
       <height>31</height>
      </rect>
     </property>
@@ -407,11 +437,14 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="lkirjoitusavain_tdsto_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>580</x>
       <y>360</y>
-      <width>271</width>
+      <width>181</width>
       <height>31</height>
      </rect>
     </property>
@@ -419,6 +452,9 @@
      <font>
       <pointsize>12</pointsize>
      </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="toolTip">
      <string>kirjoitusavain-tiedostonimi</string>
@@ -429,16 +465,22 @@
     <property name="text">
      <string/>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="placeholderText">
-     <string>kirjoitusavaimen tiedostonimi</string>
+     <string>sourceCharacterFile.txt</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lsijoitusavain_tdsto_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>580</x>
       <y>400</y>
-      <width>271</width>
+      <width>181</width>
       <height>31</height>
      </rect>
     </property>
@@ -446,6 +488,9 @@
      <font>
       <pointsize>12</pointsize>
      </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="toolTip">
      <string>sijoitusavain-tiedostonimi</string>
@@ -456,8 +501,11 @@
     <property name="text">
      <string/>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="placeholderText">
-     <string>sijoitusavaimen tiedostonimi</string>
+     <string>indexFile.txt</string>
     </property>
    </widget>
    <widget class="QPlainTextEdit" name="lviesti_plainTextEdit">
@@ -490,20 +538,37 @@
      <string>kirjoita viestisi tähän</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="lviestiselaa_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>170</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>selaa välitettävien tiedostojen talletuspolkua</string>
+    </property>
+    <property name="text">
+     <string>Selaa</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <tabstops>
   <tabstop>lvastaanottaja_lineEdit</tabstop>
   <tabstop>lveistintalletuspolku_lineEdit</tabstop>
-  <tabstop>lsalattu_tdsto_lineEdit</tabstop>
+  <tabstop>lviestiselaa_pushButton</tabstop>
   <tabstop>lviesti_plainTextEdit</tabstop>
   <tabstop>laloitusnro_lineEdit</tabstop>
+  <tabstop>llaheta_pushButton</tabstop>
+  <tabstop>lperu_pushButton</tabstop>
+  <tabstop>lsalattu_tdsto_lineEdit</tabstop>
   <tabstop>lkirjoitusavainpolku_lineEdit</tabstop>
   <tabstop>lkirjoitusavain_tdsto_lineEdit</tabstop>
   <tabstop>lsijoitusavainpolku_lineEdit</tabstop>
   <tabstop>lsijoitusavain_tdsto_lineEdit</tabstop>
-  <tabstop>llaheta_pushButton</tabstop>
-  <tabstop>lperu_pushButton</tabstop>
  </tabstops>
  <resources/>
  <connections>

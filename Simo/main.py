@@ -26,6 +26,12 @@ from ui_vastaanota import Ui_Form as vastota
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtGui as qtg
+# from PyQt5 import QtQuick 2.2
+# from PyQt5 import QtQuick 1.0
+
+import test_file_dialog as kans_hall
+import fileMessageHandler as send
+import fileReceiverHandler as pickup
 
 class Claheta_klikkaus(qtw.QWidget):
     def __init__(self):
@@ -34,10 +40,35 @@ class Claheta_klikkaus(qtw.QWidget):
         self.ui.setupUi(self)
         self.show()
         self.ui.lvastaanottaja_lineEdit.setFocus()
-        self.ui.llaheta_pushButton.clicked.connect(self.laheta_klik) 
+#        self.ui.lviestiselaa_pushButton.clicked.connect(self.viesti_tdsto_selaus_klikkaus)
+        self.ui.llaheta_pushButton.clicked.connect(self.laheta_klik)
+        #tdstoNimi =  ""
     
     def laheta_klik(self):
         print("tässä kutsu laheta-metodia")
+######### luo uusi kirjoitusavain vain kerran esim kerran kuussa tms
+        send.createSourceCharacterFile(1) 
+        send.testsearchPositionFromCharFile()
+######### luo uusi salattu viesti-tiedosto (nyt testMessage.txt)
+
+    # def viesti_tdsto_selaus_klikkaus(self):
+    #     viesti_tdsto_nimi = QFileDialog::getOpenFileNames(this, tr("Open File"),"/tekstit",tr("Mp3 Files (*.mp3)"));
+    #     ui->listWidget->addItems(viesti_tdsto_nimi);
+
+#         viesti_tdsto_nimi = FileDialog {
+#     id: fileDialog
+#     title: "Please choose a file"
+#     folder: shortcuts.home
+#     onAccepted: {
+#         console.log("You chose: " + fileDialog.fileUrls)
+#         Qt.quit()
+#     }
+#     onRejected: {
+#         console.log("Canceled")
+#         Qt.quit()
+#     }
+#     Component.onCompleted: visible = true
+# }
         
 
 class Cvastaanota_klikkaus(qtw.QWidget):
@@ -51,6 +82,7 @@ class Cvastaanota_klikkaus(qtw.QWidget):
     
     def vastaanota_klik(self):
         print("tässä kutsu vastaanota-metodia")
+        pickup.testfindIndexFromSourceCharFile()
 
 
 class Ckotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on valittu designerissa
