@@ -13,6 +13,9 @@
 # - pyuic5 -x -o ui_kotisivu.py ui_kotisivu.ui 
 # - pyuic5 -x -o ui_laheta.py ui_laheta.ui
 # - pyuic5 -x -o ui_vastaanota.py ui_vastaanota.ui
+#
+# githubin kloonaus: git clone https://SimpeLe@github.com/SimpeLe/Viestittely-kansio
+#
 # (seuraava käynnistää ohjelman. Katso että komentokehotteen edessä lukee "(env)")
 # (jos ei lue "(env)", käynnistä virtuaaliympäristö env\scripts\activate)
 # - python ui_kotisivu.py 
