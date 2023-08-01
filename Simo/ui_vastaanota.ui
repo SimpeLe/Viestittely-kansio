@@ -100,11 +100,14 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="vsalattu_tdsto_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>580</x>
       <y>170</y>
-      <width>271</width>
+      <width>181</width>
       <height>31</height>
      </rect>
     </property>
@@ -119,8 +122,11 @@
     <property name="text">
      <string/>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="placeholderText">
-     <string>salatun viesti-tiedoston nimi</string>
+     <string>testMessage.txt</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="vveistintalletuspolku_lineEdit">
@@ -128,7 +134,7 @@
      <rect>
       <x>210</x>
       <y>170</y>
-      <width>271</width>
+      <width>281</width>
       <height>31</height>
      </rect>
     </property>
@@ -148,11 +154,14 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="vsijoitusavainpolku_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>210</x>
       <y>400</y>
-      <width>271</width>
+      <width>281</width>
       <height>31</height>
      </rect>
     </property>
@@ -167,16 +176,22 @@
     <property name="text">
      <string/>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="placeholderText">
      <string>sijoitusavaimen tallennuspolku</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="vkirjoitusavainpolku_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>210</x>
       <y>360</y>
-      <width>271</width>
+      <width>281</width>
       <height>31</height>
      </rect>
     </property>
@@ -190,6 +205,9 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
     <property name="placeholderText">
      <string>kirjoitusavaimen tallennuspolku</string>
@@ -254,7 +272,7 @@
      <rect>
       <x>210</x>
       <y>320</y>
-      <width>271</width>
+      <width>281</width>
       <height>31</height>
      </rect>
     </property>
@@ -280,11 +298,14 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="vkirjoitusavain_tdsto_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>580</x>
       <y>360</y>
-      <width>271</width>
+      <width>181</width>
       <height>31</height>
      </rect>
     </property>
@@ -299,16 +320,22 @@
     <property name="text">
      <string/>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="placeholderText">
-     <string>kirjoistusavaimen tiedostonimi</string>
+     <string>sourceCharacterFile.txt</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="vsijoitusavain_tdsto_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>580</x>
       <y>400</y>
-      <width>271</width>
+      <width>181</width>
       <height>31</height>
      </rect>
     </property>
@@ -323,8 +350,11 @@
     <property name="text">
      <string/>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="placeholderText">
-     <string>sijoitusavaimen tiedostonimi</string>
+     <string>indexFile.txt</string>
     </property>
    </widget>
    <widget class="QPushButton" name="vvastaanota_pushButton">
@@ -374,6 +404,22 @@
     </property>
     <property name="placeholderText">
      <string>avattu viesti ilmestyy tähän</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="lviestiselaa_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>170</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>selaa välitettävien tiedostojen talletuspolkua</string>
+    </property>
+    <property name="text">
+     <string>Selaa</string>
     </property>
    </widget>
   </widget>

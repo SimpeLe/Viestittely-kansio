@@ -1,11 +1,13 @@
-# 20230703 9:55
+# 20230801 14:59
 # Simo-hakemistossa
 # - python -m venv env
+# seuraava käynnistää ohjelman env
 # - env\scripts\activate
 # - pip list
 # - pip install pyqt5 pyqt5-tools
 # - python.exe -m pip install --upgrade pip
 #   TAI C:\Users\Simis\AppData\Local\Programs\Python\Python311\python.exe -m pip install --upgrade pip
+#
 # (desingner kansio on syvällä kansiorakenteessa, seuraavassa oikotie)
 # - qt5-tools designer
 # - resurssienhallinnassa kopio pyqt\env\scripts\pyuic5.exe työkansioon
@@ -14,7 +16,8 @@
 # - pyuic5 -x -o ui_laheta.py ui_laheta.ui
 # - pyuic5 -x -o ui_vastaanota.py ui_vastaanota.ui
 #
-# githubin kloonaus: git clone https://SimpeLe@github.com/SimpeLe/Viestittely-kansio
+# gitbashissä isähakemistossa githubin kloonaus: 
+# git clone https://SimpeLe@github.com/SimpeLe/Viestittely-kansio
 #
 # (seuraava käynnistää ohjelman. Katso että komentokehotteen edessä lukee "(env)")
 # (jos ei lue "(env)", käynnistä virtuaaliympäristö env\scripts\activate)
@@ -32,7 +35,7 @@ from PyQt5 import QtGui as qtg
 # from PyQt5 import QtQuick 2.2
 # from PyQt5 import QtQuick 1.0
 
-import test_file_dialog as kans_hall
+#import test_file_dialog as kans_hall
 import fileMessageHandler as send
 import fileReceiverHandler as pickup
 
