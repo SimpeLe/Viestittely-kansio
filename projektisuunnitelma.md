@@ -24,11 +24,10 @@ ei liian isoa targettia kerralla
 
    
 4. Toteutus - käyttöliittymä
-?? lisää kuvat
-   4.1. Viestittely-kotisivu (PyQt Simis)
-   4.2. Viestittely-lähetä (Simis)
-   4.3. Viestittely-vastaanota (Simis)
-   4.5. Viestittely-kopio (Simis)
+   4.1. Viestittely-kotisivu (PyQt Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Kotisivu%2020230626.jpg
+   4.2. Viestittely-lähetä (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Laheta-sivu%2020230626.jpg
+   4.3. Viestittely-vastaanota (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Laheta-sivu%2020230626.jpg
+   4.5. Viestittely-kopio (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Kopio-sivu%2020230626.jpg
    
    
 5. Toteutus - ohjelmointi
