@@ -32,6 +32,7 @@ from ui_vastaanota import Ui_Form as vastota
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtGui as qtg
+
 # from PyQt5 import QtQuick 2.2
 # from PyQt5 import QtQuick 1.0
 
@@ -39,14 +40,15 @@ from PyQt5 import QtGui as qtg
 import fileMessageHandler as send
 import fileReceiverHandler as pickup
 
-class Claheta_klikkaus(qtw.QWidget):
+class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
     def __init__(self):
         super().__init__()
+        self.title = 'Viestittely - Tiedostoselaus'
         self.ui = laheta()
         self.ui.setupUi(self)
         self.show()
         self.ui.lvastaanottaja_lineEdit.setFocus()
-#        self.ui.lviestiselaa_pushButton.clicked.connect(self.viesti_tdsto_selaus_klikkaus)
+        self.ui.lviestiselaa_pushButton.clicked.connect(self.tdsto_selaus_klikkaus)
         self.ui.llaheta_pushButton.clicked.connect(self.laheta_klik)
         #tdstoNimi =  ""
     
@@ -57,8 +59,11 @@ class Claheta_klikkaus(qtw.QWidget):
         send.testsearchPositionFromCharFile()
 ######### luo uusi salattu viesti-tiedosto (nyt testMessage.txt)
 
-    # def viesti_tdsto_selaus_klikkaus(self):
-    #     viesti_tdsto_nimi = QFileDialog::getOpenFileNames(this, tr("Open File"),"/tekstit",tr("Mp3 Files (*.mp3)"));
+    def tdsto_selaus_klikkaus(self):
+        print("tässä avaa tiedosto keskustelu ikkuna")
+        # kts esim https://pythonspot.com/pyqt5-file-dialog/
+
+    #     viesti_tdsto_nimi = qtw::getOpenFileNames(this, tr("Open File"),"/tekstit",tr("Mp3 Files (*.mp3)"));
     #     ui->listWidget->addItems(viesti_tdsto_nimi);
 
 #         viesti_tdsto_nimi = FileDialog {
@@ -75,7 +80,38 @@ class Claheta_klikkaus(qtw.QWidget):
 #     }
 #     Component.onCompleted: visible = true
 # }
+
+    
+        self.setWindowTitle(self.title)
         
+        self.openFileNameDialog()
+        # self.openFileNamesDialog()
+        # self.saveFileDialog()
+        
+        self.show()
+    
+    def openFileNameDialog(self):
+        options = qtw.QFileDialog.Options()
+        options |= qtw.QFileDialog.DontUseNativeDialog
+        fileName, _ = qtw.QFileDialog.getOpenFileName(self,"qtw.QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
+        if fileName:
+            print(fileName)
+    
+    def openFileNamesDialog(self):
+        options = qtw.QFileDialog.Options()
+        options |= qtw.QFileDialog.DontUseNativeDialog
+        files, _ = qtw.QFileDialog.getOpenFileNames(self,"qtw.QFileDialog.getOpenFileNames()", "","All Files (*);;Python Files (*.py)", options=options)
+        if files:
+            print(files)
+    
+    def saveFileDialog(self):
+        options = qtw.QFileDialog.Options()
+        options |= qtw.QFileDialog.DontUseNativeDialog
+        fileName, _ = qtw.QFileDialog.getSaveFileName(self,"qtw.QFileDialog.getSaveFileName()","","All Files (*);;Text Files (*.txt)", options=options)
+        if fileName:
+            print(fileName)
+
+
 
 class Cvastaanota_klikkaus(qtw.QWidget):
     def __init__(self):
@@ -91,7 +127,8 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         pickup.testfindIndexFromSourceCharFile()
 
 
-class Ckotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on valittu designerissa
+# pitää matchata  widget-tyyppiin, joka on valittu designerissa
+class Ckotisivu(qtw.QMainWindow): 
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
@@ -118,37 +155,22 @@ class Ckotisivu(qtw.QMainWindow): # pitää matchata  widget-tyyppiin, joka on v
             self.ui.pkirjaudu_pushButton.setEnabled(False)
             # self.hide()
             ## napin painalluksen yhdistäminen luokan metodiin ##
-            # self.ui = flaheta_klikkaus() # tuo suoraan lähetä-ikkunan
-            # self.ui.plaheta_pushButton.clicked.connect(self.Claheta_klikkaus) #'Ckotisivu' object has no attribute 'claheta_klikkaus'
-            # self.ui.plaheta_pushButton.clicked.connect(Claheta_klikkaus) #tuo koti-ikkunan uudelleen näkyville
-
-            # self.laheta_form = claheta_klikkaus() # tuo suoraan läheteä-ikkunan
-            # self.laheta_form.show() # tuo suoraan läheteä-ikkunan
-
             self.ui.plaheta_pushButton.clicked.connect(self.show_claheta_klikkaus) 
             self.ui.pvastaanota_pushButton.clicked.connect(self.show_cvastaanota_klikkaus) 
         else:
             qtw.QMessageBox.critical(self, 'KIRJAUTUMISVIRHE', "Kirjoita oikea käyttäjätunnus ja salasana")
         
     def show_claheta_klikkaus(self, checked):
-        # if self.lahetasivu is None:
+#        self.hide()
         self.lahetasivu = Claheta_klikkaus()
-#        self.lahetasivu.show() # tuleeko uus sivu näkyviin ilman tätä
-        # else:
-        #     self.lahetasivu.close()
-        #     self.lahetasivu = None
 
     def show_cvastaanota_klikkaus(self, checked):
-        # if self.vastotasivu is None:
+#        self.hide()
         self.vastotasivu = Cvastaanota_klikkaus()
-#        self.vastotasivu.show()
-        # else:
-        #     self.vastotasivu.close()
-        #     self.vastotasivu = None
 
 if __name__=='__main__':
     app = qtw.QApplication([])
     kotisivu = Ckotisivu()
     app.exec_()
 
-    #https://www.pythonguis.com/tutorials/creating-multiple-windows/
+  

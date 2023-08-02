@@ -126,7 +126,7 @@
      <bool>true</bool>
     </property>
     <property name="placeholderText">
-     <string>testMessage.txt</string>
+     <string>Message.txt</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="vveistintalletuspolku_lineEdit">
@@ -354,7 +354,7 @@
      <bool>true</bool>
     </property>
     <property name="placeholderText">
-     <string>indexFile.txt</string>
+     <string>locationKeyFile.txt</string>
     </property>
    </widget>
    <widget class="QPushButton" name="vvastaanota_pushButton">

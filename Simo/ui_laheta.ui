@@ -36,7 +36,7 @@
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>30</y>
+      <y>20</y>
       <width>251</width>
       <height>61</height>
      </rect>
@@ -226,7 +226,7 @@
      <bool>true</bool>
     </property>
     <property name="placeholderText">
-     <string>testMessage.txt</string>
+     <string>Message.txt</string>
     </property>
     <property name="clearButtonEnabled">
      <bool>false</bool>
@@ -505,7 +505,7 @@
      <bool>true</bool>
     </property>
     <property name="placeholderText">
-     <string>indexFile.txt</string>
+     <string>locationKeyFile.txt</string>
     </property>
    </widget>
    <widget class="QPlainTextEdit" name="lviesti_plainTextEdit">
