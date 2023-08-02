@@ -17,13 +17,13 @@ ei liian isoa targettia kerralla
 
 
 3. Suunnitelu
-    3.1. Toteutusmäärittely
-    3.2. Vuokaavio/toimintalogiikka
-    3.3. Teksti-tiedostojen suhteet (https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Teksti_tiedostojen_suhteet.jpg)
-    3.4. Testaussuunnitelma
+   3.1. Toteutusmäärittely
+   3.2. Vuokaavio/toimintalogiikka
+   3.3. Teksti-tiedostojen suhteet https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Teksti_tiedostojen_suhteet.jpg
+   3.4. Testaussuunnitelma
 
    
-5. Toteutus - käyttöliittymä
+4. Toteutus - käyttöliittymä
 ?? lisää kuvat
    4.1. Viestittely-kotisivu (PyQt Simis)
    4.2. Viestittely-lähetä (Simis)
@@ -31,7 +31,7 @@ ei liian isoa targettia kerralla
    4.5. Viestittely-kopio (Simis)
    
    
-6. Toteutus - ohjelmointi
+5. Toteutus - ohjelmointi
 ?? näytä koodia tai print screen  
    5.1. Viestittely-kotisivu 
    5.2. Viestittely-lähetä (Ville)
@@ -45,7 +45,5 @@ ei liian isoa targettia kerralla
    
 - 7. Käyttöönotto
    7.1. Käyttöohje
-
-python moduli secrities
 
 
