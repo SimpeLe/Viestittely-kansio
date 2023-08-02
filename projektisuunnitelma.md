@@ -43,7 +43,7 @@ ei liian isoa targettia kerralla
 
    
 - 7. Käyttöönotto
-?? käyttöohje
+   7.1. Käyttöohje
 
 python moduli secrities
 
