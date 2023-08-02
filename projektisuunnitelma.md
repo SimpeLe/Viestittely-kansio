@@ -23,10 +23,10 @@ ei liian isoa targettia kerralla
    3.4. Testaussuunnitelma
 
    
-4. Toteutus - käyttöliittymä
+4. Toteutus - käyttöliittymä https://marvelapp.com/prototype/6c705j0/screen/92062571
    4.1. Viestittely-kotisivu (PyQt Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Kotisivu%2020230626.jpg
    4.2. Viestittely-lähetä (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Laheta-sivu%2020230626.jpg
-   4.3. Viestittely-vastaanota (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Laheta-sivu%2020230626.jpg
+   4.3. Viestittely-vastaanota (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Vastaanota-sivu%2020230626.jpg
    4.5. Viestittely-kopio (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Kopio-sivu%2020230626.jpg
    
    
