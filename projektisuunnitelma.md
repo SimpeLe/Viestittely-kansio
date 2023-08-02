@@ -10,9 +10,9 @@ ei liian isoa targettia kerralla
    2.3. Kerää ohjelmisto vaatimukset
    2.4. Tee käyttäjätapauksia
    2.5. Suunnittele UI kevytversio, esim. vertaa Kallen chat-sovellukseen, aluksi vähän protoillaan ei tarkkaa UI leiskaa heti
-   UI:ssa pitää vaikka aluksi olla painonappi jola avaa tiedoston mistä viesti voidaan lukea tiedostosta (myöhemmin viestin 
+   UI:ssa pitää vaikka aluksi olla painonappi jolla avaa tiedoston mistä viesti voidaan lukea tiedostosta (myöhemmin viestin 
    lähetys), viesti luetaan ja näytetään viestikentässä
-   2.6. Mieti rajapintoja eri ohjelmiston osien välillä esi. UI -tiedostun luku
+   2.6. Mieti rajapintoja eri ohjelmiston osien välillä esim. UI -tiedostun luku
    2.7. Määrittele salaukseen liittyvät termit vrt. kohta 1
 
 
@@ -27,7 +27,7 @@ ei liian isoa targettia kerralla
    4.1. Viestittely-kotisivu (PyQt Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Kotisivu%2020230626.jpg
    4.2. Viestittely-lähetä (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Laheta-sivu%2020230626.jpg
    4.3. Viestittely-vastaanota (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Vastaanota-sivu%2020230626.jpg
-   4.5. Viestittely-kopio (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Kopio-sivu%2020230626.jpg
+   4.5. ehkä Viestittely-kopio (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Kopio-sivu%2020230626.jpg
    
    
 5. Toteutus - ohjelmointi
@@ -36,7 +36,7 @@ ei liian isoa targettia kerralla
    5.2. Viestittely-lähetä (Ville)
    5.3. Viestittely-vastaanota (Ville)
    5.4. Tiedoston siirto (Ville, Simis)
-   5.5. Viestittely-kopio (Ville)
+   5.5. ehkä Viestittely-kopio (Ville)
 
    
 - 6. Testaus
