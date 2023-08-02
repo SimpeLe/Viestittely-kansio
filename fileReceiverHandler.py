@@ -2,7 +2,7 @@
 
 
 def removeLocationKey():
-    pass
+    tre  = 7
 
 def readNumberFromfileToList(filename):
     listOfOneRow=[]

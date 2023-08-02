@@ -56,7 +56,6 @@ def createSourceCharacterFile(size):
     numberOfCharinFile = 0
     oneline = createOneSourceCharacterList() + createOneSourceCharacterList() + createOneSourceCharacterList() + "\n"
     
-    print(len(oneline))
     # change  own path in your computer to next line
     with open("sourceCharacterFile.txt", 'w') as charFile:
         while numberOfCharinFile < size:
@@ -126,7 +125,7 @@ def writeFinalMessageFileByNumber():
     listOfOneRowLocation=[] # read one row of location from file to this list
     oneMessagerow=[] # create one row of messages and write to file
     listOfOneRowIndex=[] # read one row of index from file to this list
-    lengthOfOneMessageRow = 100
+    lengthOfOneMessageRow = 650
     lengthOfOneLocationRow = 0
     lengthOfOneIndexRow = 0
     numberOfIndexRowInFile = 0
@@ -172,7 +171,7 @@ def writeFinalMessageFileByNumber():
                     if messageRowReady == False: # start creating one message row
                         print("row creating")
                         for messageRowIndex in range(0, lengthOfOneMessageRow): # fill one row with random numbers
-                            oneMessagerow.append(random.randrange(102))
+                            oneMessagerow.append(random.randrange(308))
                             #print(str(messageRowIndex)+"\n")
                     elif messageRowReady == True:
                         print("row ready")
@@ -185,13 +184,12 @@ def writeFinalMessageFileByNumber():
                         logging.debug("listOfOneRowIndex : %s", str(listOfOneRowIndex))
                         logging.debug("oneRowIndex : %s", str(oneRowIndex))
                         logging.debug("indexNumber : %s", str(indexNumber))
-                        #oneMessagerow[oneRowIndex] = 36
-                        #messageFile.write(str(indexNumber)+",")
+                        
                         currenLocationNumber = listOfOneRowLocation[indexNumber] # read one location from list
                         locationCounter += currenLocationNumber # count together location for message row
                         oneMessagerow[locationCounter] = oneRowIndex # set index by location to message row
                         hanledLocationForMessageRow +=1 # add counter of handled location
-                        if hanledLocationForMessageRow == 4:
+                        if hanledLocationForMessageRow == 6:
                             hanledLocationForMessageRow = 0
                             messageFileByNumber.write(','.join(str(i) for i in oneMessagerow))
                             messageFileByNumber.write("\n")
@@ -247,7 +245,7 @@ def searchIndexFromCharFile():
     
     #messagelineHandler = "No one" + "\n" + "shall"
     with open("indexFile.txt", 'w') as indexFile:
-        with open("origMessageFile.txt", 'r') as messageFile:
+        with open("testOrigMessage.txt", 'r') as messageFile:
             with open("sourceCharacterFile.txt", 'r') as charFile:
                 numberOfRowsInCharfile = len(charFile.readlines())
                 charFile.seek(0)
@@ -487,10 +485,9 @@ def removePunc():
 setLogger()
 #createOneSourceCharacterList()
 #createSourceCharacterFile(1)
-createLocationKey(800)
+#createLocationKey(800)
 #searchPositionFromCharFile("hgsah")
 #findPositionFromSourceCharacterFile("s")
-#searchIndexFromCharFile()
 #testPickle()
 #testList()
 #writeListLines()
@@ -498,8 +495,9 @@ createLocationKey(800)
 #saveListOfNumb()
 #readNumList()
 #writelisttofile()
-#writeFinalMessageFileByNumber()
-setLogger()
+#searchIndexFromCharFile()
+writeFinalMessageFileByNumber()
+
 
 
 
