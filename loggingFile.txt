@@ -1,0 +1,7 @@
+2023-08-01 19:16:59,147 Harmless debug Message
+2023-08-01 19:16:59,147 Just an information
+2023-08-01 19:16:59,148 Its a Warning
+2023-08-01 19:16:59,148 Did you try to divide by zero
+2023-08-01 19:16:59,148 Internet is down
+2023-08-01 19:16:59,148 Exception occurred: 7
+2023-08-01 19:16:59,575 Total lines  in location file: 80

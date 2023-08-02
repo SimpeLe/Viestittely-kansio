@@ -3,8 +3,19 @@ import string
 import random
 import linecache
 import pickle
-#import numpy as np
+import logging
 
+
+def setLogger():
+    numberOfHandledChar = 7
+    logging.basicConfig(filename="loggingFile.txt",
+    format='%(asctime)s %(message)s',
+    filemode='w')
+    
+    logger = logging.getLogger()
+
+    # Set the log of level to DEBUG
+    logger.setLevel(logging.DEBUG)
 
 
 def createOneSourceCharacterList():
@@ -14,7 +25,6 @@ def createOneSourceCharacterList():
     """
    
     # Create list of all characters
-    #characters = string.printable
     characters = string.ascii_letters + string.digits + string.punctuation
     # add scandinavian characters
     characters +="äöåÄÖÅ"
@@ -24,14 +34,11 @@ def createOneSourceCharacterList():
     characters += "á"
     # add mark for ending original message
     characters += "ô"
-    print(characters)
-    print(len(characters))
+    
     # Randomize order of string
-    rand_string = ''.join(random.sample(characters, len(characters)))
-    #print(rand_string)
-    print(random.randrange(1,800))
-    print(random.randrange(1,100))
-    return rand_string
+    randomString = ''.join(random.sample(characters, len(characters)))
+    
+    return randomString
 
 def createSourceCharacterFile(size):
     """
@@ -63,7 +70,7 @@ def createSourceCharacterFile(size):
 
     with open(r"sourceCharacterFile.txt", 'r') as fp:        
         x = len(fp.readlines())
-        print('Total lines  in char file:', x) # 8
+        logging.debug("Total lines  in char file: %s", str(x))
 
     charFile.close()  
 
@@ -97,119 +104,9 @@ def createLocationKey(lengthOfKey):
 
     with open(r"locationKeyFile.txt", 'r') as fp:        
         x = len(fp.readlines())
-        print('Total lines  in location file:', x) 
-
-    # for x in enumerate(fp.readlines()):
-    #     print(x)
+        logging.debug("Total lines  in location file: %s", str(x))
             
     
-def searchPositionFromCharFile(originalMessageTextLine):
-     originLength = len(originalMessageTextLine)
-     indexInLine = 0
-     sourceCharacterlineHandler  = ""
-     indexInCharSourceLine = 0 # 0-300
-     indexOfRowInCharFile = 0 # start from 0, maximuM around 3 000 
-     startSearchingIndex = 0 # 0, 100 or 200
-     oneAsciiGroupLength = 100
-     numberOfCharToBeHandle = 3 # search 3 character from each sourcecharacterRow
-     numberOfHandledChar = 0 # tell how many char has been handled could  be 1-3
-     messagelineHandler = "" # contains one line of original message
-     messageRowLength = 0 # length of message line
-     lineHandled = False
-     messageLentghCounter = 0
-     with open("Viestittely-kansio/sourceCharacterFile.txt", 'r') as charFile:
-         #charline = linecache.getline(r"Viestittely-kansio/sourceCharacterFile.txt", 1)
-         lineread = charFile.readlines()[0]
-         print("lineread") 
-         print(lineread)
-         #print(charline)
-         charFile.seek(0)
-         lineread = charFile.readlines()[1]
-         print(lineread)
-         #print(len(lineread))
-         print("debug")
-         with open("positionFile.txt", 'w') as positionFile:
-            with open("origMessageFile.txt", 'r') as messageFile:
-                charline = linecache.getline(r"sourceCharacterFile.txt", 1)
-                # meassageline1 = linecache.getline(r"Viestittely-kansio/origMessageFile.txt", 1)
-                meassageline2 = linecache.getline(r"origMessageFile.txt", 2)
-                newline_break = ""
-                rowCount = len(messageFile.readlines())
-                print('Total lines  in message file:', rowCount)
-
-                # read through hole original message file and and find relative positions from sourceCharacterfile
-                for readline in range (1,rowCount+1):
-                    # read one line of message and handle it
-                 
-                    messagelineHandler = "No"
-                    messageRowLength = len(messagelineHandler) # length of original message row
-                    print(messageRowLength)
-                    if messageRowLength == 1:
-                        print("empty line")
-                        if messagelineHandler == "\n":
-                            print(" this is new line")
-
-                    
-                    # handle each character in one line
-                    for charInMsgLine in messagelineHandler:
-                        if lineHandled == False: 
-                            charFile.seek(0)
-                            sourceCharacterlineHandler = charFile.readline()[indexOfRowInCharFile]
-                        print("handled char in loop")
-                        print(numberOfHandledChar)
-                        if numberOfHandledChar == numberOfCharToBeHandle: # search 3 position of char each row from sourceCharFile
-                            lineHandled = False  # set counter to right values after hangling one row
-                            numberOfHandledChar = 0
-                            indexOfRowInCharFile +=1 # index for reading next line of sourCharfile 
-                            startSearchingIndex = 0 # index of row where start to find first char
-                        if lineHandled == False: 
-                            charFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
-                            sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile]
-                        lineHandled = True
-                        print(sourceCharacterlineHandler)
-                        print("char to be found")
-                        print(charInMsgLine+"\n")
-
-                        print("startSearchingIndex")
-                        print(startSearchingIndex)
-                        print("\n")
-
-                        #indexInCharSourceLine = sourceCharacterlineHandler.find(charInMsgLine, startSearchingIndex)
-                        indexInCharSourceLine = sourceCharacterlineHandler.find(charInMsgLine)
-                        
-                        print("index found"+"\n")
-                        print(indexInCharSourceLine)
-                        
-                        numberOfHandledChar +=1
-                        if numberOfHandledChar == 1: # set startseachindex for second char in row of sourcecharFile
-                            startSearchingIndex = 100
-                        elif numberOfHandledChar == 2: # set startseachindex for third char in row of sourcecharFile
-                            startSearchingIndex = 200
-
-
-                # messageFile.close()
-                # messageFile =  open("Viestittely-kansio/origMessageFile.txt", 'r')
-                # for readline in messageFile:
-                #     meassageline1 = linecache.getline(r"Viestittely-kansio/origMessageFile.txt", 1)
-                #     print(meassageline1)
-                #     line_strip = messageFile.readline() #.strip()
-                #     print(line_strip)
-                #     newline_break += line_strip
-                #     print(newline_break)
-                
-                #temp = messageFile.read().splitlines()
-                #print(temp)
-                rowLength = len(meassageline2)
-                print(rowLength)
-                currentChar = ""
-                #for index in rowLength: # hjandle sinle line of original message
-                currentChar = meassageline2[0]
-                #indexInCharSourceLine = lineread.index(currentChar)
-                print(currentChar+"\n")
-                print(indexInCharSourceLine)
-                print("\n")
-
-     #charFile.close()
              
 def findPositionFromSourceCharacterFile(mark):
     charline = linecache.getline(r"sourceCharacterFile.txt", 1)
@@ -255,9 +152,10 @@ def writeFinalMessageFileByNumber():
                 print("index file readed")
                 numberOfIndexRowInFile = len(indexRowLines)
                 print("numberOfIndexRowInFile " + str(numberOfIndexRowInFile) +"\n")
+                logging.debug("numberOfIndexRowInFile : %s", str(numberOfIndexRowInFile))
                 locationRowLines = locationFile.readlines()
                 numberOfLocationRowInFile = len(locationRowLines)
-                print("numberOfLocationRowInFile " + str(numberOfLocationRowInFile) +"\n")
+                logging.debug("numberOfLocationRowInFile : %s", str(numberOfLocationRowInFile))
                 #for line in indexFile:
                 for line in range(0,numberOfIndexRowInFile): # go through entire index file row by row
                     locationCounter = 0
@@ -266,7 +164,7 @@ def writeFinalMessageFileByNumber():
                     #listOfOneRowLocation = locationFile.readlines()[line]
                     listOfOneRowLocation = [int(x) for x in locationRowLines[line].split(",")] # read one location row to list
                     print(listOfOneRowLocation)
-                    print("index file loop " + str(line)+ "\n")
+                    logging.debug("index file loop : %s", str(line))
                     listOfOneRowIndex = [int(x) for x in indexRowLines[line].split(",")] # read one index row to list
                     print(listOfOneRowIndex)
                     lengthOfOneIndexRow = len(listOfOneRowIndex)
@@ -275,7 +173,7 @@ def writeFinalMessageFileByNumber():
                         print("row creating")
                         for messageRowIndex in range(0, lengthOfOneMessageRow): # fill one row with random numbers
                             oneMessagerow.append(random.randrange(102))
-                            print(str(messageRowIndex)+"\n")
+                            #print(str(messageRowIndex)+"\n")
                     elif messageRowReady == True:
                         print("row ready")
                         hanledLocationForMessageRow = 0
@@ -283,9 +181,10 @@ def writeFinalMessageFileByNumber():
                     for oneRowIndex in listOfOneRowIndex: # go through one index row and set numbers to message row by location
                         if lengthOfOneIndexRow > 100:
                             lastRowOfIndex = True
-                        print("listOfOneRowIndex " + str(listOfOneRowIndex) +"\n")
-                        print("oneRowIndex " + str(oneRowIndex) +"\n")
-                        print("indexNumber " + str(indexNumber) +"\n")
+
+                        logging.debug("listOfOneRowIndex : %s", str(listOfOneRowIndex))
+                        logging.debug("oneRowIndex : %s", str(oneRowIndex))
+                        logging.debug("indexNumber : %s", str(indexNumber))
                         #oneMessagerow[oneRowIndex] = 36
                         #messageFile.write(str(indexNumber)+",")
                         currenLocationNumber = listOfOneRowLocation[indexNumber] # read one location from list
@@ -300,9 +199,11 @@ def writeFinalMessageFileByNumber():
                         currenIndexNumber = oneRowIndex
                         print(listOfOneRowLocation)
                         print(oneMessagerow)
-                        print("currenLocationNumber " + str(currenLocationNumber) +"\n")
-                        print("currenIndexNumber " + str(currenIndexNumber) +"\n")
-                        print("locationCounter " + str(locationCounter) +"\n")
+
+                        logging.debug("currenLocationNumber : %s", str(currenLocationNumber))
+                        logging.debug("currenIndexNumber : %s", str(currenIndexNumber))
+                        logging.debug("locationCounter : %s", str(locationCounter))
+
                         indexNumber += 1
                     print(oneMessagerow)
                 locationFile.close()
@@ -320,7 +221,7 @@ def writelisttofile():
         outfile.write(','.join(str(i) for i in myList))
         outfile.close()
 
-def testSearchIndexFromCharFile():
+def searchIndexFromCharFile():
     """
     Find index of letters(original message written by user)
     from sourceCharFile and create indexFile
@@ -334,7 +235,7 @@ def testSearchIndexFromCharFile():
     startSearchingIndex = 0 # start index when finding index from row
     indexOfRowInCharFile = 0 # current row number while proceeding sourceCharFile
     numberOfRowsInCharfile = 0 # numberd of rows in char file, when reach end set indexOfRowInCharFile to zero
-    oneAsciiGroupLength = 100
+    oneCharcterGroupLength = 103
     numberOfCharHandle = 3 # search 3 cracter from each sorcecharacterRow
     numberOfHandledChar = 0
     messagelineHandler = "" # contains one line of original message
@@ -350,32 +251,20 @@ def testSearchIndexFromCharFile():
             with open("sourceCharacterFile.txt", 'r') as charFile:
                 numberOfRowsInCharfile = len(charFile.readlines())
                 charFile.seek(0)
-                print('Total lines  in charFile file:', numberOfRowsInCharfile) 
+                logging.debug("Total lines  in charFile file : %s", str(numberOfRowsInCharfile))
                 for readline in messageFile: # go through hole original message(write by user) file line by line
-                # messagelineHandler = linecache.getline(r"origMessageFile.txt", 1)
-                # print(messagelineHandler)
                     print("print readline\n")
                     print (readline)
-                    messagelineHandler =  readline #messageFile.readline()
-                    #line_strip = messageFile.readline() #.strip()
+                    messagelineHandler =  readline # set one row of message to handler
                     print(messagelineHandler)
-                    #newline_break += line_strip
-                    #print(newline_break)
+                
                     
                     for charInMsgLine in messagelineHandler: # go through entire row of original message char by char and found index from
-                        # sourcecharfile
-                        #sourceCharacterlineHandler = linecache.getline(r"Viestittely-kansio/sourceCharacterFile.txt", 1)
-                        # if lineHandled == False:  # this refers to reading and handling one sourceCharacterfile
-                        #     charFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
-                        #     sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile]
-                        #     print("index of row in char file " + str(indexOfRowInCharFile)+ "\n")
-                        #     #print(indexOfRowInCharFile)
-                        #     lineHandled = True
-                            #sourceCharacterlineHandler = linecache.getline(r"Viestittely-kansio/sourceCharacterFile.txt", 1)
-                            # sourceCharacterlineHandler = charFile.readline()[0]
-                        print("handled char in loop " + str(numberOfHandledChar) +"\n")
-                        #print(numberOfHandledChar)
-                        if numberOfHandledChar == numberOfCharHandle: # 3
+                                                             # sourceCharFile
+                        logging.debug("handled char in loop : %s", str(numberOfHandledChar))
+                        
+                        if numberOfHandledChar == numberOfCharHandle: # when found 3 index from one row of sourceCharFile load next row
+                                                                      # of sourcecharFile bu adding 1 to indexOfRowInCharFile
                             print("set counters to zero\n")
                             lineHandled = False
                             numberOfHandledChar = 0
@@ -387,51 +276,43 @@ def testSearchIndexFromCharFile():
                                 indexOfRowInCharFile = 0
                                 print("start reading from row zero\n")
 
-                            sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile]
-                            print("index of row in char file " + str(indexOfRowInCharFile)+ "\n")
-                            #print(indexOfRowInCharFile)
+                            sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile] # load next sourceCharFile row after founding 3 index
+                                                                                                    # from one row (index == position of one character)        
+                            logging.debug("index of row in char file : %s", str(indexOfRowInCharFile))
                             lineHandled = True
-                            #sourceCharacterlineHandler = linecache.getline(r"Viestittely-kansio/sourceCharacterFile.txt", 1)
-                            # sourceCharacterlineHandler = charFile.readline()[0]
-                        print("handled char in loop " + str(numberOfHandledChar) +"\n")
-                        # indexInCryptedMessage = 0
-                        # if lineHandled == False: 
-                        #     k = 2
-                        #     sourceCharacterlineHandler = charFile.readlines()[0]
-                        #lineHandled = True
-                        #print(sourceCharacterlineHandler)
-                        print("char to be found " + str(charInMsgLine)+ "\n")
-                        #print(charInMsgLine+"\n")
-
-                        print("startSearchingIndex " + str(startSearchingIndex)+ "\n")
-                        #print(startSearchingIndex)
-                        #print("\n")
+                            
+                        logging.debug("handled char in loop : %s", str(numberOfHandledChar))
+                        
+                        logging.debug("char to be found : %s", str(charInMsgLine))
+                        logging.debug("startSearchingIndex  : %s", str(startSearchingIndex ))
+                        
                         if charInMsgLine == " " or charInMsgLine == "\t":
                             charInMsgLine = "è"
                         elif charInMsgLine == "\n" or charInMsgLine == "\v" or charInMsgLine == "\r":
                             charInMsgLine = "á"
-                        #elif charInMsgLine == "EOF":
-                        #    charInMsgLine = "ô"
+                    
 
                         indexInCharSourceLine = sourceCharacterlineHandler.find(charInMsgLine, startSearchingIndex)
                         
-                        print("index found "+ str(indexInCharSourceLine) +"\n")
-                        #print(indexInCharSourceLine)
+                        logging.debug("index found : %s", str(indexInCharSourceLine))
 
                         
                         if numberOfHandledChar == 0:
                             #indexInCryptedMessage = indexInCharSourceLine
                             #indexrowrofile += str(indexInCharSourceLine)+","
                             listOfOneRowIndex.append(indexInCharSourceLine)
-                            startSearchingIndex = 100
+                            #startSearchingIndex = 100
+                            startSearchingIndex = oneCharcterGroupLength
                         elif numberOfHandledChar == 1: # set startseachindex for second char in row of sourcecharFile
-                            startSearchingIndex = 200
+                            #startSearchingIndex = 200
+                            startSearchingIndex =  2*oneCharcterGroupLength
                             #indexCounter = (100 - indexInCryptedMessage) + (indexInCharSourceLine - 100)
                             #indexInCryptedMessage = indexCounter
                             #indexrowrofile += str(indexInCharSourceLine)+","
                             listOfOneRowIndex.append(indexInCharSourceLine)
                         elif numberOfHandledChar == 2: # set startseachindex for third char in row of sourcecharFile
-                            startSearchingIndex = 200
+                            #startSearchingIndex = 200
+                            startSearchingIndex =  2*oneCharcterGroupLength
                             #indexCounter = (200 - indexInCryptedMessage) + (indexInCharSourceLine - 200)
                             #indexInCryptedMessage = indexCounter
                             #indexrowrofile += str(indexInCharSourceLine)+","
@@ -452,7 +333,7 @@ def testSearchIndexFromCharFile():
 
                 # end of file, set end mark(ô) for message
                 indexInCharSourceLine = sourceCharacterlineHandler.find("ô", 0) # ô char means end of message, start searching from index zero of this mark 
-                print("index found for ending message "+ str(indexInCharSourceLine) +"\n")
+                logging.debug("index found for ending message : %s", str(indexInCharSourceLine))
                 indexrowrofile += str(indexInCharSourceLine)
                 listOfOneRowIndex.append(indexInCharSourceLine)
                 print(indexrowrofile)
@@ -484,66 +365,6 @@ def testPickle():
     
     # Close the file
     F.close()
-
-
-def testList():
-    F = open('lista.txt', 'w')
- 
-    # List of numbers
-    L = [1, 2, 3, 4, 5, 6, 7]
-    
-    # Use a list comprehension to convert the 
-    # numbers to strings then join all strings 
-    # using a new line
-    F.write([str(x) for x in L])
-    #F.write("\n".join([str(x) for x in L]))
-    
-    # Close the file
-    F.close()
-
-def writeListLines():
-    numbers = []
-    numbers.append(str(121))
-    numbers.append(str(245))
-    numbers.append(str(453))
-    numbers.append(str(674))
-    numbers.append("\n")
-    print(numbers)
-    print("writelist")
-
-    with open('numbers.txt', 'w') as fp:
-        fp.writelines(numbers)
-
-def readListLines():
-    numbers = []
-
-    # open file and read the content in a list
-    with open('nums_method_1b.txt', 'r') as fp:
-        for line in fp:
-            # remove linebreak from a current name
-            # linebreak is the last character of each line
-            x = line[:-1]
-            print(str(x))
-            # add current item to the list
-            numbers.append(str(x))
-
-    # display list
-    print(numbers)
-    print(numbers)
-
-# def generate_specific_rows(filePath, row_indices=[]):
-#     with open(filePath) as f:
-#         # using enumerate to track line no.
-#         for i, line in enumerate(f):
-#             #if line no. is in the row index list, then return that line
-#             if i in row_indices:
-#                 yield line
-
-# def readRowList():
-#     gen = generate_specific_rows("numbers.txt",row_indices = [1])
-#     data = np.loadtxt(gen, delimiter=",")
-#     print(data)
-
 
 def saveListOfNumb():
     nums = [32423, 30902, 28153, 31651, 36795, 28939, 26144, 21940]
@@ -622,36 +443,6 @@ def readMultipleNumList():
     #print(list1[4])
     nums.close()
 
-def readAllNimb():
-    numbers = []
-    with open("nums_method_1b.txt") as nums:   
-        for line in nums:
-            line = line.strip() # remove newline at end and other whitespace
-            if line: # avoid empty lines
-                n = list(map(int, line.split(", ")))
-                numbers.append(n)
-       
-    row1, row2 = numbers 
-    print(row1)
-    print(row2)
-
-def readAgain():
-    numlist = []
-    f=open('nums_method_1b.txt',"r")
-    for line in f:
-        numlist.append(line.strip('\n'))
-        print(numlist)
-               
-def readAgain2():
-    with open('nums_method_1b.txt', 'r') as f:
-        lines = f.readlines()
-        numbers =[int(e.strip()) for e in lines]
-        print(numbers)
-
-def readAgain3():
-        with open('nums_method_1b.txt', 'r') as input_data:
-            input_list= [map(int,num.split()) for num in input_data.readlines()]
-        print(input_list)
 
 def readAgain4():
     L = []
@@ -692,41 +483,24 @@ def removePunc():
     mytable = str.maketrans(",", " ")
     print(txt.translate(mytable))
 
-def removePunc2():
-    #a_string = '!hi, wh?at is the weat[h]er lik?e.'
-    a_string = "32423,30902,28153,31651,36795 , 28939 , 26144 , 2194"
-    new_string = a_string.translate(str.maketrans('', '', string.punctuation))
 
-    print(new_string)
-
-def removePunc3():
-    #a_string = '!hi. wh?at is the weat[h]er lik?e.'
-    a_string = "32423,30902,28153,31651,36795 , 28939 , 26144 , 2194"
-    new_string = a_string.replace(',', ' ')
-
-    print(new_string)
-
-
+setLogger()
 #createOneSourceCharacterList()
 #createSourceCharacterFile(1)
-#createLocationKey(8000)
+createLocationKey(800)
 #searchPositionFromCharFile("hgsah")
 #findPositionFromSourceCharacterFile("s")
-testSearchIndexFromCharFile()
+#searchIndexFromCharFile()
 #testPickle()
 #testList()
 #writeListLines()
 #readListLines()
 #saveListOfNumb()
 #readNumList()
-#readNumListLoop()
-#readOneNumList()
-#readMultipleNumList()
-#readAllNimb()
-#readAgain5()
-#removePunc3()
 #writelisttofile()
 #writeFinalMessageFileByNumber()
+setLogger()
+
 
 
 
