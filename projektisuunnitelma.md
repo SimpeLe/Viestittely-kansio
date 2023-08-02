@@ -34,7 +34,7 @@ ei liian isoa targettia kerralla
 ?? näytä koodia tai print screen  
    5.1. Viestittely-kotisivu 
    5.2. Viestittely-lähetä (Ville)
-   5.3. Viestittely-vastaanota (Simis)
+   5.3. Viestittely-vastaanota (Ville)
    5.4. Tiedoston siirto (Ville, Simis)
    5.5. Viestittely-kopio (Ville)
 
