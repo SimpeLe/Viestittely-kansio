@@ -16,7 +16,7 @@ ei liian isoa targettia kerralla
    2.7. Määrittele salaukseen liittyvät termit vrt. kohta 1
 
 
-3. Suunnitelu
+3. Suunnittelu
    3.1. Toteutusmäärittely
    3.2. Vuokaavio/toimintalogiikka
    3.3. Teksti-tiedostojen suhteet https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Teksti_tiedostojen_suhteet.jpg
