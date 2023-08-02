@@ -17,10 +17,10 @@ ei liian isoa targettia kerralla
 
 
 3. Suunnitelu
-      3.1. Toteutusmäärittely
-      3.2. Vuokaavio/toimintalogiikka
-      3.3. Teksti-tiedostojen suhteet (https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Teksti_tiedostojen_suhteet.jpg)
-      3.4. Testaussuunnitelma
+    3.1. Toteutusmäärittely
+    3.2. Vuokaavio/toimintalogiikka
+    3.3. Teksti-tiedostojen suhteet (https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Teksti_tiedostojen_suhteet.jpg)
+    3.4. Testaussuunnitelma
 
    
 5. Toteutus - käyttöliittymä
