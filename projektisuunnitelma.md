@@ -23,16 +23,18 @@ ei liian isoa targettia kerralla
 
    
 4. Toteutus - käyttöliittymä
+?? lisää kuvat
    4.1. Viestittely-kotisivu (PyQt Simis)
    4.2. Viestittely-lähetä (Simis)
    4.3. Viestittely-vastaanota (Simis)
    4.5. Viestittely-kopio (Simis)
    
    
-5. Toteutus - ohjelmointi   
+5. Toteutus - ohjelmointi
+?? näytä koodia tai print screen  
    5.1. Viestittely-kotisivu 
    5.2. Viestittely-lähetä (Ville)
-   5.3. Viestittely-vastaanota (Simis)
+   5.3. Viestittely-vastaanota (Ville)
    5.4. Tiedoston siirto (Ville, Simis)
    5.5. Viestittely-kopio (Ville)
 
@@ -41,7 +43,8 @@ ei liian isoa targettia kerralla
 
    
 - 7. Käyttöönotto
+   7.1. Käyttöohje
 
-ython moduli secrities
+python moduli secrities
 
 
