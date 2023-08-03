@@ -138,9 +138,9 @@ class Ui_Form(object):
         font.setPointSize(12)
         self.vviesti_plainTextEdit.setFont(font)
         self.vviesti_plainTextEdit.setObjectName("vviesti_plainTextEdit")
-        self.lviestiselaa_pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.lviestiselaa_pushButton.setGeometry(QtCore.QRect(500, 170, 51, 31))
-        self.lviestiselaa_pushButton.setObjectName("lviestiselaa_pushButton")
+        self.vviestiselaa_pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.vviestiselaa_pushButton.setGeometry(QtCore.QRect(500, 170, 51, 31))
+        self.vviestiselaa_pushButton.setObjectName("vviestiselaa_pushButton")
 
         self.retranslateUi(Form)
         self.vperu_pushButton.clicked.connect(Form.close) # type: ignore
@@ -186,8 +186,8 @@ class Ui_Form(object):
         self.vvastaanota_pushButton.setShortcut(_translate("Form", "Alt+V"))
         self.vviesti_plainTextEdit.setToolTip(_translate("Form", "avattu viesti ilmestyy tähän"))
         self.vviesti_plainTextEdit.setPlaceholderText(_translate("Form", "avattu viesti ilmestyy tähän"))
-        self.lviestiselaa_pushButton.setToolTip(_translate("Form", "selaa välitettävien tiedostojen talletuspolkua"))
-        self.lviestiselaa_pushButton.setText(_translate("Form", "Selaa"))
+        self.vviestiselaa_pushButton.setToolTip(_translate("Form", "selaa välitettävien tiedostojen talletuspolkua"))
+        self.vviestiselaa_pushButton.setText(_translate("Form", "Selaa"))
 
 
 if __name__ == "__main__":

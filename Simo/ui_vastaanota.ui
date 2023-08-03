@@ -406,7 +406,7 @@
      <string>avattu viesti ilmestyy tähän</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="lviestiselaa_pushButton">
+   <widget class="QPushButton" name="vviestiselaa_pushButton">
     <property name="geometry">
      <rect>
       <x>500</x>

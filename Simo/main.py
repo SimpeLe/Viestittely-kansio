@@ -43,60 +43,50 @@ import fileReceiverHandler as pickup
 class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
     def __init__(self):
         super().__init__()
-        self.title = 'Viestittely - Tiedostoselaus'
+        self.title = 'Viestittely-lähetä - kansioselaus'
         self.ui = laheta()
         self.ui.setupUi(self)
         self.show()
         self.ui.lvastaanottaja_lineEdit.setFocus()
-        self.ui.lviestiselaa_pushButton.clicked.connect(self.tdsto_selaus_klikkaus)
+        self.ui.lviestiselaa_pushButton.clicked.connect(self.kansio_selaus_klikkaus)
         self.ui.llaheta_pushButton.clicked.connect(self.laheta_klik)
-        #tdstoNimi =  ""
     
     def laheta_klik(self):
         print("tässä kutsu laheta-metodia")
-######### luo uusi kirjoitusavain vain kerran esim kerran kuussa tms
+#????????? luo uusi kirjoitusavain vain kerran esim kerran kuussa tms
         send.createSourceCharacterFile(1) 
         send.testsearchPositionFromCharFile()
-######### luo uusi salattu viesti-tiedosto (nyt testMessage.txt)
+#????????? luo uusi salattu viesti-tiedosto (nyt testMessage.txt)
 
-    def tdsto_selaus_klikkaus(self):
-        print("tässä avaa tiedosto keskustelu ikkuna")
-        # kts esim https://pythonspot.com/pyqt5-file-dialog/
-
-    #     viesti_tdsto_nimi = qtw::getOpenFileNames(this, tr("Open File"),"/tekstit",tr("Mp3 Files (*.mp3)"));
-    #     ui->listWidget->addItems(viesti_tdsto_nimi);
-
-#         viesti_tdsto_nimi = FileDialog {
-#     id: fileDialog
-#     title: "Please choose a file"
-#     folder: shortcuts.home
-#     onAccepted: {
-#         console.log("You chose: " + fileDialog.fileUrls)
-#         Qt.quit()
-#     }
-#     onRejected: {
-#         console.log("Canceled")
-#         Qt.quit()
-#     }
-#     Component.onCompleted: visible = true
-# }
-
-    
-        self.setWindowTitle(self.title)
-        
-        self.openFileNameDialog()
+    def kansio_selaus_klikkaus(self):
+        print("tässä avaa kansio-keskustelu ikkuna")
+        hakemistoPolku = self.openSaveDirectoryNameDialog()
+        print("def kansio_selaus_klikkaus hakemistoPolku: ", hakemistoPolku)
         # self.openFileNamesDialog()
         # self.saveFileDialog()
-        
+        # self.saveDirectoryDialog
         self.show()
-    
-    def openFileNameDialog(self):
-        options = qtw.QFileDialog.Options()
-        options |= qtw.QFileDialog.DontUseNativeDialog
-        fileName, _ = qtw.QFileDialog.getOpenFileName(self,"qtw.QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
-        if fileName:
-            print(fileName)
-    
+        # kirjoittaa kenttään harmaan tekstin, joka häviää, kun fokus siirtyy kenttään
+        # self.ui.lveistintalletuspolku_lineEdit.setPlaceholderText(qtc.QCoreApplication.translate("Form", "Nikke Nakkerton1"))
+        self.ui.lveistintalletuspolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", hakemistoPolku))
+        self.ui.lkirjoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", hakemistoPolku))
+        self.ui.lsijoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", hakemistoPolku))
+                
+
+    def openSaveDirectoryNameDialog(self):
+        # options = qtw.QFileDialog.Options()
+        # options |= qtw.QFileDialog.DontUseNativeDialog
+        # dialog = qtw.QFileDialog(self)
+        # dialog.setFileMode(qtw.QFileDialog.DirectoryOnly)
+        # #qtw.QFileDialog.setFileMode(qtw.QFileDialog.DirectoryOnly)
+        dirName = qtw.QFileDialog.getExistingDirectory(self,"Viestittely-lähetä kansio-selaus")
+        # dirName = qtw.QFileDialog.getExistingDirectory(self,"Viestittely-lähetä kansio-selaus", "", options=options)
+        # dirName, _ = qtw.QFileDialog.getOpenFileName(self,"Viestittely-lähetä kansio-selaus", "","Text files (*.txt)", options=options)
+        if dirName:
+            print(dirName)
+            return dirName
+
+
     def openFileNamesDialog(self):
         options = qtw.QFileDialog.Options()
         options |= qtw.QFileDialog.DontUseNativeDialog
@@ -108,8 +98,18 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
         options = qtw.QFileDialog.Options()
         options |= qtw.QFileDialog.DontUseNativeDialog
         fileName, _ = qtw.QFileDialog.getSaveFileName(self,"qtw.QFileDialog.getSaveFileName()","","All Files (*);;Text Files (*.txt)", options=options)
+        self.setWindowTitle(self.title)
         if fileName:
             print(fileName)
+
+    def saveDirectoryDialog(self):
+        print ('saveDirectoryDialogin sisällä')
+        options = qtw.QFileDialog.Options()
+        options |= qtw.QFileDialog.DontUseNativeDialog
+        sDirectory, _ = qtw.QFileDialog.getExistingDirectory(self,"qtw.QFileDialog.getExistingDirectory()","","All Files (*);;Text Files (*.txt)", options=options)
+        if sDirectory:
+            print(sDirectory)
+            return sDirectory
 
 
 
@@ -120,8 +120,26 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         self.ui.setupUi(self)
         self.show()
         self.ui.vveistintalletuspolku_lineEdit.setFocus()
+        self.ui.vviestiselaa_pushButton.clicked.connect(self.vastota_kansio_selaus_klikkaus)        
         self.ui.vvastaanota_pushButton.clicked.connect(self.vastaanota_klik) 
+
+    def vastota_kansio_selaus_klikkaus(self):
+        print("tässä avaa vastota (pickup) kansio-keskustelu ikkuna")
+        vastOtaHakemistoPolku = self.openPickupDirectoryNameDialog()
+        print("def vastota_kansio_selaus_klikkaus vastOtaHakemistoPolku: ", vastOtaHakemistoPolku)
+        self.show()
+        # kirjoittaa kenttään harmaan tekstin, joka häviää, kun fokus siirtyy kenttään
+        # self.ui.lveistintalletuspolku_lineEdit.setPlaceholderText(qtc.QCoreApplication.translate("Form", "Nikke Nakkerton1"))
+        self.ui.vveistintalletuspolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", vastOtaHakemistoPolku))
+        self.ui.vkirjoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", vastOtaHakemistoPolku))
+        self.ui.vsijoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", vastOtaHakemistoPolku))
     
+    def openPickupDirectoryNameDialog(self):
+        pickupDirName = qtw.QFileDialog.getExistingDirectory(self,"Viestittely-vastaanota kansio-selaus")
+        if pickupDirName:
+            print(pickupDirName)
+            return pickupDirName
+
     def vastaanota_klik(self):
         print("tässä kutsu vastaanota-metodia")
         pickup.testfindIndexFromSourceCharFile()
@@ -135,18 +153,19 @@ class Ckotisivu(qtw.QMainWindow):
         self.ui.setupUi(self)
         self.lahetasivu = None
         self.vastotasivu = None
-        #napin painalluksen yhdistäminen luokan metodiin
-        self.ui.pkirjaudu_pushButton.clicked.connect(self.login_click) 
-# #        self.ui.cb_checkbox.setChecked(True)
         self.show()
         self.ui.pkayttaja_lineEdit.setFocus()
 
+        self.login_click()
+#??????????        # napin painalluksen yhdistäminen luokan metodiin
+#??????????        self.ui.pkirjaudu_pushButton.clicked.connect(self.login_click) 
+# #        self.ui.cb_checkbox.setChecked(True)
+
 
     def login_click(self):
- #        if users.username == self.ui.txt_username.text() and users.password==self.ui.txt_password.text():
-        if self.ui.pkayttaja_lineEdit.text() == "k" and self.ui.psalis_lineEdit.text() == "k":
-            print(self.ui.pkayttaja_lineEdit.text()," sisällä")
-            # qtw.QMessageBox.information(self, 'ONNISTUI', 'Olet kirjautunut Viestittely-ohjelmaan')
+#   #        if users.username == self.ui.txt_username.text() and users.password==self.ui.txt_password.text():
+#??????????         if self.ui.pkayttaja_lineEdit.text() == "k" and self.ui.psalis_lineEdit.text() == "k":
+            print("Käyttäjä",self.ui.pkayttaja_lineEdit.text(),"sisällä")
             self.ui.plaheta_pushButton.setEnabled(True)
             self.ui.pvastaanota_pushButton.setEnabled(True)
             self.ui.pkopio_pushButton.setEnabled(True)
@@ -157,8 +176,8 @@ class Ckotisivu(qtw.QMainWindow):
             ## napin painalluksen yhdistäminen luokan metodiin ##
             self.ui.plaheta_pushButton.clicked.connect(self.show_claheta_klikkaus) 
             self.ui.pvastaanota_pushButton.clicked.connect(self.show_cvastaanota_klikkaus) 
-        else:
-            qtw.QMessageBox.critical(self, 'KIRJAUTUMISVIRHE', "Kirjoita oikea käyttäjätunnus ja salasana")
+#??????????        else:
+#??????????            qtw.QMessageBox.critical(self, 'KIRJAUTUMISVIRHE', "Kirjoita oikea käyttäjätunnus ja salasana")
         
     def show_claheta_klikkaus(self, checked):
 #        self.hide()
@@ -169,6 +188,7 @@ class Ckotisivu(qtw.QMainWindow):
         self.vastotasivu = Cvastaanota_klikkaus()
 
 if __name__=='__main__':
+    print("main alkaa")
     app = qtw.QApplication([])
     kotisivu = Ckotisivu()
     app.exec_()
