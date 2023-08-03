@@ -4,6 +4,7 @@ import random
 import linecache
 import pickle
 import logging
+import os
 
 
 def setLogger():
@@ -16,6 +17,10 @@ def setLogger():
 
     # Set the log of level to DEBUG
     logger.setLevel(logging.DEBUG)
+
+
+def removeIndexFile():
+    os.remove("indexFile.txt")
 
 
 def createOneSourceCharacterList():
@@ -82,11 +87,11 @@ def createLocationKey(lengthOfKey):
     createdNumers = 0
     oneLinenumbers = 0
     locationLine = ""
-    with open("locationKeyFileTest.txt", 'w') as locationKeyFile:
+    with open("locationKeyFile.txt", 'w') as locationKeyFile:
         while createdNumers < lengthOfKey:
             while oneLinenumbers < 100: # length of one line in location file
                 #if oneLinenumbers < 100:
-                locationLine += str(random.randrange(102)) + ","
+                locationLine += str(random.randrange(100)) + ","
                 oneLinenumbers += 1
                 print(locationLine)
                 print(oneLinenumbers)
@@ -125,7 +130,7 @@ def writeFinalMessageFileByNumber():
     listOfOneRowLocation=[] # read one row of location from file to this list
     oneMessagerow=[] # create one row of messages and write to file
     listOfOneRowIndex=[] # read one row of index from file to this list
-    lengthOfOneMessageRow = 650
+    lengthOfOneMessageRow = 1040
     lengthOfOneLocationRow = 0
     lengthOfOneIndexRow = 0
     numberOfIndexRowInFile = 0
@@ -144,9 +149,10 @@ def writeFinalMessageFileByNumber():
     #filerowlen = len(f.readlines())
     #print(filerowlen)
     #f.close()
+    logging.debug("writeFinalMessageFileByNumber func start ")
     with open("finalMessageByNumber.txt", 'w') as messageFileByNumber:
         with open("indexFile.txt", 'r') as indexFile:
-             with open("locationTest.txt", 'r') as locationFile:
+             with open("locationKeyFile.txt", 'r') as locationFile:
                 indexRowLines = indexFile.readlines()
                 print("index file readed")
                 numberOfIndexRowInFile = len(indexRowLines)
@@ -157,11 +163,14 @@ def writeFinalMessageFileByNumber():
                 logging.debug("numberOfLocationRowInFile : %s", str(numberOfLocationRowInFile))
                 #for line in indexFile:
                 for line in range(0,numberOfIndexRowInFile): # go through entire index file row by row
+                    logging.debug("line : %s", str(line))
                     locationCounter = 0
                     indexNumber = 0
                     locationFile.seek(0) #  set file iterator to zero before read line, otherwise it will raise "index out of range" error
                     #listOfOneRowLocation = locationFile.readlines()[line]
-                    listOfOneRowLocation = [int(x) for x in locationRowLines[line].split(",")] # read one location row to list
+                    #line = line.strip()
+                    #line = line[:-1] # remove last "\n"
+                    listOfOneRowLocation = [int(x) for x in locationRowLines[line].split(",")] # read one location row to list                    
                     print(listOfOneRowLocation)
                     logging.debug("index file loop : %s", str(line))
                     listOfOneRowIndex = [int(x) for x in indexRowLines[line].split(",")] # read one index row to list
@@ -189,11 +198,12 @@ def writeFinalMessageFileByNumber():
                         locationCounter += currenLocationNumber # count together location for message row
                         oneMessagerow[locationCounter] = oneRowIndex # set index by location to message row
                         hanledLocationForMessageRow +=1 # add counter of handled location
-                        if hanledLocationForMessageRow == 6:
+                        if hanledLocationForMessageRow == 10: # handled 10 location, write message row
                             hanledLocationForMessageRow = 0
                             messageFileByNumber.write(','.join(str(i) for i in oneMessagerow))
                             messageFileByNumber.write("\n")
                             messageRowReady = True
+                            locationCounter = 0 # set zero for next message row
                         currenIndexNumber = oneRowIndex
                         print(listOfOneRowLocation)
                         print(oneMessagerow)
@@ -203,7 +213,7 @@ def writeFinalMessageFileByNumber():
                         logging.debug("locationCounter : %s", str(locationCounter))
 
                         indexNumber += 1
-                    print(oneMessagerow)
+                    #print(oneMessagerow)
                 locationFile.close()
              indexFile.close()
         messageFileByNumber.close()
@@ -243,7 +253,7 @@ def searchIndexFromCharFile():
     indexrowrofile = ""
     indexrowflineHandled = False
     
-    #messagelineHandler = "No one" + "\n" + "shall"
+    logging.debug("searchIndexFromCharFile func start ")
     with open("indexFile.txt", 'w') as indexFile:
         with open("testOrigMessage.txt", 'r') as messageFile:
             with open("sourceCharacterFile.txt", 'r') as charFile:
@@ -364,6 +374,25 @@ def testPickle():
     # Close the file
     F.close()
 
+def createLocationListToPickle(lengthOfKey):
+    locationList = []
+    createdNumers = 0
+
+    with open("locationKeyFileP.txt", 'wb') as locationKeyFile:
+        while createdNumers < lengthOfKey:
+            locationList.append(random.randrange(1,300))
+            createdNumers +=1
+        pickle.dump(locationList, locationKeyFile) 
+    locationKeyFile.close()   
+
+def loadLocationListFromPickle():
+    locationList = []
+
+    with open ('locationKeyFileP.txt', 'rb') as locationKeyFile:
+        locationList = pickle.load(locationKeyFile)
+
+    print(locationList)
+
 def saveListOfNumb():
     nums = [32423, 30902, 28153, 31651, 36795, 28939, 26144, 21940]
     nums2 = [944, 67, 576, 74, 23, 54, 4144, 2140]
@@ -442,30 +471,6 @@ def readMultipleNumList():
     nums.close()
 
 
-def readAgain4():
-    L = []
-    with open('nums_method_1b.txt') as txtfile:
-        for line in txtfile:
-            L.append(int(line.rstrip()))
-            #''.join(e for e in line if e.isalnum())
-            print(line)
-            #print(e)
-            #int(float(input))
-    print(L)
-
-def readAgain5():
-    with open('nums_method_1b.txt') as num:
-        numbers = num.read()
-        n= numbers.split()
-        lst = []
-        for x in range(len(n)):
-            nu = n[x]
-            print(nu)
-            new_string = nu.replace(',', ' ')
-            print(new_string)
-            #lst.append(int(new_string))
-            #lst.append(int(mytable))
-        print(lst)
 
 def removePunc():
     #s = "string. With. Punctuation?" # Sample string 
@@ -485,25 +490,18 @@ def removePunc():
 setLogger()
 #createOneSourceCharacterList()
 #createSourceCharacterFile(1)
-#createLocationKey(800)
-#searchPositionFromCharFile("hgsah")
-#findPositionFromSourceCharacterFile("s")
+#createLocationKey(1000)
 #testPickle()
 #testList()
-#writeListLines()
 #readListLines()
-#saveListOfNumb()
 #readNumList()
 #writelisttofile()
 #searchIndexFromCharFile()
-writeFinalMessageFileByNumber()
+#writeFinalMessageFileByNumber()
+#removeIndexFile()
+createLocationListToPickle(100)
+loadLocationListFromPickle()
 
 
-
-
-
-#oneline = createOneSourceCharacterList() + createOneSourceCharacterList() + createOneSourceCharacterList() + "\n"
-#print(len(oneline))
-#print("one line") 
 
 
