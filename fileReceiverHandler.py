@@ -68,7 +68,7 @@ def findCharByIndexFromSourceCharFile():
             for indexInLine in list: # go through entire index list
     
                 if numberOfHandledIndex == numberOfIndexHandle: # find 3 index from one sourceCharFile row
-                    logging.debug("numberOfHandledIndex: %s", str(numberOfHandledIndex))
+                    #logging.debug("numberOfHandledIndex: %s", str(numberOfHandledIndex))
                     indexrowflineHandled = False
                     numberOfHandledIndex = 0
                     indexOfRowInCharFile +=1
@@ -76,15 +76,14 @@ def findCharByIndexFromSourceCharFile():
                         indexOfRowInCharFile = 0
                     charFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
                     sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile]
-                    logging.debug("indexOfRowInCharFile: %s", str(indexOfRowInCharFile))
+                    #logging.debug("indexOfRowInCharFile: %s", str(indexOfRowInCharFile))
                 #if indexrowflineHandled == False:  # this refers to reading and handling one source Character row
                 if numberOfHandledIndex < 3:
-                    logging.debug("index of numberOfHandledIndex 1_2: %s", str(numberOfHandledIndex))
-                    logging.debug("index of row in char file: %s", str(indexOfRowInCharFile))
+                    #logging.debug("index of row in char file: %s", str(indexOfRowInCharFile))
                     indexrowflineHandled = True
-                    logging.debug("handled index in loop %s", str(numberOfHandledIndex))
+                    #logging.debug("handled index in loop %s", str(numberOfHandledIndex))
                     charFoundByIndex = sourceCharacterlineHandler[indexInLine] # find one character from sourceCharFile row by index
-                    logging.debug("charFoundByIndex in loop: %s", charFoundByIndex)
+                    #logging.debug("charFoundByIndex in loop: %s", charFoundByIndex)
                     if charFoundByIndex == "ô": #  end of message, close file
                         messageFile.close()
                         break
@@ -96,7 +95,7 @@ def findCharByIndexFromSourceCharFile():
                         
                     messageFile.write(charFoundByIndex)
                     numberOfHandledIndex +=1
-                    print("index of numberOfHandledIndex 2 " + str(numberOfHandledIndex)+ "\n")
+    
         list.clear()
         charFile.close()
      messageFile.close()
