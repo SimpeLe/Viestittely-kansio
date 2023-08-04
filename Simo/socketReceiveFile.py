@@ -10,7 +10,7 @@ SERVER_PORT = 5001
 # receive 4096 bytes each time
 BUFFER_SIZE = 4096
 SEPARATOR = "<SEPARATOR>"
-
+ 
 # create the server TCP socket
 s = socket.socket()
 

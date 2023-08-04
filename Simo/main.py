@@ -22,8 +22,8 @@
 # (seuraava käynnistää ohjelman. Katso että komentokehotteen edessä lukee "(env)")
 # (jos ei lue "(env)", käynnistä virtuaaliympäristö env\scripts\activate)
 # - python ui_kotisivu.py 
-# - python main.py 
-
+# - python main.py  
+ 
 # - tee törkeesti muutoksia main.py fileen Code Studiossa
 from ui_kotisivu import Ui_MainWindow
 from ui_laheta import Ui_Form as laheta

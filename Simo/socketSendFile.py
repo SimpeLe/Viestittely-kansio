@@ -7,7 +7,7 @@ import os
 
 SEPARATOR = "<SEPARATOR>"
 BUFFER_SIZE = 4096 # send 4096 bytes each time step
-
+ 
 # the ip address or hostname of the server, the receiver
 # tarkasta cmd komennolla ipconfig
 # host = "192.168.10.48" #vanha kone
