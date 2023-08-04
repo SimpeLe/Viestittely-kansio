@@ -53,10 +53,17 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
     
     def laheta_klik(self):
         print("tässä kutsu laheta-metodia")
+#????????? jos keretään, voit tarkastaa onko muoto oikein
+
+#????????? jos keretään, voit tarkastaa onko hakemisto olemassa
+#????????? jos keretään, voit tarkastaa onko alotusnumero numero ja <5000
+
 #????????? luo uusi kirjoitusavain vain kerran esim kerran kuussa tms
         send.createSourceCharacterFile(1) 
         send.testsearchPositionFromCharFile()
 #????????? luo uusi salattu viesti-tiedosto (nyt testMessage.txt)
+
+# kutsu file socketia
 
     def kansio_selaus_klikkaus(self):
         print("tässä avaa kansio-keskustelu ikkuna")
