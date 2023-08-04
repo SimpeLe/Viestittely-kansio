@@ -3,6 +3,7 @@ import random
 import pickle
 import logging
 import os
+import datetime
 
 
 def setLogger():
@@ -15,6 +16,27 @@ def setLogger():
     # Set the log of level to DEBUG
     logger.setLevel(logging.DEBUG)
 
+
+def getCreationtime():
+    file = "sourceCharacterFile.txt"
+ 
+    print("Created")
+    print(os.path.getctime(file))
+    print(datetime.datetime.fromtimestamp(os.path.getctime(file)))
+
+    today = datetime.datetime.now()
+    print(today)
+
+    difference = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getctime(file))
+
+    print(difference)
+    if difference.days > 30:
+        print("over 30")
+        return
+ 
+    print("Modified")
+    print(os.path.getmtime(file))
+    print(datetime.datetime.fromtimestamp(os.path.getmtime(file)))
 
 def removeIndexFile():
     os.remove("indexFile.txt")
@@ -56,7 +78,16 @@ def createSourceCharacterFile(size):
     numberOfRows = 0
     # number of character in file
     numberOfCharinFile = 0
-    oneline = createOneSourceCharacterList() + createOneSourceCharacterList() + createOneSourceCharacterList() + "\n"
+
+    file = "sourceCharacterFile.txt"
+    difference = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getctime(file))
+
+    print(difference)
+    if difference.days > 30: # create new every month
+        logging.debug("Create new sourceCharFile")
+    else:
+        return
+
     
     # change  own path in your computer to next line
     with open("sourceCharacterFile.txt", 'w') as charFile:
@@ -242,6 +273,14 @@ def createLocationListToFile(lengthOfKey):
     createdNumers = 0
     logging.debug("createLocationListToPickle func start")
 
+    file = "locationKeyFile.txt"
+    difference = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getctime(file))
+
+    if difference.days > 30: # create new every month
+        logging.debug("Create new locationKeyFile")
+    else:
+        return
+
     with open("locationKeyFile.txt", 'wb') as locationKeyFile:
         while createdNumers < lengthOfKey:
             locationList.append(random.randrange(1,100))
@@ -290,9 +329,9 @@ def saveMessageToFile(messageList):
     
 def main():
     createLocationListToFile(10_000)
-    createMessageListToFile(1_000_000)
-    searchIndexFromCharFile()
-    writeFinalMessageFileByNumber()
+    #createMessageListToFile(1_000_000)
+    #searchIndexFromCharFile()
+    #writeFinalMessageFileByNumber()
 
 #setLogger()
 #createLocationListToFile(10_000)
