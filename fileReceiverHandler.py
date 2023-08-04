@@ -10,10 +10,8 @@ def setLogger():
     filemode='w')
     
     logger = logging.getLogger()
-
     # Set the log of level to DEBUG
     logger.setLevel(logging.DEBUG)
-
 
 def removeIndexFile():
     os.remove("indexFile.txt")
@@ -27,8 +25,7 @@ def readNumberFromfileToList(filename):
     lines = f.readlines()
     f.seek(0)
     filerowlen = len(f.readlines())
-    #print(filerowlen)
-    #f.close()
+    
     for line in range(0,filerowlen):
         listOfOneRow = [int(x) for x in lines[line].split(",")]
         entireNumeberList = entireNumeberList + listOfOneRow
@@ -36,17 +33,22 @@ def readNumberFromfileToList(filename):
     f.close()
     return entireNumeberList
 
-def loadLocationListFromPickle():
-    locationList = []
+def loadListFromFile(filename):
+    logging.debug("loadListFromFile func start ")
+    currentnList = []
 
-    with open ('locationKeyFileP.txt', 'rb') as locationKeyFile:
-        locationList = pickle.load(locationKeyFile)
+    with open (filename, 'rb') as listFile:
+        currentnList = pickle.load(listFile)
 
-    print(locationList)
-    return locationList
+    logging.debug("currentnList length: %s", str(len(currentnList)))
+    return currentnList
 
 
 def findCharByIndexFromSourceCharFile():
+     """
+     Find characters from sourceCharFile and writes message
+     """   
+
      sourceCharacterlineHandler  = ""
      charFoundByIndex = ""
      indexOfRowInCharFile = 0
@@ -57,18 +59,16 @@ def findCharByIndexFromSourceCharFile():
      list = []
      list = readNumberFromfileToList("indexFile.txt")
      logging.debug("findCharByIndexFromSourceCharFile func start ")
-     with open("testMessage.txt", 'w') as messageFile:
+     with open("Message.txt", 'w') as messageFile:
         with open("sourceCharacterFile.txt", 'r') as charFile:
             numberOfRowsInCharfile = len(charFile.readlines())
             logging.debug("numberOfRowsInCharfile: %s", str(numberOfRowsInCharfile))
             charFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
             sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile]
             for indexInLine in list: # go through entire index list
-                #print(indexInLine)
-                #print("index of numberOfHandledIndex 1 " + str(numberOfHandledIndex)+ "\n")
+    
                 if numberOfHandledIndex == numberOfIndexHandle: # find 3 index from one sourceCharFile row
                     logging.debug("numberOfHandledIndex: %s", str(numberOfHandledIndex))
-                    print("set counters to zero\n")
                     indexrowflineHandled = False
                     numberOfHandledIndex = 0
                     indexOfRowInCharFile +=1
@@ -102,8 +102,12 @@ def findCharByIndexFromSourceCharFile():
      messageFile.close()
 
 def findIndexByLocationFromMessage():
-    oneMessageRowlist = [] # read one row of message to this list
-    oneLocationRowlist = [] # read one location row to this list
+    """
+    Searches index from message based on location
+    """
+
+    messagelist = [] # read one row of message to this list
+    locationlist = [] # read one location row to this list
     oneIndexRowlist = [] # write one index row to this list
     indexOfRowInMessageFile = 0
     indexOfrowInLocationInFile = 0
@@ -113,61 +117,71 @@ def findIndexByLocationFromMessage():
     locRow = ""
     locationCounter = 0 # count location together for finding rigth location from message row
     logging.debug("findIndexByLocationFromMessage func start ")
-    with open("finalMessageByNumber.txt", 'r') as messageFile:
-        with open("locationTest.txt", 'r') as locationFile:
-            with open("indexFile.txt", 'w') as indexFile:
-                messageRowLines = messageFile.readlines()
-                print("messageFile file readed")
-                numberOfMessageRowInFile = len(messageRowLines)
-                logging.debug("numberOfIndexRowInFile: %s", str(numberOfMessageRowInFile))
-                locationRowLines = locationFile.readlines()
-                numberOfLocationRowInFile = len(locationRowLines)
-                logging.debug("numberOfLocationRowInFile: %s", str(numberOfLocationRowInFile))
-                messageFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
-                sourceMessagelineHandler = messageFile.readlines()[indexOfRowInMessageFile]
+    messagelist = loadMessageListFromFile()
+    logging.debug(" length: %s", str(len(messagelist)))
+    locationlist = loadListFromFile("locationKeyFile.txt")
+    logging.debug("oneLocationRowlist length: %s", str(len(locationlist)))
+    with open("indexFile.txt", 'w') as indexFile:  
 
-                oneMessageRowlist = [int(x) for x in messageRowLines[indexOfRowInMessageFile].split(",")] # read one message row to list
-                print(oneMessageRowlist)
-                
-                for line in range(0, numberOfLocationRowInFile): # go throug  list of location 
-                    logging.debug("line: %s", str(line))
-                    if len(oneLocationRowlist) > 0:
-                        oneLocationRowlist.clear() # clear list when reading next row
-                    oneLocationRowlist = [int(x) for x in locationRowLines[line].split(",")] # read one location row to list
-                    print(oneLocationRowlist)
+        for oneRowIndex in locationlist: # go through one location row and find location from messages
+            if numberOfFoundLocation == 10: # 10 location are witten in one message row, load next message row 
+                logging.debug("numberOfFoundLocation: %s", str(numberOfFoundLocation))
+                numberOfFoundLocation = 0
+            logging.debug("oneRowIndex: %s", str(oneRowIndex))
+            locationCounter += oneRowIndex
+            if oneRowIndex > len(locationlist)-1:
+                    logging.debug("length oneLocationRowlist by index : %s", str(len(locationlist)-1))
+                    logging.debug("length oneLocationRowlist out of range :")
+                    break
+            if locationCounter > len(messagelist)-1:
+                    logging.debug("length oneMessageRowlist by index : %s", str(len(messagelist)-1))
+                    logging.debug("length of locationCounter is bigger than message list  :")
+                    break
 
-                    for oneRowIndex in oneLocationRowlist: # oneLocationRowlist: # go through one location row and find location from messages
-                        if numberOfFoundLocation == 10: # 10 location are witten in one message row, load next message row 
-                            indexOfRowInMessageFile += 1
-                            if indexOfRowInMessageFile < numberOfMessageRowInFile: # don't read out of index
-                                oneMessageRowlist.clear() # clear list before reading new row
-                                oneMessageRowlist = [int(x) for x in messageRowLines[indexOfRowInMessageFile].split(",")] # read one message row to list
-                            numberOfFoundLocation = 0
-                        logging.debug("oneRowIndex: %s", str(oneRowIndex))
-                        locationCounter += oneRowIndex
-                        logging.debug("locationCounter: %s", str(locationCounter))
-                        indexFoundByLocation = oneMessageRowlist[locationCounter] # index by location from message row
-                        print(indexFoundByLocation)
-                        oneIndexRowlist.append(indexFoundByLocation)
-                        if len(oneIndexRowlist) == 100: # when found enough index write to list
-                            indexFile.write(','.join(str(i) for i in oneIndexRowlist))
-                            indexFile.write("\n")
-                            oneIndexRowlist.clear()
-                        numberOfFoundLocation += 1
-                    oneMessageRowlist.clear()
-                # end of location numbers, write last index to file
+            indexFoundByLocation = messagelist[locationCounter] # index by location from message row
+            logging.debug("locationCounter: %s", str(locationCounter))
+            logging.debug("oneRowIndex: %s", str(oneRowIndex))
+            logging.debug("indexFoundByLocation: %s", str(indexFoundByLocation))
+            oneIndexRowlist.append(indexFoundByLocation)
+            if len(oneIndexRowlist) == 100: # when found enough index write to list
+                logging.debug("write index line ")
                 indexFile.write(','.join(str(i) for i in oneIndexRowlist))
                 indexFile.write("\n")
                 oneIndexRowlist.clear()
-            
-                indexFile.close()
-            locationFile.close()
-        messageFile.close()
+        
+        # end of location numbers, write last index to file
+        indexFile.write(','.join(str(i) for i in oneIndexRowlist))
+        messagelist.clear() # end of location handling
+        oneIndexRowlist.clear()
+        locationlist.clear()
+    
+        indexFile.close()
 
-filename = "indexFile.txt"
+
+def loadMessageListFromFile():
+    """
+    Load message to file
+    """
+
+    messageList = []
+
+    with open ('messageKeyFile.txt', 'rb') as messageKeyFile:
+        messageList = pickle.load(messageKeyFile)
+    messageKeyFile.close()
+    return messageList
+
+def main():
+    findIndexByLocationFromMessage()
+    findCharByIndexFromSourceCharFile()
+
+#setLogger()
 #readNumberFromfileToList("locationTest.txt")
 #readNumberFromfileToList(filename)
 #findIndexByLocationFromMessage()
 #findCharByIndexFromSourceCharFile()
 #removeIndexFile()
-loadLocationListFromPickle()
+
+
+if __name__ == "__main__":
+
+    main()
