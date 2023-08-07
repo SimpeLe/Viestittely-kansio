@@ -1,31 +1,32 @@
-1 Tavoite 
+**1 Tavoite** 
 Luoda ohjelma, jolla voidaan lähettää viestejä salatusti. Ohjelman pitää olla kohtuullisen helppo käyttää, pieni ja nopea. Ohjelma ei saisi luoda logitiedostoja ja viestit pitäisi olla liki mahdoton purkaa. Toivottavaa on projektin jäsenet selviävät projektista suht ehyinä ja järjissään. Projekti toteuttaa laajasti opetushallituksen määrittelemän tietotekniikan perustutkinnon osantutkinnon tavoitteet.
 
 
-2 Asiakas 
+**2 Asiakas **
 Huumekauppiaat, terrosisti-sissit (ryssän kiusaajat) ja koirien ystävät, jotka haluavat käyttää salattua viestintää. Asiakas käyttää amerikkalaista (ASCII) tai suomalaista (åäö) merkistöä. Asiakas ymmärtää kansio/hakemisto-rakenteesta. Asiakas osaa tai oppii tiedonvälitysohjelman käytön esim. Signal, Telegram, Wickr.
 
 
-3 **Käyttötapaukset**
+**3 Käyttötapaukset**
 Salatun viestin lähettäminen ja vastaanotto
 
 
-4 **Vaatimusmäärittely**
-Ohjelma pitää olla suht helppo ja miellyttävä käyttää, pieni, nopea ja kaunis. Käyttöliittymä pitää toimi Windowsissa ja ohjataan hiirellä. Ohjelma välittää teksti-tiedostoja, ei kuvaa. Ohjelma salaa maksimissaan 10 000 merkkiä pitkän viestin. Salausavaimien luonti pitää onnistua milloin vain. Vaikka projektin asenne on letkeä, tavoitteet ovat korkealla.
+**4 Vaatimusmäärittely**
+Ohjelma pitää olla suht helppo ja miellyttävä käyttää, selkeä, pieni, nopea ja kaunis. Käyttöliittymä pitää toimi Windowsissa ja ohjataan hiirellä. Ohjelma välittää teksti-tiedostoja, ei kuvaa. Ohjelma salaa maksimissaan 10 000 merkkiä pitkän viestin. Salausavaimien luonti pitää onnistua milloin vain. Vaikka projektin asenne on letkeä, tavoitteet ovat korkealla.
 
-	
-5 Tekninen toteutus ja testaus
-Ohjelma 
+ 
+**5 Tekninen toteutus ja testaus**
+Projekti toteutetaan Windows 10 ja 11:lla. Versiohallinta tapahtuu GitHubissa. Projektikokoukset järjestetään MS Meetissä ja aikataulutetaan MS Outlookissa. Ohjelman käyttöliittymän suunnitelma luodaan sivustolla marvelapp.com. Käyttöliittymä luodaan PyQt5:llä. Ohjelma koodataan Python 3.11.4:lla. Testaukseen käytetään Unit Test-ympäristöä.
 
-6. Projektivaiheet
+
+**6. Projektivaiheet**
 6.1. Yleistä
    Projektisuunnitelma alustavaa suunnitelmaa. Aluksi kevyesti toimiva perussovellus jota voidaan laajentaa,
 ei liian isoa targettia kerralla
 
 6.2. Määrittely
-   2.1. Määritä oikeat termit yksiseliiteisesti niin että kummatkin osapuolet tietävät
+   	2.1. Määritä oikeat termit yksiseliiteisesti niin että kummatkin osapuolet tietävät
    mistä asiasta puhutaan, näin koomunikointi pysyy selvänä.
-   2.2. Kerää käyttäjä- ja järjestelmä vaatimukset
+	2.2. Kerää käyttäjä- ja järjestelmä vaatimukset
    2.3. Kerää ohjelmisto vaatimukset
    2.4. Tee käyttäjätapauksia
    2.5. Suunnittele UI kevytversio, esim. vertaa Kallen chat-sovellukseen, aluksi vähän protoillaan ei tarkkaa UI leiskaa heti
