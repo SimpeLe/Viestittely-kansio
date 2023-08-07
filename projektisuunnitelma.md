@@ -15,7 +15,7 @@ Ohjelma pitää olla suht helppo ja miellyttävä käyttää, selkeä, pieni, no
 
  
 **5 Tekninen toteutus ja testaus**
-Projekti toteutetaan Windows 10 ja 11:lla. Versiohallinta tapahtuu GitHubissa. Projektikokoukset järjestetään MS Meetissä ja aikataulutetaan MS Outlookissa. Ohjelman käyttöliittymän suunnitelma luodaan sivustolla marvelapp.com. Käyttöliittymä luodaan PyQt5:llä. Ohjelma koodataan Python 3.11.4:lla. Testaukseen käytetään Unit Test-ympäristöä.
+Projekti toteutetaan Windows 10 ja 11:lla. Versiohallinta ja projekti-aikataulutus tapahtuu GitHubissa. Projektikokoukset järjestetään MS Meetissä ja ne aikataulutetaan MS Outlookissa. Ohjelman käyttöliittymän suunnitelma luodaan sivustolla marvelapp.com. Käyttöliittymä luodaan PyQt5:llä. Ohjelma koodataan Python 3.11.4:lla. Testaukseen käytetään Unit Test-ympäristöä. Toteutukseen tukena käytetään tiimikaveria, opettajia, luokkakavereita, opintomateriaalia ja DuckDuckGo:ta.
 
 
 **6. Projektivaiheet**
