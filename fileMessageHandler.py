@@ -17,6 +17,18 @@ def setLogger():
     logger.setLevel(logging.DEBUG)
 
 
+def getMessageFromUI(message):
+    with open("testMessage1.txt", 'w') as messageFile:
+        messageFile.write(message)
+        messageFile.close()
+
+
+def getPathFromUI(path):
+    global filePathOfFile
+    filePathOfFile = path
+    logging.debug("filePathOfFile : %s", filePathOfFile)
+    print(filePathOfFile)
+
 def getCreationtime():
     file = "sourceCharacterFile.txt"
  
@@ -54,7 +66,7 @@ def createOneSourceCharacterList():
     characters +="äöåÄÖÅ"
     # add space characters while reading message text if space
     characters += "è"
-    # add mark for newline while reading sorce text if line is ending
+    # add mark for newline while reading message text if line is ending
     characters += "á"
     # add mark for ending original message
     characters += "ô"
@@ -80,14 +92,14 @@ def createSourceCharacterFile(size):
     numberOfCharinFile = 0
 
     file = "sourceCharacterFile.txt"
-    difference = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getctime(file))
+    result = os.path.isfile("sourceCharacterFile.txt")
+    if result:
+        difference = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getctime(file))
 
-    print(difference)
-    if difference.days > 30: # create new every month
-        logging.debug("Create new sourceCharFile")
-    else:
-        return
-
+        if difference.days > 30: # create new every month
+            logging.debug("Create new sourceCharFile")
+        else:
+            return
     
     # change  own path in your computer to next line
     with open("sourceCharacterFile.txt", 'w') as charFile:
@@ -274,12 +286,14 @@ def createLocationListToFile(lengthOfKey):
     logging.debug("createLocationListToPickle func start")
 
     file = "locationKeyFile.txt"
-    difference = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getctime(file))
+    result = os.path.isfile(file)
+    if result:
+        difference = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getctime(file))
 
-    if difference.days > 30: # create new every month
-        logging.debug("Create new locationKeyFile")
-    else:
-        return
+        if difference.days > 30: # create new every month
+            logging.debug("Create new locationKeyFile")
+        else:
+            return
 
     with open("locationKeyFile.txt", 'wb') as locationKeyFile:
         while createdNumers < lengthOfKey:
@@ -328,15 +342,26 @@ def saveMessageToFile(messageList):
     messageList.clear()
     
 def main():
-    createLocationListToFile(10_000)
+    
+    getMessageFromUI(message)
+
+
+        
+
+    #getPathFromUI()
+    #getPathFromUI(path)
+    #printFilePathFromUI()
+    #getCreationtime()
+    
+    #createLocationListToFile(10_000)
     #createMessageListToFile(1_000_000)
     #searchIndexFromCharFile()
     #writeFinalMessageFileByNumber()
+    #createOneSourceCharacterList()
 
 #setLogger()
 #createLocationListToFile(10_000)
 #createMessageListToFile(1_000_000)
-#createOneSourceCharacterList()
 #createSourceCharacterFile(1)
 #searchIndexFromCharFile()
 #writeFinalMessageFileByNumber()

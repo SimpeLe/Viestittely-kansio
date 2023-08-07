@@ -13,6 +13,13 @@ def setLogger():
     # Set the log of level to DEBUG
     logger.setLevel(logging.DEBUG)
 
+def offerMessageToUI():
+    with open("Message.txt", 'r') as messageFile:
+        message = messageFile.read()
+        messageFile.close()
+        return message
+
+
 def removeIndexFile():
     os.remove("indexFile.txt")
 
@@ -174,7 +181,6 @@ def main():
     findCharByIndexFromSourceCharFile()
 
 #setLogger()
-#readNumberFromfileToList("locationTest.txt")
 #readNumberFromfileToList(filename)
 #findIndexByLocationFromMessage()
 #findCharByIndexFromSourceCharFile()
