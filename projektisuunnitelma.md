@@ -2,7 +2,7 @@
 Luoda ohjelma, jolla voidaan lähettää viestejä salatusti. Ohjelman pitää olla kohtuullisen helppo käyttää, pieni ja nopea. Ohjelma ei saisi luoda logitiedostoja ja viestit pitäisi olla liki mahdoton purkaa. Toivottavaa on projektin jäsenet selviävät projektista suht ehyinä ja järjissään. Projekti toteuttaa laajasti opetushallituksen määrittelemän tietotekniikan perustutkinnon osantutkinnon tavoitteet.
 
 
-**2 Asiakas **
+**2 Asiakas**
 Huumekauppiaat, terrosisti-sissit (ryssän kiusaajat) ja koirien ystävät, jotka haluavat käyttää salattua viestintää. Asiakas käyttää amerikkalaista (ASCII) tai suomalaista (åäö) merkistöä. Asiakas ymmärtää kansio/hakemisto-rakenteesta. Asiakas osaa tai oppii tiedonvälitysohjelman käytön esim. Signal, Telegram, Wickr.
 
 
