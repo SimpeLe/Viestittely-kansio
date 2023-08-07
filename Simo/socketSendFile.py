@@ -1,5 +1,6 @@
 # python socketSendFile.py
 # terminaalissa: pip3 install tqdm
+# https://www.thepythoncode.com/article/send-receive-files-using-sockets-python?utm_content=cmp-true
 
 import socket
 import tqdm
@@ -11,11 +12,13 @@ BUFFER_SIZE = 4096 # send 4096 bytes each time step
 # the ip address or hostname of the server, the receiver
 # tarkasta cmd komennolla ipconfig
 # host = "192.168.10.48" #vanha kone
-host = "192.168.10.40" #kannettava
+# host = "192.168.10.40" #kannettava
+host = "82.181.79.115" #Ville
 #host = "www.python.org" #toimii
-# the port, let's use 5001 (tai 5000 tai 5500 tai 65432)
+# the port, let's use 80, 5001, 5000, 5050, 
+# TAI 5060, 5500 tai 65432)
 port = 5001
-# port = 80 #toimii
+# port = 80 tai 5001 #toimii sisäisessä 192-verkossa
 # the name of file we want to send, make sure it exists
 filename = "Message.txt"
 # get the file size

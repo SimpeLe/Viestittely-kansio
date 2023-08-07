@@ -40,6 +40,7 @@ from PyQt5 import QtGui as qtg
 import fileMessageHandler as send
 import fileReceiverHandler as pickup
 
+
 class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
     def __init__(self):
         super().__init__()
@@ -61,6 +62,7 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
 #????????? luo uusi kirjoitusavain vain kerran esim kerran kuussa tms
         send.createSourceCharacterFile(1) 
         send.testsearchPositionFromCharFile()
+# käyttäjän kirjoittama viesti on kentässä: lviesti_plainTextEdit        
 #????????? luo uusi salattu viesti-tiedosto (nyt testMessage.txt)
 
 # kutsu file socketia
@@ -149,6 +151,7 @@ class Cvastaanota_klikkaus(qtw.QWidget):
 
     def vastaanota_klik(self):
         print("tässä kutsu vastaanota-metodia")
+# purettu viesti on kentässä: vviesti_plainTextEdit
         pickup.testfindIndexFromSourceCharFile()
 
 

@@ -1,4 +1,7 @@
 # python socketReceiveFile.py
+# terminaalissa: pip3 install tqdm
+# https://www.thepythoncode.com/article/send-receive-files-using-sockets-python?utm_content=cmp-true
+
 
 import socket
 import tqdm
