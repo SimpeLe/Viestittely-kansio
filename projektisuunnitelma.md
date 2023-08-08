@@ -54,7 +54,7 @@ Projekti toteutetaan Windows 10 ja 11:lla. Versiohallinta ja projekti-aikataulut
   
 6.5. Toteutus - ohjelmointi
 ?? näytä koodia tai print screen  
-   - 6.5.1. Viestittely-kotisivu 
+   - 6.5.1. Viestittely-kotisivu (Simis)
    - 6.5.2. Viestittely-lähetä (Ville)
    - 6.5.3. Viestittely-vastaanota (Ville)
    - 6.5.4. Tiedoston siirto (Ville, Simis)
