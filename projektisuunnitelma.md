@@ -13,7 +13,7 @@ Huumekauppiaat, terrosisti-sissit (ryssän kiusaajat) ja koirien ystävät, jotk
 
 **3 Käyttötapaukset**
 
-Salatun viestin lähettäminen ja vastaanotto
+-- Millasia ryhmiä ja mitä voi tehdä (use case model)? Hlö, järjestelmä, toiminta
 
 
 **4 Vaatimusmäärittely**
