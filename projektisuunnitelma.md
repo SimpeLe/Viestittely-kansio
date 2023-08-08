@@ -1,4 +1,5 @@
 **1 Tavoite** 
+
 Luoda ohjelma, jolla voidaan lähettää viestejä salatusti. Ohjelman pitää olla kohtuullisen helppo käyttää, pieni ja nopea. Ohjelma ei saisi luoda logitiedostoja ja viestit pitäisi olla liki mahdoton purkaa. Toivottavaa on projektin jäsenet selviävät projektista suht ehyinä ja järjissään. Projekti toteuttaa laajasti opetushallituksen määrittelemän tietotekniikan perustutkinnon osantutkinnon tavoitteet.
 
 
