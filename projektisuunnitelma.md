@@ -20,8 +20,7 @@ Projekti toteutetaan Windows 10 ja 11:lla. Versiohallinta ja projekti-aikataulut
 
 **6. Projektivaiheet**
 6.1. Yleistä
-   - Projektisuunnitelma alustavaa suunnitelmaa. Aluksi kevyesti toimiva perussovellus jota voidaan laajentaa,
-ei liian isoa targettia kerralla
+   - Projektisuunnitelma alustavaa suunnitelmaa. Aluksi kevyesti toimiva perussovellus jota voidaan laajentaa, ei liian isoa targettia kerralla
 
 6.2. Määrittely
    - 6.2.1. Määritä oikeat termit yksiseliiteisesti niin että kummatkin osapuolet tietävät
@@ -36,28 +35,28 @@ ei liian isoa targettia kerralla
    - 6.2.7. Määrittele salaukseen liittyvät termit vrt. kohta 1
 
 6.3. Suunnittelu
-   6.3.1. Toteutusmäärittely
-   6.3.2. Vuokaavio/toimintalogiikka
-   6.3.3. Teksti-tiedostojen suhteet https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Teksti_tiedostojen_suhteet.jpg
-   6.3.4. Testaussuunnitelma
+   - 6.3.1. Toteutusmäärittely
+   - 6.3.2. Vuokaavio/toimintalogiikka
+   - 6.3.3. Teksti-tiedostojen suhteet https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Teksti_tiedostojen_suhteet.jpg
+   - 6.3.4. Testaussuunnitelma
    
 6.4. Toteutus - käyttöliittymä https://marvelapp.com/prototype/6c705j0/screen/92062571
-   6.4.1. Viestittely-kotisivu (PyQt Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Kotisivu%2020230626.jpg
-   6.4.2. Viestittely-lähetä (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Laheta-sivu%2020230626.jpg
-   6.4.3. Viestittely-vastaanota (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Vastaanota-sivu%2020230626.jpg
-   6.4.5. ehkä Viestittely-kopio (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Kopio-sivu%2020230626.jpg
+   - 6.4.1. Viestittely-kotisivu (PyQt Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Kotisivu%2020230626.jpg
+   - 6.4.2. Viestittely-lähetä (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Laheta-sivu%2020230626.jpg
+   - 6.4.3. Viestittely-vastaanota (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Vastaanota-sivu%2020230626.jpg
+   - 6.4.5. ehkä Viestittely-kopio (Simis) https://github.com/SimpeLe/Viestittely-kansio/blob/Maarittely/Kopio-sivu%2020230626.jpg
   
 6.5. Toteutus - ohjelmointi
 ?? näytä koodia tai print screen  
-   6.5.1. Viestittely-kotisivu 
-   6.5.2. Viestittely-lähetä (Ville)
-   6.5.3. Viestittely-vastaanota (Ville)
-   6.5.4. Tiedoston siirto (Ville, Simis)
-   6.5.5. ehkä Viestittely-kopio (Ville)
+   - 6.5.1. Viestittely-kotisivu 
+   - 6.5.2. Viestittely-lähetä (Ville)
+   - 6.5.3. Viestittely-vastaanota (Ville)
+   - 6.5.4. Tiedoston siirto (Ville, Simis)
+   - 6.5.5. ehkä Viestittely-kopio (Ville)
    
-- 6.6. Testaus
+-- 6.6. Testaus
   
-- 6.7. Käyttöönotto
+-- 6.7. Käyttöönotto
    6.7.1. Käyttöohje
 
 
