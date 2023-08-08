@@ -20,15 +20,15 @@ Projekti toteutetaan Windows 10 ja 11:lla. Versiohallinta ja projekti-aikataulut
 
 **6. Projektivaiheet**
 6.1. Yleistä
-   Projektisuunnitelma alustavaa suunnitelmaa. Aluksi kevyesti toimiva perussovellus jota voidaan laajentaa,
+   - Projektisuunnitelma alustavaa suunnitelmaa. Aluksi kevyesti toimiva perussovellus jota voidaan laajentaa,
 ei liian isoa targettia kerralla
 
 6.2. Määrittely
    - 6.2.1. Määritä oikeat termit yksiseliiteisesti niin että kummatkin osapuolet tietävät
    mistä asiasta puhutaan, näin koomunikointi pysyy selvänä.
-	- 6.2.2. Kerää käyttäjä- ja järjestelmä vaatimukset
-   6.2.3. Kerää ohjelmisto vaatimukset
-   6.2.4. Tee käyttäjätapauksia
+   - 6.2.2. Kerää käyttäjä- ja järjestelmä vaatimukset
+   - 6.2.3. Kerää ohjelmisto vaatimukset
+   * 6.2.4. Tee käyttäjätapauksia
    6.2.5. Suunnittele UI kevytversio, esim. vertaa Kallen chat-sovellukseen, aluksi vähän protoillaan ei tarkkaa UI leiskaa heti
    UI:ssa pitää vaikka aluksi olla painonappi jolla avaa tiedoston mistä viesti voidaan lukea tiedostosta (myöhemmin viestin 
    lähetys), viesti luetaan ja näytetään viestikentässä
