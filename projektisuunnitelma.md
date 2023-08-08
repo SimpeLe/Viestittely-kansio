@@ -1,30 +1,29 @@
-*
+
 **1 Tavoite** 
 
 Luoda ohjelma, jolla voidaan lähettää viestejä salatusti. Ohjelman pitää olla kohtuullisen helppo käyttää, pieni ja nopea. Ohjelma ei saisi luoda logitiedostoja ja viestit pitäisi olla liki mahdoton purkaa. Toivottavaa on projektin jäsenet selviävät projektista suht ehyinä ja järjissään. Projekti toteuttaa laajasti opetushallituksen määrittelemän tietotekniikan perustutkinnon osantutkinnon tavoitteet.
 
 
-*
+
 **2 Asiakas**
 
 Huumekauppiaat, terrosisti-sissit (ryssän kiusaajat) ja koirien ystävät, jotka haluavat käyttää salattua viestintää. Asiakas käyttää amerikkalaista (ASCII) tai suomalaista (åäö) merkistöä. Asiakas ymmärtää kansio/hakemisto-rakenteesta. Asiakas osaa tai oppii tiedonvälitysohjelman käytön esim. Signal, Telegram, Wickr.
 
 
-*
+
 **3 Käyttötapaukset**
 
 Salatun viestin lähettäminen ja vastaanotto
 
-*
+
 **4 Vaatimusmäärittely**
 
 Ohjelma pitää olla suht helppo ja miellyttävä käyttää, selkeä, pieni, nopea ja kaunis. Käyttöliittymä pitää toimi Windowsissa ja ohjataan hiirellä. Ohjelma välittää teksti-tiedostoja, ei kuvaa. Ohjelma salaa maksimissaan 10 000 merkkiä pitkän viestin. Salausavaimien luonti pitää onnistua milloin vain. Vaikka projektin asenne on letkeä, tavoitteet ovat korkealla.
 
-* 
+ 
 **5 Tekninen toteutus ja testaus**
 
 Projekti toteutetaan Windows 10 ja 11:lla. Versiohallinta ja projekti-aikataulutus tapahtuu GitHubissa. Projektikokoukset järjestetään MS Meetissä ja ne aikataulutetaan MS Outlookissa. Ohjelman käyttöliittymän suunnitelma luodaan sivustolla marvelapp.com. Käyttöliittymä luodaan PyQt5:llä. Ohjelma koodataan Python 3.11.4:lla. Testaukseen käytetään Unit Test-ympäristöä. Toteutukseen tukena käytetään tiimikaveria, opettajia, luokkakavereita, opintomateriaalia ja DuckDuckGo:ta.
-
 
 
 **6. Projektivaiheet**
