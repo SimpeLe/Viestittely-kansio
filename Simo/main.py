@@ -57,13 +57,16 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
 #????????? jos keretään, voit tarkastaa onko muoto oikein
 
 #????????? jos keretään, voit tarkastaa onko hakemisto olemassa
-#????????? jos keretään, voit tarkastaa onko alotusnumero numero ja <5000
 
-#????????? luo uusi kirjoitusavain vain kerran esim kerran kuussa tms
         send.createSourceCharacterFile(1) 
-        send.testsearchPositionFromCharFile()
+        send.createLocationListToFile(10_000)
+        send.createMessageListToFile(1_000_000)
+        send.searchIndexFromCharFile()
+        send.writeFinalMessageFileByNumber()
 # käyttäjän kirjoittama viesti on kentässä: lviesti_plainTextEdit        
 #????????? luo uusi salattu viesti-tiedosto (nyt testMessage.txt)
+        pickup.findIndexByLocationFromMessage()
+        pickup.findCharByIndexFromSourceCharFile()   
 
 # kutsu file socketia
 
@@ -121,7 +124,7 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
             return sDirectory
 
 
-
+# kun käyttäjä klikkaa "Lähetä"-painiketta kotinäytössä
 class Cvastaanota_klikkaus(qtw.QWidget):
     def __init__(self):
         super().__init__()
@@ -132,6 +135,7 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         self.ui.vviestiselaa_pushButton.clicked.connect(self.vastota_kansio_selaus_klikkaus)        
         self.ui.vvastaanota_pushButton.clicked.connect(self.vastaanota_klik) 
 
+    # kun käyttäjä klikkaa "Selaus"-painiketta, hän pääsee selaamaan 
     def vastota_kansio_selaus_klikkaus(self):
         print("tässä avaa vastota (pickup) kansio-keskustelu ikkuna")
         vastOtaHakemistoPolku = self.openPickupDirectoryNameDialog()
@@ -143,16 +147,18 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         self.ui.vkirjoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", vastOtaHakemistoPolku))
         self.ui.vsijoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", vastOtaHakemistoPolku))
     
+
     def openPickupDirectoryNameDialog(self):
         pickupDirName = qtw.QFileDialog.getExistingDirectory(self,"Viestittely-vastaanota kansio-selaus")
         if pickupDirName:
             print(pickupDirName)
             return pickupDirName
 
+    # kun käyttäjä klikkaa "Vastaanota"-painiketta pura salattu viesti
     def vastaanota_klik(self):
         print("tässä kutsu vastaanota-metodia")
 # purettu viesti on kentässä: vviesti_plainTextEdit
-        pickup.testfindIndexFromSourceCharFile()
+        pickup.findCharByIndexFromSourceCharFile()
 
 
 # pitää matchata  widget-tyyppiin, joka on valittu designerissa
@@ -166,15 +172,14 @@ class Ckotisivu(qtw.QMainWindow):
         self.show()
         self.ui.pkayttaja_lineEdit.setFocus()
 
-        self.login_click()
-#??????????        # napin painalluksen yhdistäminen luokan metodiin
-#??????????        self.ui.pkirjaudu_pushButton.clicked.connect(self.login_click) 
+        # napin painalluksen yhdistäminen luokan metodiin
+        self.ui.pkirjaudu_pushButton.clicked.connect(self.login_click) 
 # #        self.ui.cb_checkbox.setChecked(True)
 
 
     def login_click(self):
 #   #        if users.username == self.ui.txt_username.text() and users.password==self.ui.txt_password.text():
-#??????????         if self.ui.pkayttaja_lineEdit.text() == "k" and self.ui.psalis_lineEdit.text() == "k":
+        if self.ui.pkayttaja_lineEdit.text() == "k" and self.ui.psalis_lineEdit.text() == "k":
             print("Käyttäjä",self.ui.pkayttaja_lineEdit.text(),"sisällä")
             self.ui.plaheta_pushButton.setEnabled(True)
             self.ui.pvastaanota_pushButton.setEnabled(True)
@@ -186,8 +191,8 @@ class Ckotisivu(qtw.QMainWindow):
             ## napin painalluksen yhdistäminen luokan metodiin ##
             self.ui.plaheta_pushButton.clicked.connect(self.show_claheta_klikkaus) 
             self.ui.pvastaanota_pushButton.clicked.connect(self.show_cvastaanota_klikkaus) 
-#??????????        else:
-#??????????            qtw.QMessageBox.critical(self, 'KIRJAUTUMISVIRHE', "Kirjoita oikea käyttäjätunnus ja salasana")
+        else:
+            qtw.QMessageBox.critical(self, 'KIRJAUTUMISVIRHE', "Kirjoita oikea käyttäjätunnus ja salasana")
         
     def show_claheta_klikkaus(self, checked):
 #        self.hide()
