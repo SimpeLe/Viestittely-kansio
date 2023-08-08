@@ -15,7 +15,7 @@ Salatun viestin lähettäminen ja vastaanotto
 
 **4 Vaatimusmäärittely**
 
-Ohjelma pitää olla suht helppo ja miellyttävä käyttää, selkeä, pieni, nopea ja kaunis. Käyttöliittymä pitää toimi Windowsissa ja ohjataan hiirellä. Ohjelma välittää teksti-tiedostoja, ei kuvaa. Ohjelma salaa maksimissaan 10 000 merkkiä pitkän viestin. Salausavaimien luonti pitää onnistua milloin vain. Vaikka projektin asenne on letkeä, tavoitteet ovat korkealla.
+	Ohjelma pitää olla suht helppo ja miellyttävä käyttää, selkeä, pieni, nopea ja kaunis. Käyttöliittymä pitää toimi Windowsissa ja ohjataan hiirellä. Ohjelma välittää teksti-tiedostoja, ei kuvaa. Ohjelma salaa maksimissaan 10 000 merkkiä pitkän viestin. Salausavaimien luonti pitää onnistua milloin vain. Vaikka projektin asenne on letkeä, tavoitteet ovat korkealla.
 
  
 **5 Tekninen toteutus ja testaus**
