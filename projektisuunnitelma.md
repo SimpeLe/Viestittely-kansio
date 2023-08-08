@@ -24,9 +24,9 @@ Projekti toteutetaan Windows 10 ja 11:lla. Versiohallinta ja projekti-aikataulut
 ei liian isoa targettia kerralla
 
 6.2. Määrittely
-   	6.2.1. Määritä oikeat termit yksiseliiteisesti niin että kummatkin osapuolet tietävät
+   - 6.2.1. Määritä oikeat termit yksiseliiteisesti niin että kummatkin osapuolet tietävät
    mistä asiasta puhutaan, näin koomunikointi pysyy selvänä.
-	6.2.2. Kerää käyttäjä- ja järjestelmä vaatimukset
+	- 6.2.2. Kerää käyttäjä- ja järjestelmä vaatimukset
    6.2.3. Kerää ohjelmisto vaatimukset
    6.2.4. Tee käyttäjätapauksia
    6.2.5. Suunnittele UI kevytversio, esim. vertaa Kallen chat-sovellukseen, aluksi vähän protoillaan ei tarkkaa UI leiskaa heti
