@@ -19,6 +19,7 @@ Projekti toteutetaan Windows 10 ja 11:lla. Versiohallinta ja projekti-aikataulut
 
 
 **6. Projektivaiheet**
+
 6.1. Yleistä
    - Projektisuunnitelma alustavaa suunnitelmaa. Aluksi kevyesti toimiva perussovellus jota voidaan laajentaa, ei liian isoa targettia kerralla
 
