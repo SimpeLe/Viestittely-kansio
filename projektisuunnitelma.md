@@ -28,12 +28,12 @@ ei liian isoa targettia kerralla
    mistä asiasta puhutaan, näin koomunikointi pysyy selvänä.
    - 6.2.2. Kerää käyttäjä- ja järjestelmä vaatimukset
    - 6.2.3. Kerää ohjelmisto vaatimukset
-   * 6.2.4. Tee käyttäjätapauksia
-   6.2.5. Suunnittele UI kevytversio, esim. vertaa Kallen chat-sovellukseen, aluksi vähän protoillaan ei tarkkaa UI leiskaa heti
+   - 6.2.4. Tee käyttäjätapauksia
+   - 6.2.5. Suunnittele UI kevytversio, esim. vertaa Kallen chat-sovellukseen, aluksi vähän protoillaan ei tarkkaa UI leiskaa heti
    UI:ssa pitää vaikka aluksi olla painonappi jolla avaa tiedoston mistä viesti voidaan lukea tiedostosta (myöhemmin viestin 
    lähetys), viesti luetaan ja näytetään viestikentässä
-   6.2.6. Mieti rajapintoja eri ohjelmiston osien välillä esim. UI -tiedostun luku
-   6.2.7. Määrittele salaukseen liittyvät termit vrt. kohta 1
+   - 6.2.6. Mieti rajapintoja eri ohjelmiston osien välillä esim. UI -tiedostun luku
+   - 6.2.7. Määrittele salaukseen liittyvät termit vrt. kohta 1
 
 6.3. Suunnittelu
    6.3.1. Toteutusmäärittely
