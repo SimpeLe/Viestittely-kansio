@@ -22,7 +22,7 @@
 # (seuraava käynnistää ohjelman. Katso että komentokehotteen edessä lukee "(env)")
 # (jos ei lue "(env)", käynnistä virtuaaliympäristö env\scripts\activate)
 # - python ui_kotisivu.py 
-# - python main.py  
+# - python main.py
  
 # - tee törkeesti muutoksia main.py fileen Code Studiossa
 from ui_kotisivu import Ui_MainWindow
@@ -53,23 +53,27 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
         self.ui.llaheta_pushButton.clicked.connect(self.laheta_klik)
     
     def laheta_klik(self):
-        print("tässä kutsu laheta-metodia")
-#????????? jos keretään, voit tarkastaa onko muoto oikein
-
+        print("tässä kutsu laheta-metodia")        
 #????????? jos keretään, voit tarkastaa onko hakemisto olemassa
+        hakemistopolku = self.ui.lveistintalletuspolku_lineEdit.text()
+        print ("lahet_klik(self):ssä hakemistopolku: ", hakemistopolku)
 
+#????????? jos keretään, voit tarkastaa onko viestin muoto ja pituus oikein
+        lahetettavaViesti = self.ui.lviesti_plainTextEdit.toPlainText()
+        # print ("lahetettavaViesti toPlainText():n jälkeen: ",lahetettavaViesti)
+        print("Lähetettävässä viestissä on merkkejä:", len(lahetettavaViesti))
+
+# käyttäjän kirjoittama viesti on kentässä: lviesti_plainTextEdit  
+        send.getPathFromUI(hakemistopolku)
+        send.getMessageFromUI(lahetettavaViesti)
         send.createSourceCharacterFile(1) 
         send.createLocationListToFile(10_000)
         send.createMessageListToFile(1_000_000)
         send.searchIndexFromCharFile()
         send.writeFinalMessageFileByNumber()
-# käyttäjän kirjoittama viesti on kentässä: lviesti_plainTextEdit        
 #????????? luo uusi salattu viesti-tiedosto (nyt testMessage.txt)
-        pickup.findIndexByLocationFromMessage()
-        pickup.findCharByIndexFromSourceCharFile()   
 
 # kutsu file socketia
-
     def kansio_selaus_klikkaus(self):
         print("tässä avaa kansio-keskustelu ikkuna")
         hakemistoPolku = self.openSaveDirectoryNameDialog()
@@ -83,6 +87,7 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
         self.ui.lveistintalletuspolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", hakemistoPolku))
         self.ui.lkirjoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", hakemistoPolku))
         self.ui.lsijoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", hakemistoPolku))
+        return hakemistoPolku
                 
 
     def openSaveDirectoryNameDialog(self):
@@ -95,7 +100,7 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
         # dirName = qtw.QFileDialog.getExistingDirectory(self,"Viestittely-lähetä kansio-selaus", "", options=options)
         # dirName, _ = qtw.QFileDialog.getOpenFileName(self,"Viestittely-lähetä kansio-selaus", "","Text files (*.txt)", options=options)
         if dirName:
-            print(dirName)
+            # print(dirName)
             return dirName
 
 
@@ -139,7 +144,7 @@ class Cvastaanota_klikkaus(qtw.QWidget):
     def vastota_kansio_selaus_klikkaus(self):
         print("tässä avaa vastota (pickup) kansio-keskustelu ikkuna")
         vastOtaHakemistoPolku = self.openPickupDirectoryNameDialog()
-        print("def vastota_kansio_selaus_klikkaus vastOtaHakemistoPolku: ", vastOtaHakemistoPolku)
+        print("def vastota_kansio_selaus_klikkaus(self):ssä vastOtaHakemistoPolku: ", vastOtaHakemistoPolku)
         self.show()
         # kirjoittaa kenttään harmaan tekstin, joka häviää, kun fokus siirtyy kenttään
         # self.ui.lveistintalletuspolku_lineEdit.setPlaceholderText(qtc.QCoreApplication.translate("Form", "Nikke Nakkerton1"))
@@ -151,14 +156,22 @@ class Cvastaanota_klikkaus(qtw.QWidget):
     def openPickupDirectoryNameDialog(self):
         pickupDirName = qtw.QFileDialog.getExistingDirectory(self,"Viestittely-vastaanota kansio-selaus")
         if pickupDirName:
-            print(pickupDirName)
+            # print(pickupDirName)
             return pickupDirName
 
     # kun käyttäjä klikkaa "Vastaanota"-painiketta pura salattu viesti
     def vastaanota_klik(self):
         print("tässä kutsu vastaanota-metodia")
+#????????? jos keretään, voit tarkastaa onko hakemisto olemassa
+        vastOtaPolku = self.ui.vveistintalletuspolku_lineEdit.text()
+        print ("vastaanota_klik(self):ssä vastOtaPolku: ", vastOtaPolku)
+
+        pickup.getPathFromUI(vastOtaPolku)
+        pickup.findIndexByLocationFromMessage()
+        pickup.findCharByIndexFromSourceCharFile() 
 # purettu viesti on kentässä: vviesti_plainTextEdit
-        pickup.findCharByIndexFromSourceCharFile()
+        purettuviesti = pickup.offerMessageToUI()
+        self.ui.vviesti_plainTextEdit.setPlainText(purettuviesti) 
 
 
 # pitää matchata  widget-tyyppiin, joka on valittu designerissa
