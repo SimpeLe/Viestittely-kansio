@@ -4,7 +4,7 @@ import pickle
 import logging
 import os
 import datetime
-
+#
 
 def setLogger():
     numberOfHandledChar = 7
