@@ -25,18 +25,18 @@
 # - python main.py
  
 # - tee törkeesti muutoksia main.py fileen Code Studiossa
-from ui_kotisivu import Ui_MainWindow
-from ui_laheta import Ui_Form as laheta
-from ui_vastaanota import Ui_Form as vastota
-
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtGui as qtg
+import os
 
 # from PyQt5 import QtQuick 2.2
 # from PyQt5 import QtQuick 1.0
 
-#import test_file_dialog as kans_hall
+from ui_kotisivu import Ui_MainWindow
+from ui_laheta import Ui_Form as laheta
+from ui_vastaanota import Ui_Form as vastota
+
 import fileMessageHandler as send
 import fileReceiverHandler as pickup
 
@@ -54,26 +54,40 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
     
     def laheta_klik(self):
         print("tässä kutsu laheta-metodia")        
-#????????? jos keretään, voit tarkastaa onko hakemisto olemassa
         hakemistopolku = self.ui.lveistintalletuspolku_lineEdit.text()
         print ("lahet_klik(self):ssä hakemistopolku: ", hakemistopolku)
-
-#????????? jos keretään, voit tarkastaa onko viestin muoto ja pituus oikein
+        # käyttäjän kirjoittama viesti on kentässä: lviesti_plainTextEdit  
         lahetettavaViesti = self.ui.lviesti_plainTextEdit.toPlainText()
         # print ("lahetettavaViesti toPlainText():n jälkeen: ",lahetettavaViesti)
-        print("Lähetettävässä viestissä on merkkejä:", len(lahetettavaViesti))
+        # print("lahetettavaViesti:ssä on merkkejä:", len(lahetettavaViesti))
+        # onko viesti riittävän lyhyt 
+        ViestinMaxPituus = 5 
+        if len(lahetettavaViesti) <= ViestinMaxPituus:
+            viestiPituusOK = True
+        else:
+            viestiPituusOK = False            
+        if hakemistopolku != "" and os.path.isdir(hakemistopolku) \
+            and lahetettavaViesti != "" and viestiPituusOK:  
+            send.getPathFromUI(hakemistopolku)
+            send.getMessageFromUI(lahetettavaViesti)
+            send.createSourceCharacterFile(1) 
+            send.createLocationListToFile(10_000)
+            send.createMessageListToFile(1_000_000)
+            send.searchIndexFromCharFile()
+            send.writeFinalMessageFileByNumber()
+            IP_LahetysValinta = qtw.QMessageBox.question(self, 'Tiedostojen kirjoitus', \
+                "Viestin ja avaimien tallennus päättyi. Haluatko lähettää viestin IP-osoitteeseen? Jos kyllä, vastaanottajan IP-serveri pitää olla päällä ", \
+                qtw.QMessageBox.Yes | qtw.QMessageBox.No, qtw.QMessageBox.No)
+            if IP_LahetysValinta == qtw.QMessageBox.Yes:
+                # kutsu socketSendFile
+                print("Lähetä viesti IP:hen")
+            self.close()
+        elif hakemistopolku == "" or os.path.isdir(hakemistopolku) == False: 
+            qtw.QMessageBox.critical(self, 'Kansio puuttuu', "Valitse olemassa oleva tallennuspolku")
+        elif lahetettavaViesti == "" or viestiPituusOK == False:
+            qtw.QMessageBox.critical(self, 'Viesti puuttuu', f"Kirjoita viesti, jossa on enintään {ViestinMaxPituus} merkkiä")
+        
 
-# käyttäjän kirjoittama viesti on kentässä: lviesti_plainTextEdit  
-        send.getPathFromUI(hakemistopolku)
-        send.getMessageFromUI(lahetettavaViesti)
-        send.createSourceCharacterFile(1) 
-        send.createLocationListToFile(10_000)
-        send.createMessageListToFile(1_000_000)
-        send.searchIndexFromCharFile()
-        send.writeFinalMessageFileByNumber()
-#????????? luo uusi salattu viesti-tiedosto (nyt testMessage.txt)
-
-# kutsu file socketia
     def kansio_selaus_klikkaus(self):
         print("tässä avaa kansio-keskustelu ikkuna")
         hakemistoPolku = self.openSaveDirectoryNameDialog()
