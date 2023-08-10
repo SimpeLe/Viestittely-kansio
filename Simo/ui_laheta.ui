@@ -226,7 +226,7 @@
      <bool>true</bool>
     </property>
     <property name="placeholderText">
-     <string>Message.txt</string>
+     <string>MessageFile.txt</string>
     </property>
     <property name="clearButtonEnabled">
      <bool>false</bool>

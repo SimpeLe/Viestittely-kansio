@@ -126,7 +126,7 @@
      <bool>true</bool>
     </property>
     <property name="placeholderText">
-     <string>Message.txt</string>
+     <string>MessageFile.txt</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="vveistintalletuspolku_lineEdit">

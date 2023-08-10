@@ -193,6 +193,8 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         self.ui.vviesti_plainTextEdit.setPlainText(purettuviesti) 
 
     def VastOtaViestiIP_lla(self):
+        qtw.QMessageBox.information(self, \
+            'IP-osoitteesi odottaa viestiä', "Odota, kunnes IP-osoitteesi saa viestin. Voit poistua sulkemalla ohjelman. Paina OK, niin odottaminen alkaa")
         socRecv.RecvFileViaIP(5001)
 
 

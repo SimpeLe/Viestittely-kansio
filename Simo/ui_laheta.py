@@ -195,7 +195,7 @@ class Ui_Form(object):
         self.lvastaanottaja_lineEdit.setToolTip(_translate("Form", "vastaanottajan IP"))
         self.lvastaanottaja_lineEdit.setPlaceholderText(_translate("Form", "vastaanottajan ip esim 127.0.0.25"))
         self.lsalattu_tdsto_lineEdit.setToolTip(_translate("Form", "salatun viesti-tiedoston nimi"))
-        self.lsalattu_tdsto_lineEdit.setPlaceholderText(_translate("Form", "Message.txt"))
+        self.lsalattu_tdsto_lineEdit.setPlaceholderText(_translate("Form", "MessageFile.txt"))
         self.lveistintalletuspolku_lineEdit.setToolTip(_translate("Form", "salatun viestin talletuspolku"))
         self.lveistintalletuspolku_lineEdit.setStatusTip(_translate("Form", "StatusTip viestin talletuspolku", "StatusTip-disambiquation viestin talletuspolku "))
         self.lveistintalletuspolku_lineEdit.setWhatsThis(_translate("Form", "whatsThis viestin talletuspolku", "whatsThis-disambiquation viestin talletuspolku "))

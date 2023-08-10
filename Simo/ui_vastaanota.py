@@ -158,7 +158,7 @@ class Ui_Form(object):
         self.vperu_pushButton.setText(_translate("Form", "Peru"))
         self.vperu_pushButton.setShortcut(_translate("Form", "Alt+P"))
         self.vsalattu_tdsto_lineEdit.setToolTip(_translate("Form", "salatun viesti-tiedoston nimi"))
-        self.vsalattu_tdsto_lineEdit.setPlaceholderText(_translate("Form", "Message.txt"))
+        self.vsalattu_tdsto_lineEdit.setPlaceholderText(_translate("Form", "MessageFile.txt"))
         self.vveistintalletuspolku_lineEdit.setToolTip(_translate("Form", "viestin talletuspolku"))
         self.vveistintalletuspolku_lineEdit.setPlaceholderText(_translate("Form", "viestin talletuspolku"))
         self.vsijoitusavainpolku_lineEdit.setToolTip(_translate("Form", "sijoitusavaimen talletuspolku"))
