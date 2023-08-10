@@ -36,11 +36,7 @@ def getMessageFromUI(message):
     if result:
         print("read ready message from user")
         realPath = filePathOfFile+"/MyMessage.txt"
-        with open("Message.txt", 'w') as messageFile:
-            messageFile.write(message)
-            shutil.copy(realPath, "Message.txt")
-            messageFile.close()
-    
+        shutil.copy(realPath, "Message.txt")
     else:
         with open("Message.txt", 'w') as messageFile:
             messageFile.write(message)
@@ -51,7 +47,6 @@ def getPathFromUI(path):
     global filePathOfFile
     filePathOfFile = path
     logging.debug("filePathOfFile : %s", filePathOfFile)
-    print(filePathOfFile)
 
 def getCreationtime():
     file = "sourceCharacterFile.txt"
@@ -148,8 +143,6 @@ def writeFinalMessageFileByNumber():
     listOfLocation=[] # load location from file to this list
     listOfMessage=[] # load messages and write after updating list
     listOfIndex=[]
-    lengthOfOneIndexRow = 0
-    numberOfIndexRowInFile = 0
     currenLocationNumber = 0
     currenIndexNumber = 0
     locationCounter = 0 # count location together and set to final message by location 
@@ -158,27 +151,14 @@ def writeFinalMessageFileByNumber():
     logging.debug("writeFinalMessageFileByNumber func start ")
     listOfMessage = loadMessageListFromFile()
     logging.debug("oneMessagerow length : %s", str(len(listOfMessage)))
-    #with open("indexFile.txt", 'r') as indexFile:
     listOfIndex= searchIndexFromCharFile()
     listOfLocation = loadLocationListFromFile()
     logging.debug("listOfOneRowLocation length : %s", str(len(listOfLocation)))
-    #indexRowLines = indexFile.readlines()
-    print("index file readed")
-    #numberOfIndexRowInFile = len(indexRowLines)
-    print("numberOfIndexRowInFile " + str(numberOfIndexRowInFile) +"\n")
-    #logging.debug("numberOfIndexRowInFile : %s", str(numberOfIndexRowInFile))
-
+    
     for oneIndex in listOfIndex: # go through one index row and set numbers to message row by location
-        if lengthOfOneIndexRow > 100:
-            lastRowOfIndex = True
-
+        
         logging.debug("listOfIndex : %s", str(listOfIndex))
         logging.debug("indexOfLocationList : %s", str(indexOfLocationList))
-
-        # if indexOfLocationList > len(listOfLocation)-1:
-        #     logging.debug("length listOfOneRowLocation by index : %s", str(len(listOfLocation)-1))
-        #     logging.debug("length listOfOneRowLocation out of range :")
-        #     break
 
         currenLocationNumber = listOfLocation[indexOfLocationList] # read one location from list
         locationCounter += currenLocationNumber # count together location for message row
@@ -219,8 +199,6 @@ def searchIndexFromCharFile():
     logging.debug("searchIndexFromCharFile func start ")
     with open("Message.txt", 'r') as messageFile:
         realPath = filePathOfFile+ "/sourceCharacterFile.txt"
-        print("realPath")
-        #with open("sourceCharacterFile.txt", 'r') as charFile:
         with open(realPath, 'r') as charFile:
             numberOfRowsInCharfile = len(charFile.readlines())
             charFile.seek(0)
@@ -354,11 +332,19 @@ def loadMessageListFromFile():
 
 
 def saveMessageToFile(messageList):
+    destination = filePathOfFile+"/messageFile.txt"
     with open("messageFile.txt", 'wb') as messageFile:
         pickle.dump(messageList, messageFile)
     logging.debug("messageList length : %s", str(len(messageList)))    
     messageFile.close()
     messageList.clear()
+    shutil.copyfile("messageFile.txt", destination)
+
+def sendMessage():
+    createSourceCharacterFile(1)
+    createLocationListToFile(10_000)
+    createMessageListToFile(1_000_000)
+    writeFinalMessageFileByNumber()
     
 def main():
     
@@ -369,11 +355,13 @@ def main():
     #printFilePathFromUI()
     #getCreationtime()
     getPathFromUI("grth")
-    createSourceCharacterFile(1)
-    createLocationListToFile(10_000)
-    createMessageListToFile(1_000_000)
     getMessageFromUI("bhdghb")
-    writeFinalMessageFileByNumber()
+    sendMessage()
+    # createSourceCharacterFile(1)
+    # createLocationListToFile(10_000)
+    # createMessageListToFile(1_000_000)
+    
+    # writeFinalMessageFileByNumber()
     #searchIndexFromCharFile()
     #writeFinalMessageFileByNumber()
     #createOneSourceCharacterList()

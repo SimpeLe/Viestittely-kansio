@@ -15,7 +15,6 @@ def setLogger():
     logger.setLevel(logging.DEBUG)
 
 
-
 def offerMessageToUI():
     with open("Message.txt", 'r') as messageFile:
         message = messageFile.read()
@@ -63,7 +62,6 @@ def loadListFromFile(filename):
     realPath =  filePathOfFile+filename
     print("realPath")
 
-    #with open (filename, 'rb') as listFile:
     with open (realPath, 'rb') as listFile:
         currentnList = pickle.load(listFile)
 
@@ -82,7 +80,6 @@ def findCharByIndexFromSourceCharFile():
      numberOfRowsInCharfile = 0
      numberOfHandledIndex = 0
      numberOfIndexHandle = 3 # search 3 index from each sorcecharacterRow
-     indexrowflineHandled = False
      list = [] # load index list here
 
      realPath = ""
@@ -90,17 +87,15 @@ def findCharByIndexFromSourceCharFile():
      result = file.is_file()
 
      if result:
-         print("File found")
+         #print("File found")
+         h = 8
      else:
         print("no sourcecharfile")
         return
      
-    
      logging.debug("findCharByIndexFromSourceCharFile func start ")
      with open("Message.txt", 'w') as messageFile:
          realPath =  filePathOfFile+ "/sourceCharacterFile.txt"
-         print("realPath")
-         #with open("sourceCharacterFile.txt", 'r') as charFile:
          with open(realPath, 'r') as charFile:
             list = findIndexByLocationFromMessage()
             numberOfRowsInCharfile = len(charFile.readlines())
@@ -111,7 +106,6 @@ def findCharByIndexFromSourceCharFile():
     
                 if numberOfHandledIndex == numberOfIndexHandle: # find 3 index from one sourceCharFile row
                     #logging.debug("numberOfHandledIndex: %s", str(numberOfHandledIndex))
-                    indexrowflineHandled = False
                     numberOfHandledIndex = 0
                     indexOfRowInCharFile +=1
                     if indexOfRowInCharFile == numberOfRowsInCharfile: # last row of file, start reading from zero
@@ -122,7 +116,6 @@ def findCharByIndexFromSourceCharFile():
                 
                 if numberOfHandledIndex < 3:
                     #logging.debug("index of row in char file: %s", str(indexOfRowInCharFile))
-                    indexrowflineHandled = True
                     #logging.debug("handled index in loop %s", str(numberOfHandledIndex))
                     charFoundByIndex = sourceCharacterlineHandler[indexInLine] # find one character from sourceCharFile row by index
                     #logging.debug("charFoundByIndex in loop: %s", charFoundByIndex)
@@ -157,29 +150,28 @@ def findIndexByLocationFromMessage():
     logging.debug(" length: %s", str(len(messagelist)))
     locationlist = loadListFromFile("/locationKeyFile.txt")
     logging.debug("oneLocationRowlist length: %s", str(len(locationlist)))
-    with open("indexFile.txt", 'w') as indexFile:  
+    
+    for oneLocation in locationlist: # go through  location list and find index by location from messages
+        logging.debug("oneLocation: %s", str(oneLocation))
+        locationCounter += oneLocation
+        if oneLocation > len(locationlist)-1:
+                logging.debug("length oneLocationRowlist by index : %s", str(len(locationlist)-1))
+                logging.debug("length oneLocationRowlist out of range :")
+                break
+        if locationCounter > len(messagelist)-1:
+                logging.debug("length oneMessageRowlist by index : %s", str(len(messagelist)-1))
+                logging.debug("length of locationCounter is bigger than message list  :")
+                break
 
-        for oneLocation in locationlist: # go through  location list and find index by location from messages
-            logging.debug("oneLocation: %s", str(oneLocation))
-            locationCounter += oneLocation
-            if oneLocation > len(locationlist)-1:
-                    logging.debug("length oneLocationRowlist by index : %s", str(len(locationlist)-1))
-                    logging.debug("length oneLocationRowlist out of range :")
-                    break
-            if locationCounter > len(messagelist)-1:
-                    logging.debug("length oneMessageRowlist by index : %s", str(len(messagelist)-1))
-                    logging.debug("length of locationCounter is bigger than message list  :")
-                    break
-
-            indexFoundByLocation = messagelist[locationCounter] # index by location from message row
-            logging.debug("locationCounter: %s", str(locationCounter))
-            logging.debug("oneRowIndex: %s", str(oneLocation))
-            logging.debug("indexFoundByLocation: %s", str(indexFoundByLocation))
-            indexList.append(indexFoundByLocation)
-            
-        messagelist.clear() # end of location handling
-        locationlist.clear()
-        return indexList
+        indexFoundByLocation = messagelist[locationCounter] # index by location from message row
+        logging.debug("locationCounter: %s", str(locationCounter))
+        logging.debug("oneRowIndex: %s", str(oneLocation))
+        logging.debug("indexFoundByLocation: %s", str(indexFoundByLocation))
+        indexList.append(indexFoundByLocation)
+        
+    messagelist.clear() # end of location handling
+    locationlist.clear()
+    return indexList
         
 
 
@@ -189,15 +181,24 @@ def loadMessageListFromFile():
     """
 
     messageList = []
+    filename = "/messageFile.txt"
+    realPath = filePathOfFile+filename
+    file = Path(filePathOfFile+filename)
+    result = file.is_file()
 
-    with open ('messageFile.txt', 'rb') as messageKeyFile:
-        messageList = pickle.load(messageKeyFile)
+    if result:
+         with open (realPath, 'rb') as messageKeyFile:
+            messageList = pickle.load(messageKeyFile)
+    else:
+        with open ('messageFile.txt', 'rb') as messageKeyFile:
+            messageList = pickle.load(messageKeyFile)
+
     messageKeyFile.close()
     return messageList
 
 def main():
     #findIndexByLocationFromMessage()
-    #getPathFromUI("sdtgh")
+    getPathFromUI("sdtgh")
     findCharByIndexFromSourceCharFile()
 
 #setLogger()
