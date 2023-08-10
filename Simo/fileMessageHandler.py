@@ -4,10 +4,13 @@ import pickle
 import logging
 import os
 import datetime
+import numpy as np # pip install numpy
+from pathlib import Path
+import shutil
 
 
 def setLogger():
-    numberOfHandledChar = 7
+    
     logging.basicConfig(filename="loggingFile.txt",
     format='%(asctime)s %(message)s',
     filemode='w')
@@ -16,11 +19,32 @@ def setLogger():
     # Set the log of level to DEBUG
     logger.setLevel(logging.DEBUG)
 
+def createUniqueList():
+    list_of_numbers = np.random.choice(
+    range(1, 999999),
+    1112,
+    replace=False
+    ).tolist()
+
+    print(list_of_numbers) 
+
 
 def getMessageFromUI(message):
-    with open("testMessage.txt", 'w') as messageFile:
-        messageFile.write(message)
-        messageFile.close()
+       
+    file = Path(filePathOfFile+"/MyMessage.txt")
+    result = file.is_file()
+    if result:
+        print("read ready message from user")
+        realPath = filePathOfFile+"/MyMessage.txt"
+        with open("Message.txt", 'w') as messageFile:
+            messageFile.write(message)
+            shutil.copy(realPath, "Message.txt")
+            messageFile.close()
+    
+    else:
+        with open("Message.txt", 'w') as messageFile:
+            messageFile.write(message)
+            messageFile.close()
 
 
 def getPathFromUI(path):
@@ -50,8 +74,8 @@ def getCreationtime():
     print(os.path.getmtime(file))
     print(datetime.datetime.fromtimestamp(os.path.getmtime(file)))
 
-def removeIndexFile():
-    os.remove("indexFile.txt")
+def removeMessageFile():
+    os.remove("Message.txt")
 
 
 def createOneSourceCharacterList():
@@ -91,8 +115,10 @@ def createSourceCharacterFile(size):
     # number of character in file
     numberOfCharinFile = 0
 
-    file = "sourceCharacterFile.txt"
-    result = os.path.isfile("sourceCharacterFile.txt")
+   
+    file = Path(filePathOfFile+"/sourceCharacterFile.txt")
+    result = file.is_file()
+    
     if result:
         difference = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getctime(file))
 
@@ -102,19 +128,14 @@ def createSourceCharacterFile(size):
             return
     
     # change  own path in your computer to next line
-    with open("sourceCharacterFile.txt", 'w') as charFile:
+    
+    with open(filePathOfFile+"/sourceCharacterFile.txt", 'w') as charFile:
         while numberOfCharinFile < size:
             oneline = createOneSourceCharacterList() + createOneSourceCharacterList() + createOneSourceCharacterList() + "\n"
             lengthOfOneLine = len(oneline)
             numberOfCharinFile += lengthOfOneLine
-            print(lengthOfOneLine)
-            print(numberOfCharinFile)
             charFile.write(oneline)
             oneline = ""
-
-    with open(r"sourceCharacterFile.txt", 'r') as fp:        
-        x = len(fp.readlines())
-        logging.debug("Total lines  in char file: %s", str(x))
 
     charFile.close()  
 
@@ -126,7 +147,6 @@ def writeFinalMessageFileByNumber():
 
     listOfLocation=[] # load location from file to this list
     listOfMessage=[] # load messages and write after updating list
-    listOfOneRowIndex=[] # read one row of index from file to this list
     listOfIndex=[]
     lengthOfOneIndexRow = 0
     numberOfIndexRowInFile = 0
@@ -152,7 +172,7 @@ def writeFinalMessageFileByNumber():
         if lengthOfOneIndexRow > 100:
             lastRowOfIndex = True
 
-        logging.debug("listOfOneRowIndex : %s", str(listOfOneRowIndex))
+        logging.debug("listOfIndex : %s", str(listOfIndex))
         logging.debug("indexOfLocationList : %s", str(indexOfLocationList))
 
         # if indexOfLocationList > len(listOfLocation)-1:
@@ -197,7 +217,7 @@ def searchIndexFromCharFile():
     realPath = ""
     
     logging.debug("searchIndexFromCharFile func start ")
-    with open("testMessage.txt", 'r') as messageFile:
+    with open("Message.txt", 'r') as messageFile:
         realPath = filePathOfFile+ "/sourceCharacterFile.txt"
         print("realPath")
         #with open("sourceCharacterFile.txt", 'r') as charFile:
@@ -265,6 +285,7 @@ def searchIndexFromCharFile():
 
         charFile.close()
     messageFile.close()
+    removeMessageFile()
     return indexList
 
 
@@ -273,8 +294,9 @@ def createLocationListToFile(lengthOfKey):
     createdNumers = 0
     logging.debug("createLocationListtoFile func start")
 
-    file = "locationKeyFile.txt"
-    result = os.path.isfile(file)
+    file = Path(filePathOfFile+"/locationKeyFile.txt")
+    result = file.is_file()
+
     if result:
         difference = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getctime(file))
 
@@ -283,7 +305,7 @@ def createLocationListToFile(lengthOfKey):
         else:
             return
 
-    with open("locationKeyFile.txt", 'wb') as locationKeyFile:
+    with open(filePathOfFile+"/locationKeyFile.txt", 'wb') as locationKeyFile:
         while createdNumers < lengthOfKey:
             locationList.append(random.randrange(1,100))
             createdNumers +=1
@@ -293,13 +315,20 @@ def createLocationListToFile(lengthOfKey):
 
 def loadLocationListFromFile():
     locationList = []
-    realPath = filePathOfFile+ "/locationKeyFile.txt"
-    print("realPath")
+    
 
-    with open (realPath, 'rb') as locationKeyFile:
-        locationList = pickle.load(locationKeyFile)
-    locationKeyFile.close()
-    #print(locationList)
+    file = Path(filePathOfFile+"/locationKeyFile.txt")
+    result = file.is_file()
+
+    if result:
+
+        with open (filePathOfFile+"/locationKeyFile.txt", 'rb') as locationKeyFile:
+            locationList = pickle.load(locationKeyFile)
+        locationKeyFile.close()
+    else:
+        print("location key file does not exist")
+        return
+
     return locationList
 
 def createMessageListToFile(length):
@@ -312,7 +341,7 @@ def createMessageListToFile(length):
             messageList.append(random.randrange(1,309))
             createdNumers +=1
         pickle.dump(messageList, messageKeyFile)
-    logging.debug("locationList length : %s", str(len(messageList)))    
+    logging.debug("messageList length : %s", str(len(messageList)))    
     messageKeyFile.close()
 
 def loadMessageListFromFile():
@@ -330,18 +359,27 @@ def saveMessageToFile(messageList):
     logging.debug("messageList length : %s", str(len(messageList)))    
     messageFile.close()
     messageList.clear()
+
+def sendMessage():
+    createSourceCharacterFile(1)
+    createLocationListToFile(10_000)
+    createMessageListToFile(1_000_000)
+    writeFinalMessageFileByNumber()
     
 def main():
     
     #getMessageFromUI(message)
-
+    #createUniqueList()
     #getPathFromUI()
     #getPathFromUI(path)
     #printFilePathFromUI()
     #getCreationtime()
-    
+    getPathFromUI("grth")
+    createSourceCharacterFile(1)
     createLocationListToFile(10_000)
     createMessageListToFile(1_000_000)
+    getMessageFromUI("bhdghb")
+    writeFinalMessageFileByNumber()
     #searchIndexFromCharFile()
     #writeFinalMessageFileByNumber()
     #createOneSourceCharacterList()
@@ -349,7 +387,8 @@ def main():
 #setLogger()
 #createLocationListToFile(10_000)
 #createMessageListToFile(1_000_000)
-#createSourceCharacterFile(1)
+    #getPathFromUI("grth")
+    #createSourceCharacterFile(1)
 #searchIndexFromCharFile()
 #writeFinalMessageFileByNumber()
 #removeIndexFile()

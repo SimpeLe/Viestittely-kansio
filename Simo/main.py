@@ -5,6 +5,8 @@
 # - env\scripts\activate
 # - pip list
 # - pip install pyqt5 pyqt5-tools
+# - pip3 install tqdm
+# - pip install numpy
 # - python.exe -m pip install --upgrade pip
 #   TAI C:\Users\Simis\AppData\Local\Programs\Python\Python311\python.exe -m pip install --upgrade pip
 #
@@ -39,6 +41,8 @@ from ui_vastaanota import Ui_Form as vastota
 
 import fileMessageHandler as send
 import fileReceiverHandler as pickup
+import socketSendFile as socSend
+import socketReceiveFile as socRecv
 
 
 class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
@@ -51,7 +55,7 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
         self.ui.lvastaanottaja_lineEdit.setFocus()
         self.ui.lviestiselaa_pushButton.clicked.connect(self.kansio_selaus_klikkaus)
         self.ui.llaheta_pushButton.clicked.connect(self.laheta_klik)
-    
+        
     def laheta_klik(self):
         print("tässä kutsu laheta-metodia")        
         hakemistopolku = self.ui.lveistintalletuspolku_lineEdit.text()
@@ -70,17 +74,18 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
             and lahetettavaViesti != "" and viestiPituusOK:  
             send.getPathFromUI(hakemistopolku)
             send.getMessageFromUI(lahetettavaViesti)
-            send.createSourceCharacterFile(1) 
-            send.createLocationListToFile(10_000)
-            send.createMessageListToFile(1_000_000)
-            send.searchIndexFromCharFile()
-            send.writeFinalMessageFileByNumber()
+            send.sendMessage()
+            # send.createSourceCharacterFile(1) 
+            # send.createLocationListToFile(10_000)
+            # send.createMessageListToFile(1_000_000)
+            # send.searchIndexFromCharFile()
+            # send.writeFinalMessageFileByNumber()
             IP_LahetysValinta = qtw.QMessageBox.question(self, 'Tiedostojen kirjoitus', \
                 "Viestin ja avaimien tallennus päättyi. Haluatko lähettää viestin IP-osoitteeseen? Jos kyllä, vastaanottajan IP-serveri pitää olla päällä ", \
                 qtw.QMessageBox.Yes | qtw.QMessageBox.No, qtw.QMessageBox.No)
             if IP_LahetysValinta == qtw.QMessageBox.Yes:
-                # kutsu socketSendFile
                 print("Lähetä viesti IP:hen")
+                socSend.sendFileViaIP("192.168.10.48", 5001, "MessageFile.txt")
             self.close()
         elif hakemistopolku == "" or os.path.isdir(hakemistopolku) == False: 
             qtw.QMessageBox.critical(self, 'Kansio puuttuu', "Valitse olemassa oleva tallennuspolku")
@@ -118,32 +123,32 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
             return dirName
 
 
-    def openFileNamesDialog(self):
-        options = qtw.QFileDialog.Options()
-        options |= qtw.QFileDialog.DontUseNativeDialog
-        files, _ = qtw.QFileDialog.getOpenFileNames(self,"qtw.QFileDialog.getOpenFileNames()", "","All Files (*);;Python Files (*.py)", options=options)
-        if files:
-            print(files)
+    # def openFileNamesDialog(self):
+    #     options = qtw.QFileDialog.Options()
+    #     options |= qtw.QFileDialog.DontUseNativeDialog
+    #     files, _ = qtw.QFileDialog.getOpenFileNames(self,"qtw.QFileDialog.getOpenFileNames()", "","All Files (*);;Python Files (*.py)", options=options)
+    #     if files:
+    #         print(files)
     
-    def saveFileDialog(self):
-        options = qtw.QFileDialog.Options()
-        options |= qtw.QFileDialog.DontUseNativeDialog
-        fileName, _ = qtw.QFileDialog.getSaveFileName(self,"qtw.QFileDialog.getSaveFileName()","","All Files (*);;Text Files (*.txt)", options=options)
-        self.setWindowTitle(self.title)
-        if fileName:
-            print(fileName)
+    # def saveFileDialog(self):
+    #     options = qtw.QFileDialog.Options()
+    #     options |= qtw.QFileDialog.DontUseNativeDialog
+    #     fileName, _ = qtw.QFileDialog.getSaveFileName(self,"qtw.QFileDialog.getSaveFileName()","","All Files (*);;Text Files (*.txt)", options=options)
+    #     self.setWindowTitle(self.title)
+    #     if fileName:
+    #         print(fileName)
 
-    def saveDirectoryDialog(self):
-        print ('saveDirectoryDialogin sisällä')
-        options = qtw.QFileDialog.Options()
-        options |= qtw.QFileDialog.DontUseNativeDialog
-        sDirectory, _ = qtw.QFileDialog.getExistingDirectory(self,"qtw.QFileDialog.getExistingDirectory()","","All Files (*);;Text Files (*.txt)", options=options)
-        if sDirectory:
-            print(sDirectory)
-            return sDirectory
+    # def saveDirectoryDialog(self):
+    #     print ('saveDirectoryDialogin sisällä')
+    #     options = qtw.QFileDialog.Options()
+    #     options |= qtw.QFileDialog.DontUseNativeDialog
+    #     sDirectory, _ = qtw.QFileDialog.getExistingDirectory(self,"qtw.QFileDialog.getExistingDirectory()","","All Files (*);;Text Files (*.txt)", options=options)
+    #     if sDirectory:
+    #         print(sDirectory)
+    #         return sDirectory
 
 
-# kun käyttäjä klikkaa "Lähetä"-painiketta kotinäytössä
+# kun käyttäjä klikkaa "vastaanota"-painiketta kotisivu-näytössä
 class Cvastaanota_klikkaus(qtw.QWidget):
     def __init__(self):
         super().__init__()
@@ -153,7 +158,7 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         self.ui.vveistintalletuspolku_lineEdit.setFocus()
         self.ui.vviestiselaa_pushButton.clicked.connect(self.vastota_kansio_selaus_klikkaus)        
         self.ui.vvastaanota_pushButton.clicked.connect(self.vastaanota_klik) 
-
+        self.ui.vIP_vastaanotto_pushButton.clicked.connect(self.VastOtaViestiIP_lla) 
     # kun käyttäjä klikkaa "Selaus"-painiketta, hän pääsee selaamaan 
     def vastota_kansio_selaus_klikkaus(self):
         print("tässä avaa vastota (pickup) kansio-keskustelu ikkuna")
@@ -181,11 +186,14 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         print ("vastaanota_klik(self):ssä vastOtaPolku: ", vastOtaPolku)
 
         pickup.getPathFromUI(vastOtaPolku)
-        pickup.findIndexByLocationFromMessage()
+        # pickup.findIndexByLocationFromMessage()
         pickup.findCharByIndexFromSourceCharFile() 
 # purettu viesti on kentässä: vviesti_plainTextEdit
         purettuviesti = pickup.offerMessageToUI()
         self.ui.vviesti_plainTextEdit.setPlainText(purettuviesti) 
+
+    def VastOtaViestiIP_lla(self):
+        socRecv.RecvFileViaIP(5001)
 
 
 # pitää matchata  widget-tyyppiin, joka on valittu designerissa

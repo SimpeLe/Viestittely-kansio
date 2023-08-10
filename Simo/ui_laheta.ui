@@ -490,11 +490,19 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="toolTip">
      <string>selaa välitettävien tiedostojen talletuspolkua</string>
     </property>
     <property name="text">
      <string>Selaa</string>
+    </property>
+    <property name="shortcut">
+     <string>Alt+S</string>
     </property>
    </widget>
   </widget>
@@ -528,7 +536,7 @@
      <x>399</x>
      <y>299</y>
     </hint>
-   </hints> 
+   </hints>
   </connection>
  </connections>
 </ui>

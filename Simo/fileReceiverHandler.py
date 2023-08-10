@@ -1,10 +1,11 @@
 import logging
 import os
 import pickle
+from pathlib import Path
 
 
 def setLogger():
-    numberOfHandledChar = 7
+    
     logging.basicConfig(filename="loggingFile.txt",
     format='%(asctime)s %(message)s',
     filemode='w')
@@ -13,10 +14,13 @@ def setLogger():
     # Set the log of level to DEBUG
     logger.setLevel(logging.DEBUG)
 
+
+
 def offerMessageToUI():
     with open("Message.txt", 'r') as messageFile:
         message = messageFile.read()
         messageFile.close()
+        os.remove("Message.txt") # delete message after it has been returned to UI
         return message
 
 def getPathFromUI(path):
@@ -45,14 +49,22 @@ def readNumberFromfileToList(filename):
 
 def loadListFromFile(filename):
     logging.debug("loadListFromFile func start ")
+    realPath = filePathOfFile+filename
+    file = Path(filePathOfFile+filename)
+    result = file.is_file()
+
+    if result:
+         print("File found")
+    else:
+        print("no file")
+        return
+
     currentnList = []
     realPath =  filePathOfFile+filename
     print("realPath")
 
     #with open (filename, 'rb') as listFile:
     with open (realPath, 'rb') as listFile:
-    
-
         currentnList = pickle.load(listFile)
 
     logging.debug("currentnList length: %s", str(len(currentnList)))
@@ -74,10 +86,19 @@ def findCharByIndexFromSourceCharFile():
      list = [] # load index list here
 
      realPath = ""
+     file = Path(filePathOfFile+"/sourceCharacterFile.txt")
+     result = file.is_file()
+
+     if result:
+         print("File found")
+     else:
+        print("no sourcecharfile")
+        return
+     
     
      logging.debug("findCharByIndexFromSourceCharFile func start ")
      with open("Message.txt", 'w') as messageFile:
-         realPath =  filePathOfFile+ "/locationKeyFile.txt"
+         realPath =  filePathOfFile+ "/sourceCharacterFile.txt"
          print("realPath")
          #with open("sourceCharacterFile.txt", 'r') as charFile:
          with open(realPath, 'r') as charFile:
@@ -176,6 +197,7 @@ def loadMessageListFromFile():
 
 def main():
     #findIndexByLocationFromMessage()
+    #getPathFromUI("sdtgh")
     findCharByIndexFromSourceCharFile()
 
 #setLogger()

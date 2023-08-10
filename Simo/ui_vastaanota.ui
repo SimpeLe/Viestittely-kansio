@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0"> 
+<ui version="4.0">
  <class>Form</class>
  <widget class="QWidget" name="Form">
   <property name="geometry">
@@ -80,7 +80,7 @@
      </font>
     </property>
     <property name="toolTip">
-     <string>peru ja palaa takaisin kotisivulle</string>
+     <string>Peru ja palaa takaisin kotisivulle</string>
     </property>
     <property name="statusTip">
      <string/>
@@ -367,11 +367,43 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="toolTip">
      <string>selaa välitettävien tiedostojen talletuspolkua</string>
     </property>
     <property name="text">
      <string>Selaa</string>
+    </property>
+    <property name="shortcut">
+     <string>Alt+S</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="vIP_vastaanotto_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>480</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Avaa palvelun, joka kuuntelee IP:llä tulevaa viestiä</string>
+    </property>
+    <property name="text">
+     <string>IP:n kuuntelu</string>
+    </property>
+    <property name="shortcut">
+     <string>Alt+I</string>
     </property>
    </widget>
   </widget>
