@@ -194,8 +194,8 @@ class Cvastaanota_klikkaus(qtw.QWidget):
 
     def VastOtaViestiIP_lla(self):
         qtw.QMessageBox.information(self, \
-            'IP-osoitteesi odottaa viestiä', "Odota, kunnes IP-osoitteesi saa viestin. Voit poistua sulkemalla ohjelman. Paina OK, niin odottaminen alkaa")
-        socRecv.RecvFileViaIP(5001)
+            'IP-osoitteesi odottaa viestiä', "Odota, kunnes viesti saapuu tai odota hetki, kunnes vastaanotto päättyy. Paina OK, niin vastaanotto alkaa")
+        socRecv.RecvFileViaIP(5001, 5) #portti ja sekunnit, jotk aserveri odottaa viesti
 
 
 # pitää matchata  widget-tyyppiin, joka on valittu designerissa

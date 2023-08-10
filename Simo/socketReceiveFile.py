@@ -7,8 +7,10 @@ import socket
 import tqdm
 import os
 import time
+from PyQt5 import QtWidgets as qtw
 
-def RecvFileViaIP(port = 5001):
+
+def RecvFileViaIP(port = 5001, sekuntia = 5):
     # device's IP address
     SERVER_HOST = "0.0.0.0"
     SERVER_PORT = port
@@ -27,50 +29,52 @@ def RecvFileViaIP(port = 5001):
     # the system will allow before refusing new connections
     s.listen(5)
     print(f"[*] Listening as {SERVER_HOST}:{SERVER_PORT}")
-    s.settimeout(5)
-    
-    stopped = False
-    while not stopped:
-        try:
-            # accept connection if there is any
-            client_socket, address = s.accept() 
-        except socket.timeout:
-            pass
-        except:
-            raise
-        else:
-            # if below code is executed, that means the sender is connected
-            print("venttaa 3")
-            print(f"[+] {address} is connected.")
+    s.settimeout(sekuntia)
+    client_socket = ""
+    try:
+        # accept connection if there is any
+        print ("try")
+        client_socket, address = s.accept() 
+    except socket.timeout:
+        print("except timeout")
+        pass        
+    else:    
+        print("else")
+        # if below code is executed, that means the sender is connected
+        print(f"[+] {address} is connected.")
 
-            # receive the file infos
-            # receive using client socket, not server socket
-            received = client_socket.recv(BUFFER_SIZE).decode()
-            filename, filesize = received.split(SEPARATOR)
-            # remove absolute path if there is
-            filename = os.path.basename(filename)
-            # convert to integer
-            filesize = int(filesize)
+        # receive the file infos
+        # receive using client socket, not server socket
+        received = client_socket.recv(BUFFER_SIZE).decode()
+        filename, filesize = received.split(SEPARATOR)
+        # remove absolute path if there is
+        filename = os.path.basename(filename)
+        # convert to integer
+        filesize = int(filesize)
 
-            # start receiving the file from the socket
-            # and writing to the file stream
-            progress = tqdm.tqdm(range(filesize), f"Receiving {filename}", unit="B", unit_scale=True, unit_divisor=1024)
-            with open(filename, "wb") as f:
-                while True:
-                    # read 1024 bytes from the socket (receive)
-                    bytes_read = client_socket.recv(BUFFER_SIZE)
-                    if not bytes_read:    
-                        # nothing is received
-                        # file transmitting is done
-                        break
-                    # write to the file the bytes we just received
-                    f.write(bytes_read)
-                    # update the progress bar
-                    progress.update(len(bytes_read))
+        # start receiving the file from the socket
+        # and writing to the file stream
+        progress = tqdm.tqdm(range(filesize), f"Receiving {filename}", unit="B", unit_scale=True, unit_divisor=1024)
+        with open(filename, "wb") as f:
+            while True:
+                # read 1024 bytes from the socket (receive)
+                bytes_read = client_socket.recv(BUFFER_SIZE)
+                if not bytes_read:    
+                    # nothing is received
+                    # file transmitting is done
+                    break
+                # write to the file the bytes we just received
+                f.write(bytes_read)
+                # update the progress bar
+                progress.update(len(bytes_read))
+        # close the client socket
+        client_socket.close()
+    if client_socket == "":
+        qtw.QMessageBox.information(None, 'IP-osoitteesi odottaa viestiä', f"Viestiä ei saapunut {sekuntia} sekunnissa")
 
-    # close the client socket
-    client_socket.close()
+    print("seuraavaksi klosaa server socket")
     # close the server socket
     s.close()
+
 
 
