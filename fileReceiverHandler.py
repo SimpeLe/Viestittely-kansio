@@ -23,7 +23,7 @@ def offerMessageToUI():
         return message
 
 def getPathFromUI(path):
-    global filePathOfFile
+    global filePathOfFile 
     filePathOfFile = path
     logging.debug("filePathOfFile : %s", filePathOfFile)
     print(filePathOfFile)
@@ -47,7 +47,7 @@ def readNumberFromfileToList(filename):
     return entireNumeberList
 
 def loadListFromFile(filename):
-    logging.debug("loadListFromFile func start ")
+    logging.debug("loadListFromFile func start")
     realPath = filePathOfFile+filename
     file = Path(filePathOfFile+filename)
     result = file.is_file()
@@ -144,7 +144,6 @@ def findIndexByLocationFromMessage():
     locationlist = [] # read list of location 
     indexList = [] # save founded index here and return list
     indexFoundByLocation = 0
-    locationCounter = 0 # count location together for finding rigth location from message row
     logging.debug("findIndexByLocationFromMessage func start ")
     messagelist = loadMessageListFromFile()
     logging.debug(" length: %s", str(len(messagelist)))
@@ -153,19 +152,8 @@ def findIndexByLocationFromMessage():
     
     for oneLocation in locationlist: # go through  location list and find index by location from messages
         logging.debug("oneLocation: %s", str(oneLocation))
-        locationCounter += oneLocation
-        if oneLocation > len(locationlist)-1:
-                logging.debug("length oneLocationRowlist by index : %s", str(len(locationlist)-1))
-                logging.debug("length oneLocationRowlist out of range :")
-                break
-        if locationCounter > len(messagelist)-1:
-                logging.debug("length oneMessageRowlist by index : %s", str(len(messagelist)-1))
-                logging.debug("length of locationCounter is bigger than message list  :")
-                break
-
-        indexFoundByLocation = messagelist[locationCounter] # index by location from message row
-        logging.debug("locationCounter: %s", str(locationCounter))
-        logging.debug("oneRowIndex: %s", str(oneLocation))
+        indexFoundByLocation = messagelist[oneLocation] # index by location from message row
+        logging.debug("oneLocation: %s", str(oneLocation))
         logging.debug("indexFoundByLocation: %s", str(indexFoundByLocation))
         indexList.append(indexFoundByLocation)
         
@@ -173,7 +161,6 @@ def findIndexByLocationFromMessage():
     locationlist.clear()
     return indexList
         
-
 
 def loadMessageListFromFile():
     """
@@ -198,6 +185,7 @@ def loadMessageListFromFile():
 
 def main():
     #findIndexByLocationFromMessage()
+    #setLogger()
     getPathFromUI("sdtgh")
     findCharByIndexFromSourceCharFile()
 
