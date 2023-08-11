@@ -50,6 +50,8 @@ def getMessageFromUI(message):
 
 def getPathFromUI(path):
     global filePathOfFile
+    #filePathOfFile = "C:/Users/Ville/project/Viestittely-kansio"
+    #filePathOfFile = "C:\\Users\\Ville\\project\\Viestittely-kansio" 
     filePathOfFile = path
     logging.debug("filePathOfFile : %s", filePathOfFile)
 
@@ -324,13 +326,22 @@ def loadMessageListFromFile():
 
 
 def saveMessageToFile(messageList):
-    destination = filePathOfFile+"/messageFile.txt"
+    destination = filePathOfFile+"\\messageFile.txt"
     with open("messageFile.txt", 'wb') as messageFile:
         pickle.dump(messageList, messageFile)
     logging.debug("messageList length : %s", str(len(messageList)))    
     messageFile.close()
     messageList.clear()
-    shutil.copyfile("messageFile.txt", destination)
+    fname = "messageFile.txt"
+    print(os.path.abspath(fname))
+    print("test path")
+    print("\n")
+    print(destination)
+    if destination == os.path.abspath(fname):
+        print("same path")
+    else:
+        print("different path")
+        shutil.copyfile("messageFile.txt", destination)
 
 def createMessage():
     createSourceCharacterFile(1)

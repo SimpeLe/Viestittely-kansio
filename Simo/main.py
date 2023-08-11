@@ -85,7 +85,7 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
                 qtw.QMessageBox.Yes | qtw.QMessageBox.No, qtw.QMessageBox.No)
             if IP_LahetysValinta == qtw.QMessageBox.Yes:
                 print("Lähetä viesti IP:hen")
-                socSend.sendFileViaIP("192.168.10.48", 5001, "MessageFile.txt")
+                socSend.sendFileViaIP("192.168.10.48", 5001, "messageFile.txt")
             self.close()
         elif hakemistopolku == "" or os.path.isdir(hakemistopolku) == False: 
             qtw.QMessageBox.critical(self, 'Kansio puuttuu', "Valitse olemassa oleva tallennuspolku")

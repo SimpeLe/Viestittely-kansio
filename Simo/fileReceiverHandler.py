@@ -16,10 +16,10 @@ def setLogger():
 
 
 def offerMessageToUI():
-    with open("Message.txt", 'r') as messageFile:
+    with open("messageFile.txt", 'r') as messageFile:
         message = messageFile.read()
         messageFile.close()
-        os.remove("Message.txt") # delete message after it has been returned to UI
+        os.remove("messageFile.txt") # delete message after it has been returned to UI
         return message
 
 def getPathFromUI(path):
@@ -94,7 +94,7 @@ def findCharByIndexFromSourceCharFile():
         return
      
      logging.debug("findCharByIndexFromSourceCharFile func start ")
-     with open("Message.txt", 'w') as messageFile:
+     with open("messageFile.txt", 'w') as messageFile:
          realPath =  filePathOfFile+ "/sourceCharacterFile.txt"
          with open(realPath, 'r') as charFile:
             list = findIndexByLocationFromMessage()

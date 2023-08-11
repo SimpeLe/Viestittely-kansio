@@ -6,7 +6,7 @@ import socket
 import tqdm
 import os
 
-def sendFileViaIP(ip = "192.168.10.48", port = 5001, filename = "MessageFile.txt"):
+def sendFileViaIP(ip = "192.168.10.48", port = 5001, filename = "messageFile.txt"):
     SEPARATOR = "<SEPARATOR>"
     BUFFER_SIZE = 4096 # send 4096 bytes each time step
     
@@ -22,7 +22,7 @@ def sendFileViaIP(ip = "192.168.10.48", port = 5001, filename = "MessageFile.txt
     # port = 5001
     # port = 80 tai 5001 #toimii sisäisessä 192-verkossa
     # the name of file we want to send, make sure it exists
-    filename = "MessageFile.txt"
+    # filename = "messageFile.txt"
     # get the file size
     filesize = os.path.getsize(filename)
 
