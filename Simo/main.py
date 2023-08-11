@@ -74,7 +74,7 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
             and lahetettavaViesti != "" and viestiPituusOK:  
             send.getPathFromUI(hakemistopolku)
             send.getMessageFromUI(lahetettavaViesti)
-            send.sendMessage()
+            send.createMessage()
             # send.createSourceCharacterFile(1) 
             # send.createLocationListToFile(10_000)
             # send.createMessageListToFile(1_000_000)
