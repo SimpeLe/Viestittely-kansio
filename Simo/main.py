@@ -65,7 +65,7 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
         # print ("lahetettavaViesti toPlainText():n jälkeen: ",lahetettavaViesti)
         # print("lahetettavaViesti:ssä on merkkejä:", len(lahetettavaViesti))
         # onko viesti riittävän lyhyt 
-        ViestinMaxPituus = 5 
+        ViestinMaxPituus = 10 
         if len(lahetettavaViesti) <= ViestinMaxPituus:
             viestiPituusOK = True
         else:
@@ -195,7 +195,7 @@ class Cvastaanota_klikkaus(qtw.QWidget):
     def VastOtaViestiIP_lla(self):
         qtw.QMessageBox.information(self, \
             'IP-osoitteesi odottaa viestiä', "Odota, kunnes viesti saapuu tai odota hetki, kunnes vastaanotto päättyy. Paina OK, niin vastaanotto alkaa")
-        socRecv.RecvFileViaIP(5001, 5) #portti ja sekunnit, jotk aserveri odottaa viesti
+        socRecv.RecvFileViaIP(5001, 5) #portti ja sekunnit, jotka aserveri odottaa viesti
 
 
 # pitää matchata  widget-tyyppiin, joka on valittu designerissa
