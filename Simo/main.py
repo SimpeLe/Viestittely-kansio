@@ -72,6 +72,7 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
             viestiPituusOK = False            
         if hakemistopolku != "" and os.path.isdir(hakemistopolku) \
             and lahetettavaViesti != "" and viestiPituusOK:  
+            send.setLogger()
             send.getPathFromUI(hakemistopolku)
             send.getMessageFromUI(lahetettavaViesti)
             send.createMessage()
@@ -159,6 +160,7 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         self.ui.vviestiselaa_pushButton.clicked.connect(self.vastota_kansio_selaus_klikkaus)        
         self.ui.vvastaanota_pushButton.clicked.connect(self.vastaanota_klik) 
         self.ui.vIP_vastaanotto_pushButton.clicked.connect(self.VastOtaViestiIP_lla) 
+        
     # kun käyttäjä klikkaa "Selaus"-painiketta, hän pääsee selaamaan 
     def vastota_kansio_selaus_klikkaus(self):
         print("tässä avaa vastota (pickup) kansio-keskustelu ikkuna")
@@ -171,7 +173,6 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         self.ui.vkirjoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", vastOtaHakemistoPolku))
         self.ui.vsijoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", vastOtaHakemistoPolku))
     
-
     def openPickupDirectoryNameDialog(self):
         pickupDirName = qtw.QFileDialog.getExistingDirectory(self,"Viestittely-vastaanota kansio-selaus")
         if pickupDirName:
@@ -184,13 +185,17 @@ class Cvastaanota_klikkaus(qtw.QWidget):
 #????????? jos keretään, voit tarkastaa onko hakemisto olemassa
         vastOtaPolku = self.ui.vveistintalletuspolku_lineEdit.text()
         print ("vastaanota_klik(self):ssä vastOtaPolku: ", vastOtaPolku)
+        if vastOtaPolku != "" and os.path.isdir(vastOtaPolku):
+            pickup.setLogger()
+            pickup.getPathFromUI(vastOtaPolku)
+            # pickup.findIndexByLocationFromMessage()
+            pickup.findCharByIndexFromSourceCharFile() 
+            # purettu viesti on kentässä: vviesti_plainTextEdit
+            purettuviesti = pickup.offerMessageToUI()
+            self.ui.vviesti_plainTextEdit.setPlainText(purettuviesti) 
+        elif vastOtaPolku == "" or os.path.isdir(vastOtaPolku) == False: 
+            qtw.QMessageBox.critical(self, 'Kansio puuttuu', "Valitse olemassa oleva tallennuspolku")
 
-        pickup.getPathFromUI(vastOtaPolku)
-        # pickup.findIndexByLocationFromMessage()
-        pickup.findCharByIndexFromSourceCharFile() 
-# purettu viesti on kentässä: vviesti_plainTextEdit
-        purettuviesti = pickup.offerMessageToUI()
-        self.ui.vviesti_plainTextEdit.setPlainText(purettuviesti) 
 
     def VastOtaViestiIP_lla(self):
         qtw.QMessageBox.information(self, \
