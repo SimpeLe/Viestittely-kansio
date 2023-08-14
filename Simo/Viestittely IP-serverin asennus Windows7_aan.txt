@@ -10,11 +10,17 @@ py -m ensurepip --upgrade
 # pipin p‰ivitys
 py -m pip install --upgrade pip
 
-# tqdm-kirjaston asennus
+# tqdm- ja muiden kirjastojen asennus
+py -m pip install pyqt5 pyqt5-tools
 py -m pip install tqdm
+py -m pip install numpy
+
 
 # ipconfig kertoo mit‰ IP-osoitetetta l‰hett‰j‰n pit‰‰ k‰ytt‰‰
 ipconfig
 
-# k‰ynnist‰ IP-viestin vastaanottaja (serveri)
-py -m socketRecieveFile.py
+## k‰ynnist‰ IP-viestin vastaanottaja (serveri)
+#py -m socketRecieveFile.py
+
+# k‰ynnist‰ Viestittely-ohjelma
+python main.py
