@@ -3,4 +3,6 @@
 20230626 11:32
 20230627 14:46
 20230629 15:49
+jaa github myös arvioijalle
+mikko@haltu.fi
 
