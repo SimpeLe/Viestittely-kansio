@@ -31,6 +31,9 @@ from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtGui as qtg
 import os
+import re
+import string
+
 
 # from PyQt5 import QtQuick 2.2
 # from PyQt5 import QtQuick 1.0
@@ -57,30 +60,36 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
         self.ui.llaheta_pushButton.clicked.connect(self.laheta_klik)
         
     def laheta_klik(self):
-        print("tässä kutsu laheta-metodia")        
+        # print("tässä kutsu laheta-metodia")        
         hakemistopolku = self.ui.lveistintalletuspolku_lineEdit.text()
-        print ("lahet_klik(self):ssä hakemistopolku: ", hakemistopolku)
+        # print ("def lahet_klik(self):ssä hakemistopolku: ", hakemistopolku)
         # käyttäjän kirjoittama viesti on kentässä: lviesti_plainTextEdit  
         lahetettavaViesti = self.ui.lviesti_plainTextEdit.toPlainText()
         # print ("lahetettavaViesti toPlainText():n jälkeen: ",lahetettavaViesti)
+
+        # sisältääkö viesti vain ASCII- ja scandi-merkkejä? Jos ei sisällä, korvaa sallimaton merkki alaviivalla "_"
+        sallitutMerkit = string.ascii_letters + string.digits + string.punctuation +"äöåÄÖÅ" +'.' + "\n" + " " + "\t" + "\v" + "\r" 
+        for kirjain in lahetettavaViesti:
+            if kirjain not in sallitutMerkit:
+                # print("kirjain: ", kirjain)
+                lahetettavaViesti = lahetettavaViesti.replace(kirjain, '_')
+                # print("lahetettavaViesti (if not sallitutMerkit:ssa):", lahetettavaViesti)
+        print ("laheta_klik(self):ssa lahetettavaViesti:", lahetettavaViesti)
+
         # print("lahetettavaViesti:ssä on merkkejä:", len(lahetettavaViesti))
-        # onko viesti riittävän lyhyt 
-        ViestinMaxPituus = 10 
-        if len(lahetettavaViesti) <= ViestinMaxPituus:
+        # Onko viesti riittävän lyhyt?
+        ViestinMaxPituus = 12 
+        viestinPituus = len(lahetettavaViesti)
+        if viestinPituus <= ViestinMaxPituus:
             viestiPituusOK = True
         else:
-            viestiPituusOK = False            
+            viestiPituusOK = False
         if hakemistopolku != "" and os.path.isdir(hakemistopolku) \
             and lahetettavaViesti != "" and viestiPituusOK:  
             send.setLogger()
             send.getPathFromUI(hakemistopolku)
             send.getMessageFromUI(lahetettavaViesti)
             send.createMessage()
-            # send.createSourceCharacterFile(1) 
-            # send.createLocationListToFile(10_000)
-            # send.createMessageListToFile(1_000_000)
-            # send.searchIndexFromCharFile()
-            # send.writeFinalMessageFileByNumber()
             IP_LahetysValinta = qtw.QMessageBox.question(self, 'Tiedostojen kirjoitus', \
                 "Viestin ja avaimien tallennus päättyi. Haluatko lähettää viestin IP-osoitteeseen? Jos kyllä, vastaanottajan IP-serveri pitää olla päällä ", \
                 qtw.QMessageBox.Yes | qtw.QMessageBox.No, qtw.QMessageBox.No)
@@ -95,9 +104,9 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
         
 
     def kansio_selaus_klikkaus(self):
-        print("tässä avaa kansio-keskustelu ikkuna")
+        # print("tässä avaa kansio-keskustelu ikkuna")
         hakemistoPolku = self.openSaveDirectoryNameDialog()
-        print("def kansio_selaus_klikkaus hakemistoPolku: ", hakemistoPolku)
+        # print("def kansio_selaus_klikkaus(self) hakemistoPolku: ", hakemistoPolku)
         # self.openFileNamesDialog()
         # self.saveFileDialog()
         # self.saveDirectoryDialog
@@ -161,11 +170,11 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         self.ui.vvastaanota_pushButton.clicked.connect(self.vastaanota_klik) 
         self.ui.vIP_vastaanotto_pushButton.clicked.connect(self.VastOtaViestiIP_lla) 
         
-    # kun käyttäjä klikkaa "Selaus"-painiketta, hän pääsee selaamaan 
+    # kun käyttäjä klikkaa "Selaus"-painiketta, hän pääsee selaamaan kansioita
     def vastota_kansio_selaus_klikkaus(self):
-        print("tässä avaa vastota (pickup) kansio-keskustelu ikkuna")
+        # print("tässä avaa vastota (pickup) kansio-keskustelu ikkuna")
         vastOtaHakemistoPolku = self.openPickupDirectoryNameDialog()
-        print("def vastota_kansio_selaus_klikkaus(self):ssä vastOtaHakemistoPolku: ", vastOtaHakemistoPolku)
+        # print("def vastota_kansio_selaus_klikkaus(self):ssä vastOtaHakemistoPolku: ", vastOtaHakemistoPolku)
         self.show()
         # kirjoittaa kenttään harmaan tekstin, joka häviää, kun fokus siirtyy kenttään
         # self.ui.lveistintalletuspolku_lineEdit.setPlaceholderText(qtc.QCoreApplication.translate("Form", "Nikke Nakkerton1"))
@@ -179,11 +188,11 @@ class Cvastaanota_klikkaus(qtw.QWidget):
             # print(pickupDirName)
             return pickupDirName
 
-    # kun käyttäjä klikkaa "Vastaanota"-painiketta pura salattu viesti
+    # kun käyttäjä klikkaa "Vastaanota"-painiketta, pura salattu viesti
     def vastaanota_klik(self):
-        print("tässä kutsu vastaanota-metodia")
+        # print("tässä kutsu vastaanota-metodia")
         vastOtaPolku = self.ui.vveistintalletuspolku_lineEdit.text()
-        print ("vastaanota_klik(self):ssä vastOtaPolku: ", vastOtaPolku)
+        # print ("vastaanota_klik(self):ssä vastOtaPolku: ", vastOtaPolku)
         if vastOtaPolku != "" and os.path.isdir(vastOtaPolku):
             pickup.setLogger()
             pickup.getPathFromUI(vastOtaPolku)
@@ -195,7 +204,7 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         elif vastOtaPolku == "" or os.path.isdir(vastOtaPolku) == False: 
             qtw.QMessageBox.critical(self, 'Kansio puuttuu', "Valitse olemassa oleva tallennuspolku")
 
-
+    # käyttäjä haluaa käynnistää socket serverin viestin vastaanottamiseksi IP-osoitteella
     def VastOtaViestiIP_lla(self):
         qtw.QMessageBox.information(self, \
             'IP-osoitteesi odottaa viestiä', "Odota, kunnes viesti saapuu tai odota hetki, kunnes vastaanotto päättyy. Paina OK, niin vastaanotto alkaa")
@@ -221,7 +230,7 @@ class Ckotisivu(qtw.QMainWindow):
     def login_click(self):
 #   #        if users.username == self.ui.txt_username.text() and users.password==self.ui.txt_password.text():
         if self.ui.pkayttaja_lineEdit.text() == "k" and self.ui.psalis_lineEdit.text() == "k":
-            print("Käyttäjä",self.ui.pkayttaja_lineEdit.text(),"sisällä")
+            # print("Käyttäjä",self.ui.pkayttaja_lineEdit.text(),"sisällä")
             self.ui.plaheta_pushButton.setEnabled(True)
             self.ui.pvastaanota_pushButton.setEnabled(True)
             self.ui.pkopio_pushButton.setEnabled(True)

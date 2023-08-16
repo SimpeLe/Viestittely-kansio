@@ -35,6 +35,8 @@ def checkMessageCharacter(message):
 def getMessageFromUI(message):
 
    # checkMessageCharacter(message)
+    logging.debug("message from UI : %s", str(message ))
+    logging.debug("message length from UI : %s", str(len(message) ))
        
     file = Path(filePathOfFile+"/MyMessage.txt")
     result = file.is_file()
@@ -50,8 +52,6 @@ def getMessageFromUI(message):
 
 def getPathFromUI(path):
     global filePathOfFile
-    #filePathOfFile = "C:/Users/Ville/project/Viestittely-kansio"
-    #filePathOfFile = "C:\\Users\\Ville\\project\\Viestittely-kansio" 
     filePathOfFile = path
     logging.debug("filePathOfFile : %s", filePathOfFile)
 
@@ -97,9 +97,11 @@ def createOneSourceCharacterList():
     # add mark for ending original message
     characters += "ô"
     
+    print(characters)
+
     # Randomize order of string
     randomString = ''.join(random.sample(characters, len(characters)))
-    
+    print(randomString)
     return randomString
 
 def createSourceCharacterFile(size):
@@ -153,22 +155,22 @@ def writeFinalMessageFileByNumber():
 
     logging.debug("writeFinalMessageFileByNumber func start ")
     listOfMessage = loadMessageListFromFile()
-    logging.debug("oneMessagerow length : %s", str(len(listOfMessage)))
+    #logging.debug("oneMessagerow length : %s", str(len(listOfMessage)))
     listOfIndex= searchIndexFromCharFile()
     listOfLocation = loadLocationListFromFile()
-    logging.debug("listOfOneRowLocation length : %s", str(len(listOfLocation)))
+    #logging.debug("listOfLocation length : %s", str(len(listOfLocation)))
     
     for oneIndex in listOfIndex: # go through index list and set index  to message  by location
         
-        logging.debug("listOfIndex : %s", str(listOfIndex))
-        logging.debug("indexOfLocationList : %s", str(indexOfLocationList))
+        #logging.debug("listOfIndex : %s", str(listOfIndex))
+        #logging.debug("indexOfLocationList : %s", str(indexOfLocationList))
 
         currenLocationNumber = listOfLocation[indexOfLocationList] # read one location from locationList
         listOfMessage[currenLocationNumber] = oneIndex # set index by location to crypted message
         
-        logging.debug("currenLocationNumber : %s", str(currenLocationNumber))
-        logging.debug("oneIndex : %s", str(oneIndex))
-        logging.debug("indexOfLocationList : %s", str(indexOfLocationList))
+        #logging.debug("currenLocationNumber : %s", str(currenLocationNumber))
+        #logging.debug("oneIndex : %s", str(oneIndex))
+        #logging.debug("indexOfLocationList : %s", str(indexOfLocationList))
 
         indexOfLocationList += 1 # add counter for reading next location From list
     listOfIndex.clear()
@@ -200,15 +202,15 @@ def searchIndexFromCharFile():
         with open(realPath, 'r') as charFile:
             numberOfRowsInCharfile = len(charFile.readlines())
             charFile.seek(0)
-            logging.debug("Total lines  in charFile file : %s", str(numberOfRowsInCharfile))
+            #logging.debug("Total lines  in charFile file : %s", str(numberOfRowsInCharfile))
             for readline in messageFile: # go through hole original message(writing by user) file line by line
-                logging.debug("Total lines  in charFile file : %s", str(numberOfRowsInCharfile))
+                #logging.debug("Total lines  in charFile file : %s", str(numberOfRowsInCharfile))
                 messagelineHandler =  readline # set one row of message to handler
                 logging.debug("messagelineHandler : %s", str(messagelineHandler))
                     
                 for charInMsgLine in messagelineHandler: # go through entire row of original message char by char and found index from
                                                             # sourceCharFile
-                    logging.debug("handled char in loop : %s", str(numberOfHandledChar))
+                    #logging.debug("number of  handled char in loop : %s", str(numberOfHandledChar))
                     
                     if numberOfHandledChar == numberOfCharHandle: # when found 3 index from one row of sourceCharFile load next row
                                                                     # of sourcecharFile by adding 1 to indexOfRowInCharFile
@@ -220,15 +222,23 @@ def searchIndexFromCharFile():
                         charFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
                         if numberOfRowsInCharfile == indexOfRowInCharFile: # end of file, start reading from first row
                             indexOfRowInCharFile = 0
-
+                       # logging.debug("indexOfRowInCharFile is : %s", str(indexOfRowInCharFile))
                         sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile] # load next sourceCharFile row after founding 3 index
                                                                                                 # from one row (index == position of one character)        
-                        logging.debug("index of row in char file : %s", str(indexOfRowInCharFile))
+                        #logging.debug("index of row in char file : %s", str(indexOfRowInCharFile))
                         lineHandled = True
                         
-                    logging.debug("handled char in loop : %s", str(numberOfHandledChar))
-                    logging.debug("char to be found : %s", str(charInMsgLine))
-                    logging.debug("startSearchingIndex  : %s", str(startSearchingIndex ))
+                    #logging.debug("handled char in loop : %s", str(numberOfHandledChar))
+                    if charInMsgLine == "\n":
+                        #logging.debug("char to be found is newline : %s", str(charInMsgLine))
+                        d = 4
+                    elif charInMsgLine == " ":
+                        #logging.debug("char to be found is space : %s", str(charInMsgLine))
+                        g = 7
+                    else:
+                      #  logging.debug("char to be found : %s", str(charInMsgLine))
+                         h = 6
+                  #  logging.debug("startSearchingIndex  : %s", str(startSearchingIndex ))
                     
                     if charInMsgLine == " " or charInMsgLine == "\t":
                         charInMsgLine = "è"
@@ -236,7 +246,7 @@ def searchIndexFromCharFile():
                         charInMsgLine = "á"
                 
                     indexInCharSourceLine = sourceCharacterlineHandler.find(charInMsgLine, startSearchingIndex) # find char index from sourceChar line
-                    logging.debug("index found : %s", str(indexInCharSourceLine))
+                    
                
                     if numberOfHandledChar == 0:
                         indexList.append(indexInCharSourceLine)
@@ -254,6 +264,9 @@ def searchIndexFromCharFile():
             indexInCharSourceLine = sourceCharacterlineHandler.find("ô", 0) # ô char means end of message, start searching from index zero of this mark 
             logging.debug("index found for ending message : %s", str(indexInCharSourceLine))
             indexList.append(indexInCharSourceLine)
+            #logging.debug("indexInCharSourceLine when finish sending  : %s", str(indexInCharSourceLine ))
+            #logging.debug("indexList when finish sending  : %s", str(indexList ))
+            #logging.debug("indexList length when finish sending  : %s", str(len(indexList) ))
             
 
         charFile.close()
@@ -327,6 +340,7 @@ def loadMessageListFromFile():
 
 def saveMessageToFile(messageList):
     destination = filePathOfFile+"\\messageFile.txt"
+    logging.debug("saveMessageToFile func start")
     with open("messageFile.txt", 'wb') as messageFile:
         pickle.dump(messageList, messageFile)
     logging.debug("messageList length : %s", str(len(messageList)))    
@@ -339,8 +353,12 @@ def saveMessageToFile(messageList):
     print(destination)
     if destination == os.path.abspath(fname):
         print("same path")
+        logging.debug("same path")
+        logging.debug("destination path : %s", str(destination)) 
     else:
         print("different path")
+        logging.debug("different path")
+        logging.debug("destination path different : %s", str(destination)) 
         shutil.copyfile("messageFile.txt", destination)
 
 def createMessage():
@@ -353,10 +371,11 @@ def main():
     
     #getPathFromUI(path)
     #printFilePathFromUI()
-    #setLogger()
-    getPathFromUI("grth")
-    getMessageFromUI("bhdghb")
-    createMessage()
+    setLogger()
+    #getPathFromUI("grth")
+    #getMessageFromUI("bhdghb")
+    #createMessage()
+    #createOneSourceCharacterList()
     
 if __name__ == "__main__":
 

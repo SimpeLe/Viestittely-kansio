@@ -16,8 +16,20 @@ def setLogger():
 
 
 def offerMessageToUI():
-    with open("Message.txt", 'r') as messageFile:
+    file = Path("Message.txt")
+    print("offer message to ui")
+    logging.debug("offer message to ui")
+    logging.debug("file path  : %s", str(file)) 
+    print(file)
+    result = file.is_file()
+    if not result:
+            print("no message file")
+            logging.debug("no message file")
+            logging.debug("file path  : %s", str(file)) 
+            return
 
+    with open("Message.txt", 'r') as messageFile:
+        
         message = messageFile.read()
         messageFile.close()
         os.remove("Message.txt") # delete message after it has been returned to UI
@@ -26,7 +38,6 @@ def offerMessageToUI():
 
 def getPathFromUI(path):
     global filePathOfFile 
-    #filePathOfFile = "C:/Users/Ville/project/Viestittely-kansio/source" 
     filePathOfFile = path
     logging.debug("filePathOfFile receiverHandler: %s", filePathOfFile)
     print(filePathOfFile)
@@ -82,21 +93,21 @@ def findCharByIndexFromSourceCharFile():
          realPath =  filePathOfFile+ "/sourceCharacterFile.txt"
          with open(realPath, 'r') as charFile:
             list = findIndexByLocationFromMessage()
-            logging.debug("index list when receiving in loop: %s", list)
-            logging.debug("index list length when receiving in loop: %s", len(list))
+            #logging.debug("index list when receiving in loop: %s", list)
+            #logging.debug("index list length when receiving in loop: %s", len(list))
             numberOfRowsInCharfile = len(charFile.readlines())
-            logging.debug("numberOfRowsInCharfile: %s", str(numberOfRowsInCharfile))
+            #logging.debug("numberOfRowsInCharfile: %s", str(numberOfRowsInCharfile))
             charFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
             sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile]
             for indexInLine in list: # go through entire index list
-                logging.debug("indexInLine when receiving in loop: %s", indexInLine)
+                #logging.debug("indexInLine when receiving in loop: %s", indexInLine)
                 if numberOfHandledIndex == numberOfIndexHandle: # find 3 index from one sourceCharFile row
                     #logging.debug("numberOfHandledIndex: %s", str(numberOfHandledIndex))
-                    logging.debug("test 1")
+                    #logging.debug("test 1")
                     charFoundByIndex = sourceCharacterlineHandler[indexInLine] # find one character from sourceCharFile row by index
-                    logging.debug("charFoundByIndex after 3 index 1: %s", charFoundByIndex)
+                    #logging.debug("charFoundByIndex after 3 index 1: %s", charFoundByIndex)
                     if charFoundByIndex == "ô": #  end of message, close file
-                        logging.debug("end of message reading when receive before loading new sourceChar row")
+                        #logging.debug("end of message reading when receive before loading new sourceChar row")
                         messageFile.close()
                         list.clear()
                         charFile.close()
@@ -108,13 +119,13 @@ def findCharByIndexFromSourceCharFile():
                         indexOfRowInCharFile = 0
                     charFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
                     sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile]
-                    logging.debug("indexOfRowInCharFile when re4ceiving: %s", str(indexOfRowInCharFile))
+                    #logging.debug("indexOfRowInCharFile when re4ceiving: %s", str(indexOfRowInCharFile))
 
 
                     charFoundByIndex = sourceCharacterlineHandler[indexInLine] # find one character from sourceCharFile row by index
-                    logging.debug("charFoundByIndex after 3 index 2: %s", charFoundByIndex)
+                    #logging.debug("charFoundByIndex after 3 index 2: %s", charFoundByIndex)
                     if charFoundByIndex == "ô": #  end of message, close file
-                        logging.debug("end of message reading when receive after loading new sourceChar row")
+                        #logging.debug("end of message reading when receive after loading new sourceChar row")
                         messageFile.close()
                         list.clear()
                         charFile.close()
@@ -129,12 +140,12 @@ def findCharByIndexFromSourceCharFile():
                 
                 if numberOfHandledIndex < 3:
                     #logging.debug("index of row in char file: %s", str(indexOfRowInCharFile))
-                    logging.debug("handled index when receiving in loop %s", str(numberOfHandledIndex))
+                    #logging.debug("handled index when receiving in loop %s", str(numberOfHandledIndex))
                     charFoundByIndex = sourceCharacterlineHandler[indexInLine] # find one character from sourceCharFile row by index
-                    logging.debug("charFoundByIndex when receiving in loop: %s", charFoundByIndex)
+                    #logging.debug("charFoundByIndex when receiving in loop: %s", charFoundByIndex)
                     if charFoundByIndex == "ô": #  end of message, close file
-                        logging.debug("end of message reading when receive")
-                        logging.debug("Index list when receiving in loop: %s", list)
+                        #logging.debug("end of message reading when receive")
+                        #logging.debug("Index list when receiving in loop: %s", list)
                         messageFile.close()
                         list.clear()
                         charFile.close()
@@ -168,9 +179,9 @@ def findIndexByLocationFromMessage():
     logging.debug("oneLocationRowlist length: %s", str(len(locationlist)))
     
     for oneLocation in locationlist: # go through  location list and find index by location from messages
-        logging.debug("oneLocation: %s", str(oneLocation))
+        #logging.debug("oneLocation: %s", str(oneLocation))
         indexFoundByLocation = messagelist[oneLocation] # index by location from message list
-        logging.debug("indexFoundByLocation: %s", str(indexFoundByLocation))
+        #logging.debug("indexFoundByLocation: %s", str(indexFoundByLocation))
         indexList.append(indexFoundByLocation)
         
     messagelist.clear() # end of location handling
@@ -205,8 +216,9 @@ def loadMessageListFromFile():
 def main():
     #findIndexByLocationFromMessage()
     setLogger()
-   # getPathFromUI("sdtgh")
-    findCharByIndexFromSourceCharFile()
+    #getPathFromUI("sdtgh")
+    #offerMessageToUI()
+    #findCharByIndexFromSourceCharFile()
 
 #setLogger()
 #findIndexByLocationFromMessage()
