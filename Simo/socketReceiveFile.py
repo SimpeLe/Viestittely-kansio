@@ -10,7 +10,7 @@ import time
 from PyQt5 import QtWidgets as qtw
 
 
-def RecvFileViaIP(port = 5001, sekuntia = 15):
+def RecvFileViaIP(port = 5001, sekuntia = 10):
     # device's IP address
     SERVER_HOST = "0.0.0.0"
     SERVER_PORT = port

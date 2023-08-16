@@ -182,7 +182,6 @@ class Cvastaanota_klikkaus(qtw.QWidget):
     # kun käyttäjä klikkaa "Vastaanota"-painiketta pura salattu viesti
     def vastaanota_klik(self):
         print("tässä kutsu vastaanota-metodia")
-#????????? jos keretään, voit tarkastaa onko hakemisto olemassa
         vastOtaPolku = self.ui.vveistintalletuspolku_lineEdit.text()
         print ("vastaanota_klik(self):ssä vastOtaPolku: ", vastOtaPolku)
         if vastOtaPolku != "" and os.path.isdir(vastOtaPolku):
@@ -200,7 +199,7 @@ class Cvastaanota_klikkaus(qtw.QWidget):
     def VastOtaViestiIP_lla(self):
         qtw.QMessageBox.information(self, \
             'IP-osoitteesi odottaa viestiä', "Odota, kunnes viesti saapuu tai odota hetki, kunnes vastaanotto päättyy. Paina OK, niin vastaanotto alkaa")
-        socRecv.RecvFileViaIP(5001, 5) #portti ja sekunnit, jotka aserveri odottaa viesti
+        socRecv.RecvFileViaIP(5001, 7) #portti ja sekunnit, jotka serveri odottaa viestiä
 
 
 # pitää matchata  widget-tyyppiin, joka on valittu designerissa
