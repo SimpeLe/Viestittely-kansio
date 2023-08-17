@@ -13,7 +13,7 @@ Viestittelijät ja koirien ystävät, jotka haluavat käyttää salattua viestin
 
 **3 Käyttötapaukset**
 
--- Millasia ryhmiä ja mitä voi tehdä (use case model)? Hlö, järjestelmä, toiminta
+Katso Github asiakirja Käyttötapaukset.
 
 
 **4 Vaatimusmäärittely**
