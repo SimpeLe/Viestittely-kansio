@@ -13,7 +13,7 @@ Viestittelijät ja koirien ystävät, jotka haluavat käyttää salattua viestin
 
 **3 Käyttötapaukset**
 
-Katso Github asiakirja Käyttötapaukset.
+Katso Github asiakirja "Viestittely käyttötapaukset"
 
 
 **4 Vaatimusmäärittely**
