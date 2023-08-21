@@ -18,6 +18,7 @@
 # - pyuic5 -x -o ui_kotisivu.py ui_kotisivu.ui 
 # - pyuic5 -x -o ui_laheta.py ui_laheta.ui
 # - pyuic5 -x -o ui_vastaanota.py ui_vastaanota.ui
+# - pyuic5 -x -o ui_kopioi.py ui_kopioi.ui
 #
 # gitbashissä isähakemistossa githubin kloonaus: 
 # git clone https://SimpeLe@github.com/SimpeLe/Viestittely-kansio
@@ -42,6 +43,7 @@ import socket
 from ui_kotisivu import Ui_MainWindow
 from ui_laheta import Ui_Form as laheta
 from ui_vastaanota import Ui_Form as vastota
+from ui_kopioi import Ui_Form as kopio
 
 import fileMessageHandler as send
 import fileReceiverHandler as pickup
@@ -49,8 +51,9 @@ import socketSendFile as socSend
 import socketReceiveFile as socRecv
 
 
-# käyttöliittymän(UI) sivu. Käyttäjä kirjoittaa viestin ja luodaan salattu viesti
-class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
+#########################################################################################################################
+# käyttöliittymän(UI) laheta-sivu. Käyttäjä kirjoittaa viestin ja luodaan salattu viesti
+class Claheta_klikkaus(qtw.QWidget): #
     def __init__(self):
         super().__init__()
         self.title = 'Viestittely-lähetä - kansioselaus'
@@ -189,6 +192,8 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
     #         return sDirectory
 
 
+
+#########################################################################################################################
 # kun käyttäjä klikkaa "vastaanota"-painiketta kotisivu-näytössä, haluaa purkaa salatun viestin
 class Cvastaanota_klikkaus(qtw.QWidget):
     def __init__(self):
@@ -200,15 +205,14 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         self.ui.vviestiselaa_pushButton.clicked.connect(self.vastota_kansio_selaus_klikkaus)        
         self.ui.vvastaanota_pushButton.clicked.connect(self.vastaanota_klik) 
         self.ui.vIP_vastaanotto_pushButton.clicked.connect(self.VastOtaViestiIP_lla) 
-        
+
+
     # kun käyttäjä klikkaa "Selaus"-painiketta, hän pääsee selaamaan kansioita
     def vastota_kansio_selaus_klikkaus(self):
         # print("tässä avaa vastota (pickup) kansio-keskustelu ikkuna")
         vastOtaHakemistoPolku = self.openPickupDirectoryNameDialog()
         # print("def vastota_kansio_selaus_klikkaus(self):ssä vastOtaHakemistoPolku: ", vastOtaHakemistoPolku)
         self.show()
-        # kirjoittaa kenttään harmaan tekstin, joka häviää, kun fokus siirtyy kenttään
-        # self.ui.lveistintalletuspolku_lineEdit.setPlaceholderText(qtc.QCoreApplication.translate("Form", "Nikke Nakkerton1"))
         self.ui.vveistintalletuspolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", vastOtaHakemistoPolku))
         self.ui.vkirjoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", vastOtaHakemistoPolku))
         self.ui.vsijoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", vastOtaHakemistoPolku))
@@ -251,6 +255,83 @@ class Cvastaanota_klikkaus(qtw.QWidget):
 
 
 
+#########################################################################################################################
+# käyttöliittymän(UI) kopioi-sivu. Käyttäjä kopio tai noutaa viestejä
+class Ckopio_Klikkaus(qtw.QWidget): 
+    def __init__(self):
+        super().__init__()
+        self.title = 'Viestittely-kopio'
+        self.ui = kopio()
+        self.ui.setupUi(self)
+        self.show()
+        self.valitse_kopio_nouda()
+        self.ui.kselaalahdekansio_pushButton.setFocus()
+        self.ui.kselaalahdekansio_pushButton.clicked.connect(self.klahdekansio_selaus_klikkaus)
+        self.ui.kselaakohdekansio_pushButton.clicked.connect(self.kkohdekansio_selaus_klikkaus)
+        self.ui.kkopio_pushButton.clicked.connect(self.kopio_klik)
+        self.ui.knouda_pushButton.clicked.connect(self.nouda_klik)
+
+
+    def valitse_kopio_nouda(self):
+        box = qtw.QMessageBox()
+        box.setIcon(qtw.QMessageBox.Question)
+        box.setWindowTitle('Kopioi tai nouda')
+        box.setText('Haluatko kopioida viestin monien joukkoon vai noutaa viestin useiden joukosta?')
+        box.setStandardButtons(qtw.QMessageBox.Yes|qtw.QMessageBox.No)
+        buttonY = box.button(qtw.QMessageBox.Yes)
+        buttonY.setText('Kopioi')
+        buttonN = box.button(qtw.QMessageBox.No)
+        buttonN.setText('Nouda')
+        box.exec_()
+        if box.clickedButton() == buttonN:
+            self.ui.knouda_pushButton.setEnabled(True)
+            self.ui.kkopio_pushButton.setEnabled(False)
+            # kirjoittaa kenttään harmaan tekstin, joka häviää, kun fokus siirtyy kenttään
+            self.ui.klahde_tdsto_lineEdit.setPlaceholderText(qtc.QCoreApplication.translate("Form", "Messages.txt"))
+            self.ui.kkohde_tdsto_lineEdit.setPlaceholderText(qtc.QCoreApplication.translate("Form", "MessageFile.txt"))
+
+    # kutsu lahde kansio-keskustelu ikkunaa
+    def klahdekansio_selaus_klikkaus(self):
+        lahdehakemistoPolku = qtw.QFileDialog.getExistingDirectory(self,"Viestittely-kopio kansio-selaus")
+        self.show()
+        self.ui.klahdepolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", lahdehakemistoPolku))
+        self.ui.kkohdepolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", lahdehakemistoPolku))
+        return lahdehakemistoPolku
+
+    # kutsu kohde kansio-keskustelu ikkunaa
+    def kkohdekansio_selaus_klikkaus(self):
+        kohdehakemistoPolku = qtw.QFileDialog.getExistingDirectory(self,"Viestittely-nouda kansio-selaus")
+        self.show()
+        self.ui.kkohdepolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", kohdehakemistoPolku))
+        return kohdehakemistoPolku
+ 
+    # kutsu tiedostojen kopiointi metodeja
+    def kopio_klik(self):
+        lahdepolku = self.ui.klahdepolku_lineEdit.text()
+        kohdepolku = self.ui.kkohdepolku_lineEdit.text()
+        # Ovatko kansiot olemassa? 
+        if os.path.isdir(lahdepolku) and os.path.isdir(kohdepolku):
+            print("tässä kutsu tiedoston kopiointia")  
+        elif os.path.isdir(lahdepolku) == False: 
+            qtw.QMessageBox.critical(self, 'Lähdetiedoston kansio puuttuu', "Valitse olemassa oleva kansiopolku")
+        elif os.path.isdir(kohdepolku) == False: 
+            qtw.QMessageBox.critical(self, 'Kohdetiedoston kansio puuttuu', "Valitse olemassa oleva kansiopolku")
+
+    # kutsu tiedostojen nouda metodeja
+    def nouda_klik(self):
+        lahdePolku = self.ui.klahdepolku_lineEdit.text()
+        kohdePolku = self.ui.kkohdepolku_lineEdit.text()
+        # Ovatko kansiot olemassa? 
+        if os.path.isdir(lahdePolku) and os.path.isdir(kohdePolku):
+            print("tässä kutsu tiedoston noutoa")  
+        elif os.path.isdir(lahdePolku) == False: 
+            qtw.QMessageBox.critical(self, 'Lähdetiedoston kansio puuttuu', "Valitse olemassa oleva kansiopolku")
+        elif os.path.isdir(kohdePolku) == False: 
+            qtw.QMessageBox.critical(self, 'Kohdetiedoston kansio puuttuu', "Valitse olemassa oleva kansiopolku")
+
+
+        
+#########################################################################################################################
 # pääsivu - kotisivu
 class Ckotisivu(qtw.QMainWindow): 
     # pitää matchata  widget-tyyppiin, joka on valittu designerissa
@@ -281,6 +362,7 @@ class Ckotisivu(qtw.QMainWindow):
             ## napin painalluksen yhdistäminen luokan metodiin ##
             self.ui.plaheta_pushButton.clicked.connect(self.show_claheta_klikkaus) 
             self.ui.pvastaanota_pushButton.clicked.connect(self.show_cvastaanota_klikkaus) 
+            self.ui.pkopio_pushButton.clicked.connect(self.show_ckopio_klikkaus) 
         else:
             qtw.QMessageBox.critical(self, 'KIRJAUTUMISVIRHE', "Kirjoita oikea käyttäjätunnus ja salasana")
         
@@ -291,6 +373,10 @@ class Ckotisivu(qtw.QMainWindow):
     def show_cvastaanota_klikkaus(self, checked):
 #        self.hide()
         self.vastotasivu = Cvastaanota_klikkaus()
+    
+    def show_ckopio_klikkaus(self, checked):
+#        self.hide()
+        self.kopioSivu = Ckopio_Klikkaus()
 
 if __name__=='__main__':
     print("main alkaa")
