@@ -9,4 +9,7 @@ pyinstaller --onefile 7.py
 
 (luodaan myös 7.spec-filen, jota voi muuttaa, esim hidden import-kohtaan voi lisätä kirjastoja)
 
+jaa projekti ja repository tarkastajalle: mikko@haltu.fi
+
+
 
