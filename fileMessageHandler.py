@@ -33,7 +33,7 @@ def checkMessageCharacter(message):
             print("illegal char ")
 
 def getMessageFromUI(message):
-
+    logging.debug("getMessageFromUI func start")
    # checkMessageCharacter(message)
     logging.debug("message from UI : %s", str(message ))
     logging.debug("message length from UI : %s", str(len(message) ))
@@ -52,7 +52,8 @@ def getMessageFromUI(message):
 
 def getPathFromUI(path):
     global filePathOfFile
-    filePathOfFile = path
+    #filePathOfFile = path
+    filePathOfFile = "C:/Users/Ville/project/Viestittely-kansio/source" 
     logging.debug("filePathOfFile : %s", filePathOfFile)
 
 def getCreationtime():
@@ -271,15 +272,50 @@ def searchIndexFromCharFile():
         charFile.close()
     messageFile.close()
     removeMessageFile()
+    indexList = addIndexWrap(indexList)
     return indexList
+
+def addIndexWrap(indexList):
+    logging.debug("addIndexWrap func start ")
+    entireList = []
+    indexWraplist = []
+    wrappedIndex = 0
+    counter = 0
+    indexListLength = 0
+    entireList = loadLocationListFromFile()
+    indexWraplist = entireList[10_000:] # get index wrap list from entire list of locationKeyList and indexWrapList
+    indexListLength = len(indexList)
+
+    logging.debug("indexListLength: %s", str(indexListLength))
+    logging.debug("indexWraplist[0]: %s", str(indexWraplist[0]))
+    logging.debug("indexWraplist[1]: %s", str(indexWraplist[1]))
+    logging.debug("indexWraplist[9998]: %s", str(indexWraplist[9998]))
+    logging.debug("indexWraplist[9999]: %s", str(indexWraplist[9999]))
+
+    for oneIndex in range(indexListLength): # go through index list and set index  wrapper
+       
+        # logging.debug("oneIndex: %s", str(oneIndex))
+        # logging.debug("original index %s", str(indexList[oneIndex]))
+        # logging.debug("Wrap index: %s", str(indexWraplist[oneIndex]))
+        # logging.debug("Index together: %s", str(wrappedIndex))
+        indexList[oneIndex] += indexWraplist[oneIndex]
+       
+        logging.debug("index after wrap: %s", str(indexList[oneIndex]))
+
+
+    return indexList
+
 
 
 def createLocationListToFile(lengthOfKey):
     """
     Create location lis for setting index to message
+    and add index wrap list to the same list
     """
     locationList = []
+    indexWrapList = []
     createdNumers = 0
+    indexListLength = 10_000
     logging.debug("createLocationListtoFile func start")
 
     file = Path(filePathOfFile+"/locationKeyFile.txt")
@@ -291,21 +327,26 @@ def createLocationListToFile(lengthOfKey):
         if difference.days > 30: # create new every month
             logging.debug("Create new locationKeyFile")
         else:
-            return
+            logging.debug("no locationKeyFile")
+            #return
+
+    indexWrapList = np.random.choice( range(0, 200), indexListLength, replace=True).tolist() 
 
     with open(filePathOfFile+"/locationKeyFile.txt", 'wb') as locationKeyFile:
         locationList = np.random.choice( range(0, 999999), lengthOfKey, replace=False).tolist() # creatue unique list on numbers (amount is lengthOfKey)
                                                                                                 # in range 0-999 999 (length of crypted message)        
-        print("locationList length : %s", str(len(locationList)))
+        print("locationList length 1: %s", str(len(locationList)))
+        locationList += indexWrapList
+        print("locationList length 2: %s", str(len(locationList)))
         pickle.dump(locationList, locationKeyFile)
-    logging.debug("locationList length : %s", str(len(locationList)))    
+      
     locationKeyFile.close()   
 
 def loadLocationListFromFile():
     """
     Load location list when creating new message
     """
-
+    logging.debug("loadLocationListFromFile func start")
     locationList = []
     
     file = Path(filePathOfFile+"/locationKeyFile.txt")
@@ -385,9 +426,10 @@ def main():
     #getPathFromUI(path)
     #printFilePathFromUI()
     setLogger()
-    #getPathFromUI("grth")
-    #getMessageFromUI("bhdghb")
-    #createMessage()
+    getPathFromUI("grth")
+    #createLocationListToFile(10_000)
+    getMessageFromUI("bhdghb")
+    createMessage()
     #createOneSourceCharacterList()
     
 if __name__ == "__main__":
