@@ -17,8 +17,7 @@ def sendFileViaIP(ip = "192.168.10.48", port = 5001, filename = "messageFile.txt
     # host = "82.181.79.115" #Ville
     # host = "www.python.org" #toimii
     host = ip
-    # the port, let's use 80, 5001, 5000, 5050, 
-    # TAI 5060, 5500 tai 65432)
+    # the port, let's use 80, 5001, 5000, 5050, 5060, 5500 tai 65432)
     # port = 5001
     # port = 80 tai 5001 #toimii sisäisessä 192-verkossa
     # the name of file we want to send, make sure it exists
@@ -31,7 +30,11 @@ def sendFileViaIP(ip = "192.168.10.48", port = 5001, filename = "messageFile.txt
 
     # Connecting to the server:
     print(f"[+] Connecting to {host}:{port}")
-    s.connect((host, port))
+    try:
+        s.connect((host, port))
+    except socket.error:
+        # print("Vastaanottaja ei vastannut")
+        return True #IP-osoite ei vastaa
     print("[+] Connected.")
 
     # send the filename and filesize

@@ -1,9 +1,10 @@
-# 20230801 14:59
+# 20230817 14:03
 # Simo-hakemistossa
 # - python -m venv env
 # seuraava käynnistää ohjelman env
 # - env\scripts\activate
 # - pip list
+# - pip freeze > requirements.txt  # pip list eli kirjastot versioineen tiedostoon
 # - pip install pyqt5 pyqt5-tools
 # - pip3 install tqdm
 # - pip install numpy
@@ -33,7 +34,7 @@ from PyQt5 import QtGui as qtg
 import os
 import re
 import string
-
+import socket
 
 # from PyQt5 import QtQuick 2.2
 # from PyQt5 import QtQuick 1.0
@@ -48,6 +49,7 @@ import socketSendFile as socSend
 import socketReceiveFile as socRecv
 
 
+# käyttöliittymän(UI) sivu. Käyttäjä kirjoittaa viestin ja luodaan salattu viesti
 class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
     def __init__(self):
         super().__init__()
@@ -74,16 +76,18 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
                 # print("kirjain: ", kirjain)
                 lahetettavaViesti = lahetettavaViesti.replace(kirjain, '_')
                 # print("lahetettavaViesti (if not sallitutMerkit:ssa):", lahetettavaViesti)
-        print ("laheta_klik(self):ssa lahetettavaViesti:", lahetettavaViesti)
+        # print ("laheta_klik(self):ssa lahetettavaViesti:", lahetettavaViesti)
 
+        # Viestin maksimi pituus ja kirjoitetun viestin pituus
         # print("lahetettavaViesti:ssä on merkkejä:", len(lahetettavaViesti))
-        # Onko viesti riittävän lyhyt?
         ViestinMaxPituus = 12 
         viestinPituus = len(lahetettavaViesti)
         if viestinPituus <= ViestinMaxPituus:
             viestiPituusOK = True
         else:
             viestiPituusOK = False
+
+        # Onko tallennuspolku olemassa? Onko viesti riittävän lyhyt? 
         if hakemistopolku != "" and os.path.isdir(hakemistopolku) \
             and lahetettavaViesti != "" and viestiPituusOK:  
             send.setLogger()
@@ -93,16 +97,43 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
             IP_LahetysValinta = qtw.QMessageBox.question(self, 'Tiedostojen kirjoitus', \
                 "Viestin ja avaimien tallennus päättyi. Haluatko lähettää viestin IP-osoitteeseen? Jos kyllä, vastaanottajan IP-serveri pitää olla päällä ", \
                 qtw.QMessageBox.Yes | qtw.QMessageBox.No, qtw.QMessageBox.No)
+            jataLahetysIkkunaAuki = True
             if IP_LahetysValinta == qtw.QMessageBox.Yes:
-                print("Lähetä viesti IP:hen")
-                socSend.sendFileViaIP("192.168.10.48", 5001, "messageFile.txt")
-            self.close()
+                # print("* Lähetä viesti IP:hen")
+                vastOttIP = self.ui.lvastaanottaja_lineEdit.text()
+                vastOttPortti = self.ui.lvastaanottajanportti_lineEdit.text()
+                try:
+                    # print("vastOttIP 2. IP muoto oikein:", vastOttIP)
+                    socket.inet_aton(vastOttIP)
+                    IPmuotoinen = True
+                except socket.error:
+                    # print("vastOttIP 3. IP muotovirhe:", vastOttIP)
+                    IPmuotoinen = False
+                # print ("vastOttPortti 1.: ", vastOttPortti)
+                if IPmuotoinen and vastOttPortti != "" and vastOttPortti.isnumeric():
+                    vastOttPortti = int(vastOttPortti)
+                    if vastOttPortti > 0 and vastOttPortti < 65535:
+                        IPeiVastaa = socSend.sendFileViaIP(vastOttIP, vastOttPortti, "messageFile.txt")
+                        if IPeiVastaa:
+                            jataLahetysIkkunaAuki = False
+                            qtw.QMessageBox.critical(self, 'IP-osoite ei vastaa', "Pyydä vastaanottajaa avaamaan IP-vastaanotto")        
+                    elif vastOttPortti < 0 or vastOttPortti > 65535:
+                        jataLahetysIkkunaAuki = False
+                        qtw.QMessageBox.critical(self, 'Portti on mahdoton', "Kirjoita mahdollinen porttinumero 1-65535")        
+                elif not(IPmuotoinen):
+                        jataLahetysIkkunaAuki = False
+                        qtw.QMessageBox.critical(self, 'IP-osoite on mahdoton', "Kirjoita mahdollinen osoite")        
+                elif vastOttPortti == "" or not(vastOttPortti.isnumeric()):
+                    jataLahetysIkkunaAuki = False
+                    qtw.QMessageBox.critical(self, 'Portti on mahdoton', "Kirjoita mahdollinen porttinumero 1-65535")        
+            if jataLahetysIkkunaAuki:
+                self.close()
         elif hakemistopolku == "" or os.path.isdir(hakemistopolku) == False: 
             qtw.QMessageBox.critical(self, 'Kansio puuttuu', "Valitse olemassa oleva tallennuspolku")
         elif lahetettavaViesti == "" or viestiPituusOK == False:
             qtw.QMessageBox.critical(self, 'Viesti puuttuu', f"Kirjoita viesti, jossa on enintään {ViestinMaxPituus} merkkiä")
         
-
+    # kutsu kansio-keskustelu ikkunaa ja täytä UI:n kansio kentät
     def kansio_selaus_klikkaus(self):
         # print("tässä avaa kansio-keskustelu ikkuna")
         hakemistoPolku = self.openSaveDirectoryNameDialog()
@@ -118,7 +149,7 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
         self.ui.lsijoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", hakemistoPolku))
         return hakemistoPolku
                 
-
+    # avaa resurssienhallinnan tyyppinen kansio-valinta-ikkuna
     def openSaveDirectoryNameDialog(self):
         # options = qtw.QFileDialog.Options()
         # options |= qtw.QFileDialog.DontUseNativeDialog
@@ -158,7 +189,7 @@ class Claheta_klikkaus(qtw.QWidget): #tiedostoselaimet
     #         return sDirectory
 
 
-# kun käyttäjä klikkaa "vastaanota"-painiketta kotisivu-näytössä
+# kun käyttäjä klikkaa "vastaanota"-painiketta kotisivu-näytössä, haluaa purkaa salatun viestin
 class Cvastaanota_klikkaus(qtw.QWidget):
     def __init__(self):
         super().__init__()
@@ -182,6 +213,7 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         self.ui.vkirjoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", vastOtaHakemistoPolku))
         self.ui.vsijoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", vastOtaHakemistoPolku))
     
+    # selaa kansioita vastaanotto-sivulla
     def openPickupDirectoryNameDialog(self):
         pickupDirName = qtw.QFileDialog.getExistingDirectory(self,"Viestittely-vastaanota kansio-selaus")
         if pickupDirName:
@@ -196,7 +228,6 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         if vastOtaPolku != "" and os.path.isdir(vastOtaPolku):
             pickup.setLogger()
             pickup.getPathFromUI(vastOtaPolku)
-            # pickup.findIndexByLocationFromMessage()
             pickup.findCharByIndexFromSourceCharFile() 
             # purettu viesti on kentässä: vviesti_plainTextEdit
             purettuviesti = pickup.offerMessageToUI()
@@ -204,15 +235,25 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         elif vastOtaPolku == "" or os.path.isdir(vastOtaPolku) == False: 
             qtw.QMessageBox.critical(self, 'Kansio puuttuu', "Valitse olemassa oleva tallennuspolku")
 
-    # käyttäjä haluaa käynnistää socket serverin viestin vastaanottamiseksi IP-osoitteella
+    # käynnistä socket serveri viestin vastaanottamiseksi IP-osoitteella
     def VastOtaViestiIP_lla(self):
-        qtw.QMessageBox.information(self, \
-            'IP-osoitteesi odottaa viestiä', "Odota, kunnes viesti saapuu tai odota hetki, kunnes vastaanotto päättyy. Paina OK, niin vastaanotto alkaa")
-        socRecv.RecvFileViaIP(5001, 7) #portti ja sekunnit, jotka serveri odottaa viestiä
+        qtw.QMessageBox.information(self, 'IP-osoitteesi odottaa viestiä', \
+            "Odota, kunnes viesti saapuu tai odota hetki, kunnes vastaanotto päättyy. Paina OK, niin vastaanotto alkaa")
+        IPvastaOtaPolku = self.ui.vveistintalletuspolku_lineEdit.text()
+        # print ("VastOtaViestiIP_lla(self):ssä IPvastaOtaPolku: ", IPvastaOtaPolku)
+        if IPvastaOtaPolku != "" and os.path.isdir(IPvastaOtaPolku):
+## ????????????? vaihda työkansio käyttäjän valitsemaksi        
+            # parametrit: socket-portti, sekunnit (jotka serveri odottaa viestiä)...
+            # ja polku, johon IP-viesti luetaa
+            socRecv.RecvFileViaIP(5001, 7, IPvastaOtaPolku) 
+        elif IPvastaOtaPolku == "" or os.path.isdir(IPvastaOtaPolku) == False: 
+            qtw.QMessageBox.critical(self, 'Kansio puuttuu', "Valitse olemassa oleva tallennuspolku")
 
 
-# pitää matchata  widget-tyyppiin, joka on valittu designerissa
+
+# pääsivu - kotisivu
 class Ckotisivu(qtw.QMainWindow): 
+    # pitää matchata  widget-tyyppiin, joka on valittu designerissa
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
@@ -221,14 +262,13 @@ class Ckotisivu(qtw.QMainWindow):
         self.vastotasivu = None
         self.show()
         self.ui.pkayttaja_lineEdit.setFocus()
-
         # napin painalluksen yhdistäminen luokan metodiin
         self.ui.pkirjaudu_pushButton.clicked.connect(self.login_click) 
-# #        self.ui.cb_checkbox.setChecked(True)
+        # self.ui.cb_checkbox.setChecked(True)
 
-
+    # tarkastetaan käyttäjätunnus ja salasana
     def login_click(self):
-#   #        if users.username == self.ui.txt_username.text() and users.password==self.ui.txt_password.text():
+        # if users.username == self.ui.txt_username.text() and users.password==self.ui.txt_password.text():
         if self.ui.pkayttaja_lineEdit.text() == "k" and self.ui.psalis_lineEdit.text() == "k":
             # print("Käyttäjä",self.ui.pkayttaja_lineEdit.text(),"sisällä")
             self.ui.plaheta_pushButton.setEnabled(True)
@@ -257,5 +297,7 @@ if __name__=='__main__':
     app = qtw.QApplication([])
     kotisivu = Ckotisivu()
     app.exec_()
+
+    
 
   

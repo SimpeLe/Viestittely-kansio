@@ -61,7 +61,7 @@ def getCreationtime():
     print("Created")
     print(os.path.getctime(file))
     print(datetime.datetime.fromtimestamp(os.path.getctime(file)))
-
+    
     today = datetime.datetime.now()
     print(today)
 
@@ -97,11 +97,10 @@ def createOneSourceCharacterList():
     # add mark for ending original message
     characters += "ô"
     
-    print(characters)
 
     # Randomize order of string
     randomString = ''.join(random.sample(characters, len(characters)))
-    print(randomString)
+
     return randomString
 
 def createSourceCharacterFile(size):
@@ -276,6 +275,9 @@ def searchIndexFromCharFile():
 
 
 def createLocationListToFile(lengthOfKey):
+    """
+    Create location lis for setting index to message
+    """
     locationList = []
     createdNumers = 0
     logging.debug("createLocationListtoFile func start")
@@ -300,6 +302,10 @@ def createLocationListToFile(lengthOfKey):
     locationKeyFile.close()   
 
 def loadLocationListFromFile():
+    """
+    Load location list when creating new message
+    """
+
     locationList = []
     
     file = Path(filePathOfFile+"/locationKeyFile.txt")
@@ -317,6 +323,10 @@ def loadLocationListFromFile():
     return locationList
 
 def createMessageListToFile(length):
+    """
+    Create message list for writing message. This list will be updated every time
+    while creting a new message
+    """
     messageList = []
     createdNumers = 0
     logging.debug("createMessageListToFile func start")
@@ -330,6 +340,9 @@ def createMessageListToFile(length):
     messageKeyFile.close()
 
 def loadMessageListFromFile():
+    """
+    Load this list to use when creting final message
+    """
     messageList = []
 
     with open ('messageFile.txt', 'rb') as messageKeyFile:
@@ -339,6 +352,10 @@ def loadMessageListFromFile():
 
 
 def saveMessageToFile(messageList):
+    """
+    Save ready message to file for sending
+    """
+
     destination = filePathOfFile+"\\messageFile.txt"
     logging.debug("saveMessageToFile func start")
     with open("messageFile.txt", 'wb') as messageFile:
@@ -346,19 +363,15 @@ def saveMessageToFile(messageList):
     logging.debug("messageList length : %s", str(len(messageList)))    
     messageFile.close()
     messageList.clear()
-    fname = "messageFile.txt"
-    print(os.path.abspath(fname))
-    print("test path")
-    print("\n")
-    print(destination)
-    if destination == os.path.abspath(fname):
+    
+    currPath = str(Path.cwd())
+    currPath =  currPath.replace('\\', '/')
+    if currPath == filePathOfFile:
         print("same path")
         logging.debug("same path")
         logging.debug("destination path : %s", str(destination)) 
     else:
         print("different path")
-        logging.debug("different path")
-        logging.debug("destination path different : %s", str(destination)) 
         shutil.copyfile("messageFile.txt", destination)
 
 def createMessage():

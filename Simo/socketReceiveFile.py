@@ -10,7 +10,7 @@ import time
 from PyQt5 import QtWidgets as qtw
 
 
-def RecvFileViaIP(port = 5001, sekuntia = 10):
+def RecvFileViaIP(port = 5001, sekuntia = 10, kohdeKansio = "C:/Tekstit"):
     # device's IP address
     SERVER_HOST = "0.0.0.0"
     SERVER_PORT = port
@@ -33,16 +33,16 @@ def RecvFileViaIP(port = 5001, sekuntia = 10):
     client_socket = ""
     try:
         # accept connection if there is any
-        print ("try")
+        # print ("try")
         client_socket, address = s.accept() 
     except socket.timeout:
-        print("except timeout")
+        # print("except timeout")
         pass        
     else:    
-        print("else")
+        # print("else")
+## ????????????? vaihda työkansio käyttäjän valitsemaksi: kohdeKansio
         # if below code is executed, that means the sender is connected
         print(f"[+] {address} is connected.")
-
         # receive the file infos
         # receive using client socket, not server socket
         received = client_socket.recv(BUFFER_SIZE).decode()
@@ -70,9 +70,10 @@ def RecvFileViaIP(port = 5001, sekuntia = 10):
         # close the client socket
         client_socket.close()
     if client_socket == "":
-        qtw.QMessageBox.information(None, 'IP-osoitteesi odottaa viestiä', f"Viestiä ei saapunut {sekuntia} sekunnissa")
+        qtw.QMessageBox.information(None, 'IP-osoitteesi odottaa viestiä', \
+            f"Viestiä ei saapunut {sekuntia} sekunnissa")
 
-    print("seuraavaksi klosaa server socket")
+    # print("seuraavaksi klosaa server socket")
     # close the server socket
     s.close()
 
