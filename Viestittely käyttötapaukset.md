@@ -1,16 +1,16 @@
-Käyttötapaus    Kirjautuminen sovellukseen
-Tavoite					Käyttäjä kirjautuu onnistuneesti sovellukseen
-Käyttäjä				Salatun viestin lähettäjä/vastaanottaja
-Esiehto					Käyttäjällä on oikeat kirjautumistunnukset
-Jälkiehto				Käyttäjä on kirjautunut sisään sovellukseen
+1.1. Käyttötapaus    Kirjautuminen sovellukseen
+1.2. Tavoite					Käyttäjä kirjautuu onnistuneesti sovellukseen
+1.3. Käyttäjä				Salatun viestin lähettäjä/vastaanottaja
+1.4. Esiehto					Käyttäjällä on oikeat kirjautumistunnukset
+1.5. Jälkiehto				Käyttäjä on kirjautunut sisään sovellukseen
 
-Käyttötapauksen kulku			Käyttäjä avaa sovelluksen
-Sovelluksen kirjautumissivu aukeaa
-Käyttäjä syöttää käyttäjätunnuksen ja salasanan
-Sovellus tarkastaa ovatko tunnus ja salasana oikeat
-Käyttäjä kirjataan sisään sovellukseen ja pääsivu aukeaa
+1.6. Käyttötapauksen kulku		- Käyttäjä avaa sovelluksen
+- Sovelluksen kirjautumissivu aukeaa
+- Käyttäjä syöttää käyttäjätunnuksen ja salasanan
+- Sovellus tarkastaa ovatko tunnus ja salasana oikeat
+- Käyttäjä kirjataan sisään sovellukseen ja pääsivu aukeaa
 
-Poikkeuksellinen toiminta		Käyttäjä antaa väärät kirjautumistiedot ja ei pääse sisään 						sovellukseen 	
+1.7. Poikkeuksellinen toiminta		Käyttäjä antaa väärät kirjautumistiedot ja ei pääse sisään 						sovellukseen 	
 
 ![kuva](https://github.com/SimpeLe/Viestittely-kansio/assets/135036998/13a832c7-b98e-4301-896b-151e0b1f2085)
 
