@@ -60,8 +60,6 @@ def loadListFromFile(filename):
     with open (realPath, 'rb') as listFile:
         currentnList = pickle.load(listFile)
 
-    logging.debug("currentnList length: %s", str(len(currentnList)))
-
     return currentnList
 
 
@@ -89,26 +87,28 @@ def findCharByIndexFromSourceCharFile():
         print("no sourcecharfile")
         return
      
+     messageExist = False
+     messageExist = checkIfMessageExist()
+     if messageExist:
+        logging.debug("there is message")
+        #messagelist = loadMessageListFromFile()
+     else:
+        logging.debug("no message: return")
+        return
+     
      logging.debug("findCharByIndexFromSourceCharFile func start again ")
      with open("Message.txt", 'w') as messageFile:
          realPath =  filePathOfFile+ "/sourceCharacterFile.txt"
          with open(realPath, 'r') as charFile:
             list = findIndexByLocationFromMessage()
-            #logging.debug("index list when receiving in loop: %s", list)
-            #logging.debug("index list length when receiving in loop: %s", len(list))
             numberOfRowsInCharfile = len(charFile.readlines())
-            #logging.debug("numberOfRowsInCharfile: %s", str(numberOfRowsInCharfile))
-            charFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
+            charFile.seek(0) #  set file iterator to zero before read line, otherwise it will raise "index out of range" error
             sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile]
             for indexInLine in list: # go through entire index list
-                #logging.debug("indexInLine when receiving in loop: %s", indexInLine)
+                
                 if numberOfHandledIndex == numberOfIndexHandle: # find 3 index from one sourceCharFile row
-                    #logging.debug("numberOfHandledIndex: %s", str(numberOfHandledIndex))
-                    #logging.debug("test 1")
                     charFoundByIndex = sourceCharacterlineHandler[indexInLine] # find one character from sourceCharFile row by index
-                    #logging.debug("charFoundByIndex after 3 index 1: %s", charFoundByIndex)
                     if charFoundByIndex == "ô": #  end of message, close file
-                        #logging.debug("end of message reading when receive before loading new sourceChar row")
                         messageFile.close()
                         list.clear()
                         charFile.close()
@@ -120,26 +120,20 @@ def findCharByIndexFromSourceCharFile():
                         indexOfRowInCharFile = 0
                     charFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
                     sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile]
-                    #logging.debug("indexOfRowInCharFile when re4ceiving: %s", str(indexOfRowInCharFile))
+                    
 
 
                     charFoundByIndex = sourceCharacterlineHandler[indexInLine] # find one character from sourceCharFile row by index
-                    #logging.debug("charFoundByIndex after 3 index 2: %s", charFoundByIndex)
+                
                     if charFoundByIndex == "ô": #  end of message, close file
-                        #logging.debug("end of message reading when receive after loading new sourceChar row")
                         messageFile.close()
                         list.clear()
                         charFile.close()
                         break
                 
                 if numberOfHandledIndex < 3:
-                    #logging.debug("index of row in char file: %s", str(indexOfRowInCharFile))
-                    #logging.debug("handled index when receiving in loop %s", str(numberOfHandledIndex))
                     charFoundByIndex = sourceCharacterlineHandler[indexInLine] # find one character from sourceCharFile row by index
-                    #logging.debug("charFoundByIndex when receiving in loop: %s", charFoundByIndex)
                     if charFoundByIndex == "ô": #  end of message, close file
-                        #logging.debug("end of message reading when receive")
-                        #logging.debug("Index list when receiving in loop: %s", list)
                         messageFile.close()
                         list.clear()
                         charFile.close()
@@ -166,23 +160,42 @@ def findIndexByLocationFromMessage():
     locationlist = [] # read list of location 
     indexList = [] # save founded index here and return list
     indexFoundByLocation = 0
-    logging.debug("findIndexByLocationFromMessage func start ")
-    messagelist = loadMessageListFromFile()
-    logging.debug(" length: %s", str(len(messagelist)))
+    messageExist = False
+    messageExist = checkIfMessageExist()
+    if messageExist:
+        logging.debug("there is message")
+        messagelist = loadMessageListFromFile()
+    else:
+        logging.debug("no message")
+        return
+    
+    
     locationlist = loadListFromFile("/locationKeyFile.txt")
     locationlist = locationlist[:10_000] # separate location list from index wrap list
-    logging.debug("oneLocationRowlist length: %s", str(len(locationlist)))
+    
     
     for oneLocation in locationlist: # go through  location list and find index by location from messages
-        #logging.debug("oneLocation: %s", str(oneLocation))
         indexFoundByLocation = messagelist[oneLocation] # index by location from message list
-        #logging.debug("indexFoundByLocation: %s", str(indexFoundByLocation))
         indexList.append(indexFoundByLocation)
         
     messagelist.clear() # end of location handling
     locationlist.clear()
     indexList = removeIndexWrap(indexList)
+    removeMessageFile() # remove message
     return indexList
+
+def removeMessageFile():
+
+    filename = "/messageFile.txt"
+    realPath = filePathOfFile+filename
+
+    logging.debug("realPath to delete: %s", str(realPath))
+
+    file = Path(realPath)
+    result = file.is_file()
+    if result:
+        logging.debug("removeMessageFile delete message file ")
+        os.remove(realPath)
 
 
 def removeIndexWrap(indexList):
@@ -198,18 +211,37 @@ def removeIndexWrap(indexList):
 
     for oneIndex in range(indexListLength): # go through index list and remove index  wrapper
         
-        wrappedIndex = indexList[oneIndex] 
-        # logging.debug("oneIndex: %s", str(oneIndex))
-        # logging.debug("index before wrap remove: %s", str(indexList[oneIndex]))
-        # logging.debug("wrapper index: %s", str(indexWraplist[oneIndex]))
-        # logging.debug("index together %s", str(wrappedIndex))
-
-
+    
         indexList[oneIndex] -= indexWraplist[oneIndex]
-        logging.debug("Index after remove wrap: %s", str(indexList[oneIndex]))
 
     return indexList
         
+def checkIfMessageExist():
+    """
+    Check if messageFile.txt file exist, if not exist do not to start handle message
+    """
+    
+    filename = "/messageFile.txt"
+    realPath = filePathOfFile+filename
+    logging.debug("realPath: %s", str(realPath))
+    file = Path(filePathOfFile+filename)
+    result = file.is_file()
+    if not result:
+        logging.debug("no file in selected folder")
+        file = Path(filename)
+        logging.debug("file messagefile.txt home path: %s", str(file))
+        result = file.is_file()
+        if result:
+            logging.debug("file in home folder")
+            return True
+        else:
+            logging.debug("no file in home folder")
+            return False
+    else:
+        logging.debug("file messagefile.txt in selected folder")
+        return True
+
+
 
 def loadMessageListFromFile():
     """
