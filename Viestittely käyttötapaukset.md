@@ -1,7 +1,7 @@
 **- 1.1. Käyttötapaus	Kirjautuminen sovellukseen**
-- __1.2. Tavoite__		Käyttäjä kirjautuu onnistuneesti sovellukseen
-- _1.3. Käyttäjä_		Salatun viestin lähettäjä/vastaanottaja
-- 1.4. Esiehto		Käyttäjällä on oikeat kirjautumistunnukset
+- **1.2. Tavoite**		Käyttäjä kirjautuu onnistuneesti sovellukseen
+- **1.3. Käyttäjä**		Salatun viestin lähettäjä/vastaanottaja
+- **1.4. Esiehto**		Käyttäjällä on oikeat kirjautumistunnukset
 - 1.5. Jälkiehto		Käyttäjä on kirjautunut sisään sovellukseen
 - 1.6. Käyttötapauksen kulku		- Käyttäjä avaa sovelluksen
                                 - Sovelluksen kirjautumissivu aukeaa
