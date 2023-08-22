@@ -20,6 +20,8 @@ Käyttötapauksen kulku:
 	6. Ohjelma kirjoittaa salausavaimen tiedostoon tikulle
  	7. Ohjelma ilmoittaa, kun salausavain kirjoitettu ja viesti lähetetty 
  	8. Käyttäjä välittää avaimen ja satunnainen numero sovitulla tavalla vastaanottajalle esim tikulla
+     ![kuva](https://github.com/SimpeLe/Viestittely-kansio/assets/135036998/5c720cf7-2158-4187-9101-8455525ed857)
+
 	
 
 3.  Kehittynyt käyttäjä vastaanottaa viestin
