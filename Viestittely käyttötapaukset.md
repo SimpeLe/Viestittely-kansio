@@ -1,11 +1,7 @@
 Käyttötapaus    Kirjautuminen sovellukseen
-
 Tavoite					Käyttäjä kirjautuu onnistuneesti sovellukseen
-
 Käyttäjä				Salatun viestin lähettäjä/vastaanottaja
-
 Esiehto					Käyttäjällä on oikeat kirjautumistunnukset
-
 Jälkiehto				Käyttäjä on kirjautunut sisään sovellukseen
 
 Käyttötapauksen kulku			Käyttäjä avaa sovelluksen
