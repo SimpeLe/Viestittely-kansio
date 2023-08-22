@@ -63,7 +63,8 @@ class Claheta_klikkaus(qtw.QWidget): #
         self.ui.lvastaanottaja_lineEdit.setFocus()
         self.ui.lviestiselaa_pushButton.clicked.connect(self.kansio_selaus_klikkaus)
         self.ui.llaheta_pushButton.clicked.connect(self.laheta_klik)
-        
+
+    # käyttäjä klikkas lähetä-painiketta. Viestin salaus, avain-tiedostojen luonti, lähetys ehkä IP:llä
     def laheta_klik(self):
         # print("tässä kutsu laheta-metodia")        
         hakemistopolku = self.ui.lveistintalletuspolku_lineEdit.text()
@@ -130,11 +131,11 @@ class Claheta_klikkaus(qtw.QWidget): #
             if jataLahetysIkkunaAuki:
                 self.close()
         elif os.path.isdir(hakemistopolku) == False: 
-            qtw.QMessageBox.critical(self, 'Kansio puuttuu', "Valitse olemassa oleva tallennuspolku")
+            qtw.QMessageBox.critical(self, 'Epäkelpo kansio', "Valitse olemassa oleva kansiopolku")
         elif hakemistopolku == "C:/":
-            qtw.QMessageBox.critical(self, 'Kansio puuttuu', "C:/ ei kelpaa. Valitse toinen tallennuspolku")
+            qtw.QMessageBox.critical(self, 'Epäkelpo kansio', "Kansioon ole ei kirjoitusoikeutta. Valitse toinen kansiopolku")
         elif viestiPituusOK == False:
-            qtw.QMessageBox.critical(self, 'Viesti puuttuu', f"Kirjoita viesti, jossa on enintään {ViestinMaxPituus} merkkiä")
+            qtw.QMessageBox.critical(self, 'Epäkelpo viesti', f"Kirjoita viesti, jossa on enintään {ViestinMaxPituus} merkkiä")
         
     # kutsu kansio-keskustelu ikkunaa ja täytä UI:n kansio kentät
     def kansio_selaus_klikkaus(self):
@@ -229,15 +230,17 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         # print("tässä kutsu vastaanota-metodia")
         vastOtaPolku = self.ui.vveistintalletuspolku_lineEdit.text()
         # print ("vastaanota_klik(self):ssä vastOtaPolku: ", vastOtaPolku)
-        if vastOtaPolku != "" and os.path.isdir(vastOtaPolku):
+        if os.path.isdir(vastOtaPolku) and vastOtaPolku != "C:/" :
             pickup.setLogger()
             pickup.getPathFromUI(vastOtaPolku)
             pickup.findCharByIndexFromSourceCharFile() 
             # purettu viesti on kentässä: vviesti_plainTextEdit
             purettuviesti = pickup.offerMessageToUI()
             self.ui.vviesti_plainTextEdit.setPlainText(purettuviesti) 
-        elif vastOtaPolku == "" or os.path.isdir(vastOtaPolku) == False: 
-            qtw.QMessageBox.critical(self, 'Kansio puuttuu', "Valitse olemassa oleva tallennuspolku")
+        elif os.path.isdir(vastOtaPolku) == False: 
+            qtw.QMessageBox.critical(self, 'Epäkelpo kansio', "Valitse olemassa oleva kansiopolku")
+        elif vastOtaPolku == "C:/" :
+            qtw.QMessageBox.critical(self, 'Epäkelpo kansio', "Kansioon ole ei kirjoitusoikeutta. Valitse toinen kansiopolku")
 
     # käynnistä socket serveri viestin vastaanottamiseksi IP-osoitteella
     def VastOtaViestiIP_lla(self):
@@ -258,8 +261,8 @@ class Cvastaanota_klikkaus(qtw.QWidget):
             vastOtaPortti = int(vastOtaPortti)
             if vastOtaPortti > 0 and vastOtaPortti < 65535:
                 IPvastOttoOdotusAika = 7 #sekuntia
-                qtw.QMessageBox.information(self, 'IP-osoitteesi odottaa viestiä', \
-                    f"Odota, kunnes viesti saapuu tai odota {IPvastOttoOdotusAika} sekuntia, kunnes vastaanotto päättyy. Paina OK, niin vastaanotto alkaa")
+                qtw.QMessageBox.information(self, 'IP-osoitteesi ja porttisi dottaa viestiä', \
+                    f"Odota, kunnes viesti saapuu tai odota {IPvastOttoOdotusAika} sekuntia. Paina OK, niin vastaanotto alkaa")
                 # parametrit: socket-portti, sekunnit (jotka serveri odottaa viestiä)...
                 # ja polku, johon IP-viesti luetaa
                 socRecv.RecvFileViaIP(vastOtaPortti, IPvastOttoOdotusAika, IPvastaOtaPolku) 
@@ -288,7 +291,7 @@ class Ckopio_Klikkaus(qtw.QWidget):
         self.ui.kkopio_pushButton.clicked.connect(self.kopio_klik)
         self.ui.knouda_pushButton.clicked.connect(self.nouda_klik)
 
-
+    # valinta-ikkuna haluaako käyttäjä kopoida vai noutaa
     def valitse_kopio_nouda(self):
         box = qtw.QMessageBox()
         box.setIcon(qtw.QMessageBox.Question)
@@ -307,7 +310,7 @@ class Ckopio_Klikkaus(qtw.QWidget):
             self.ui.klahde_tdsto_lineEdit.setPlaceholderText(qtc.QCoreApplication.translate("Form", "Messages.txt"))
             self.ui.kkohde_tdsto_lineEdit.setPlaceholderText(qtc.QCoreApplication.translate("Form", "MessageFile.txt"))
 
-    # kutsu lahde kansio-keskustelu ikkunaa
+    # kutsu lahde-tiedoston kansio-keskustelu ikkunaa
     def klahdekansio_selaus_klikkaus(self):
         lahdehakemistoPolku = qtw.QFileDialog.getExistingDirectory(self,"Viestittely-kopio kansio-selaus")
         self.show()
@@ -315,7 +318,7 @@ class Ckopio_Klikkaus(qtw.QWidget):
         self.ui.kkohdepolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", lahdehakemistoPolku))
         return lahdehakemistoPolku
 
-    # kutsu kohde kansio-keskustelu ikkunaa
+    # kutsu kohde-tiedoston kansio-keskustelu ikkunaa
     def kkohdekansio_selaus_klikkaus(self):
         kohdehakemistoPolku = qtw.QFileDialog.getExistingDirectory(self,"Viestittely-nouda kansio-selaus")
         self.show()
@@ -330,9 +333,9 @@ class Ckopio_Klikkaus(qtw.QWidget):
         if os.path.isdir(lahdepolku) and os.path.isdir(kohdepolku):
             print("tässä kutsu tiedoston kopiointia")  
         elif os.path.isdir(lahdepolku) == False: 
-            qtw.QMessageBox.critical(self, 'Lähdetiedoston kansio puuttuu', "Valitse olemassa oleva kansiopolku")
+            qtw.QMessageBox.critical(self, 'Lähdetiedoston epäkelpo kansio', "Valitse olemassa oleva kansiopolku")
         elif os.path.isdir(kohdepolku) == False: 
-            qtw.QMessageBox.critical(self, 'Kohdetiedoston kansio puuttuu', "Valitse olemassa oleva kansiopolku")
+            qtw.QMessageBox.critical(self, 'Kohdetiedoston epäkelpo kansio', "Valitse olemassa oleva kansiopolku")
 
     # kutsu tiedostojen nouda metodeja
     def nouda_klik(self):
@@ -342,15 +345,16 @@ class Ckopio_Klikkaus(qtw.QWidget):
         if os.path.isdir(lahdePolku) and os.path.isdir(kohdePolku):
             print("tässä kutsu tiedoston noutoa")  
         elif os.path.isdir(lahdePolku) == False: 
-            qtw.QMessageBox.critical(self, 'Lähdetiedoston kansio puuttuu', "Valitse olemassa oleva kansiopolku")
+            qtw.QMessageBox.critical(self, 'Lähdetiedoston epäkelpo kansio', "Valitse olemassa oleva kansiopolku")
         elif os.path.isdir(kohdePolku) == False: 
-            qtw.QMessageBox.critical(self, 'Kohdetiedoston kansio puuttuu', "Valitse olemassa oleva kansiopolku")
+            qtw.QMessageBox.critical(self, 'Kohdetiedoston epäkelpo kansio', "Valitse olemassa oleva kansiopolku")
 
 
         
 #########################################################################################################################
 # pääsivu - kotisivu
 class Ckotisivu(qtw.QMainWindow): 
+    # 
     # pitää matchata  widget-tyyppiin, joka on valittu designerissa
     def __init__(self):
         super().__init__()
