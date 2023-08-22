@@ -1,6 +1,6 @@
-- 1.1. Käyttötapaus	Kirjautuminen sovellukseen
-- 1.2. Tavoite		Käyttäjä kirjautuu onnistuneesti sovellukseen
-- 1.3. Käyttäjä		Salatun viestin lähettäjä/vastaanottaja
+**- 1.1. Käyttötapaus	Kirjautuminen sovellukseen**
+- _1.2. Tavoite_		Käyttäjä kirjautuu onnistuneesti sovellukseen
+- _1.3. Käyttäjä_		Salatun viestin lähettäjä/vastaanottaja
 - 1.4. Esiehto		Käyttäjällä on oikeat kirjautumistunnukset
 - 1.5. Jälkiehto		Käyttäjä on kirjautunut sisään sovellukseen
 - 1.6. Käyttötapauksen kulku		- Käyttäjä avaa sovelluksen
@@ -16,7 +16,7 @@ sovellukseen
 
 
 
-- 2.1. Käyttötapaus	Viestin lähettäminen ensimmäisellä kerralla
+**- 2.1. Käyttötapaus	Viestin lähettäminen ensimmäisellä kerralla**
 - 2.2. Tavoite		Käyttäjä lähettää salatun viestin
 - 2.3. Käyttäjä		Salatun viestin lähettäjä
 - 2.4. Esiehto		Käyttäjä osaa kansiorakenteen tietokoneessa		
@@ -34,7 +34,7 @@ tietokoneesta, tiedostot eivät tallennu kansioon
 
 
 
-- 3.1. Käyttötapaus 				Viestin vastaanottaminen
+**- 3.1. Käyttötapaus 				Viestin vastaanottaminen**
 - 3.2. Tavoite					Käyttäjä vastaanottaa salatun viestin
 - 3.3. Käyttäjä				Salatun viestin vastaanottaja
 - 3.4. Esiehto					Käyttäjä osaa kansiorakenteen tietokoneessa		
