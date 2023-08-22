@@ -21,11 +21,11 @@ sovellukseen
 2.3. Käyttäjä		Salatun viestin lähettäjä
 2.4. Esiehto		Käyttäjä osaa kansiorakenteen tietokoneessa		
 2.5. Jälkiehto		Käyttäjä on lähettänyt viestin onnistuneesti	
-2.6. Käyttötapauksen kulku * Käyttäjä syöttää vastaanottajan IP-osoitteen “lähetä” sivulla
-* Käyttäjä valitsee kansion mihin salausavaimet kirjoitetaan
-* Käyttäjä kirjoittaa viestin ja valitsee “lähetä”
-* Sovellus luo salausavaimet ja salatun viestin
-* Sovellus lähettää salatun viestin 
+2.6. Käyttötapauksen kulku - Käyttäjä syöttää vastaanottajan IP-osoitteen “lähetä” sivulla
+- Käyttäjä valitsee kansion mihin salausavaimet kirjoitetaan
+- Käyttäjä kirjoittaa viestin ja valitsee “lähetä”
+- Sovellus luo salausavaimet ja salatun viestin
+- Sovellus lähettää salatun viestin 
 2.7. Poikkeuksellinen toiminta		Käyttäjä valitsee kansioksi muistitikun mutta poistaa sen
 tietokoneesta, tiedostot eivät tallennu kansioon
 
