@@ -84,15 +84,13 @@ class Claheta_klikkaus(qtw.QWidget): #
         # Viestin maksimi pituus ja kirjoitetun viestin pituus
         # print("lahetettavaViesti:ssä on merkkejä:", len(lahetettavaViesti))
         ViestinMaxPituus = 12 
-        viestinPituus = len(lahetettavaViesti)
-        if viestinPituus <= ViestinMaxPituus:
+        if lahetettavaViesti != "" and len(lahetettavaViesti) <= ViestinMaxPituus:
             viestiPituusOK = True
         else:
             viestiPituusOK = False
-
         # Onko tallennuspolku olemassa? Onko viesti riittävän lyhyt? 
-        if hakemistopolku != "" and os.path.isdir(hakemistopolku) \
-            and lahetettavaViesti != "" and viestiPituusOK:  
+        if os.path.isdir(hakemistopolku) and hakemistopolku != "C:/" \
+            and viestiPituusOK:  
             send.setLogger()
             send.getPathFromUI(hakemistopolku)
             send.getMessageFromUI(lahetettavaViesti)
@@ -131,9 +129,11 @@ class Claheta_klikkaus(qtw.QWidget): #
                     qtw.QMessageBox.critical(self, 'Portti on mahdoton', "Kirjoita mahdollinen porttinumero 1-65535")        
             if jataLahetysIkkunaAuki:
                 self.close()
-        elif hakemistopolku == "" or os.path.isdir(hakemistopolku) == False: 
+        elif os.path.isdir(hakemistopolku) == False: 
             qtw.QMessageBox.critical(self, 'Kansio puuttuu', "Valitse olemassa oleva tallennuspolku")
-        elif lahetettavaViesti == "" or viestiPituusOK == False:
+        elif hakemistopolku == "C:/":
+            qtw.QMessageBox.critical(self, 'Kansio puuttuu', "C:/ ei kelpaa. Valitse toinen tallennuspolku")
+        elif viestiPituusOK == False:
             qtw.QMessageBox.critical(self, 'Viesti puuttuu', f"Kirjoita viesti, jossa on enintään {ViestinMaxPituus} merkkiä")
         
     # kutsu kansio-keskustelu ikkunaa ja täytä UI:n kansio kentät
@@ -241,17 +241,34 @@ class Cvastaanota_klikkaus(qtw.QWidget):
 
     # käynnistä socket serveri viestin vastaanottamiseksi IP-osoitteella
     def VastOtaViestiIP_lla(self):
-        qtw.QMessageBox.information(self, 'IP-osoitteesi odottaa viestiä', \
-            "Odota, kunnes viesti saapuu tai odota hetki, kunnes vastaanotto päättyy. Paina OK, niin vastaanotto alkaa")
+        vastOtaPortti = self.ui.vvastaanottajanportti_lineEdit.text()
         IPvastaOtaPolku = self.ui.vveistintalletuspolku_lineEdit.text()
         # print ("VastOtaViestiIP_lla(self):ssä IPvastaOtaPolku: ", IPvastaOtaPolku)
-        if IPvastaOtaPolku != "" and os.path.isdir(IPvastaOtaPolku):
-## ????????????? vaihda työkansio käyttäjän valitsemaksi        
-            # parametrit: socket-portti, sekunnit (jotka serveri odottaa viestiä)...
-            # ja polku, johon IP-viesti luetaa
-            socRecv.RecvFileViaIP(5001, 7, IPvastaOtaPolku) 
-        elif IPvastaOtaPolku == "" or os.path.isdir(IPvastaOtaPolku) == False: 
-            qtw.QMessageBox.critical(self, 'Kansio puuttuu', "Valitse olemassa oleva tallennuspolku")
+        kotiKansio = os.getcwd()
+        # kotiKansio = kotiKansio.replace("\\","/")
+        # print ("main kotiKansio:", kotiKansio)
+        # print ("main kohdeKansio:", IPvastaOtaPolku)
+        # os.chdir(IPvastaOtaPolku)
+        # tyoKansio = os.getcwd()
+        # print ("main tyokansio:", tyoKansio)
+        # jos UI:ssä kansiopolku on epäkelpo käytä ohjelman kotikansiota
+        if os.path.isdir(IPvastaOtaPolku) == False:
+            IPvastaOtaPolku = kotiKansio
+        if vastOtaPortti.isnumeric():
+            vastOtaPortti = int(vastOtaPortti)
+            if vastOtaPortti > 0 and vastOtaPortti < 65535:
+                IPvastOttoOdotusAika = 7 #sekuntia
+                qtw.QMessageBox.information(self, 'IP-osoitteesi odottaa viestiä', \
+                    f"Odota, kunnes viesti saapuu tai odota {IPvastOttoOdotusAika} sekuntia, kunnes vastaanotto päättyy. Paina OK, niin vastaanotto alkaa")
+                # parametrit: socket-portti, sekunnit (jotka serveri odottaa viestiä)...
+                # ja polku, johon IP-viesti luetaa
+                socRecv.RecvFileViaIP(vastOtaPortti, IPvastOttoOdotusAika, IPvastaOtaPolku) 
+            elif vastOtaPortti < 0 or vastOtaPortti > 65535:
+                qtw.QMessageBox.critical(self, 'Portti on mahdoton', "Kirjoita mahdollinen porttinumero 1-65535")
+        elif not (vastOtaPortti.isnumeric()):
+            qtw.QMessageBox.critical(self, 'Portti on mahdoton', "Kirjoita mahdollinen porttinumero 1-65535")
+        # tyoKansio = os.getcwd()
+        # print ("main tyokansio2:", tyoKansio)
 
 
 

@@ -24,7 +24,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>0</y>
+     <y>-20</y>
      <width>801</width>
      <height>541</height>
     </rect>
@@ -535,7 +535,7 @@
      <string>vastaanottajan portti esim 80, 5000, 5001, 5050, 5060, 5500, 65432</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lvastaanottaja_label_2">
+   <widget class="QLabel" name="lvastaanottajanportti_label">
     <property name="geometry">
      <rect>
       <x>20</x>

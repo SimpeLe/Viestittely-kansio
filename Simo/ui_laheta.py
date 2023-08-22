@@ -19,7 +19,7 @@ class Ui_Form(object):
         icon.addPixmap(QtGui.QPixmap("cards.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Form.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(Form)
-        self.centralwidget.setGeometry(QtCore.QRect(0, 0, 801, 541))
+        self.centralwidget.setGeometry(QtCore.QRect(0, -20, 801, 541))
         self.centralwidget.setToolTipDuration(2)
         self.centralwidget.setObjectName("centralwidget")
         self.lylaotsikko_label = QtWidgets.QLabel(self.centralwidget)
@@ -169,17 +169,17 @@ class Ui_Form(object):
         self.lvastaanottajanportti_lineEdit.setText("")
         self.lvastaanottajanportti_lineEdit.setMaxLength(5)
         self.lvastaanottajanportti_lineEdit.setObjectName("lvastaanottajanportti_lineEdit")
-        self.lvastaanottaja_label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.lvastaanottaja_label_2.setGeometry(QtCore.QRect(20, 160, 191, 31))
+        self.lvastaanottajanportti_label = QtWidgets.QLabel(self.centralwidget)
+        self.lvastaanottajanportti_label.setGeometry(QtCore.QRect(20, 160, 191, 31))
         font = QtGui.QFont()
         font.setPointSize(14)
-        self.lvastaanottaja_label_2.setFont(font)
-        self.lvastaanottaja_label_2.setObjectName("lvastaanottaja_label_2")
+        self.lvastaanottajanportti_label.setFont(font)
+        self.lvastaanottajanportti_label.setObjectName("lvastaanottajanportti_label")
         self.lvastaanottaja_label.setBuddy(self.lvastaanottaja_lineEdit)
         self.lviesti_label.setBuddy(self.lveistintalletuspolku_lineEdit)
         self.lkirjoitusavain_label.setBuddy(self.lkirjoitusavain_tdsto_lineEdit)
         self.lsijoitusavain_label.setBuddy(self.lsijoitusavain_tdsto_lineEdit)
-        self.lvastaanottaja_label_2.setBuddy(self.lvastaanottajanportti_lineEdit)
+        self.lvastaanottajanportti_label.setBuddy(self.lvastaanottajanportti_lineEdit)
 
         self.retranslateUi(Form)
         self.lperu_pushButton.clicked.connect(Form.close) # type: ignore
@@ -231,7 +231,7 @@ class Ui_Form(object):
         self.lviestiselaa_pushButton.setShortcut(_translate("Form", "Alt+S"))
         self.lvastaanottajanportti_lineEdit.setToolTip(_translate("Form", "vastaanottajan portti esim 80, 5000, 5001, 5050, 5060, 5500, 65432"))
         self.lvastaanottajanportti_lineEdit.setPlaceholderText(_translate("Form", "vastaanottajan portti esim 80, 5000, 5001, 5050, 5060, 5500, 65432"))
-        self.lvastaanottaja_label_2.setText(_translate("Form", "Vastaanottajan portti:"))
+        self.lvastaanottajanportti_label.setText(_translate("Form", "Vastaanottajan portti:"))
 
 
 if __name__ == "__main__":

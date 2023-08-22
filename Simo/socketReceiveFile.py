@@ -24,6 +24,15 @@ def RecvFileViaIP(port = 5001, sekuntia = 10, kohdeKansio = "C:/Tekstit"):
     # bind the socket to our local address
     s.bind((SERVER_HOST, SERVER_PORT))
 
+    # laita kotihakemisto talteen ja siirry kohdekansioon
+    kotiKansio = os.getcwd()
+    # print ("socketReceiveFile kotiKansio:", kotiKansio)
+    # print ("socketReceiveFile kohdeKansio:", kohdeKansio)
+    os.chdir(kohdeKansio)
+    # tyoKansio = os.getcwd()
+    # print ("socketReceiveFile tyokansio:", tyoKansio)
+
+    
     # enabling our server to accept connections
     # 5 here is the number of unaccepted connections that
     # the system will allow before refusing new connections
@@ -40,7 +49,6 @@ def RecvFileViaIP(port = 5001, sekuntia = 10, kohdeKansio = "C:/Tekstit"):
         pass        
     else:    
         # print("else")
-## ????????????? vaihda työkansio käyttäjän valitsemaksi: kohdeKansio
         # if below code is executed, that means the sender is connected
         print(f"[+] {address} is connected.")
         # receive the file infos
@@ -73,9 +81,14 @@ def RecvFileViaIP(port = 5001, sekuntia = 10, kohdeKansio = "C:/Tekstit"):
         qtw.QMessageBox.information(None, 'IP-osoitteesi odottaa viestiä', \
             f"Viestiä ei saapunut {sekuntia} sekunnissa")
 
+    os.chdir(kotiKansio)
     # print("seuraavaksi klosaa server socket")
     # close the server socket
     s.close()
 
+if __name__=='__main__':
+    app = qtw.QApplication([])
+    kotisivu = RecvFileViaIP()
+    app.exec_()
 
 

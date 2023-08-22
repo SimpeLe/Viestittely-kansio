@@ -135,18 +135,37 @@ class Ui_Form(object):
         font.setPointSize(12)
         self.vIP_vastaanotto_pushButton.setFont(font)
         self.vIP_vastaanotto_pushButton.setObjectName("vIP_vastaanotto_pushButton")
+        self.vvastaanottajanportti_lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.vvastaanottajanportti_lineEdit.setGeometry(QtCore.QRect(210, 130, 291, 31))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.vvastaanottajanportti_lineEdit.setFont(font)
+        self.vvastaanottajanportti_lineEdit.setStatusTip("")
+        self.vvastaanottajanportti_lineEdit.setText("")
+        self.vvastaanottajanportti_lineEdit.setMaxLength(5)
+        self.vvastaanottajanportti_lineEdit.setObjectName("vvastaanottajanportti_lineEdit")
+        self.vvastaanottajanportti_label = QtWidgets.QLabel(self.centralwidget)
+        self.vvastaanottajanportti_label.setGeometry(QtCore.QRect(20, 130, 191, 31))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.vvastaanottajanportti_label.setFont(font)
+        self.vvastaanottajanportti_label.setObjectName("vvastaanottajanportti_label")
+        self.vvastaanottajanportti_label.setBuddy(self.vvastaanottajanportti_lineEdit)
 
         self.retranslateUi(Form)
         self.vperu_pushButton.clicked.connect(Form.close) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.vvastaanottajanportti_lineEdit, self.vviestiselaa_pushButton)
+        Form.setTabOrder(self.vviestiselaa_pushButton, self.vviesti_plainTextEdit)
+        Form.setTabOrder(self.vviesti_plainTextEdit, self.vvastaanota_pushButton)
+        Form.setTabOrder(self.vvastaanota_pushButton, self.vperu_pushButton)
+        Form.setTabOrder(self.vperu_pushButton, self.vIP_vastaanotto_pushButton)
+        Form.setTabOrder(self.vIP_vastaanotto_pushButton, self.vveistintalletuspolku_lineEdit)
         Form.setTabOrder(self.vveistintalletuspolku_lineEdit, self.vsalattu_tdsto_lineEdit)
-        Form.setTabOrder(self.vsalattu_tdsto_lineEdit, self.vviesti_plainTextEdit)
-        Form.setTabOrder(self.vviesti_plainTextEdit, self.vkirjoitusavainpolku_lineEdit)
+        Form.setTabOrder(self.vsalattu_tdsto_lineEdit, self.vkirjoitusavainpolku_lineEdit)
         Form.setTabOrder(self.vkirjoitusavainpolku_lineEdit, self.vkirjoitusavain_tdsto_lineEdit)
         Form.setTabOrder(self.vkirjoitusavain_tdsto_lineEdit, self.vsijoitusavainpolku_lineEdit)
         Form.setTabOrder(self.vsijoitusavainpolku_lineEdit, self.vsijoitusavain_tdsto_lineEdit)
-        Form.setTabOrder(self.vsijoitusavain_tdsto_lineEdit, self.vvastaanota_pushButton)
-        Form.setTabOrder(self.vvastaanota_pushButton, self.vperu_pushButton)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -182,6 +201,9 @@ class Ui_Form(object):
         self.vIP_vastaanotto_pushButton.setToolTip(_translate("Form", "Avaa palvelun, joka kuuntelee IP:llä tulevaa viestiä"))
         self.vIP_vastaanotto_pushButton.setText(_translate("Form", "IP:n kuuntelu"))
         self.vIP_vastaanotto_pushButton.setShortcut(_translate("Form", "Alt+I"))
+        self.vvastaanottajanportti_lineEdit.setToolTip(_translate("Form", "vastaanottajan portti esim 80, 5000, 5001, 5050, 5060, 5500, 65432"))
+        self.vvastaanottajanportti_lineEdit.setPlaceholderText(_translate("Form", "vastaanottajan portti esim 80, 5000, 5001, 5050, 5060, 5500, 65432"))
+        self.vvastaanottajanportti_label.setText(_translate("Form", "Vastaanottajan portti:"))
 
 
 if __name__ == "__main__":

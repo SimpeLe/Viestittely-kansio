@@ -406,18 +406,72 @@
      <string>Alt+I</string>
     </property>
    </widget>
+   <widget class="QLineEdit" name="vvastaanottajanportti_lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>130</y>
+      <width>291</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>vastaanottajan portti esim 80, 5000, 5001, 5050, 5060, 5500, 65432</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="maxLength">
+     <number>5</number>
+    </property>
+    <property name="placeholderText">
+     <string>vastaanottajan portti esim 80, 5000, 5001, 5050, 5060, 5500, 65432</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="vvastaanottajanportti_label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>130</y>
+      <width>191</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Vastaanottajan portti:</string>
+    </property>
+    <property name="buddy">
+     <cstring>vvastaanottajanportti_lineEdit</cstring>
+    </property>
+   </widget>
   </widget>
  </widget>
  <tabstops>
+  <tabstop>vvastaanottajanportti_lineEdit</tabstop>
+  <tabstop>vviestiselaa_pushButton</tabstop>
+  <tabstop>vviesti_plainTextEdit</tabstop>
+  <tabstop>vvastaanota_pushButton</tabstop>
+  <tabstop>vperu_pushButton</tabstop>
+  <tabstop>vIP_vastaanotto_pushButton</tabstop>
   <tabstop>vveistintalletuspolku_lineEdit</tabstop>
   <tabstop>vsalattu_tdsto_lineEdit</tabstop>
-  <tabstop>vviesti_plainTextEdit</tabstop>
   <tabstop>vkirjoitusavainpolku_lineEdit</tabstop>
   <tabstop>vkirjoitusavain_tdsto_lineEdit</tabstop>
   <tabstop>vsijoitusavainpolku_lineEdit</tabstop>
   <tabstop>vsijoitusavain_tdsto_lineEdit</tabstop>
-  <tabstop>vvastaanota_pushButton</tabstop>
-  <tabstop>vperu_pushButton</tabstop>
  </tabstops>
  <resources/>
  <connections>
