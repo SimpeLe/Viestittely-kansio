@@ -4,10 +4,10 @@
 - 1.4. Esiehto		Käyttäjällä on oikeat kirjautumistunnukset
 - 1.5. Jälkiehto		Käyttäjä on kirjautunut sisään sovellukseen
 - 1.6. Käyttötapauksen kulku		- Käyttäjä avaa sovelluksen
-- Sovelluksen kirjautumissivu aukeaa
-- Käyttäjä syöttää käyttäjätunnuksen ja salasanan
-- Sovellus tarkastaa ovatko tunnus ja salasana oikeat
-- Käyttäjä kirjataan sisään sovellukseen ja pääsivu aukeaa
+                                - Sovelluksen kirjautumissivu aukeaa
+                                - Käyttäjä syöttää käyttäjätunnuksen ja salasanan
+                                - Sovellus tarkastaa ovatko tunnus ja salasana oikeat
+                                - Käyttäjä kirjataan sisään sovellukseen ja pääsivu aukeaa
 
 - 1.7. Poikkeuksellinen toiminta		Käyttäjä antaa väärät kirjautumistiedot ja ei pääse sisään
 sovellukseen 	
