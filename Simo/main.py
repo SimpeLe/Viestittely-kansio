@@ -190,14 +190,14 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         IPvastaOtaPolku = self.ui.vveistintalletuspolku_lineEdit.text()
         # print ("VastOtaViestiIP_lla(self):ssä IPvastaOtaPolku: ", IPvastaOtaPolku)
         kotiKansio = os.getcwd()
-        print ("main kotiKansio:", kotiKansio)
+        # print ("main kotiKansio:", kotiKansio)
         # kotiKansio = kotiKansio.replace("\\","/")
         # print ("main kotiKansio:", kotiKansio)
         # print ("main kohdeKansio:", IPvastaOtaPolku)
         # os.chdir(IPvastaOtaPolku)
-        tyoKansio = os.getcwd()
+        # tyoKansio = os.getcwd()
         # print ("main tyoKansio:", tyoKansio)
-        print ("main tyoKansio:", tyoKansio)
+        # print ("main tyoKansio:", tyoKansio)
         # jos UI:ssä kansiopolku on epäkelpo käytä ohjelman kotikansiota
         if os.path.isdir(IPvastaOtaPolku) == False:
             IPvastaOtaPolku = kotiKansio
@@ -343,7 +343,7 @@ class Ckotisivu(qtw.QMainWindow):
         self.kopioSivu = Ckopio_Klikkaus()
 
 if __name__=='__main__':
-    print("main alkaa")
+    # print("main alkaa")
     app = qtw.QApplication([])
     kotisivu = Ckotisivu()
     app.exec_()
