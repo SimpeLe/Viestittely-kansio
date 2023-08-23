@@ -176,9 +176,12 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         if os.path.isdir(vastOtaPolku) and vastOtaPolku != "C:/" :
             pickup.setLogger()
             pickup.getPathFromUI(vastOtaPolku)
-            pickup.findCharByIndexFromSourceCharFile() 
+            pickup.findCharByIndexFromSourceCharFile()
             purettuviesti = pickup.offerMessageToUI()
             self.ui.vviesti_plainTextEdit.setPlainText(purettuviesti) 
+            if purettuviesti == "" or purettuviesti == None:
+                    qtw.QMessageBox.critical(self, 'Epäkelpo kansio', \
+                        "Kansiossa ei ole salattua viestiä tai viesti on tuhottu, kun se on jo luettu")
         elif os.path.isdir(vastOtaPolku) == False: 
             qtw.QMessageBox.critical(self, 'Epäkelpo kansio', "Valitse olemassa oleva kansiopolku")
         elif vastOtaPolku == "C:/" :
