@@ -339,7 +339,7 @@ class Ckotisivu(qtw.QMainWindow):
     
     def show_ckopio_klikkaus(self, checked):
 #        self.hide()
-        self.kopioSivu = Ckopio_Klikkaus()
+        self.kopioSivu = Ckopio_Klikkaus() 
 
 if __name__=='__main__':
     print("main alkaa")
