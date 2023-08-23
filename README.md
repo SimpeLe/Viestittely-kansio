@@ -1,11 +1,11 @@
-**Python TYPO4 kevät 2023 Viestittely-projektin kuvaus.**
+**Python TYPO4 kevät 2023 Viestittely-ohjelman kuvaus**
 
-Viestittely-ohjelma käytetään viestien salaamiseen. Lähettäjä ja vastaanottaja käyttävät saman ohjelman eri sivuja. Lähettäjä voi lähettää viestin vastaanottajan IP-osoitteseen ja portiin, jos vastaanottajan reitittimessä on portti avattu. Viestissä voi käyttää amerikkalaista (ASCII) tai suomalaista (åäö) merkistöä. 
+Viestittely-ohjelma käytetään viestien salaamiseen. Lähettäjä ja vastaanottaja käyttävät saman ohjelman eri sivuja. Lähettäjä voi lähettää viestin vastaanottajan IP-osoitteseen ja porttiin, jos vastaanottajan reitittimessä on portti avattu. Viestissä voi käyttää amerikkalaista (ASCII) tai suomalaista (åäö) merkistöä. 
 
 Viestittely-ohjelma luo lähetyksessä salatun viesti-tiedoston ja kaksi avain-tiedostoa. Avaimet annetaan vastaanottajalle esim tikulla tai postitse. Itse salatun viestin voi lähettää esim ohjelmilla Signal, Telegram, Wickr, Outlookilla.
 
 Ohjelma tiedostoja ovat: fileMessageHandler.py, fileReceiverHandler.py, main.py, socketReceiveFile.py, socketSendFile.py. 23.8.2023 Python versio on 3.11.4.
-- main.py, käynnistä Viestittely-ohjelma tästä tiedostosta.
+- main.py, käynnistä Viestittely-ohjelma tästä tiedostosta. Ohjelman käyttäjä tunnus on 'k' ja salasana 'k'. 
 
 Jos ajat ohjelmaa Pythonilla, pitää asentaa seuraavat kirjastot.
 - pip install pyqt5 pyqt5-tools
