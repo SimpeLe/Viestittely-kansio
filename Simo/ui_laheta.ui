@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Viestittely-lähetä</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>cards.ico</normaloff>cards.ico</iconset>
+  </property>
+  <property name="toolTip">
+   <string>Vie kursori haluamaasi kenttään tai painikkeelle, niin näet vihjeen.</string>
+  </property>
+  <widget class="QWidget" name="centralwidget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>-20</y>
+     <width>801</width>
+     <height>541</height>
+    </rect>
+   </property>
+   <property name="toolTipDuration">
+    <number>2</number>
+   </property>
+   <widget class="QLabel" name="lylaotsikko_label">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>20</y>
+      <width>251</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Viestittely-lähetä</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lvastaanottaja_label">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>120</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Vastaanottajan IP:</string>
+    </property>
+    <property name="buddy">
+     <cstring>lvastaanottaja_lineEdit</cstring>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lviesti_label">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>200</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Viesti:</string>
+    </property>
+    <property name="buddy">
+     <cstring>lveistintalletuspolku_lineEdit</cstring>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="llaheta_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>510</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>lähetä viesti, ALT+L</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="text">
+     <string>Lähetä</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>laheta.png</normaloff>laheta.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>32</width>
+      <height>32</height>
+     </size>
+    </property>
+    <property name="shortcut">
+     <string>Alt+L</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="lperu_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>510</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>peru ja siirry takaisin kotisivulle, ALT+P</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string>Peru</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>peru.jpg</normaloff>peru.jpg</iconset>
+    </property>
+    <property name="shortcut">
+     <string>Alt+P</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lvastaanottaja_lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>120</y>
+      <width>291</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>vastaanottajan IP</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="maxLength">
+     <number>16</number>
+    </property>
+    <property name="placeholderText">
+     <string>vastaanottajan ip esim 127.0.0.25</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lsalattu_tdsto_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>200</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="toolTip">
+     <string>salatun viesti-tiedoston nimi</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>MessageFile.txt</string>
+    </property>
+    <property name="clearButtonEnabled">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lveistintalletuspolku_lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>200</y>
+      <width>291</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>salatun viestin talletuspolku</string>
+    </property>
+    <property name="toolTipDuration">
+     <number>-1</number>
+    </property>
+    <property name="statusTip">
+     <string comment="StatusTip-disambiquation viestin talletuspolku " extracomment="StatusTip-comment viestin talletuspolku ">StatusTip viestin talletuspolku</string>
+    </property>
+    <property name="whatsThis">
+     <string comment="whatsThis-disambiquation viestin talletuspolku " extracomment="whatsThis-comment viestin talletuspolku ">whatsThis viestin talletuspolku</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>viestin talletuspolku</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lsijoitusavainpolku_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>430</y>
+      <width>281</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="toolTip">
+     <string>sijoitusavaimen talletuspolku</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>sijoitusavaimen tallennuspolku</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lkirjoitusavainpolku_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>390</y>
+      <width>281</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="toolTip">
+     <string>kirjoitusavaimen talletuspolku</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>kirjoitusavaimen tallennuspolku</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lkirjoitusavain_label">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>390</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Kirjoitusavain:</string>
+    </property>
+    <property name="buddy">
+     <cstring>lkirjoitusavain_tdsto_lineEdit</cstring>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lsijoitusavain_label">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>430</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Sijoitusavain:</string>
+    </property>
+    <property name="buddy">
+     <cstring>lsijoitusavain_tdsto_lineEdit</cstring>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lkirjoitusavain_tdsto_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>390</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="toolTip">
+     <string>kirjoitusavain-tiedostonimi</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>sourceCharacterFile.txt</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lsijoitusavain_tdsto_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>430</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="toolTip">
+     <string>sijoitusavain-tiedostonimi</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>locationKeyFile.txt</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="lviesti_plainTextEdit">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>240</y>
+      <width>551</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>kirjoita viestisi tähän</string>
+    </property>
+    <property name="statusTip">
+     <string>kirjoita viestisi tähänkirjoita</string>
+    </property>
+    <property name="whatsThis">
+     <string>kirjoita viestisi tähänkirjoita</string>
+    </property>
+    <property name="plainText">
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>kirjoita viestisi tähän</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="lviestiselaa_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>200</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>selaa välitettävien tiedostojen talletuspolkua</string>
+    </property>
+    <property name="text">
+     <string>Selaa</string>
+    </property>
+    <property name="shortcut">
+     <string>Alt+S</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lvastaanottajanportti_lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>160</y>
+      <width>291</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>vastaanottajan portti esim 80, 5000, 5001, 5050, 5060, 5500, 65432</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="maxLength">
+     <number>5</number>
+    </property>
+    <property name="placeholderText">
+     <string>vastaanottajan portti esim 80, 5000, 5001, 5050, 5060, 5500, 65432</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lvastaanottajanportti_label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>160</y>
+      <width>191</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Vastaanottajan portti:</string>
+    </property>
+    <property name="buddy">
+     <cstring>lvastaanottajanportti_lineEdit</cstring>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>lviestiselaa_pushButton</tabstop>
+  <tabstop>lviesti_plainTextEdit</tabstop>
+  <tabstop>llaheta_pushButton</tabstop>
+  <tabstop>lperu_pushButton</tabstop>
+  <tabstop>lvastaanottaja_lineEdit</tabstop>
+  <tabstop>lvastaanottajanportti_lineEdit</tabstop>
+  <tabstop>lveistintalletuspolku_lineEdit</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>lperu_pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>580</x>
+     <y>525</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

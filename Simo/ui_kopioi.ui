@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Viestittely-lähetä</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>cards.ico</normaloff>cards.ico</iconset>
+  </property>
+  <property name="toolTip">
+   <string>Vie kursori haluamaasi kenttään tai painikkeelle, niin näet vihjeen.</string>
+  </property>
+  <widget class="QWidget" name="centralwidget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>801</width>
+     <height>541</height>
+    </rect>
+   </property>
+   <property name="toolTipDuration">
+    <number>2</number>
+   </property>
+   <widget class="QLabel" name="kylaotsikko_label">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>20</y>
+      <width>251</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Viestittely-kopioi</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="klahde_label">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>200</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Lähdetiedosto:</string>
+    </property>
+    <property name="buddy">
+     <cstring>klahdepolku_lineEdit</cstring>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="kkopio_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>510</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>kopio tiedosto, ALT+k</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="text">
+     <string>Kopio</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>kopio.png</normaloff>kopio.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>20</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="shortcut">
+     <string>Alt+K</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="kperu_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>510</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>peru ja siirry takaisin kotisivulle, ALT+p</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string>Peru</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>peru.jpg</normaloff>peru.jpg</iconset>
+    </property>
+    <property name="shortcut">
+     <string>Alt+P</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="klahde_tdsto_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>200</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="toolTip">
+     <string>lähdetiedoston nimi</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>MessageFile.txt</string>
+    </property>
+    <property name="clearButtonEnabled">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="klahdepolku_lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>200</y>
+      <width>291</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>lähdetiedoston kansiopolku</string>
+    </property>
+    <property name="toolTipDuration">
+     <number>-1</number>
+    </property>
+    <property name="statusTip">
+     <string comment="StatusTip-disambiquation viestin talletuspolku " extracomment="StatusTip-comment viestin talletuspolku ">StatusTip lähdetiedoston talletuspolku</string>
+    </property>
+    <property name="whatsThis">
+     <string comment="whatsThis-disambiquation viestin talletuspolku " extracomment="whatsThis-comment viestin talletuspolku ">whatsThis lähdetiedoston talletuspolku</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>lähdetiedoston kansiopolku</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="kselaalahdekansio_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>200</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>selaa lähdetiedoston kansiopolku, ALT+s</string>
+    </property>
+    <property name="text">
+     <string>Selaa</string>
+    </property>
+    <property name="shortcut">
+     <string>Alt+S</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="kkohdepolku_lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>250</y>
+      <width>291</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>kohdetiedoston kansiopolku</string>
+    </property>
+    <property name="toolTipDuration">
+     <number>-1</number>
+    </property>
+    <property name="statusTip">
+     <string comment="StatusTip-disambiquation viestin talletuspolku " extracomment="StatusTip-comment viestin talletuspolku ">StatusTip kohde tiedoston kansiopolku</string>
+    </property>
+    <property name="whatsThis">
+     <string comment="whatsThis-disambiquation viestin talletuspolku " extracomment="whatsThis-comment viestin talletuspolku ">whatsThis kohde tiedoston kansiopolku</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>kohdetiedoston kansiopolku</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="kkohde_label">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>250</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Kohdetiedosto:</string>
+    </property>
+    <property name="buddy">
+     <cstring>klahdepolku_lineEdit</cstring>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="knouda_pushButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>510</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>nouda tiedosto, ALT+n</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="text">
+     <string>Nouda</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>Pura.png</normaloff>Pura.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>20</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="shortcut">
+     <string>Alt+N</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="kselaakohdekansio_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>250</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>selaa kohdetiedoston kansiopolku, ALT+e</string>
+    </property>
+    <property name="text">
+     <string>Selaa</string>
+    </property>
+    <property name="shortcut">
+     <string>Alt+E</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="kkohde_tdsto_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>250</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="toolTip">
+     <string>kohdetiedoston nimi</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>Messages.txt</string>
+    </property>
+    <property name="clearButtonEnabled">
+     <bool>false</bool>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>kselaalahdekansio_pushButton</tabstop>
+  <tabstop>kselaakohdekansio_pushButton</tabstop>
+  <tabstop>kkopio_pushButton</tabstop>
+  <tabstop>knouda_pushButton</tabstop>
+  <tabstop>kperu_pushButton</tabstop>
+  <tabstop>klahdepolku_lineEdit</tabstop>
+  <tabstop>kkohdepolku_lineEdit</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>kperu_pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>580</x>
+     <y>525</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
