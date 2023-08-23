@@ -1,61 +1,41 @@
-import logging
 import os
 import pickle
 from pathlib import Path
 
 
-def setLogger():
-    
-    logging.basicConfig(filename="loggingFile.txt",
-    format='%(asctime)s %(message)s',
-    filemode='a')
-    
-    logger = logging.getLogger()
-    # Set the log of level to DEBUG
-    logger.setLevel(logging.DEBUG)
-
-
 def offerMessageToUI():
+    """
+    Return message to UI after it has been decrypted
+    
+    """
     file = Path("Message.txt")
-    print("offer message to ui")
-    logging.debug("offer message to ui")
-    logging.debug("file path  : %s", str(file)) 
-    print(file)
+    
     result = file.is_file()
     if not result:
-            print("no message file")
-            logging.debug("no message file")
-            logging.debug("file path  : %s", str(file)) 
-            return
+            return #no message file
 
     with open("Message.txt", 'r') as messageFile:
         
         message = messageFile.read()
         messageFile.close()
         os.remove("Message.txt") # delete message after it has been returned to UI
-        logging.debug("message to ui : %s", message)
         return message
 
 def getPathFromUI(path):
     global filePathOfFile 
     filePathOfFile = path
-    logging.debug("filePathOfFile receiverHandler: %s", filePathOfFile)
-    print(filePathOfFile)
 
 
 def loadListFromFile(filename):
-    logging.debug("loadListFromFile func start")
     realPath = filePathOfFile+filename
     file = Path(filePathOfFile+filename)
     result = file.is_file()
 
     if not result:
-         print("File not found")
-         return
+         return #File not found
 
     currentnList = []
     realPath =  filePathOfFile+filename
-    print("realPath")
 
     with open (realPath, 'rb') as listFile:
         currentnList = pickle.load(listFile)
@@ -81,22 +61,17 @@ def findCharByIndexFromSourceCharFile():
      result = file.is_file()
 
      if result:
-         #print("File found")
          h = 8
      else:
-        print("no sourcecharfile")
-        return
+        return #no sourcecharfile
      
      messageExist = False
      messageExist = checkIfMessageExist()
      if messageExist:
         logging.debug("there is message")
-        #messagelist = loadMessageListFromFile()
      else:
-        logging.debug("no message: return")
-        return
+        return #no message: return
      
-     logging.debug("findCharByIndexFromSourceCharFile func start again ")
      with open("Message.txt", 'w') as messageFile:
          realPath =  filePathOfFile+ "/sourceCharacterFile.txt"
          with open(realPath, 'r') as charFile:
@@ -121,7 +96,6 @@ def findCharByIndexFromSourceCharFile():
                     charFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
                     sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile]
                     
-
 
                     charFoundByIndex = sourceCharacterlineHandler[indexInLine] # find one character from sourceCharFile row by index
                 
@@ -163,12 +137,9 @@ def findIndexByLocationFromMessage():
     messageExist = False
     messageExist = checkIfMessageExist()
     if messageExist:
-        logging.debug("there is message")
         messagelist = loadMessageListFromFile()
     else:
-        logging.debug("no message")
-        return
-    
+        return #no message
     
     locationlist = loadListFromFile("/locationKeyFile.txt")
     locationlist = locationlist[:10_000] # separate location list from index wrap list
@@ -189,17 +160,12 @@ def removeMessageFile():
     filename = "/messageFile.txt"
     realPath = filePathOfFile+filename
 
-    logging.debug("realPath to delete: %s", str(realPath))
-
     file = Path(realPath)
     result = file.is_file()
     if result:
-        logging.debug("removeMessageFile delete message file ")
-        os.remove(realPath)
-
+        os.remove(realPath) # delete message file 
 
 def removeIndexWrap(indexList):
-    logging.debug("removeIndexWrap func start ")
     entireList = []
     indexWraplist = []
     wrappedIndex = 0
@@ -211,7 +177,6 @@ def removeIndexWrap(indexList):
 
     for oneIndex in range(indexListLength): # go through index list and remove index  wrapper
         
-    
         indexList[oneIndex] -= indexWraplist[oneIndex]
 
     return indexList
@@ -223,20 +188,16 @@ def checkIfMessageExist():
     
     filename = "/messageFile.txt"
     realPath = filePathOfFile+filename
-    logging.debug("realPath: %s", str(realPath))
     file = Path(filePathOfFile+filename)
     result = file.is_file()
     if not result:
-        logging.debug("no file in selected folder")
+        #no file in selected folder
         file = Path(filename)
-        logging.debug("file messagefile.txt home path: %s", str(file))
         result = file.is_file()
         if result:
-            logging.debug("file in home folder")
-            return True
-        else:
-            logging.debug("no file in home folder")
-            return False
+            return True #file in home folder
+        else:  
+            return False #no file in home folder
     else:
         logging.debug("file messagefile.txt in selected folder")
         return True
@@ -268,15 +229,8 @@ def loadMessageListFromFile():
     return messageList
 
 def main():
-    #findIndexByLocationFromMessage()
-    setLogger()
-    getPathFromUI("sdtgh")
-    #offerMessageToUI()
-    findCharByIndexFromSourceCharFile()
+    pass
 
-#setLogger()
-#findIndexByLocationFromMessage()
-#findCharByIndexFromSourceCharFile()
 
 
 if __name__ == "__main__":
