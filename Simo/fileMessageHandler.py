@@ -33,12 +33,13 @@ def checkMessageCharacter(message):
             print("illegal char ")
 
 def getMessageFromUI(message):
-
+    logging.debug("getMessageFromUI func start")
    # checkMessageCharacter(message)
     logging.debug("message from UI : %s", str(message ))
     logging.debug("message length from UI : %s", str(len(message) ))
        
     file = Path(filePathOfFile+"/MyMessage.txt")
+    logging.debug("mymessage path : %s", str(file ))
     result = file.is_file()
     if result:
         print("read ready message from user")
@@ -77,6 +78,9 @@ def getCreationtime():
     print(datetime.datetime.fromtimestamp(os.path.getmtime(file)))
 
 def removeMessageFile():
+    """
+    Revomeve message after it has ben delivered to UI
+    """
     os.remove("Message.txt")
 
 
@@ -128,7 +132,7 @@ def createSourceCharacterFile(size):
         if difference.days > 30: # create new every month
             logging.debug("Create new sourceCharFile")
         else:
-            return # file does not exist
+            return # file does exist and is newer than 30 days
     
     with open(filePathOfFile+"/sourceCharacterFile.txt", 'w') as charFile:
         while numberOfCharinFile < size:
@@ -154,22 +158,14 @@ def writeFinalMessageFileByNumber():
 
     logging.debug("writeFinalMessageFileByNumber func start ")
     listOfMessage = loadMessageListFromFile()
-    #logging.debug("oneMessagerow length : %s", str(len(listOfMessage)))
     listOfIndex= searchIndexFromCharFile()
     listOfLocation = loadLocationListFromFile()
     #logging.debug("listOfLocation length : %s", str(len(listOfLocation)))
     
     for oneIndex in listOfIndex: # go through index list and set index  to message  by location
         
-        #logging.debug("listOfIndex : %s", str(listOfIndex))
-        #logging.debug("indexOfLocationList : %s", str(indexOfLocationList))
-
         currenLocationNumber = listOfLocation[indexOfLocationList] # read one location from locationList
         listOfMessage[currenLocationNumber] = oneIndex # set index by location to crypted message
-        
-        #logging.debug("currenLocationNumber : %s", str(currenLocationNumber))
-        #logging.debug("oneIndex : %s", str(oneIndex))
-        #logging.debug("indexOfLocationList : %s", str(indexOfLocationList))
 
         indexOfLocationList += 1 # add counter for reading next location From list
     listOfIndex.clear()
@@ -201,15 +197,15 @@ def searchIndexFromCharFile():
         with open(realPath, 'r') as charFile:
             numberOfRowsInCharfile = len(charFile.readlines())
             charFile.seek(0)
-            #logging.debug("Total lines  in charFile file : %s", str(numberOfRowsInCharfile))
+            
             for readline in messageFile: # go through hole original message(writing by user) file line by line
-                #logging.debug("Total lines  in charFile file : %s", str(numberOfRowsInCharfile))
+                
                 messagelineHandler =  readline # set one row of message to handler
                 logging.debug("messagelineHandler : %s", str(messagelineHandler))
                     
                 for charInMsgLine in messagelineHandler: # go through entire row of original message char by char and found index from
                                                             # sourceCharFile
-                    #logging.debug("number of  handled char in loop : %s", str(numberOfHandledChar))
+                    
                     
                     if numberOfHandledChar == numberOfCharHandle: # when found 3 index from one row of sourceCharFile load next row
                                                                     # of sourcecharFile by adding 1 to indexOfRowInCharFile
@@ -221,24 +217,12 @@ def searchIndexFromCharFile():
                         charFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
                         if numberOfRowsInCharfile == indexOfRowInCharFile: # end of file, start reading from first row
                             indexOfRowInCharFile = 0
-                       # logging.debug("indexOfRowInCharFile is : %s", str(indexOfRowInCharFile))
+                       
                         sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile] # load next sourceCharFile row after founding 3 index
                                                                                                 # from one row (index == position of one character)        
                         #logging.debug("index of row in char file : %s", str(indexOfRowInCharFile))
                         lineHandled = True
                         
-                    #logging.debug("handled char in loop : %s", str(numberOfHandledChar))
-                    if charInMsgLine == "\n":
-                        #logging.debug("char to be found is newline : %s", str(charInMsgLine))
-                        d = 4
-                    elif charInMsgLine == " ":
-                        #logging.debug("char to be found is space : %s", str(charInMsgLine))
-                        g = 7
-                    else:
-                      #  logging.debug("char to be found : %s", str(charInMsgLine))
-                         h = 6
-                  #  logging.debug("startSearchingIndex  : %s", str(startSearchingIndex ))
-                    
                     if charInMsgLine == " " or charInMsgLine == "\t":
                         charInMsgLine = "è"
                     elif charInMsgLine == "\n" or charInMsgLine == "\v" or charInMsgLine == "\r":
@@ -261,25 +245,45 @@ def searchIndexFromCharFile():
 
             # end of original message file written by user , set end mark(ô) for message
             indexInCharSourceLine = sourceCharacterlineHandler.find("ô", 0) # ô char means end of message, start searching from index zero of this mark 
-            logging.debug("index found for ending message : %s", str(indexInCharSourceLine))
             indexList.append(indexInCharSourceLine)
-            #logging.debug("indexInCharSourceLine when finish sending  : %s", str(indexInCharSourceLine ))
-            #logging.debug("indexList when finish sending  : %s", str(indexList ))
-            #logging.debug("indexList length when finish sending  : %s", str(len(indexList) ))
             
 
         charFile.close()
     messageFile.close()
-    removeMessageFile()
+    #removeMessageFile()
+    indexList = addIndexWrap(indexList)
     return indexList
+
+def addIndexWrap(indexList):
+    """
+    Add random number between 1-100 to each index berore sendin message
+    """
+    
+    entireList = [] # entire locatioKey list
+    indexWraplist = [] #¤ list of wrap value
+    indexListLength = 0
+    entireList = loadLocationListFromFile()
+    indexWraplist = entireList[10_000:] # get index wrap list from entire list of locationKeyList and indexWrapList
+    indexListLength = len(indexList)
+
+
+    for oneIndex in range(indexListLength): # go through index list and set index  wrapper
+       
+        indexList[oneIndex] += indexWraplist[oneIndex]
+       
+    return indexList
+
 
 
 def createLocationListToFile(lengthOfKey):
     """
-    Create location lis for setting index to message
+    Create location list for setting index to message
+    and add index wrap list to the same list
     """
     locationList = []
+    indexWrapList = []
     createdNumers = 0
+    indexListLength = 10_000
     logging.debug("createLocationListtoFile func start")
 
     file = Path(filePathOfFile+"/locationKeyFile.txt")
@@ -291,21 +295,25 @@ def createLocationListToFile(lengthOfKey):
         if difference.days > 30: # create new every month
             logging.debug("Create new locationKeyFile")
         else:
-            return
+            logging.debug("no locationKeyFile")
+            #return
+
+    indexWrapList = np.random.choice( range(0, 100), indexListLength, replace=True).tolist() 
 
     with open(filePathOfFile+"/locationKeyFile.txt", 'wb') as locationKeyFile:
         locationList = np.random.choice( range(0, 999999), lengthOfKey, replace=False).tolist() # creatue unique list on numbers (amount is lengthOfKey)
                                                                                                 # in range 0-999 999 (length of crypted message)        
-        print("locationList length : %s", str(len(locationList)))
+    
+        locationList += indexWrapList
         pickle.dump(locationList, locationKeyFile)
-    logging.debug("locationList length : %s", str(len(locationList)))    
+      
     locationKeyFile.close()   
 
 def loadLocationListFromFile():
     """
     Load location list when creating new message
     """
-
+    logging.debug("loadLocationListFromFile func start")
     locationList = []
     
     file = Path(filePathOfFile+"/locationKeyFile.txt")
@@ -329,11 +337,10 @@ def createMessageListToFile(length):
     """
     messageList = []
     createdNumers = 0
-    logging.debug("createMessageListToFile func start")
 
     with open("messageFile.txt", 'wb') as messageKeyFile:
         while createdNumers < length:
-            messageList.append(random.randrange(1,309))
+            messageList.append(random.randrange(1,308))
             createdNumers +=1
         pickle.dump(messageList, messageKeyFile)
     logging.debug("messageList length : %s", str(len(messageList)))    
@@ -357,7 +364,7 @@ def saveMessageToFile(messageList):
     """
 
     destination = filePathOfFile+"\\messageFile.txt"
-    logging.debug("saveMessageToFile func start")
+
     with open("messageFile.txt", 'wb') as messageFile:
         pickle.dump(messageList, messageFile)
     logging.debug("messageList length : %s", str(len(messageList)))    
@@ -367,12 +374,11 @@ def saveMessageToFile(messageList):
     currPath = str(Path.cwd())
     currPath =  currPath.replace('\\', '/')
     if currPath == filePathOfFile:
-        print("same path")
         logging.debug("same path")
         logging.debug("destination path : %s", str(destination)) 
     else:
-        print("different path")
         shutil.copyfile("messageFile.txt", destination)
+        os.remove("messageFile.txt") 
 
 def createMessage():
     createSourceCharacterFile(1)
@@ -385,9 +391,10 @@ def main():
     #getPathFromUI(path)
     #printFilePathFromUI()
     setLogger()
-    #getPathFromUI("grth")
-    #getMessageFromUI("bhdghb")
-    #createMessage()
+    getPathFromUI("grth")
+    #createLocationListToFile(10_000)
+    getMessageFromUI("bhdghb")
+    createMessage()
     #createOneSourceCharacterList()
     
 if __name__ == "__main__":
