@@ -1,6 +1,6 @@
 **Python TYPO4 kevät 2023 Viestittely-ohjelman kuvaus**
 
-Viestittely-ohjelma käytetään viestien salaamiseen. Lähettäjä ja vastaanottaja käyttävät saman ohjelman eri sivuja. Lähettäjä voi lähettää viestin vastaanottajan IP-osoitteseen ja porttiin, jos vastaanottajan reitittimessä on portti avattu. Viestissä voi käyttää amerikkalaista (ASCII) tai suomalaista (åäö) merkistöä. 
+Viestittely-ohjelmaa käytetään viestien salaamiseen. Lähettäjä ja vastaanottaja käyttävät saman ohjelman eri sivuja. Lähettäjä voi lähettää viestin vastaanottajan IP-osoitteseen ja porttiin, jos vastaanottajan reitittimessä on portti avattu. Viestissä voi käyttää amerikkalaista (ASCII) tai suomalaista (åäö) merkistöä. 
 
 Viestittely-ohjelma luo lähetyksessä salatun viesti-tiedoston ja kaksi avain-tiedostoa. Avaimet annetaan vastaanottajalle esim tikulla tai postitse. Itse salatun viestin voi lähettää esim ohjelmilla Signal, Telegram, Wickr, Outlookilla.
 
