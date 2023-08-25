@@ -68,7 +68,7 @@ def findCharByIndexFromSourceCharFile():
      messageExist = False
      messageExist = checkIfMessageExist()
      if messageExist:
-        logging.debug("there is message")
+        # logging.debug("there is message")
      else:
         return #no message: return
      
@@ -199,7 +199,7 @@ def checkIfMessageExist():
         else:  
             return False #no file in home folder
     else:
-        logging.debug("file messagefile.txt in selected folder")
+        # logging.debug("file messagefile.txt in selected folder")
         return True
 
 
