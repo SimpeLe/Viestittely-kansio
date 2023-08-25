@@ -69,6 +69,7 @@ def findCharByIndexFromSourceCharFile():
      messageExist = checkIfMessageExist()
      if messageExist:
         # logging.debug("there is message")
+        pass
      else:
         return #no message: return
      
