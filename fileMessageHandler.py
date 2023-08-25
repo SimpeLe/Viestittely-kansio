@@ -245,7 +245,7 @@ def searchIndexFromCharFile():
 
         charFile.close()
     messageFile.close()
-    #removeMessageFile()
+    removeMessageFile()
     indexList = addIndexWrap(indexList)
     return indexList
 
@@ -287,10 +287,9 @@ def createLocationListToFile(lengthOfKey):
         difference = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getctime(file))
 
         if difference.days > 30: # create new every month
-            h = 7
+            h = 7 # older than 30 days, create new one
         else:
-            logging.debug("no locationKeyFile")
-            #return
+            return # under 30 days old, do not create new one, return
 
     indexWrapList = np.random.choice( range(0, 100), indexListLength, replace=True).tolist() 
 
