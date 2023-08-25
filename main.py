@@ -63,7 +63,7 @@ class Claheta_klikkaus(qtw.QWidget): #
 
     # käyttäjän lähetä-painikkeen klikkaus kutsuu laheta-metodia. Viestin salaus, avain-tiedostojen luonti, lähetys ehkä IP:llä
     def laheta_klik(self):
-        hakemistopolku = self.ui.lveistintalletuspolku_lineEdit.text()
+        lahHakPolku = self.ui.lveistintalletuspolku_lineEdit.text()
         lahetettavaViesti = self.ui.lviesti_plainTextEdit.toPlainText()
 
         # sisältääkö viesti vain ASCII- ja scandi-merkkejä? Jos ei sisällä, korvaa sallimaton merkki alaviivalla "_"
@@ -79,10 +79,10 @@ class Claheta_klikkaus(qtw.QWidget): #
         else:
             viestiPituusOK = False
         # Onko tallennuspolku olemassa? Onko viesti riittävän lyhyt? 
-        if os.path.isdir(hakemistopolku) and hakemistopolku != "C:/" \
+        if os.path.isdir(lahHakPolku) and lahHakPolku != "C:/" \
             and viestiPituusOK:  
-            send.setLogger()
-            send.getPathFromUI(hakemistopolku)
+            # send.setLogger()
+            send.getPathFromUI(lahHakPolku)
             send.getMessageFromUI(lahetettavaViesti)
             send.createMessage()
             IP_LahetysValinta = qtw.QMessageBox.question(self, 'Tiedostojen kirjoitus', \
@@ -102,7 +102,7 @@ class Claheta_klikkaus(qtw.QWidget): #
                 if IPmuotoinen and vastOttPortti != "" and vastOttPortti.isnumeric():
                     vastOttPortti = int(vastOttPortti)
                     if vastOttPortti > 0 and vastOttPortti < 65535:
-                        IPeiVastaa = socSend.sendFileViaIP(vastOttIP, vastOttPortti, "messageFile.txt")
+                        IPeiVastaa = socSend.sendFileViaIP(vastOttIP, vastOttPortti, lahHakPolku, "messageFile.txt")
                         if IPeiVastaa:
                             jataLahetysIkkunaAuki = False
                             qtw.QMessageBox.critical(self, 'IP-osoite ei vastaa', "Pyydä vastaanottajaa avaamaan IP-vastaanotto")        
@@ -117,21 +117,21 @@ class Claheta_klikkaus(qtw.QWidget): #
                     qtw.QMessageBox.critical(self, 'Portti on mahdoton', "Kirjoita mahdollinen porttinumero 1-65535")        
             if jataLahetysIkkunaAuki:
                 self.close()
-        elif os.path.isdir(hakemistopolku) == False: 
+        elif os.path.isdir(lahHakPolku) == False: 
             qtw.QMessageBox.critical(self, 'Epäkelpo kansio', "Valitse olemassa oleva kansiopolku")
-        elif hakemistopolku == "C:/":
+        elif lahHakPolku == "C:/":
             qtw.QMessageBox.critical(self, 'Epäkelpo kansio', "Kansioon ole ei kirjoitusoikeutta. Valitse toinen kansiopolku")
         elif viestiPituusOK == False:
             qtw.QMessageBox.critical(self, 'Epäkelpo viesti', f"Kirjoita viesti, jossa on enintään {ViestinMaxPituus} merkkiä")
         
     # kutsu kansio-keskustelu ikkunaa ja täytä UI:n kansio kentät
     def kansio_selaus_klikkaus(self):
-        hakemistoPolku = self.openSaveDirectoryNameDialog()
+        selausPolku = self.openSaveDirectoryNameDialog()
         self.show()
-        self.ui.lveistintalletuspolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", hakemistoPolku))
-        self.ui.lkirjoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", hakemistoPolku))
-        self.ui.lsijoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", hakemistoPolku))
-        return hakemistoPolku
+        self.ui.lveistintalletuspolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", selausPolku))
+        self.ui.lkirjoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", selausPolku))
+        self.ui.lsijoitusavainpolku_lineEdit.setText(qtc.QCoreApplication.translate("MainWindow", selausPolku))
+        return selausPolku
                 
     # avaa resurssienhallinnan tyyppinen kansio-valinta-ikkuna
     def openSaveDirectoryNameDialog(self):
@@ -191,22 +191,22 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         vastOtaPortti = self.ui.vvastaanottajanportti_lineEdit.text()
         IPvastaOtaPolku = self.ui.vveistintalletuspolku_lineEdit.text()
         # print ("VastOtaViestiIP_lla(self):ssä IPvastaOtaPolku: ", IPvastaOtaPolku)
-        kotiKansio = os.getcwd()
-        print ("main kotiKansio:", kotiKansio)
+        vkotiKansio = os.getcwd()
+        # print ("main kotiKansio:", kotiKansio)
         # kotiKansio = kotiKansio.replace("\\","/")
         # print ("main kotiKansio:", kotiKansio)
         # print ("main kohdeKansio:", IPvastaOtaPolku)
         # os.chdir(IPvastaOtaPolku)
-        tyoKansio = os.getcwd()
+        # vtyoKansio = os.getcwd()
         # print ("main tyoKansio:", tyoKansio)
-        print ("main tyoKansio:", tyoKansio)
+        # print ("main tyoKansio:", tyoKansio)
         # jos UI:ssä kansiopolku on epäkelpo käytä ohjelman kotikansiota
         if os.path.isdir(IPvastaOtaPolku) == False:
-            IPvastaOtaPolku = kotiKansio
+            IPvastaOtaPolku = vkotiKansio
         if vastOtaPortti.isnumeric():
             vastOtaPortti = int(vastOtaPortti)
             if vastOtaPortti > 0 and vastOtaPortti < 65535:
-                IPvastOttoOdotusAika = 7 #sekuntia
+                IPvastOttoOdotusAika = 20 #sekuntia
                 qtw.QMessageBox.information(self, 'IP-osoitteesi ja porttisi dottaa viestiä', \
                     f"Odota, kunnes viesti saapuu tai odota {IPvastOttoOdotusAika} sekuntia. Paina OK, niin vastaanotto alkaa")
                 # parametrit: socket-portti, sekunnit (jotka serveri odottaa viestiä)...
@@ -345,7 +345,7 @@ class Ckotisivu(qtw.QMainWindow):
         self.kopioSivu = Ckopio_Klikkaus()
 
 if __name__=='__main__':
-    print("main alkaa")
+    # print("main alkaa")
     app = qtw.QApplication([])
     kotisivu = Ckotisivu()
     app.exec_()
