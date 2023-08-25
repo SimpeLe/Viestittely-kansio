@@ -192,15 +192,15 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         IPvastaOtaPolku = self.ui.vveistintalletuspolku_lineEdit.text()
         # print ("VastOtaViestiIP_lla(self):ssä IPvastaOtaPolku: ", IPvastaOtaPolku)
         vkotiKansio = os.getcwd()
-        # print ("main kotiKansio:", kotiKansio)
-        # kotiKansio = kotiKansio.replace("\\","/")
-        # print ("main kotiKansio:", kotiKansio)
+        # print ("main vkotiKansio:", vkotiKansio)
+        # vkotiKansio = vkotiKansio.replace("\\","/")
+        # print ("main vkotiKansio:", vkotiKansio)
         # print ("main kohdeKansio:", IPvastaOtaPolku)
         # os.chdir(IPvastaOtaPolku)
         # vtyoKansio = os.getcwd()
         # print ("main tyoKansio:", tyoKansio)
         # print ("main tyoKansio:", tyoKansio)
-        # jos UI:ssä kansiopolku on epäkelpo käytä ohjelman kotikansiota
+        # jos UI:ssä kansiopolku on epäkelpo käytä ohjelman vkotikansiota
         if os.path.isdir(IPvastaOtaPolku) == False:
             IPvastaOtaPolku = vkotiKansio
         if vastOtaPortti.isnumeric():
