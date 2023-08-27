@@ -44,6 +44,7 @@ from ui_kopioi import Ui_Form as kopio
 
 import fileMessageHandler as send
 import fileReceiverHandler as pickup
+import fileMessageCopier as copy
 import socketSendFile as socSend
 import socketReceiveFile as socRecv
 
@@ -277,7 +278,7 @@ class Ckopio_Klikkaus(qtw.QWidget):
         kohdepolku = self.ui.kkohdepolku_lineEdit.text()
         # Ovatko kansiot olemassa? 
         if os.path.isdir(lahdepolku) and os.path.isdir(kohdepolku):
-            print("tässä kutsu tiedoston kopiointia")  
+            copy.copyOneMessageToList(kohdepolku, lahdepolku) # new 27.8
         elif os.path.isdir(lahdepolku) == False: 
             qtw.QMessageBox.critical(self, 'Lähdetiedoston epäkelpo kansio', "Valitse olemassa oleva kansiopolku")
         elif os.path.isdir(kohdepolku) == False: 
@@ -289,7 +290,7 @@ class Ckopio_Klikkaus(qtw.QWidget):
         kohdePolku = self.ui.kkohdepolku_lineEdit.text()
         # Ovatko kansiot olemassa? 
         if os.path.isdir(lahdePolku) and os.path.isdir(kohdePolku):
-            print("tässä kutsu tiedoston noutoa")  
+            copy.retrieveCopy(kohdePolku, lahdePolku)  # new 27.8
         elif os.path.isdir(lahdePolku) == False: 
             qtw.QMessageBox.critical(self, 'Lähdetiedoston epäkelpo kansio', "Valitse olemassa oleva kansiopolku")
         elif os.path.isdir(kohdePolku) == False: 
