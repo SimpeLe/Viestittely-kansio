@@ -1,23 +1,12 @@
 import string
 import random
 import pickle
-import logging
 import os
 import datetime
 import numpy as np # pip install numpy
 from pathlib import Path
 import shutil
 
-
-def setLogger():
-    
-    logging.basicConfig(filename="loggingFile.txt",
-    format='%(asctime)s %(message)s',
-    filemode='w')
-    
-    logger = logging.getLogger()
-    # Set the log of level to DEBUG
-    logger.setLevel(logging.DEBUG)
 
 def checkMessageCharacter(message):
 
@@ -53,26 +42,6 @@ def getPathFromUI(path):
     global filePathOfFile
     filePathOfFile = path
 
-def getCreationtime():
-    file = "sourceCharacterFile.txt"
- 
-    print("Created")
-    print(os.path.getctime(file))
-    print(datetime.datetime.fromtimestamp(os.path.getctime(file)))
-    
-    today = datetime.datetime.now()
-    print(today)
-
-    difference = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getctime(file))
-
-    print(difference)
-    if difference.days > 30:
-        print("over 30")
-        return
- 
-    print("Modified")
-    print(os.path.getmtime(file))
-    print(datetime.datetime.fromtimestamp(os.path.getmtime(file)))
 
 def removeMessageFile():
     """
@@ -126,10 +95,9 @@ def createSourceCharacterFile(size):
     if result:
         difference = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getctime(file))
 
-        if difference.days > 30: # create new every month
-            h = 7
-        else:
-            return # file does exist and is newer than 30 days
+        if difference.days < 30: 
+            return # file does exist and is under than 30 days old
+
     
     with open(filePathOfFile+"/sourceCharacterFile.txt", 'w') as charFile:
         while numberOfCharinFile < size:
@@ -187,7 +155,7 @@ def searchIndexFromCharFile():
     lineHandled = False
     realPath = ""
     
-    logging.debug("searchIndexFromCharFile func start ")
+
     with open("Message.txt", 'r') as messageFile: # open orinal message written by user
         realPath = filePathOfFile+ "/sourceCharacterFile.txt"
         with open(realPath, 'r') as charFile:
@@ -197,7 +165,6 @@ def searchIndexFromCharFile():
             for readline in messageFile: # go through hole original message(writing by user) file line by line
                 
                 messagelineHandler =  readline # set one row of message to handler
-                logging.debug("messagelineHandler : %s", str(messagelineHandler))
                     
                 for charInMsgLine in messagelineHandler: # go through entire row of original message char by char and found index from
                                                             # sourceCharFile
@@ -286,9 +253,7 @@ def createLocationListToFile(lengthOfKey):
     if result:
         difference = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getctime(file))
 
-        if difference.days > 30: # create new every month
-            h = 7 # older than 30 days, create new one
-        else:
+        if difference.days < 30: # create new every month
             return # under 30 days old, do not create new one, return
 
     indexWrapList = np.random.choice( range(0, 100), indexListLength, replace=True).tolist() 
@@ -357,7 +322,7 @@ def saveMessageToFile(messageList):
 
     with open("messageFile.txt", 'wb') as messageFile:
         pickle.dump(messageList, messageFile)
-    logging.debug("messageList length : %s", str(len(messageList)))    
+
     messageFile.close()
     messageList.clear()
     
