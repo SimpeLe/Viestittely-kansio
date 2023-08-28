@@ -1,13 +1,16 @@
 
-# suorita n�m� komentokehotteessa cmd.exe
-# asenna python 3.8.10 Windows 7:��n
+# suorita nämä komentokehotteessa cmd.exe
+# asenna python 3.8.10 Windows 7:ään
 https://www.python.org/ftp/python/3.8.10/python-3.8.10-amd64.exe 
-(#python.exe l�ytyy kansiosta C:\Users\Perhonen\AppData\Local\Programs\Python\Python38)
+(#python.exe löytyy kansiosta C:\Users\Perhonen\AppData\Local\Programs\Python\Python38)
+
+# lisää pythonin hakemisto esim C:\Users\Perhonen\AppData\Local\Programs\Python\Python38 path-muuttujaan
+Kopioi Pythonin polku leikepöydälle- napauta Käynnistä - Ohjauspaneeli - Järjestelmä - Järjestelmän lisäasetukset - välilehti Lisäasetukset - painike Ympäristömuuttujat - ikkunassa Järjestelmämuuttujat (alempi ikkuna) napauta Path-muuttujaa - näpäytä painiketta Muokkaa - kentässä Muuttujan arvo, siirry loppuun (END-painike) - liitä Pythonin polku (CTRL+V) - napsauta OK-painiketta. Nyt sulje avaamasi ikkunat.
 
 # pipin asennus
 py -m ensurepip --upgrade
 
-# pipin p�ivitys
+# pipin päivitys
 py -m pip install --upgrade pip
 
 # tqdm- ja muiden kirjastojen asennus
@@ -16,11 +19,11 @@ py -m pip install tqdm
 py -m pip install numpy
 
 
-# ipconfig kertoo mit� IP-osoitetetta l�hett�j�n pit�� k�ytt��
+# ipconfig kertoo mitä IP-osoitetetta lähettäjän pitää käyttää
 ipconfig
 
-## k�ynnist� IP-viestin vastaanottaja (serveri)
+## käynnistä IP-viestin vastaanottaja (serveri)
 #py -m socketRecieveFile.py
 
-# k�ynnist� Viestittely-ohjelma
+# käynnistä Viestittely-ohjelma
 python main.py
