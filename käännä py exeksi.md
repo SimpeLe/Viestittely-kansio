@@ -11,5 +11,6 @@ pyinstaller --onefile 7.py
 
 jaa projekti ja repository tarkastajalle: mikko@haltu.fi
 
+PISTE.
 
 
