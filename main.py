@@ -1,5 +1,5 @@
 #
-# 20230823 13:10
+# 20230830 21:41
 # Simo-hakemistossa
 # - python -m venv env
 # seuraava käynnistää ohjelman env
@@ -23,7 +23,12 @@
 #
 # gitbashissä isähakemistossa githubin kloonaus: 
 # git clone --branch main https://SimpeLe@github.com/SimpeLe/Viestittely-kansio
+#
+# luo main.py:stä main.exe
+# laita env-versiohallinta päälle
+# pyinstaller --onefile main.py
 # 
+#
 # (seuraava käynnistää ohjelman. Katso että komentokehotteen edessä lukee "(env)")
 # (jos ei lue "(env)", käynnistä virtuaaliympäristö env\scripts\activate)
 # - python ui_kotisivu.py 
