@@ -10,7 +10,14 @@ import time
 from PyQt5 import QtWidgets as qtw
 
 
-def RecvFileViaIP(port = 5001, sekuntia = 10, kohdeKansio = "C:/Tekstit"):
+def RecvFileViaIP(port = 5001, sekuntia = 20, kohdeKansio = "C:/tmp"):
+    # Tämä ryhmä on aktivoitava, jos käännät py:n exe:ksi
+    # print("Tämä on Viestittely-ohjelman IP-vastaanotto")
+    # port = int(input("Mistä portista haluat vastaanotettavan viestin lukea (1-65535)? "))
+    # sekuntia = int(input("Montako sekuntia IP-vastaanotto odottaa? "))
+    # kohdeKansio = input("Mihin kansioon haluat viestin tallentaa esim c:\\tmp? ")
+    # print("Muista siirtää vastaanottamasi viesti ja saamasi avaimet samaan kansioon. /n")
+    
     # device's IP address
     SERVER_HOST = "0.0.0.0"
     SERVER_PORT = port
