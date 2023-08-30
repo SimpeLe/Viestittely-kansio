@@ -9,36 +9,52 @@ import shutil
 
 
 def checkMessageCharacter(message):
+    """
+    Check if message contains illegal character
+    """
 
-    characters = string.ascii_letters + string.digits + string.punctuation +"äöåÄÖÅ" +'.' + "\n" + " " + "\t" + "\v" + "\r"
-    print(characters)
-    for i in message:
-        if i in characters:
-            print("char found")
-            index = characters.find(i) # fi
-            print(index)
-            f = 6
-        else:
-            print("illegal char ")
+    legalCharacters = string.ascii_letters + string.digits + string.punctuation +"äöåÄÖÅ" +'.' + "\n" + " " + "\t" + "\v" + "\r"
+    
+    for char in message:
+        if char not in legalCharacters:
+            message = message.replace(char, '_')
+    return message
+
 
 def getMessageFromUI(message):
-    
-   # checkMessageCharacter(message)
+    """
+    Receive original message from UI or read users pre-defined
+    message from file MyMessage.txt
+    """
        
     file = Path(filePathOfFile+"/MyMessage.txt")
-    
     result = file.is_file()
     if result:
-        print("read ready message from user")
         realPath = filePathOfFile+"/MyMessage.txt"
-        shutil.copy(realPath, "Message.txt")
+        with open( realPath,"r+") as f:
+            message = f.read()
+            message = checkMessageCharacter(message)
+            
+            with open( "Message.txt","w") as file:
+                if len(message) > 10_000: 
+                    allowedMessage = message[:10_000] # max. message lentgh is 10 000
+                    file.write(allowedMessage)
+                else:
+                    file.write(message)
+                
+                f.close()
+                file.close()
     else:
         with open("Message.txt", 'w') as messageFile:
             messageFile.write(message)
             messageFile.close()
-
+   
 
 def getPathFromUI(path):
+    """
+    Get user selected foldef from UI which contain key files
+    
+    """
     global filePathOfFile
     filePathOfFile = path
 
@@ -177,7 +193,7 @@ def searchIndexFromCharFile():
                         indexOfRowInCharFile +=1 # increase for reading next row
                         startSearchingIndex = 0
                     if lineHandled == False:  # this refers to reading and handling one source Character row
-                        charFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
+                        charFile.seek(0) #  set file iterator to zero before read line, otherwise it will raise "index out of range" error
                         if numberOfRowsInCharfile == indexOfRowInCharFile: # end of file, start reading from first row
                             indexOfRowInCharFile = 0
                        
