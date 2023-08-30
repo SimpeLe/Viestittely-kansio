@@ -60,10 +60,9 @@ def findCharByIndexFromSourceCharFile():
      file = Path(filePathOfFile+"/sourceCharacterFile.txt")
      result = file.is_file()
 
-     if result:
-         h = 8
-     else:
-        return #no sourcecharfile
+     if not result:
+         return #no sourcecharfile
+        
      
      messageExist = False
      messageExist = checkIfMessageExist()
@@ -81,22 +80,18 @@ def findCharByIndexFromSourceCharFile():
                 
                 if numberOfHandledIndex == numberOfIndexHandle: # find 3 index from one sourceCharFile row
                     charFoundByIndex = sourceCharacterlineHandler[indexInLine] # find one character from sourceCharFile row by index
-                    if charFoundByIndex == "ô": #  end of message, close file
-                        messageFile.close()
-                        list.clear()
-                        charFile.close()
-                        break
-
+                    
                     numberOfHandledIndex = 0
                     indexOfRowInCharFile +=1
                     if indexOfRowInCharFile == numberOfRowsInCharfile: # last row of file, start reading from zero
                         indexOfRowInCharFile = 0
-                    charFile.seek(0) # IMPORTANT! set file iterator to zero before read line, otherwise it will raise "index out of range" error
+                    charFile.seek(0) # set file iterator to zero before read line, otherwise it will raise "index out of range" error
                     sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile]
                     
 
                     charFoundByIndex = sourceCharacterlineHandler[indexInLine] # find one character from sourceCharFile row by index
-                
+
+                   
                     if charFoundByIndex == "ô": #  end of message, close file
                         messageFile.close()
                         list.clear()
