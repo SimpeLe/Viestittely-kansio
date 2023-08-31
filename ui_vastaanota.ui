@@ -51,7 +51,7 @@
     <property name="geometry">
      <rect>
       <x>140</x>
-      <y>170</y>
+      <y>210</y>
       <width>51</width>
       <height>31</height>
      </rect>
@@ -69,7 +69,7 @@
     <property name="geometry">
      <rect>
       <x>510</x>
-      <y>480</y>
+      <y>500</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -106,7 +106,7 @@
     <property name="geometry">
      <rect>
       <x>580</x>
-      <y>170</y>
+      <y>210</y>
       <width>181</width>
       <height>31</height>
      </rect>
@@ -133,7 +133,7 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>170</y>
+      <y>210</y>
       <width>281</width>
       <height>31</height>
      </rect>
@@ -144,13 +144,13 @@
      </font>
     </property>
     <property name="toolTip">
-     <string>viestin talletuspolku</string>
+     <string>kansiopolku, josta viesti ja avaimet löytyvät</string>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="placeholderText">
-     <string>viestin talletuspolku</string>
+     <string>esim C:\Tmp</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="vsijoitusavainpolku_lineEdit">
@@ -160,7 +160,7 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>400</y>
+      <y>440</y>
       <width>281</width>
       <height>31</height>
      </rect>
@@ -190,7 +190,7 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>360</y>
+      <y>400</y>
       <width>281</width>
       <height>31</height>
      </rect>
@@ -217,7 +217,7 @@
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>360</y>
+      <y>400</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -235,7 +235,7 @@
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>400</y>
+      <y>440</y>
       <width>111</width>
       <height>31</height>
      </rect>
@@ -256,7 +256,7 @@
     <property name="geometry">
      <rect>
       <x>580</x>
-      <y>360</y>
+      <y>400</y>
       <width>181</width>
       <height>31</height>
      </rect>
@@ -286,7 +286,7 @@
     <property name="geometry">
      <rect>
       <x>580</x>
-      <y>400</y>
+      <y>440</y>
       <width>181</width>
       <height>31</height>
      </rect>
@@ -313,7 +313,7 @@
     <property name="geometry">
      <rect>
       <x>250</x>
-      <y>480</y>
+      <y>500</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -341,7 +341,7 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>210</y>
+      <y>250</y>
       <width>551</width>
       <height>141</height>
      </rect>
@@ -362,7 +362,7 @@
     <property name="geometry">
      <rect>
       <x>500</x>
-      <y>170</y>
+      <y>210</y>
       <width>51</width>
       <height>31</height>
      </rect>
@@ -386,7 +386,7 @@
     <property name="geometry">
      <rect>
       <x>640</x>
-      <y>480</y>
+      <y>500</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -421,7 +421,7 @@
      </font>
     </property>
     <property name="toolTip">
-     <string>vastaanottajan portti esim 80, 5000, 5001, 5050, 5060, 5500, 65432</string>
+     <string>portti, jota IP:n kuuntelu käyttää</string>
     </property>
     <property name="statusTip">
      <string/>
@@ -433,7 +433,7 @@
      <number>5</number>
     </property>
     <property name="placeholderText">
-     <string>vastaanottajan portti esim 80, 5000, 5001, 5050, 5060, 5500, 65432</string>
+     <string>esim 80, 5000, 5001, 5050, 5060, 5500, 65432</string>
     </property>
    </widget>
    <widget class="QLabel" name="vvastaanottajanportti_label">
@@ -455,6 +455,57 @@
     </property>
     <property name="buddy">
      <cstring>vvastaanottajanportti_lineEdit</cstring>
+    </property>
+   </widget>
+   <widget class="QLabel" name="vodotusaika_label">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>170</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Odotusaika:</string>
+    </property>
+    <property name="buddy">
+     <cstring>vodotusaika_lineEdit</cstring>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="vodotusaika_lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>170</y>
+      <width>291</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>sekunnit, jonka IP:n kuuntelu odottaa viestiä saapuvaksi</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="maxLength">
+     <number>5</number>
+    </property>
+    <property name="placeholderText">
+     <string>esim 20 (sekuntia)</string>
     </property>
    </widget>
   </widget>
