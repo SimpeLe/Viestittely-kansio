@@ -8,6 +8,7 @@ def offerMessageToUI():
     Return message to UI after it has been decrypted
     
     """
+    
     file = Path("Message.txt")
     
     result = file.is_file()
@@ -27,6 +28,7 @@ def getPathFromUI(path):
 
 
 def loadListFromFile(filename):
+
     realPath = filePathOfFile+filename
     file = Path(filePathOfFile+filename)
     result = file.is_file()
@@ -45,19 +47,16 @@ def loadListFromFile(filename):
 
 def findCharByIndexFromSourceCharFile():
      """
-     Find characters from sourceCharFile and writes message
+     Find characters from sourceCharList and writes message
      """   
-
-     sourceCharacterlineHandler  = "" # read one row of source char 
+     
      charFoundByIndex = ""
-     indexOfRowInCharFile = 0
-     numberOfRowsInCharfile = 0
-     numberOfHandledIndex = 0
-     numberOfIndexHandle = 3 # search 3 index from each sorcecharacterRow
      list = [] # load index list here
+     entireList=[]
+     sourceCharList =[]
 
      realPath = ""
-     file = Path(filePathOfFile+"/sourceCharacterFile.txt")
+     file = Path(filePathOfFile+"/keyFile.txt")
      result = file.is_file()
 
      if not result:
@@ -70,59 +69,39 @@ def findCharByIndexFromSourceCharFile():
         return #there is not message
      
      with open("Message.txt", 'w') as messageFile:
-         realPath =  filePathOfFile+ "/sourceCharacterFile.txt"
-         with open(realPath, 'r') as charFile:
+         realPath = filePathOfFile+ "/keyFile.txt"
+         with open(realPath, 'rb') as keyFile:
+            entireList = pickle.load(keyFile)
+            sourceCharList = entireList[20_000:]
             list = findIndexByLocationFromMessage()
-            numberOfRowsInCharfile = len(charFile.readlines())
-            charFile.seek(0) #  set file iterator to zero before read line, otherwise it will raise "index out of range" error
-            sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile]
+            
             for indexInLine in list: # go through entire index list
                 
-                if numberOfHandledIndex == numberOfIndexHandle: # find 3 index from one sourceCharFile row
-                    charFoundByIndex = sourceCharacterlineHandler[indexInLine] # find one character from sourceCharFile row by index
-                    
-                    numberOfHandledIndex = 0
-                    indexOfRowInCharFile +=1
-                    if indexOfRowInCharFile == numberOfRowsInCharfile: # last row of file, start reading from zero
-                        indexOfRowInCharFile = 0
-                    charFile.seek(0) # set file iterator to zero before read line, otherwise it will raise "index out of range" error
-                    sourceCharacterlineHandler = charFile.readlines()[indexOfRowInCharFile]
-                    
+                charFoundByIndex = sourceCharList[indexInLine]
+              
+                if charFoundByIndex == "è": # this is our own space mark in sourcharfile
+                    charFoundByIndex = " "
 
-                    charFoundByIndex = sourceCharacterlineHandler[indexInLine] # find one character from sourceCharFile row by index
+                elif charFoundByIndex == "á" or charFoundByIndex == "\v" or charFoundByIndex == "\r": # this is our own newline mark(á) in sourcharfile
+                    charFoundByIndex = "\n"
 
-                   
-                    if charFoundByIndex == "ô": #  end of message, close file
-                        messageFile.close()
-                        list.clear()
-                        charFile.close()
-                        break
-                
-                if numberOfHandledIndex < 3:
-                    charFoundByIndex = sourceCharacterlineHandler[indexInLine] # find one character from sourceCharFile row by index
-                    if charFoundByIndex == "ô": #  end of message, close file
-                        messageFile.close()
-                        list.clear()
-                        charFile.close()
-                        break
-                    if charFoundByIndex == "è": # this is our own space mark in sourcharfile
-                        charFoundByIndex = " "
-
-                    elif charFoundByIndex == "á" or charFoundByIndex == "\v" or charFoundByIndex == "\r": # this is our own newline mark(á) in sourcharfile
-                        charFoundByIndex = "\n"
-                        
+                if not charFoundByIndex == "ô": # do not write end mark to message
                     messageFile.write(charFoundByIndex)
-                    numberOfHandledIndex +=1
-    
+
+                if charFoundByIndex == "ô": #  end of message, close file
+                    messageFile.close()
+                    list.clear()
+                    keyFile.close()
+                    break
+                    
          list.clear()
-         charFile.close()
+         keyFile.close()
      messageFile.close()
 
 def findIndexByLocationFromMessage():
     """
     Searches index from message based on location
     """
-
     messagelist = [] # read list of message here
     locationlist = [] # read list of location 
     indexList = [] # save founded index here and return list
@@ -134,9 +113,8 @@ def findIndexByLocationFromMessage():
     else:
         return #no message
     
-    locationlist = loadListFromFile("/locationKeyFile.txt")
+    locationlist = loadListFromFile("/keyFile.txt")
     locationlist = locationlist[:10_000] # separate location list from index wrap list
-    
     
     for oneLocation in locationlist: # go through  location list and find index by location from messages
         indexFoundByLocation = messagelist[oneLocation] # index by location from message list
@@ -146,6 +124,7 @@ def findIndexByLocationFromMessage():
     locationlist.clear()
     indexList = removeIndexWrap(indexList)
     removeMessageFile() # remove message
+    
     return indexList
 
 def removeMessageFile():
@@ -164,14 +143,15 @@ def removeIndexWrap(indexList):
     wrappedIndex = 0
     counter = 0
     indexListLength = 0
-    entireList = loadListFromFile("/locationKeyFile.txt")
-    indexWraplist = entireList[10_000:] # get index wrap list from entire list of locationKeyList and indexWrapList
+    entireList = loadListFromFile("/keyFile.txt")
+    indexWraplist = entireList[10_000:20_000] # get index wrap list from entire list of locationKeyList and indexWrapList
     indexListLength = len(indexList)
 
     for oneIndex in range(indexListLength): # go through index list and remove index  wrapper
         
         indexList[oneIndex] -= indexWraplist[oneIndex]
 
+    
     return indexList
         
 def checkIfMessageExist():
