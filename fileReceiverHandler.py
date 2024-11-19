@@ -1,6 +1,8 @@
 import os
 import pickle
 from pathlib import Path
+import fileMessageHandler as send
+
 
 
 def offerMessageToUI():
@@ -8,7 +10,7 @@ def offerMessageToUI():
     Return message to UI after it has been decrypted
     
     """
-    
+
     file = Path("Message.txt")
     
     result = file.is_file()
@@ -54,6 +56,8 @@ def findCharByIndexFromSourceCharFile():
      list = [] # load index list here
      entireList=[]
      sourceCharList =[]
+     startSearchingIndex = 0 # start index to search each character from char list
+     realIndex = 0 # Real index in source character list
 
      realPath = ""
      file = Path(filePathOfFile+"/keyFile.txt")
@@ -77,7 +81,9 @@ def findCharByIndexFromSourceCharFile():
             
             for indexInLine in list: # go through entire index list
                 
-                charFoundByIndex = sourceCharList[indexInLine]
+                realIndex += startSearchingIndex + indexInLine
+                charFoundByIndex = sourceCharList[realIndex]
+                
               
                 if charFoundByIndex == "è": # this is our own space mark in sourcharfile
                     charFoundByIndex = " "
@@ -93,6 +99,9 @@ def findCharByIndexFromSourceCharFile():
                     list.clear()
                     keyFile.close()
                     break
+
+                startSearchingIndex += len (send.createOneSourceCharacterList()) # increase start searching point for each character
+                realIndex = 0
                     
          list.clear()
          keyFile.close()
@@ -115,7 +124,8 @@ def findIndexByLocationFromMessage():
     
     locationlist = loadListFromFile("/keyFile.txt")
     locationlist = locationlist[:10_000] # separate location list from index wrap list
-    
+
+
     for oneLocation in locationlist: # go through  location list and find index by location from messages
         indexFoundByLocation = messagelist[oneLocation] # index by location from message list
         indexList.append(indexFoundByLocation)

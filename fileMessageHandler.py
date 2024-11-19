@@ -8,12 +8,13 @@ from pathlib import Path
 import shutil
 
 
+
 def checkMessageCharacter(message):
     """
     Check if message contains illegal character
     """
 
-    legalCharacters = string.ascii_letters + string.digits + string.punctuation +"äöåÄÖÅ" +'.' + "\n" + " " + "\t" + "\v" + "\r"
+    legalCharacters = string.ascii_letters + string.digits + string.punctuation +"äöåÄÖÅ" +'.' + "“”’" + "\n" + " " + "\t" + "\v" + "\r"
     
     for char in message:
         if char not in legalCharacters:
@@ -31,7 +32,7 @@ def getMessageFromUI(message):
     result = file.is_file()
     if result:
         realPath = filePathOfFile+"/MyMessage.txt"
-        with open( realPath,"r+") as f:
+        with open( realPath,"r+", errors='ignore') as f: # encoding='utf-8'
             message = f.read()
             message = checkMessageCharacter(message)
             
@@ -71,11 +72,12 @@ def createOneSourceCharacterList():
     Creates list of all alphabetic ascii
     characters in arbitrary order 
     """
-   
     # Create list of all characters
     characters = string.ascii_letters + string.digits + string.punctuation
     # add scandinavian characters
     characters +="äöåÄÖÅ"
+    # add american style apostrophe and quotation marks
+    characters += "“”’"
     # add space characters while reading message text if space
     characters += "è"
     # add mark for newline while reading message text if line is ending
@@ -120,11 +122,13 @@ def searchIndexFromCharList():
     Find index of letters(original message written by user)
     from sourceCharFile and create indexFile
     """
-    
+
     indexList=[] # list of index
-    indexInCharSourceLine = 0 # number of index found from row
+    indexInCharSourceList = 0 # number of index found from list
+    indexForMessageList = 0 # the real number to set in final message
     startSearchingIndex = 0 # start index when finding index from row
     messagelineHandler = "" # contains one line of original message
+    lengthOfOneCharacterSet = 0 # length og one source character set
     realPath = ""
     entireList=[]
     sourceCharList = []
@@ -135,11 +139,11 @@ def searchIndexFromCharList():
         with open(realPath, 'rb') as keyFile:
             entireList = pickle.load(keyFile)
             sourceCharList = entireList[20_000:]
+            lengthOfOneCharacterSet = len(createOneSourceCharacterList())
             
             for readline in messageFile: # go through hole original message(writing by user) file line by line
                 
                 messagelineHandler =  readline # set one row of message to handler
-                    
                 for charInMsgLine in messagelineHandler: # go through entire row of original message char by char and found index from
                                                             # sourceCharList
                                            
@@ -147,16 +151,18 @@ def searchIndexFromCharList():
                         charInMsgLine = "è"
                     elif charInMsgLine == "\n" or charInMsgLine == "\v" or charInMsgLine == "\r":
                         charInMsgLine = "á"
-                    startSearchingIndex = random.randrange(0,1_023_920)
+                    
                    
-                    indexInCharSourceLine = sourceCharList.index(charInMsgLine, startSearchingIndex) # find char index from sourceChar line
-                    indexList.append(indexInCharSourceLine)
+                    indexInCharSourceList = sourceCharList.index(charInMsgLine, startSearchingIndex) # find char index from sourceChar list
+                    indexForMessageList = indexInCharSourceList - startSearchingIndex # count index for message list
+                    indexList.append(indexForMessageList)
+                    startSearchingIndex += lengthOfOneCharacterSet # increase this for searching from next char set each time
                     
 
-            # end of original message file written by user , set end mark(ô) for message
-            startSearchingIndex = random.randrange(0,1_023_920)
-            indexInCharSourceLine = sourceCharList.index("ô", startSearchingIndex) # ô char means end of message, start searching from index zero of this mark 
-            indexList.append(indexInCharSourceLine)
+            
+            indexInCharSourceList = sourceCharList.index("ô", startSearchingIndex) # ô char means end of message, start searching from index zero of this mark 
+            indexForMessageList = indexInCharSourceList - startSearchingIndex
+            indexList.append(indexForMessageList)
           
 
         keyFile.close()
@@ -266,7 +272,7 @@ def createMessageListToFile(length):
 
     with open("messageFile.txt", 'wb') as messageKeyFile:
         while createdNumers < length:
-            messageList.append(random.randrange(1,408))
+            messageList.append(random.randrange(1,206))
             createdNumers +=1
         pickle.dump(messageList, messageKeyFile)  
     messageKeyFile.close()

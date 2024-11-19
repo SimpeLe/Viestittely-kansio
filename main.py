@@ -1,5 +1,5 @@
 #
-# 20230830 21:41
+# 20230823 13:10
 # Simo-hakemistossa
 # - python -m venv env
 # seuraava käynnistää ohjelman env
@@ -23,12 +23,7 @@
 #
 # gitbashissä isähakemistossa githubin kloonaus: 
 # git clone --branch main https://SimpeLe@github.com/SimpeLe/Viestittely-kansio
-#
-# luo main.py:stä main.exe
-# laita env-versiohallinta päälle
-# pyinstaller --onefile main.py
 # 
-#
 # (seuraava käynnistää ohjelman. Katso että komentokehotteen edessä lukee "(env)")
 # (jos ei lue "(env)", käynnistä virtuaaliympäristö env\scripts\activate)
 # - python ui_kotisivu.py 
@@ -73,7 +68,7 @@ class Claheta_klikkaus(qtw.QWidget): #
         lahetettavaViesti = self.ui.lviesti_plainTextEdit.toPlainText()
 
         # sisältääkö viesti vain ASCII- ja scandi-merkkejä? Jos ei sisällä, korvaa sallimaton merkki alaviivalla "_"
-        sallitutMerkit = string.ascii_letters + string.digits + string.punctuation +"äöåÄÖÅ" +'.' + "\n" + " " + "\t" + "\v" + "\r" 
+        sallitutMerkit = string.ascii_letters + string.digits + string.punctuation +"äöåÄÖÅ" +'.' + "“”’" + "\n" + " " + "\t" + "\v" + "\r" 
         for kirjain in lahetettavaViesti:
             if kirjain not in sallitutMerkit:
                 lahetettavaViesti = lahetettavaViesti.replace(kirjain, '_')
@@ -87,7 +82,6 @@ class Claheta_klikkaus(qtw.QWidget): #
         # Onko tallennuspolku olemassa? Onko viesti riittävän lyhyt? 
         if os.path.isdir(lahHakPolku) and lahHakPolku != "C:/" \
             and viestiPituusOK:  
-            # send.setLogger()
             send.getPathFromUI(lahHakPolku)
             send.getMessageFromUI(lahetettavaViesti)
             send.createMessage()
@@ -195,7 +189,6 @@ class Cvastaanota_klikkaus(qtw.QWidget):
     # käynnistä socket serveri viestin vastaanottamiseksi IP-osoitteella
     def VastOtaViestiIP_lla(self):
         vastOtaPortti = self.ui.vvastaanottajanportti_lineEdit.text()
-        vastOtaSekuntia = self.ui.vodotusaika_lineEdit.text()
         IPvastaOtaPolku = self.ui.vveistintalletuspolku_lineEdit.text()
         # print ("VastOtaViestiIP_lla(self):ssä IPvastaOtaPolku: ", IPvastaOtaPolku)
         # vkotiKansio = os.getcwd()
@@ -207,10 +200,10 @@ class Cvastaanota_klikkaus(qtw.QWidget):
         # vtyoKansio = os.getcwd()
         # print ("main vtyoKansio:", vtyoKansio)
         # jos UI:ssä kansiopolku on epäkelpo käytä ohjelman vkotikansiota
-        if os.path.isdir(IPvastaOtaPolku) and IPvastaOtaPolku != "C:/" and vastOtaPortti.isnumeric() and vastOtaSekuntia.isnumeric():
+        if os.path.isdir(IPvastaOtaPolku) and IPvastaOtaPolku != "C:/" and vastOtaPortti.isnumeric():
             vastOtaPortti = int(vastOtaPortti)
-            IPvastOttoOdotusAika = int(vastOtaSekuntia)
             if vastOtaPortti > 0 and vastOtaPortti < 65535:
+                IPvastOttoOdotusAika = 20 #sekuntia
                 qtw.QMessageBox.information(self, 'IP-osoitteesi ja porttisi odottaa viestiä', \
                     f"Odota, kunnes viesti saapuu tai odota {IPvastOttoOdotusAika} sekuntia. Paina OK, niin vastaanotto alkaa")
                 # parametrit: socket-portti, sekunnit (jotka serveri odottaa viestiä)...
@@ -218,15 +211,13 @@ class Cvastaanota_klikkaus(qtw.QWidget):
                 socRecv.RecvFileViaIP(vastOtaPortti, IPvastOttoOdotusAika, IPvastaOtaPolku) 
             elif vastOtaPortti < 0 or vastOtaPortti > 65535:
                 qtw.QMessageBox.critical(self, 'Portti on mahdoton', "Kirjoita mahdollinen porttinumero 1-65535")
-        elif not (vastOtaPortti.isnumeric()):
-            qtw.QMessageBox.critical(self, 'Portti on mahdoton', "Kirjoita mahdollinen porttinumero 1-65535")
-        elif not (vastOtaSekuntia.isnumeric()):
-            qtw.QMessageBox.critical(self, 'Odotusaika on mahdoton', "Kirjoita mahdollinen odotusaika sekunteina")
         elif os.path.isdir(IPvastaOtaPolku) == False: 
             qtw.QMessageBox.critical(self, 'Epäkelpo kansio', "Valitse olemassa oleva kansiopolku")
         elif IPvastaOtaPolku == "C:/":
             qtw.QMessageBox.critical(self, 'Epäkelpo kansio', "Kansioon ole ei kirjoitusoikeutta. Valitse toinen kansiopolku")
-        
+        elif not (vastOtaPortti.isnumeric()):
+            qtw.QMessageBox.critical(self, 'Portti on mahdoton', "Kirjoita mahdollinen porttinumero 1-65535")
+
         # tyoKansio = os.getcwd()
         # print ("main tyokansio2:", tyoKansio)
 
