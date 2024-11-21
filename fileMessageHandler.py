@@ -190,7 +190,6 @@ def addIndexWrap(indexList):
     return indexList
 
 
-
 def createAllKeyListToFile(lengthOfKey, size):
     """
     Create location list for setting index to message
@@ -198,6 +197,8 @@ def createAllKeyListToFile(lengthOfKey, size):
     """
     
     locationList = []
+    locationListCumSum = []
+    locationListCumSum_b = []
     indexWrapList = []
     keyList=[]
     createdNumers = 0
@@ -231,11 +232,17 @@ def createAllKeyListToFile(lengthOfKey, size):
 
                                                                                                                                                                                                                                                                                                                                                 
     with open(filePathOfFile+"/keyFile.txt", 'wb') as keyFile:
-        locationList = np.random.choice( range(0, 999999), lengthOfKey, replace=False).tolist() # creatue unique list on numbers (amount is lengthOfKey)
-                                                                                                # in range 0-999 999 (length of crypted message)        
-    
-        locationList += indexWrapList
-        keyList = locationList + sourceCharList # entire key list
+        #locationList = np.random.choice( range(0, 999999), lengthOfKey, replace=False).tolist() # creatue unique list on numbers (amount is lengthOfKey)
+                                                                                                 # in range 0-999 999 (length of crypted message
+        for i in range(lengthOfKey): 
+            locationList.append(random.randrange(1,100))
+
+        locationListCumSum = np.cumsum(locationList).tolist()
+        random.shuffle(locationListCumSum) 
+
+        
+        keyList = locationListCumSum + indexWrapList
+        keyList += sourceCharList
         pickle.dump(keyList, keyFile)
       
     keyFile.close()   
@@ -272,7 +279,8 @@ def createMessageListToFile(length):
 
     with open("messageFile.txt", 'wb') as messageKeyFile:
         while createdNumers < length:
-            messageList.append(random.randrange(1,206))
+            messageList.append(random.randrange(1,206)) # max. number is 206 because lenght of one character set is 106 and index wrap is max. 100
+                                                        # together max 206 so all numbers is message must be between 1-206
             createdNumers +=1
         pickle.dump(messageList, messageKeyFile)  
     messageKeyFile.close()
