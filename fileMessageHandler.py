@@ -8,6 +8,7 @@ from pathlib import Path
 import shutil
 
 
+# TO DO randomize location list, create optional "password" for each message
 
 def checkMessageCharacter(message):
     """
@@ -103,9 +104,9 @@ def writeFinalMessageFileByNumber():
     indexOfLocationList = 0
 
     listOfMessage = loadMessageListFromFile()
-    listOfIndex= searchIndexFromCharList()
+    listOfIndex = searchIndexFromCharList()
     listOfLocation = loadLocationListFromFile()
-    listOfLocation = listOfLocation[:10_000]
+    listOfLocation = listOfLocation[:10_003]
     
     for oneIndex in listOfIndex: # go through index list and set index  to message  by location
         
@@ -120,28 +121,48 @@ def writeFinalMessageFileByNumber():
 def searchIndexFromCharList():
     """
     Find index of letters(original message written by user)
-    from sourceCharFile and create indexFile
+    from sourceCharList and create indexList
     """
 
     indexList=[] # list of index
     indexInCharSourceList = 0 # number of index found from list
     indexForMessageList = 0 # the real number to set in final message
-    startSearchingIndex = 0 # start index when finding index from row
+    startSearchingIndex = 0 # start index when finding index from sourceCharList
     messagelineHandler = "" # contains one line of original message
-    lengthOfOneCharacterSet = 0 # length og one source character set
+    lengthOfOneCharacterSet = 0 # length of one source character set
     realPath = ""
     entireList=[]
     sourceCharList = []
+    randomNumberList = []
+    randomNumberListLength = 0
+
     
 
     with open("Message.txt", 'r') as messageFile: # open orinal message written by user
         realPath = filePathOfFile+ "/keyFile.txt"
         with open(realPath, 'rb') as keyFile:
             entireList = pickle.load(keyFile)
-            sourceCharList = entireList[20_000:]
+            sourceCharList = entireList[20_006:]
             lengthOfOneCharacterSet = len(createOneSourceCharacterList())
+            ##### add  3 digit random  number to index list first
+
+            randomNumberList = createRandomNumberForIndexWrapList()
+            randomNumberListLength = len (randomNumberList)
+        
+            if randomNumberListLength < 2: # under 10
+                indexList.append(0)
+                indexList.append(0)
+                indexList.append(randomNumberList[0])
+                
+            if randomNumberListLength == 2: # over 10 but under 100
+                indexList.append(0)
+                indexList.append(randomNumberList[0])
+                indexList.append(randomNumberList[1])
+            if randomNumberListLength == 3: # over 100
+                indexList.extend(randomNumberList)
             
-            for readline in messageFile: # go through hole original message(writing by user) file line by line
+
+            for readline in messageFile: # go through hole original message(writed by user) file line by line
                 
                 messagelineHandler =  readline # set one row of message to handler
                 for charInMsgLine in messagelineHandler: # go through entire row of original message char by char and found index from
@@ -162,33 +183,73 @@ def searchIndexFromCharList():
             
             indexInCharSourceList = sourceCharList.index("ô", startSearchingIndex) # ô char means end of message, start searching from index zero of this mark 
             indexForMessageList = indexInCharSourceList - startSearchingIndex
+                    
             indexList.append(indexForMessageList)
           
 
         keyFile.close()
     messageFile.close()
     removeMessageFile()
-    indexList = addIndexWrap(indexList)
-    return indexList
 
-def addIndexWrap(indexList):
+    indexList = addIndexWrap(indexList, randomNumberList)
+    return indexList 
+
+def addIndexWrap(indexList, randomNumberList):
     """
-    Add random number between 1-100 to each index berore sendin message
+    Add random number between 1-100 to each index before sending message
     """
+    
 
     entireList = [] # entire locatioKey list
     indexWraplist = [] #¤ list of wrap value
+    indexRandWraplist = [] #¤ list of wrap value randomized
+    indexWraplistForRandomNumber = [] # list for random number wrapper
     indexListLength = 0
     entireList = loadLocationListFromFile()
-    indexWraplist = entireList[10_000:20_000] # get index wrap list from entire list of locationKeyList, indexWrapList and sourcharList
+    indexWraplist = entireList[10_006:20_006] # get index wrap list from entire list of locationKeyList, indexWrapList and sourcharList
+    indexWraplistForRandomNumber = entireList[10_003:10_006]
+    indexRandWraplist = randomizeIndexWrapList(indexWraplist, randomNumberList, indexWraplistForRandomNumber) # mix index wrap list
     indexListLength = len(indexList)
+
+
    
     for oneIndex in range(indexListLength): # go through index list and set index  wrapper
        
-        indexList[oneIndex] += indexWraplist[oneIndex]
-       
+        indexList[oneIndex] +=  indexRandWraplist[oneIndex]
+
+
     return indexList
 
+def createRandomNumberForIndexWrapList():
+    """
+    Create random number for changing order of index wrap list    
+    """
+    randomNumber =  random.randrange(1,999)
+    randomNumberList = list(map(int,str(randomNumber)))
+    return randomNumberList
+
+def randomizeIndexWrapList(indexWrapList, randomNumberList, indexWraplistForRandomNumber):
+    """
+    Randomize index wrap list
+    """
+  
+    randomizedList = []
+    storageList = []
+    storageListSec = []
+
+    
+    randomNumber = int(''.join(map(str, randomNumberList)))
+
+    storageList = indexWrapList[randomNumber:]
+    storageListSec = indexWrapList[:randomNumber]
+
+    randomizedList.append(indexWraplistForRandomNumber[0])
+    randomizedList.append(indexWraplistForRandomNumber[1])
+    randomizedList.append(indexWraplistForRandomNumber[2])
+    
+    randomizedList += storageList + storageListSec
+
+    return randomizedList
 
 def createAllKeyListToFile(lengthOfKey, size):
     """
@@ -198,11 +259,10 @@ def createAllKeyListToFile(lengthOfKey, size):
     
     locationList = []
     locationListCumSum = []
-    locationListCumSum_b = []
     indexWrapList = []
     keyList=[]
     createdNumers = 0
-    indexListLength = 10_000
+    indexWrapListLength = 10_003
     numberOfCharinFile = 0
     # sourceChatList
     sourceCharList= []
@@ -219,10 +279,10 @@ def createAllKeyListToFile(lengthOfKey, size):
         if difference.days < 30: # create new every month
             return # under 30 days old, do not create new one, return
 
-    indexWrapList = np.random.choice( range(0, 100), indexListLength, replace=True).tolist() 
+    indexWrapList = np.random.choice( range(0, 100), indexWrapListLength, replace=True).tolist() 
 
 
-    while numberOfCharinFile < size:
+    while numberOfCharinFile < size: # create sorce char list
             oneline = createOneSourceCharacterList() + createOneSourceCharacterList() + createOneSourceCharacterList()
             
             lengthOfOneLine = len(oneline)
@@ -238,9 +298,8 @@ def createAllKeyListToFile(lengthOfKey, size):
             locationList.append(random.randrange(1,100))
 
         locationListCumSum = np.cumsum(locationList).tolist()
-        random.shuffle(locationListCumSum) 
-
-        
+        random.shuffle(locationListCumSum)
+    
         keyList = locationListCumSum + indexWrapList
         keyList += sourceCharList
         pickle.dump(keyList, keyFile)
@@ -262,7 +321,7 @@ def loadLocationListFromFile():
 
         with open (filePathOfFile+"/keyFile.txt", 'rb') as keyFile:
             keyList = pickle.load(keyFile)
-            locationList = keyList[:20_000] # read location list from entire list(location + index wrap and source char list)
+            locationList = keyList[:20_006] # read location list from entire list(location + index wrap and source char list)
         keyFile.close()
     else:
         return #location key file does not exist
@@ -321,8 +380,8 @@ def saveMessageToFile(messageList):
 
 def createMessage():
     
-    createAllKeyListToFile(10_000, 1)
-    createMessageListToFile(1_000_000)
+    createAllKeyListToFile(10_003, 1)
+    createMessageListToFile(1_000_300)
     writeFinalMessageFileByNumber()
     
 def main():

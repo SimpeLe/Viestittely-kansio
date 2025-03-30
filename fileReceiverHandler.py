@@ -2,7 +2,7 @@ import os
 import pickle
 from pathlib import Path
 import fileMessageHandler as send
-
+import random
 
 
 def offerMessageToUI():
@@ -76,14 +76,13 @@ def findCharByIndexFromSourceCharFile():
          realPath = filePathOfFile+ "/keyFile.txt"
          with open(realPath, 'rb') as keyFile:
             entireList = pickle.load(keyFile)
-            sourceCharList = entireList[20_000:]
+            sourceCharList = entireList[20_006:]
             list = findIndexByLocationFromMessage()
-            
+
             for indexInLine in list: # go through entire index list
                 
                 realIndex += startSearchingIndex + indexInLine
                 charFoundByIndex = sourceCharList[realIndex]
-                
               
                 if charFoundByIndex == "è": # this is our own space mark in sourcharfile
                     charFoundByIndex = " "
@@ -114,6 +113,7 @@ def findIndexByLocationFromMessage():
     messagelist = [] # read list of message here
     locationlist = [] # read list of location 
     indexList = [] # save founded index here and return list
+    
     indexFoundByLocation = 0
     messageExist = False
     messageExist = checkIfMessageExist()
@@ -123,8 +123,7 @@ def findIndexByLocationFromMessage():
         return #no message
     
     locationlist = loadListFromFile("/keyFile.txt")
-    locationlist = locationlist[:10_000] # separate location list from index wrap list
-
+    locationlist = locationlist[:10_003] # separate location list from index wrap list
 
     for oneLocation in locationlist: # go through  location list and find index by location from messages
         indexFoundByLocation = messagelist[oneLocation] # index by location from message list
@@ -134,7 +133,6 @@ def findIndexByLocationFromMessage():
     locationlist.clear()
     indexList = removeIndexWrap(indexList)
     removeMessageFile() # remove message
-    
     return indexList
 
 def removeMessageFile():
@@ -150,19 +148,65 @@ def removeMessageFile():
 def removeIndexWrap(indexList):
     entireList = []
     indexWraplist = []
-    wrappedIndex = 0
-    counter = 0
     indexListLength = 0
+    indexRandWraplist = []
+    randomizedIndexWrapList = []
+    
+
     entireList = loadListFromFile("/keyFile.txt")
-    indexWraplist = entireList[10_000:20_000] # get index wrap list from entire list of locationKeyList and indexWrapList
+
+    indexRandWraplist = entireList[10_003:10_006] # random number new 8.12
+    
+    indexRandWraplist = entireList[10_003:10_006]
+    indexWraplist = entireList[10_006:20_006] # get index wrap list from entire list of locationKeyList and indexWrapList
+
+    randomizedIndexWrapList = randomizeIndexWrapList(indexRandWraplist, indexWraplist, indexList)
+   
     indexListLength = len(indexList)
 
-    for oneIndex in range(indexListLength): # go through index list and remove index  wrapper
+    for oneIndex in range(indexListLength): #(indexListLength): # go through index list and remove index  wrapper
         
-        indexList[oneIndex] -= indexWraplist[oneIndex]
+        indexList[oneIndex] -= randomizedIndexWrapList[oneIndex] 
+   
+
+    indexList = indexList[3:] # remove rand number from index list
+
+    return indexList  
+
+
+def randomizeIndexWrapList(indexRandWraplist, indexWrapList, indexList ):
+    
+    randomizedList = []
+    storageList = []
+    storageListSec = []
+    randomNumber = 0
+    firstRandomnumber = 0
+    secondRandomnumber = 0
+    thirdRandomnumber = 0
+   
+    
+    firstRandomnumber = indexList[0] - indexRandWraplist[0]
+    secondRandomnumber = indexList[1] - indexRandWraplist[1]
+    thirdRandomnumber = indexList[2] - indexRandWraplist[2]
 
     
-    return indexList
+    if firstRandomnumber == 0 and secondRandomnumber == 0:
+        randomNumber = thirdRandomnumber
+    if firstRandomnumber == 0 and secondRandomnumber > 0:
+       randomNumber = int(str(secondRandomnumber) + str(thirdRandomnumber))
+    if firstRandomnumber > 0:
+        randomNumber = int(str(firstRandomnumber) + str(secondRandomnumber) + str(thirdRandomnumber))
+   
+    storageList = indexWrapList[randomNumber:]
+    storageListSec = indexWrapList[:randomNumber]
+ 
+    randomizedList.append(indexRandWraplist[0])
+    randomizedList.append(indexRandWraplist[1])
+    randomizedList.append(indexRandWraplist[2])
+
+    randomizedList += storageList + storageListSec
+    
+    return randomizedList
         
 def checkIfMessageExist():
     """
