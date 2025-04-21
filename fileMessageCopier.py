@@ -6,67 +6,95 @@ import shutil
 import os
 
 
-
 def copyOneMessageToList(targetPath, sourcePath):
     """
     Copy message to group of messages
     """
 
     targetList = [] # existing list of messages
-    copyList = [] # message to copy
-    messageId = [0,0,0,0,0,0,0]
+    sourceList = [] # message to copy
+    locationList = []
     i = 0
     targetName = ""
     sourceName = ""
+    targetIndex = 0
+    sourceIndex = 0
+
+    locationListLength = 0
+    targetListLength = 0
+    sourcelistLength = 0
      
-    fileMessages = Path(targetPath+"/Messages.txt")
-    targetExist = fileMessages.is_file()
-    oneMessage = Path(sourcePath+"/messageFile.txt")
-    sourceExist = oneMessage.is_file()
+   
+    targetMessages = Path(targetPath+"/messageFile.txt") 
+    targetExist = targetMessages.is_file()
+    sourceMessage = Path(sourcePath+"/messageFile.txt")
+    sourceExist = sourceMessage.is_file()
+
+
+    locationListFile = Path(sourcePath+"/locationFile.txt")
+    locationFileExist = locationListFile.is_file()
+
+
+    if not locationFileExist:
+        return # no location list, return
 
 
     if not sourceExist:
-        return #no sorce file, return
+        return #no source file, return
 
     if targetExist:
-        with open (oneMessage, 'rb') as messageFile: # open one message to add list
-            copyList = pickle.load(messageFile)
-        messageFile.close()
+        with open (sourceMessage, 'rb') as sourceMessageFile: # open message file to copy new message 
+            sourceList = pickle.load(sourceMessageFile)
+        sourceMessageFile.close()
+        sourcelistLength = len(sourceList)
+        
 
-        with open(fileMessages, 'rb+') as copyFile: # open existing list of messages
-            targetList = pickle.load(copyFile)
-            targetList += copyList # add message to list
-            pickle.dump(targetList, copyFile)
-        copyFile.close()
+        with open(targetMessages, 'rb') as targetFile: # open existing list of messages
+            targetList = pickle.load(targetFile)
+            targetListLength = len(targetList)
+            
+            targetFile.close()
+            with open (locationListFile, 'rb') as locationFile: # open location file
+                 locationList = pickle.load(locationFile)
+                 locationListLength = len(locationList)
+                
+                 for i in range(locationListLength):
+                     
+                     targetIndex = targetList[locationList[i]]
+                     sourceIndex = sourceList[locationList[i]]
+
+                     targetList[locationList[i]] = sourceList[locationList[i]] # copy index by location to new file
+                     targetIndex = targetList[locationList[i]]
+            
+            with open(targetMessages, 'wb') as targetFile:
+                pickle.dump(targetList, targetFile)
+
+        targetListLength = len(targetList)
+        targetFile.close()
+        locationFile.close()
+        sourceMessageFile.close()
+        sourceList.clear()
+        targetList.clear()
+        locationList.clear()
+
         
     else:
+        logging.debug("target does not exist")
         file = Path(sourcePath+"/messageFile.txt")
         sourceName = sourcePath+"/messageFile.txt"
         result = file.is_file()
         if result:
             print("just rename file")
+            logging.debug("just rename file")
             if  targetPath == sourcePath:
                 h = 6
             else:
-                with open (oneMessage, 'rb') as messageFile: # open one message
-                    copyList = pickle.load(messageFile)
+                with open (sourceMessage, 'rb') as messageFile: # open one message
+                    sourceList = pickle.load(messageFile)
                 messageFile.close()
                 os.rename(sourcePath+'/messageFile.txt', sourcePath+'/Messages.txt')
                 shutil.copyfile(sourcePath+"/Messages.txt", targetPath+"/Messages.txt")
      
-
-    while i<5: # create id for copied file
-        messageId[i] =  copyList[i]  
-        i +=1
-
-    messageId[5] =  copyList[100] 
-
-    if  targetPath != sourcePath:
-        with open(targetPath+"/copyIdentifier.txt", 'wb') as idFile:
-            pickle.dump(messageId, idFile)
-        idFile.close()
-
-   
 
 def retrieveCopy(targetPath, sourcePath):
     """"

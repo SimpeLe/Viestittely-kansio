@@ -274,9 +274,10 @@ def createAllKeyListToFile(lengthOfKey, size):
     result = file.is_file()
 
     if result:
-        difference = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getctime(file))
+     
+     #  difference = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getctime(file))
 
-        if difference.days < 30: # create new every month
+      #  if difference.days > 30: # create new every month
             return # under 30 days old, do not create new one, return
 
     indexWrapList = np.random.choice( range(0, 100), indexWrapListLength, replace=True).tolist() 
@@ -299,6 +300,9 @@ def createAllKeyListToFile(lengthOfKey, size):
 
         locationListCumSum = np.cumsum(locationList).tolist()
         random.shuffle(locationListCumSum)
+        with open(filePathOfFile+"/locationFile.txt", 'wb') as locationFile: # create location list to file for copying several messages to one file
+            pickle.dump(locationListCumSum, locationFile)
+        locationFile.close()
     
         keyList = locationListCumSum + indexWrapList
         keyList += sourceCharList
